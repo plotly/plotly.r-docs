@@ -19,5 +19,6 @@ jobs:
       - run:
           name: test command
           command: |
+            ls r 
             npx cowsay Hello, world!
             
