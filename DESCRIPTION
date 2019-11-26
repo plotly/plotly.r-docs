@@ -1,6 +1,7 @@
 Package: test
 Imports:
     plotly,
+    pandoc,
     geomorph,
     maptools,
     rjson,
