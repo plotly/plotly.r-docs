@@ -18,7 +18,7 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
           paths:
             - "/usr/local/lib/R/site-library"
-      -run:
+      - run:
           command: |
             sudo apt-get install pandoc
       - run:
