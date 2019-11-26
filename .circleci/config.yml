@@ -11,6 +11,14 @@ jobs:
       - run:
           command: |
             Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")
-      - store_artifacts:
-          path: man/
-          destination: man
+      - run: 
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git init
+              git config user.name joedamiba
+              git config user.email joseph.damiba@plot.ly
+              git add *
+              git commit -m build
+              git push --force git@github.com:plotly/plotly.r-docs.git master:built
+              rm -rf .git
+            fi
