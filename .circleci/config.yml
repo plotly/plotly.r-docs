@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:current-browsers
+
+    steps:
+      - restore_cache:
+          keys:
+            - source-v1- 
+
+      - checkout
+
+      - save_cache:
+          key: source-v1-1
+          paths:
+            - ".git"
+
+      - run:
+          name: test command
+          command: |
+            npx cowsay Hello, world!
+            
