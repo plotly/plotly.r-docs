@@ -18,6 +18,9 @@ jobs:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
           paths:
             - "/usr/local/lib/R/site-library"
+      -run:
+          command: |
+            sudo apt-get install pandoc
       - run:
           command: |
             Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")'
