@@ -32,7 +32,7 @@ jobs:
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
               rm -rf *.html
-              git add *.md
+              git add *
               git commit -m build
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
               rm -rf .git
