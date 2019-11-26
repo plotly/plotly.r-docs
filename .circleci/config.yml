@@ -20,8 +20,8 @@ jobs:
             - "/usr/local/lib/R/site-library"
       - run:
           command: |
-            wget https://github.com/jgm/pandoc/releases/download/1.15.1/pandoc-1.15.1-1-amd64.deb
-            dpkg -i pandoc-1.15.1-1-amd64.deb
+            apt-get update -y
+            apt-get install -y pandoc
       - run:
           command: |
             Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")'
@@ -31,7 +31,8 @@ jobs:
               git init
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
-              git add *
+              rm -rf *.html
+              git add *.md
               git commit -m build
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
               rm -rf .git
