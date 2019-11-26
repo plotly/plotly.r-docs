@@ -1,13 +1,26 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/project
     docker:
       - image: appsilon/ci-base:1.0
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
+            - deps1-{{ .Branch }}
+            - deps1-
       - run:
           command: |
-            Rscript -e RdepLibs.R
+            R -e 'devtools::install_deps(dependencies = TRUE)'
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
+          paths:
+            - "/usr/local/lib/R/site-library"
+      - run:
+          command: |
+            R -e 'devtools::check()'
       - run:
           command: |
             Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")
