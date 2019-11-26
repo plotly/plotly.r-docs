@@ -20,9 +20,6 @@ jobs:
             - "/usr/local/lib/R/site-library"
       - run:
           command: |
-            R -e 'devtools::check()'
-      - run:
-          command: |
             Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")
       - run: 
           command: |
