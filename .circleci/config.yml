@@ -2,23 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:current-browsers
-
+      - image: appsilon/ci-base:1.0
     steps:
-      - restore_cache:
-          keys:
-            - source-v1- 
-
       - checkout
-
-      - save_cache:
-          key: source-v1-1
-          paths:
-            - ".git"
-
       - run:
-          name: test command
           command: |
-            ls r 
-            npx cowsay Hello, world!
-            
+            Rscript -e RdepLibs.R
+      - run:
+          command: |
+            Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")
+      - store_artifacts:
+          path: man/
+          destination: man
