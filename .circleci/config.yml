@@ -20,7 +20,7 @@ jobs:
             - "/usr/local/lib/R/site-library"
       - run:
           command: |
-            Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")
+            Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")'
       - run: 
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
