@@ -5,6 +5,9 @@ jobs:
     docker:
       - image: appsilon/ci-base:1.0
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "32:3b:e8:1d:9a:32:6f:ca:ca:9e:f1:ce:e2:8a:e8:03"
       - checkout
       - restore_cache:
           keys:
