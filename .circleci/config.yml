@@ -3,28 +3,29 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: appsilon/ci-base:1.0
+      - image: rocker/tidyverse
     steps:
       - checkout
       - restore_cache:
           keys:
-            - deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
-            - deps1-{{ .Branch }}
-            - deps1-
+            - cache2
       - run:
           command: |
-            R -e 'devtools::install_deps(dependencies = TRUE)'
+            sudo apt-get update -y
+            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
+      - run:
+          command: |
+            sudo R -e 'install.packages(c("devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
+          key: cache2
           paths:
             - "/usr/local/lib/R/site-library"
+      - store_artifacts:
+          path: man/
+          destination: man
       - run:
           command: |
-            apt-get update -y
-            apt-get install -y pandoc
-      - run:
-          command: |
-            Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")'
+            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i')"; done
       - run: 
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
@@ -32,8 +33,9 @@ jobs:
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
               rm -rf *.html
+              rm -rf *.Rmd
               git add *
               git commit -m build
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
-              rm -rf .git
+              rm -rf .git        
             fi

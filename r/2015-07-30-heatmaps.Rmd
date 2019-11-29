@@ -1,0 +1,88 @@
+---
+name: Heatmaps
+permalink: r/heatmaps/
+description: How to make a heatmap in R with a matrix. Seven examples of colored and labeled heatmaps with custom colorscales.
+layout: base
+thumbnail: thumbnail/heatmap.jpg
+language: r
+page_type: example_index
+display_as: scientific
+order: 7
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+### New to Plotly?
+
+Plotly's R library is free and open source!<br>
+[Get started](https://plot.ly/r/getting-started/) by downloading the client and [reading the primer](https://plot.ly/r/getting-started/).<br>
+You can set up Plotly to work in [online](https://plot.ly/r/getting-started/#hosting-graphs-in-your-online-plotly-account) or [offline](https://plot.ly/r/offline/) mode.<br>
+We also have a quick-reference [cheatsheet](https://images.plot.ly/plotly-documentation/images/r_cheat_sheet.pdf) (new!) to help you get started!
+
+### Version Check
+
+Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
+Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
+```{r}
+library(plotly)
+packageVersion('plotly')
+```
+
+#### Basic Heatmap
+
+```{r}
+library(plotly)
+p <- plot_ly(z = volcano, type = "heatmap")
+
+p
+```
+
+
+#### Categorical Axes
+
+```{r}
+m <- matrix(rnorm(9), nrow = 3, ncol = 3)
+p <- plot_ly(
+	x = c("a", "b", "c"), y = c("d", "e", "f"),
+	z = m, type = "heatmap"
+)
+
+p
+```
+
+#### Sequential Colorscales: Greys
+
+The `colors` argument understands color brewer palettes (see `RColorBrewer::brewer.pal.info` for valid names).
+
+```{r}
+p <- plot_ly(z = volcano, colors = "Greys", type = "heatmap")
+
+p
+```
+
+#### Custom colorscales
+
+The `colors` argument also accepts a color interpolation function like `colorRamp()`
+
+```{r}
+p <- plot_ly(z = volcano, colors = colorRamp(c("red", "green")), type = "heatmap")
+
+p
+```
+
+Or, you can do the scaling yourself and use the colorscale attribute directly...
+
+```{r}
+vals <- unique(scales::rescale(c(volcano)))
+o <- order(vals, decreasing = FALSE)
+cols <- scales::col_numeric("Blues", domain = NULL)(vals)
+colz <- setNames(data.frame(vals[o], cols[o]), NULL)
+p <- plot_ly(z = volcano, colorscale = colz, type = "heatmap")
+
+p
+```
+
