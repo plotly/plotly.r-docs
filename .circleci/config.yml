@@ -15,7 +15,7 @@ jobs:
       - run:
           command: |
             sudo apt-get update -y
-            sudo apt-get install curl python3-pip
+            sudo apt-get install -y curl python3-pip 
             pip3 install front-matter
             curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
             python front-matter-ci.py r
