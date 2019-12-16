@@ -5,7 +5,7 @@ description: How to make an area on Map in R with plotly.
 layout: base
 thumbnail: thumbnail/area.jpg
 language: r
-page_type: example_index
+page_type: u-guide
 display_as: maps
 order: 6
 output:

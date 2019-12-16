@@ -5,7 +5,7 @@ description: How to make a heatmap in R with a matrix. Seven examples of colore
 layout: base
 thumbnail: thumbnail/heatmap.jpg
 language: r
-page_type: example_index
+page_type: u-guide
 display_as: scientific
 order: 7
 output:
