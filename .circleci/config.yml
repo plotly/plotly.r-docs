@@ -38,16 +38,17 @@ jobs:
           destination: man
       - run:
           command: |
-            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i')"; done
+            rm -rf r/md
+            mkdir r/md
+            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='r/md')"; done
       - run:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              cd r
+              cd r/md
               git init
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
               rm -rf *.html
-              rm -rf *.Rmd
               sed -i.bkp 's/<!--.*-->//g' *md && rm *.bkp
               git add *
               git commit -m build
