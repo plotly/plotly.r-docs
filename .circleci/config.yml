@@ -8,9 +8,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "32:3b:e8:1d:9a:32:6f:ca:ca:9e:f1:ce:e2:8a:e8:03"
-      - run:
-          name: Keyscan Github (HACK)
-          command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - checkout
       - restore_cache:
           keys:
@@ -18,13 +15,16 @@ jobs:
       - run:
           command: |
             sudo apt-get update -y
-            sudo apt-get install -y curl python3-pip python3-venv ssh-client
+            sudo apt-get install -y curl python3-pip python3-venv ssh-client ssh git
             pip3 install virtualenv
             python3 -m venv venv
             . venv/bin/activate
             pip3 install python-frontmatter
             curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
             python front-matter-ci.py r
+      - run:
+          name: Keyscan Github (HACK)
+          command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
           command: |
             sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
