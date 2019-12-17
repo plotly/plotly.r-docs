@@ -1,16 +1,17 @@
 ---
-name: Heatmaps
-permalink: r/heatmaps/
-description: How to make a heatmap in R with a matrix. Seven examples of colored and labeled heatmaps with custom colorscales.
-layout: base
-thumbnail: thumbnail/heatmap.jpg
-language: r
-page_type: u-guide
+description: How to make a heatmap in R with a matrix. Seven examples of colored and
+  labeled heatmaps with custom colorscales.
 display_as: scientific
-order: 7
+language: r
+layout: base
+name: Heatmaps
+order: 3
 output:
   html_document:
     keep_md: true
+page_type: example-index
+permalink: r/heatmaps/
+thumbnail: thumbnail/heatmap.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -85,4 +86,3 @@ p <- plot_ly(z = volcano, colorscale = colz, type = "heatmap")
 
 p
 ```
-
