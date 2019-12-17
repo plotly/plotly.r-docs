@@ -359,3 +359,4 @@ See examples of horizontal bar charts [here](https://plot.ly/r/horizontal-bar-ch
 #Reference
 
 See [https://plot.ly/r/reference/#bar](https://plot.ly/r/reference/#bar) for more information and chart attribute options!
+
