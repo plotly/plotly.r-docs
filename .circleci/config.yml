@@ -15,7 +15,7 @@ jobs:
       - run:
           command: |
             sudo apt-get update -y
-            sudo apt-get install -y curl python3-pip python3-venv ssh-client
+            sudo apt-get install -y curl python3-pip python3-venv
             pip3 install virtualenv
             python3 -m venv venv
             . venv/bin/activate
@@ -36,18 +36,17 @@ jobs:
       - run:
           command: |
             for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i')"; done
-      - run: 
+      - run:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cd r
               git init
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
-              rm -rf r/*.html
-              rm -rf r/*.Rmd
-              rm -r front-matter-ci.py
-              rm -rf venv
+              rm -rf *.html
+              rm -rf *.Rmd
               git add *
               git commit -m build
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
-              rm -rf .git        
+              rm -rf .git
             fi
