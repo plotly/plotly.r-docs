@@ -9,7 +9,7 @@ order: 6
 output:
   html_document:
     keep_md: true
-page_type: example_index
+page_type: u-guide
 permalink: r/mapbox-layers/
 thumbnail: thumbnail/mapbox-layers.png
 ---
