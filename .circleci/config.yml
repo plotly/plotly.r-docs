@@ -17,11 +17,6 @@ jobs:
             sudo apt-get update -y
             sudo apt-get install -y curl python3-pip python3-venv ssh-client ssh git
             pip3 install virtualenv
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install python-frontmatter
-            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
-            python front-matter-ci.py r
       - run:
           name: Keyscan Github (HACK)
           command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
@@ -38,13 +33,20 @@ jobs:
           destination: man
       - run:
           command: |
-            rm -rf r/md
-            mkdir r/md
-            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='r/md')"; done
+            rm -rf build
+            mkdir build
+            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build')"; done
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install python-frontmatter
+            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
+            python front-matter-ci.py build
+            curl https://raw.githubusercontent.com/plotly/documentation/update-ci-check/check-or-enforce-order.py > check-or-enforce-order.py
+            python check-or-enforce-order.py build
       - run:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              cd r/md
+              cd build
               git init
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
