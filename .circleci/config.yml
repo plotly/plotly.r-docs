@@ -20,7 +20,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip3 install python-frontmatter
-            curl https://raw.githubusercontent.com/plotly/documentation/update-ci-check/front-matter-ci.py > front-matter-ci.py
+            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
             python front-matter-ci.py r
       - run:
           command: |
