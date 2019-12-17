@@ -5,7 +5,7 @@ description: How to make a contour plot in R. Two examples of contour plots of m
 layout: base
 thumbnail: thumbnail/contour.jpg
 language: r
-page_type: example_index
+page_type: u-guide
 display_as: scientific
 order: 6
 output:
