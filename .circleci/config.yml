@@ -42,8 +42,10 @@ jobs:
               git init
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
-              rm -rf *.html
-              rm -rf *.Rmd
+              rm -rf r/*.html
+              rm -rf r/*.Rmd
+              rm -r front-matter-ci.py
+              rm -rf venv
               git add *
               git commit -m build
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
