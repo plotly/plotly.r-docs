@@ -4,7 +4,7 @@ display_as: scientific
 language: r
 layout: base
 name: Ternary Plots
-order: 5
+order: 14
 output:
   html_document:
     keep_md: true
