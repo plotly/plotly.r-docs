@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: appsilon/ci-base:1.0
+      - image: rocker/tidyverse
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -11,30 +11,47 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
-            - deps1-{{ .Branch }}
-            - deps1-
+            - cache2
       - run:
           command: |
-            R -e 'devtools::install_deps(dependencies = TRUE)'
+            sudo apt-get update -y
+            sudo apt-get install -y curl python3-pip python3-venv ssh-client ssh git
+            pip3 install virtualenv
+      - run:
+          name: Keyscan Github (HACK)
+          command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      - run:
+          command: |
+            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
+            sudo R -e 'install.packages(c("devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
-          key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
+          key: cache2
           paths:
             - "/usr/local/lib/R/site-library"
+      - store_artifacts:
+          path: man/
+          destination: man
       - run:
           command: |
-            apt-get update -y
-            apt-get install -y pandoc
+            rm -rf build
+            mkdir build
+            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build')"; done
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install python-frontmatter
+            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
+            python front-matter-ci.py build
+            curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/check-or-enforce-order.py > check-or-enforce-order.py
+            python check-or-enforce-order.py build
       - run:
-          command: |
-            Rscript -e 'rmarkdown::render("r/2015-07-30-bar-charts.Rmd")'
-      - run: 
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cd build
               git init
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
               rm -rf *.html
+              sed -i.bkp 's/<!--.*-->//g' *md && rm *.bkp
               git add *
               git commit -m build
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
