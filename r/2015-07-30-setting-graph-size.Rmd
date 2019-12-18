@@ -10,6 +10,7 @@ output:
     keep_md: true
 page_type: u-guide
 permalink: r/setting-graph-size/
+thumbnail: thumbnail/sizing.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
