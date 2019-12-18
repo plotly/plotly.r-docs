@@ -35,14 +35,17 @@ jobs:
           command: |
             rm -rf build
             mkdir build
-            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build')"; done
+            mkdir build/ggplot2
+            mkdir build/r
+            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build/r')"; done
+            for i in ggplot2/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build/ggplot2')"; done
             python3 -m venv venv
             . venv/bin/activate
             pip3 install python-frontmatter
             curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/front-matter-ci.py > front-matter-ci.py
-            python front-matter-ci.py build
+            python front-matter-ci.py build/r
             curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/check-or-enforce-order.py > check-or-enforce-order.py
-            python check-or-enforce-order.py build
+            python check-or-enforce-order.py build/r
       - run:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
@@ -50,8 +53,10 @@ jobs:
               git init
               git config user.name joedamiba
               git config user.email joseph.damiba@plot.ly
-              rm -rf *.html
-              sed -i.bkp 's/<!--.*-->//g' *md && rm *.bkp
+              rm -rf r/*.html
+              sed -i.bkp 's/<!--.*-->//g' r/*md && rm r/*.bkp
+              rm -rf ggplot2/*.html
+              sed -i.bkp 's/<!--.*-->//g' ggplot2/*md && rm ggplot2/*.bkp
               git add *
               git commit -m build
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
