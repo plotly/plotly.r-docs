@@ -5,6 +5,7 @@ language: r
 layout: base
 name: Log Plots
 order: 1
+page_type: example-index
 output:
   html_document:
     keep_md: true
