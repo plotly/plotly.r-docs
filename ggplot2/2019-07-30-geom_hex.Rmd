@@ -90,7 +90,7 @@ p <- ggplot(english_french, aes(x=engperc, y=frenperc, weight=total)) +
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "population")
-ggplotly(p)
+p <- ggplotly(p)
 
 p
 ```
