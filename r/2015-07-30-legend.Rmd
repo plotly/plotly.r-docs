@@ -5,7 +5,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Legends
-order: 4
+order: 24
 output:
   html_document:
     keep_md: true

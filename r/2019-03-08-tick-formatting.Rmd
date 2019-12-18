@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Formatting Ticks
-order: 2
+order: 22
 output:
   html_document:
     keep_md: true
