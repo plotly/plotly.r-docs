@@ -1,16 +1,16 @@
 ---
-name: WebGL Text and Annotations
-permalink: r/webgl-text-and-annotations/
 description: How to add WebGL text labels and annotations to plots in R.
-layout: base
-thumbnail: thumbnail/webgl-text-and-annotations.jpg
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: style_opt
-order: 10
+layout: base
+name: WebGL Text and Annotations
+order: 18
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/webgl-text-and-annotations/
+thumbnail: thumbnail/webgl-text-and-annotations.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}

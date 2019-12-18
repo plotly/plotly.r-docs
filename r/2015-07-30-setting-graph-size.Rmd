@@ -1,14 +1,15 @@
 ---
-name: Setting Graph Size
-permalink: r/setting-graph-size/
 description: How to change the size of graphs in R.
-layout: base
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: layout_opt
+layout: base
+name: Setting Graph Size
+order: 20
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/setting-graph-size/
 ---
 
 ```{r, echo = FALSE, message=FALSE}

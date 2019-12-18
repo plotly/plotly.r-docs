@@ -1,16 +1,16 @@
 ---
-name: Font Styles
-permalink: r/font/
 description: How to create font styles in R with Plotly.
-layout: base
-thumbnail: thumbnail/your-tutorial-chart.jpg
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: style_opt
-order: 3
+layout: base
+name: Font Styles
+order: 11
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/font/
+thumbnail: thumbnail/your-tutorial-chart.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}

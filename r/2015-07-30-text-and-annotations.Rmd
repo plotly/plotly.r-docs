@@ -1,16 +1,16 @@
 ---
-name: Text and Annotations
-permalink: r/text-and-annotations/
 description: How to add text labels and annotations to plots in R.
-layout: base
-thumbnail: thumbnail/text-and-annotations.jpg
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: style_opt
-order: 1
+layout: base
+name: Text and Annotations
+order: 10
 output:
   html_document:
     keep_md: true
+page_type: example_index
+permalink: r/text-and-annotations/
+thumbnail: thumbnail/text-and-annotations.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}

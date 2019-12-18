@@ -1,15 +1,16 @@
 ---
-name: Hover Text and Formatting
-permalink: r/hover-text-and-formatting/
 description: How to use hover text and formatting in R with Plotly.
-layout: base
-thumbnail: thumbnail/hover'text.jpg
+display_as: file_settings
 language: r
-display_as: layout_opt
-page_type: example_index
+layout: base
+name: Hover Text and Formatting
+order: 7
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/hover-text-and-formatting/
+thumbnail: thumbnail/hover'text.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}

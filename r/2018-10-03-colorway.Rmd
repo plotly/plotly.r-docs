@@ -1,16 +1,16 @@
 ---
-name: Colorway
-permalink: r/colorway/
 description: How to set default trace colors using colorway in R with Plotly.
-layout: base
+display_as: file_settings
 language: r
-page_type: example_index
-thumbnail: thumbnail/colorway.jpg
-display_as: style_opt
-order: 5
+layout: base
+name: Colorway
+order: 19
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/colorway/
+thumbnail: thumbnail/colorway.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}

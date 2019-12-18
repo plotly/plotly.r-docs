@@ -1,16 +1,16 @@
 ---
-name: Embedding Logos in Plotly Graphs
-permalink: r/logos/
 description: How to embed logos and images into Plotly charts.
-layout: base
-thumbnail: thumbnail/get-requests.jpg
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: style_opt
-order: 6
+layout: base
+name: Embedding Logos in Plotly Graphs
+order: 14
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/logos/
+thumbnail: thumbnail/get-requests.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}

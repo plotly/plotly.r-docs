@@ -1,16 +1,16 @@
 ---
-name: Marker Styling
-permalink: r/marker-style/
 description: How to style markers in R.
-layout: base
-thumbnail: thumbnail/marker-style.gif
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: style_opt
-order: 8
+layout: base
+name: Marker Styling
+order: 16
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/marker-style/
+thumbnail: thumbnail/marker-style.gif
 ---
 
 ```{r, echo = FALSE, message=FALSE}

@@ -1,15 +1,16 @@
 ---
-name: Axes Labels
-permalink: r/figure-labels/
 description: How to set the title and axis-titles in R
-layout: base
-thumbnail: figure-labels.jpg
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: layout_opt
+layout: base
+name: Axes Labels
+order: 3
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/figure-labels/
+thumbnail: figure-labels.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}

@@ -1,15 +1,17 @@
 ---
-name: Legends
-permalink: r/legend/
-description: How to modify the legend in R graphs. Nine examples of how to move, color, and hide the legend.
-layout: base
-thumbnail: thumbnail/legends.jpg
+description: How to modify the legend in R graphs. Nine examples of how to move, color,
+  and hide the legend.
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: layout_opt
+layout: base
+name: Legends
+order: 4
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/legend/
+thumbnail: thumbnail/legends.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -251,5 +253,3 @@ p
 Reference
 
 See [https://plot.ly/r/reference/#layout-legend](https://plot.ly/r/reference/#layout-legend) for more information and chart attribute options!
-
-

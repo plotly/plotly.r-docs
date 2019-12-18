@@ -1,15 +1,16 @@
 ---
-name: Locales
-permalink: r/locales/
 description: How to set locales with Plotly.
-layout: base
-thumbnail: thumbnail/locales.jpg
+display_as: file_settings
 language: r
-display_as: style_opt
-order: 9
+layout: base
+name: Locales
+order: 17
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/locales/
+thumbnail: thumbnail/locales.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -48,4 +49,4 @@ p <- plot_ly(x = x, y = rnorm(length(x))) %>%
 
 ### Reference
 
-See `?plotly::config` for more information about config options or [click here](https://plot.ly/r/configuration-options/). For more information regarding localization, [click here](https://github.com/plotly/plotly.js/tree/master/dist#to-include-localization). 
+See `?plotly::config` for more information about config options or [click here](https://plot.ly/r/configuration-options/). For more information regarding localization, [click here](https://github.com/plotly/plotly.js/tree/master/dist#to-include-localization).

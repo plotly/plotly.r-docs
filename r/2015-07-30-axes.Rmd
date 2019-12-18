@@ -1,15 +1,17 @@
 ---
-name: Axes
-permalink: r/axes/
-description: How to adjust axes properties in R. Seven examples of linear and logarithmic axes, axes titles, and styling and coloring axes and grid lines.
-layout: base
-thumbnail: thumbnail/axes.jpg
+description: How to adjust axes properties in R. Seven examples of linear and logarithmic
+  axes, axes titles, and styling and coloring axes and grid lines.
+display_as: file_settings
 language: r
-page_type: example_index
-display_as: layout_opt
+layout: base
+name: Axes
+order: 1
 output:
   html_document:
     keep_md: true
+page_type: u-guide
+permalink: r/axes/
+thumbnail: thumbnail/axes.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
