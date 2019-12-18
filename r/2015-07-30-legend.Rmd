@@ -9,9 +9,9 @@ order: 4
 output:
   html_document:
     keep_md: true
-page_type: u-guide
+page_type: example_index
 permalink: r/legend/
-thumbnail: thumbnail/legends.jpg
+thumbnail: thumbnail/legends.gif
 ---
 
 ```{r, echo = FALSE, message=FALSE}

@@ -8,9 +8,9 @@ order: 3
 output:
   html_document:
     keep_md: true
-page_type: u-guide
+page_type: example_index
 permalink: r/figure-labels/
-thumbnail: figure-labels.jpg
+thumbnail: thumbnail/figure-labels.png
 ---
 
 ```{r, echo = FALSE, message=FALSE}

@@ -10,7 +10,7 @@ output:
     keep_md: true
 page_type: u-guide
 permalink: r/3d-axes/
-thumbnail: thumbnail/your-tutorial-chart.jpg
+thumbnail: thumbnail/theming-and-templates.png
 ---
 
 ```{r, echo = FALSE, message=FALSE}

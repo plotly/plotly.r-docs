@@ -10,7 +10,7 @@ output:
     keep_md: true
 page_type: u-guide
 permalink: r/locales/
-thumbnail: thumbnail/locales.jpg
+thumbnail: thumbnail/mapbox-layers.png
 ---
 
 ```{r, echo = FALSE, message=FALSE}
