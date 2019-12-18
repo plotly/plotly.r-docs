@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: 3D Axes
-order: 25
+order: 6
 output:
   html_document:
     keep_md: true

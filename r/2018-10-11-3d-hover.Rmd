@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: 3D Hover Options
-order: 27
+order: 8
 output:
   html_document:
     keep_md: true
