@@ -7,6 +7,7 @@ language: r
 page_type: u-guide
 display_as: file_settings
 order: 15
+thumbnail: thumbnail/heatmap_colorscale.jpg
 output:
   html_document:
     keep_md: true
