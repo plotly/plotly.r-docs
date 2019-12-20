@@ -1,22 +1,16 @@
 ---
-description: How to create colorscales in R with Plotly.
-display_as: file_settings
-language: r
-layout: base
 name: Colorscales
-order: 15
+permalink: r/colorscales/
+description: How to create colorscales in R with Plotly.
+layout: base
+language: r
+page_type: example_index
+display_as: style_opt
+order: 6
 output:
   html_document:
     keep_md: true
-page_type: u-guide
-permalink: r/colorscales/
-thumbnail: thumbnail/heatmap_colorscale.jpg
 ---
-
-```{r, echo = FALSE, message=FALSE}
-knitr::opts_chunk$set(message = FALSE, warning=FALSE)
-```
-
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
@@ -36,7 +30,7 @@ packageVersion('plotly')
 
 ### Colorscale for Scatter Plots
 
-```{r}
+```{r, results = 'hide'}
 library(plotly)
 
 p <- plot_ly(
@@ -63,13 +57,11 @@ p <- plot_ly(
       zeroline = F
     )
   )
-
-p
 ```
 
 ### Colorscale Contour
 
-```{r}
+```{r, results = 'hide'}
 library(plotly)
 
 p <- plot_ly(
@@ -81,6 +73,31 @@ p <- plot_ly(
       0, 0.625, 2.5, 5.625, 10),
       nrow=5, ncol=5)
 )
+
+p
+```
+
+### Share Color Axis
+
+This example shows how to specify the color scale and color bar per trace. To share colorscale information in multiple subplots, you can use [coloraxis](https://plot.ly/r/reference/#scatter-marker-line-coloraxis).
+Below we show how to set a reference coloraxis1 to a shared coloraxis, which are set in the layout. Note that multiple color scales can be linked to the same color.
+
+```{r, results = 'hide'}
+
+library(plotly)
+
+p1 <- plot_ly(
+    type = "heatmap",
+    x = c(1,2,3,4),
+    z = list(c(1,2,3,4), c(4,-3,-1,1)),
+    coloraxis = 'coloraxis')
+p2 <- plot_ly(
+    type = "heatmap",
+    x = c(3,4,5,6),
+    z = list(c(10,2,1,0), c(4,3,5,6)),
+    coloraxis = 'coloraxis')
+p <- subplot(p1, p2) %>%
+  layout(coloraxis=list(colorscale='Jet'))
 
 p
 ```
