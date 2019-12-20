@@ -165,6 +165,8 @@ p <- d %>%
       )
     ) %>%
   layout(legend = list(orientation = 'h', y = -0.3))
+
+p
 ```
 
 #### Reference
