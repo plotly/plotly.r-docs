@@ -63,10 +63,6 @@ p <- plot_ly(
 p
 ```
 
-```{r, echo=FALSE}
-chart_link
-```
-
 ### Create Canvas
 
 ```{r, results = 'hide'}
@@ -90,7 +86,6 @@ p <- plot_ly(
     xaxis = list(showgrid = F, zeroline = F),
     yaxis = list(showgrid = F, zeroline = F)
   )
-
 ```
 
 
@@ -132,7 +127,6 @@ p <- plot_ly(
     xaxis = list(showgrid = F, zeroline = F),
     yaxis = list(showgrid = F, zeroline = F)
 )
-
 ```
 
 ### Add Links
