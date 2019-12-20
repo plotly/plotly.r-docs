@@ -1,21 +1,16 @@
 ---
-name: Sankey Diagram
-permalink: r/sankey-diagram/
 description: How to create sankey diagrams in R with Plotly.
-layout: base
-thumbnail: thumbnail/sankey.jpg
-language: r
 display_as: basic
+language: r
+layout: base
+name: Sankey Diagram
 order: 16
 output:
   html_document:
     keep_md: true
+permalink: r/sankey-diagram/
+thumbnail: thumbnail/sankey.jpg
 ---
-
-```{r, echo = FALSE, message=FALSE}
-knitr::opts_chunk$set(message = FALSE, warning=FALSE)
-```
-
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
@@ -68,6 +63,10 @@ p <- plot_ly(
 p
 ```
 
+```{r, echo=FALSE}
+chart_link
+```
+
 ### Create Canvas
 
 ```{r, results = 'hide'}
@@ -92,7 +91,6 @@ p <- plot_ly(
     yaxis = list(showgrid = F, zeroline = F)
   )
 
-p
 ```
 
 
@@ -135,7 +133,6 @@ p <- plot_ly(
     yaxis = list(showgrid = F, zeroline = F)
 )
 
-p
 ```
 
 ### Add Links
@@ -239,7 +236,30 @@ p <- plot_ly(
 p
 ```
 
+### Define Node Position
+The following example sets [node.x](https://plot.ly/r/reference/#sankey-node-x) and `node.y` to place nodes in the specified locations, except in the `snap arrangement` (default behaviour when `node.x` and `node.y` are not defined) to avoid overlapping of the nodes, therefore, an automatic snapping of elements will be set to define the padding between nodes via [nodepad](https://plot.ly/r/reference/#sankey-node-pad). The other possible arrangements are:<font color='blue'> 1)</font> perpendicular <font color='blue'>2)</font> freeform <font color='blue'>3)</font> fixed
+
+```{r}
+library(plotly)
+p <- plot_ly(
+  type = "sankey",
+  arrangement = "snap",
+  node = list(
+    label = c("A", "B", "C", "D", "E", "F"),
+    x = c(0.2, 0.1, 0.5, 0.7, 0.3, 0.5),
+    y = c(0.7, 0.5, 0.2, 0.4, 0.2, 0.3),
+    pad = 10), # 10 Pixel
+  link = list(
+    source = c(0, 0, 1, 2, 5, 4, 3, 5),
+    target = c(5, 3, 4, 3, 0, 2, 2, 3),
+    value = c(1, 2, 1, 1, 1, 1, 1, 2))) %>%
+  layout(title = "Sankey with manually positioned node")
+
+# Create a shareable link to your chart
+# Set up API credentials: https://plot.ly/r/getting-started
+p
+```
+
 ### Reference
 
 See [https://plot.ly/r/reference/#sankey](https://plot.ly/r/reference/#sankey) for more information and options!
-
