@@ -30,7 +30,7 @@ packageVersion('plotly')
 
 ### Colorscale for Scatter Plots
 
-```{r, results = 'hide'}
+```{r}
 library(plotly)
 
 p <- plot_ly(
@@ -61,7 +61,7 @@ p <- plot_ly(
 
 ### Colorscale Contour
 
-```{r, results = 'hide'}
+```{r}
 library(plotly)
 
 p <- plot_ly(
@@ -82,7 +82,7 @@ p
 This example shows how to specify the color scale and color bar per trace. To share colorscale information in multiple subplots, you can use [coloraxis](https://plot.ly/r/reference/#scatter-marker-line-coloraxis).
 Below we show how to set a reference coloraxis1 to a shared coloraxis, which are set in the layout. Note that multiple color scales can be linked to the same color.
 
-```{r, results = 'hide'}
+```{r}
 
 library(plotly)
 
