@@ -30,7 +30,7 @@ packageVersion('plotly')
 
 #### Add Hover Text
 
-```{r, results='hide'}
+```{r}
 library(plotly)
 
 p <- plot_ly(type = 'scatter', mode = 'markers') %>%
@@ -46,13 +46,9 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
 p
 ```
 
-``` {r, echo=FALSE}
-chart_link
-```
-
 #### Format Hover Text 
 
-```{r, results='hide'}
+```{r}
 library(plotly)
 
 p <- plot_ly(type = 'scatter', mode = 'markers') %>%
@@ -72,10 +68,6 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
 p
 ```
 
-``` {r, echo=FALSE}
-chart_link
-```
-
 #### Customize Tooltip Text with a Hovertemplate
 
 To customize the tooltip on your graph you can use [hovertemplate](https://plot.ly/r/reference/#pie-hovertemplate), which is a template string used for rendering the information that appear on hoverbox.
@@ -83,7 +75,7 @@ This template string can include `variables` in %{variable} format, `numbers` in
 Hovertemplate customize the tooltip text vs. [texttemplate](https://plot.ly/r/reference/#pie-texttemplate) which customizes the text that appears on your chart. <br>
 Set the horizontal alignment of the text within tooltip with [hoverlabel.align](https://plot.ly/r/reference/#layout-hoverlabel-align).
 
-```{r, results='hide'}
+```{r}
 library(plotly)
 
 p <- plot_ly() %>%
@@ -110,11 +102,7 @@ p <- plot_ly() %>%
 p
 ```
 
-``` {r, echo=FALSE}
-chart_link
-```
-
-```{r, results='hide'}
+```{r}
 library(plotly)
 p <-  plot_ly() %>%
   add_trace(
@@ -129,13 +117,9 @@ p <-  plot_ly() %>%
 p
 ```
 
-``` {r, echo=FALSE}
-chart_link
-```
-
 #### Advanced Hovertemplate
 
-```{r, results='hide'}
+```{r}
 library(plotly)
 
 d <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/job-automation-probability.csv')
