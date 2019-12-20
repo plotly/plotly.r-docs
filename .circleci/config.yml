@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    ignore:
+        - built
     working_directory: ~/project
     docker:
       - image: rocker/tidyverse
