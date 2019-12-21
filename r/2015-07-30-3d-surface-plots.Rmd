@@ -12,6 +12,11 @@ page_type: example_index
 permalink: r/3d-surface-plots/
 thumbnail: thumbnail/3d-surface.jpg
 ---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
