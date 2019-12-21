@@ -12,6 +12,11 @@ output:
   html_document:
     keep_md: true
 ---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
