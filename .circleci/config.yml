@@ -9,7 +9,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "32:3b:e8:1d:9a:32:6f:ca:ca:9e:f1:ce:e2:8a:e8:03"
+            - "dc:5f:39:48:00:b4:72:34:e1:d2:c4:e1:1f:d1:e2:ce" #plotlydocbot
       - checkout
       - restore_cache:
           keys:
@@ -53,14 +53,28 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               cd build
               git init
-              git config user.name joedamiba
-              git config user.email joseph.damiba@plot.ly
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
               rm -rf r/*.html
               sed -i.bkp 's/<!--.*-->//g' r/*md && rm r/*.bkp
               rm -rf ggplot2/*.html
               sed -i.bkp 's/<!--.*-->//g' ggplot2/*md && rm ggplot2/*.bkp
               git add *
-              git commit -m build
+              git commit -m "build of https://github.com/plotly/plotly.r-docs/commit/${CIRCLE_SHA1}"
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
               rm -rf .git
+            fi
+
+      - run:
+          name: trigger doc build
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              git clone --depth=1 --branch=source-design-merge https://github.com/plotly/documentation.git
+              cd documentation
+              git config user.name plotlydocbot
+              git config user.email accounts@plot.ly
+              git commit --allow-empty -m "deploying https://github.com/plotly/plotly.r-docs/commit/${CIRCLE_SHA1}"
+              git push
+              cd ..
+              rm -rf documentation
             fi
