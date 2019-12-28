@@ -24,7 +24,7 @@ jobs:
           command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
           command: |
-            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
+            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev libcurl3
             sudo R -e 'install.packages(c("devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
           key: cache2
