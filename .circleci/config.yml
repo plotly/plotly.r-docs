@@ -17,7 +17,6 @@ jobs:
       - run:
           command: |
             sudo apt-get update -y
-            sudo apt-get remove -y libcurl3
             sudo apt-get install -y curl python3-pip python3-venv ssh-client ssh git
             pip3 install virtualenv
       - run:
@@ -25,8 +24,8 @@ jobs:
           command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
           command: |
-            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev libcurl4-openssl-dev
-            sudo R -e 'install.packages(c("devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_deps(dependencies = TRUE) '
+            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
+            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
           key: cache2
           paths:
