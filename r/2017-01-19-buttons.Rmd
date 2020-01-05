@@ -343,8 +343,8 @@ library(plotly)
 # Sys.setenv('MAPBOX_TOKEN' = 'your mapbox token')
 
 # read in wind turbines and farms data
-df_wind = read.csv('https://plot.ly/~datasets/2805.csv')
-df_farms = read.csv('https://plot.ly/~jackp/17256.csv')
+df_wind = read.csv('data/2805.csv')
+df_farms = read.csv('https://plot.ly/~jackp/17256.csv', skipNul = TRUE)
 
 # subset and clean data
 df_sub <- subset(df_wind, manufac != "unknown", select=c(lat_DD, long_DD, manufac))

@@ -1,7 +1,8 @@
 version: 2
 jobs:
   build:
-    ignore:
+    branches:
+      ignore:
         - built
     working_directory: ~/project
     docker:
@@ -15,6 +16,7 @@ jobs:
           keys:
             - cache2
       - run:
+          name: Install container-level dependencies
           command: |
             sudo apt-get update -y
             sudo apt-get install -y curl python3-pip python3-venv ssh-client ssh git
@@ -23,6 +25,7 @@ jobs:
           name: Keyscan Github (HACK)
           command: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - run:
+          name: install application-level dependencies
           command: |
             sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
             sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_deps(dependencies = TRUE) '
@@ -34,6 +37,7 @@ jobs:
           path: man/
           destination: man
       - run:
+          name: build site and perform front-matter checks
           command: |
             rm -rf build
             mkdir build
@@ -49,6 +53,7 @@ jobs:
             curl https://raw.githubusercontent.com/plotly/documentation/source-design-merge/check-or-enforce-order.py > check-or-enforce-order.py
             python check-or-enforce-order.py build/r
       - run:
+          name: deploy to plotly/r.docs:built
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               cd build
@@ -56,7 +61,7 @@ jobs:
               git config user.name plotlydocbot
               git config user.email accounts@plot.ly
               rm -rf r/*.html
-              sed -i.bkp 's/<!--.*-->//g' r/*md && rm r/*.bkp
+              sed -i.bkp 's/<!--.*-->//g' r/*md && rm r/*.bkp # remove html comments
               rm -rf ggplot2/*.html
               sed -i.bkp 's/<!--.*-->//g' ggplot2/*md && rm ggplot2/*.bkp
               git add *
@@ -66,7 +71,7 @@ jobs:
             fi
 
       - run:
-          name: trigger doc build
+          name: trigger plotly/documentation build
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               git clone --depth=1 --branch=source-design-merge https://github.com/plotly/documentation.git
