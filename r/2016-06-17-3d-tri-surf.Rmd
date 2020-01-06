@@ -73,7 +73,11 @@ p
 library(plotly)
 library(geomorph)
 
-dest <- "data/chopper.ply"
+plyFile <- 'http://people.sc.fsu.edu/~jburkardt/data/ply/chopper.ply'	
+dest <- basename(plyFile)	
+if (!file.exists(dest)) {	
+  download.file(plyFile, dest)	
+}
 mesh <- read.ply(dest)
 # see getS3method("shade3d", "mesh3d") for details on how to plot
 
