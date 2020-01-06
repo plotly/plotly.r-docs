@@ -74,7 +74,7 @@ jobs:
           name: trigger plotly/documentation build
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git clone --depth=1 --branch=source-design-merge https://github.com/plotly/documentation.git
+              git clone --depth=1 --branch=source-design-merge git@github.com:plotly/documentation.git
               cd documentation
               git config user.name plotlydocbot
               git config user.email accounts@plot.ly
