@@ -17,15 +17,6 @@ thumbnail: thumbnail/scatter-mapbox.jpg
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-```{r, echo = FALSE}
-# Mapbox token for plotly | this one is for plot_mapbox figure
-mapboxToken <- paste("pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNqdnBvNDMyaT",
-                "AxYzkzeW5ubWdpZ2VjbmMifQ.TXcBE-xg9BFdV2ocecc_7g", sep = "")
-
-# Setting mapbox token for R environment 
-Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
-```
-
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
@@ -37,24 +28,36 @@ We also have a quick-reference [cheatsheet](https://images.plot.ly/plotly-docume
 
 Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
 Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
-```{r}
-library(plotly)
-packageVersion('plotly')
-```
-
-### Mapbox Access Token
-
-To create mapbox maps with Plotly, you'll need a Mapbox account and a [Mapbox Access Token](https://www.mapbox.com/studio/) that you can add to your [Plotly Settings](https://plot.ly/settings/mapbox). If you're using a Chart Studio Enterprise server, please see additional instructions here: https://help.plot.ly/mapbox-atlas/.
 
 ```{r}
 library(plotly)
 packageVersion('plotly')
 ```
+
+### Mapbox Access Tokens and When You Need Them
+
+  The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox.js open-source library. If your basemap in `layout.mapbox.style` uses data from the Mapbox *service*, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided either in `mapboxAccessToken`  in `setPlotConfig` function, or as a variable that would be passed as an argument of `newPlot`.
+    If your `layout.mapbox.style` does not use data from the Mapbox service, you do *not* need to register for a Mapbox account.
+    <h6>Base Maps in `layout.mapbox.style`</h6>
+    The accepted values for `layout.mapbox.style` are one of the following tiles.
+    <ol>
+        <li> `"white-bg"` yields an empty white canvas which results in no external HTTP requests </li>
+        <li> `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens </li>
+        <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
+        <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
+        <li> A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/ </li>
+    </ol>
 
 ### Basic Example
 
 ```{r}
 library(plotly)
+
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+
+# Setting mapbox token for R environment 
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
+
 
 dat <- map_data("world", "canada") %>% group_by(group)
 
@@ -64,7 +67,8 @@ p <- plot_mapbox(dat, x = ~long, y = ~lat) %>%
   layout(mapbox = list(zoom = 0,
                        center = list(lat = ~median(lat),
                                      lon = ~median(long))
-  ))
+  )) %>%
+  config(mapboxAccessToken = mapboxToken)
 
 p
 ```
@@ -73,6 +77,11 @@ p
 
 ```{r}
 library(plotly)
+
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+
+# Setting mapbox token for R environment 
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
 
 df = read.csv('https://raw.githubusercontent.com/bcdunbar/datasets/master/meteorites_subset.csv')
 
@@ -88,7 +97,8 @@ p <- df %>%
                        font = list(size = 8)),
          margin = list(l = 25, r = 25,
                        b = 25, t = 25,
-                       pad = 2))
+                       pad = 2)) %>%
+  config(mapboxAccessToken = mapboxToken)
 
 p
 ```
@@ -98,6 +108,11 @@ p
 ```{r}
 library(plotly)
 library(dplyr)
+
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+
+# Setting mapbox token for R environment 
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
 
 # airport locations
 air <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_february_us_airport_traffic.csv')
@@ -125,7 +140,8 @@ p <- plot_mapbox(mode = 'scattermapbox') %>%
     margin = list(l = 0, r = 0,
                   b = 0, t = 0,
                   pad = 0),
-    showlegend=FALSE)
+    showlegend=FALSE) %>%
+  config(mapboxAccessToken = mapboxToken)
 
 p
 ```

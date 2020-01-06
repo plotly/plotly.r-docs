@@ -17,15 +17,6 @@ output:
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-```{r, echo = FALSE}
-# Mapbox token for plotly | this one is for plot_mapbox figure
-mapboxToken <- paste("pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNqdnBvNDMyaT",
-                "AxYzkzeW5ubWdpZ2VjbmMifQ.TXcBE-xg9BFdV2ocecc_7g", sep = "")
-
-# Setting mapbox token for R environment 
-Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
-```
-
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
@@ -339,8 +330,10 @@ When adding buttons to Plotly charts, users have the option of styling the color
 ```{r}
 library(plotly)
 
-# make sure you have a Mapbox token https://www.mapbox.com/help/create-api-access-token/
-# Sys.setenv('MAPBOX_TOKEN' = 'your mapbox token')
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+
+# Setting mapbox token for R environment 
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
 
 # read in wind turbines and farms data
 df_wind = read.csv('data/2805.csv')
@@ -426,8 +419,8 @@ p <- plot_mapbox(df_sub, lat = ~lat_DD, lon = ~long_DD, mode = 'scattermapbox',
                 yanchor = "bottom",
                 x = 1,
                 y = 0,
-                buttons=list(dark,basic,satellite)))) 
-
+                buttons=list(dark,basic,satellite)))) %>%
+  config(accesstoken = mapboxToken)
 
 p
 ```

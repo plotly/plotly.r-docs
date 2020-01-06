@@ -33,34 +33,6 @@ library(plotly)
 packageVersion('plotly')
 ```
 
-### Mapbox Access Token
-
-To create mapbox maps with Plotly, you'll need a Mapbox account and a [Mapbox Access Token](https://www.mapbox.com/studio/) that you can add to your [Plotly Settings](https://plot.ly/settings/mapbox). If you're using a Chart Studio Enterprise server, please see additional instructions here: https://help.plot.ly/mapbox-atlas/.
-
-```{r, results = 'hide'}
-library(plotly)
-Sys.setenv('MAPBOX_TOKEN' = 'your_mapbox_token_here')
-```
-
-```{r, echo = FALSE}
-# Mapbox token for plotly | this one is for plot_mapbox figure
-mapboxToken <- paste("pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNqdnBvNDMyaT",
-                "AxYzkzeW5ubWdpZ2VjbmMifQ.TXcBE-xg9BFdV2ocecc_7g", sep = "")
-
-# Setting mapbox token for R environment 
-Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
-```
-
-### How Layers work in Mapbox Maps
-
-  If your figure contains one or more traces of type `Scattermapbox`, `Choroplethmapbox` or `Densitymapbox`, the `layout` object in your figure contains configuration information for the map itself. The map is composed of various layers, of three different types.
-    <ol>
-        <li> `layout.mapbox.style` defines the lowest layers, also known as your "base map"</li>
-        <li> The various traces in `data` are by default rendered above the base map (although this can be controlled via the `below` attribute).</li>
-        <li> `layout.mapbox.layers` is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).</li>
-    </ol>
-
-
 ### Mapbox Access Tokens and When You Need Them
 
   The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox.js open-source library. If your basemap in `layout.mapbox.style` uses data from the Mapbox *service*, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided either in `mapboxAccessToken`  in `setPlotConfig` function, or as a variable that would be passed as an argument of `newPlot`.
@@ -73,6 +45,15 @@ Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
         <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
         <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
         <li> A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/ </li>
+    </ol>
+
+### How Layers work in Mapbox Maps
+
+  If your figure contains one or more traces of type `Scattermapbox`, `Choroplethmapbox` or `Densitymapbox`, the `layout` object in your figure contains configuration information for the map itself. The map is composed of various layers, of three different types.
+    <ol>
+        <li> `layout.mapbox.style` defines the lowest layers, also known as your "base map"</li>
+        <li> The various traces in `data` are by default rendered above the base map (although this can be controlled via the `below` attribute).</li>
+        <li> `layout.mapbox.layers` is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).</li>
     </ol>
 
 ### OpenStreetMap Tiles, no Token Needed
@@ -95,7 +76,7 @@ p <- us_cities %>%
     mapbox = list(
       style = 'open-street-map',
       zoom =2.5,
-      center = list(lon = -88, lat = 34)))
+      center = list(lon = -88, lat = 34))) 
 
 p
 ```
@@ -171,7 +152,10 @@ Here is a map rendered with the `"dark"` style from the Mapbox service, which re
 ```{r}
 library(plotly)
 
-#mapboxToken <- paste(readLines(".mapbox_token"), collapse="")    # You need your own token
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+
+# Setting mapbox token for R environment 
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
 
 us_cities = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
@@ -185,9 +169,9 @@ p <- us_cities %>%
   layout(
     mapbox = list(
       style = 'dark',
-      accesstoken = mapboxToken,
       zoom =2.5,
-      center = list(lon = -88, lat = 34)))
+      center = list(lon = -88, lat = 34))) %>%
+  config(mapboxAccessToken = mapboxToken)
 
 p
 ```

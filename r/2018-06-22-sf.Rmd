@@ -16,15 +16,6 @@ thumbnail: thumbnail/sf.jpg
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-```{r, echo = FALSE}
-# Mapbox token for plotly | this one is for plot_mapbox figure
-mapboxToken <- paste("pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNqdnBvNDMyaT",
-                "AxYzkzeW5ubWdpZ2VjbmMifQ.TXcBE-xg9BFdV2ocecc_7g", sep = "")
-
-# Setting mapbox token for R environment 
-Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
-```
-
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
@@ -48,6 +39,20 @@ In order to complete the examples below, you'll require installing additional pa
 - [sf](https://github.com/r-spatial/sf)
 
 The examples below use the library [simple features](https://r-spatial.github.io/sf/) to read in the shape files before plotting the features with Plotly.
+
+### Mapbox Access Tokens and When You Need Them
+
+  The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox.js open-source library. If your basemap in `layout.mapbox.style` uses data from the Mapbox *service*, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided either in `mapboxAccessToken`  in `setPlotConfig` function, or as a variable that would be passed as an argument of `newPlot`.
+    If your `layout.mapbox.style` does not use data from the Mapbox service, you do *not* need to register for a Mapbox account.
+    <h6>Base Maps in `layout.mapbox.style`</h6>
+    The accepted values for `layout.mapbox.style` are one of the following tiles.
+    <ol>
+        <li> `"white-bg"` yields an empty white canvas which results in no external HTTP requests </li>
+        <li> `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens </li>
+        <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
+        <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
+        <li> A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/ </li>
+    </ol>
 
 ### Basic sf 
 
@@ -81,6 +86,11 @@ Or `plot_mapbox`:
 library(plotly)
 library(sf)
 
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+
+# Setting mapbox token for R environment 
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
+
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
 p <- plot_mapbox(nc, split=~NAME) %>%
@@ -88,7 +98,8 @@ p <- plot_mapbox(nc, split=~NAME) %>%
     mapbox = list(
       zoom = 6
     )
-  )
+  ) %>%
+  config(mapboxAccessToken = mapboxToken)
 
 p
 ```
