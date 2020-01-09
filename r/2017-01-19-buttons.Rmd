@@ -424,7 +424,7 @@ p <- plot_mapbox(df_sub, lat = ~lat_DD, lon = ~long_DD, mode = 'scattermapbox',
                 x = 1,
                 y = 0,
                 buttons=list(dark,basic,satellite)))) %>%
-  config(mapboxAccessToken = mapboxToken)
+  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
 p
 ```
