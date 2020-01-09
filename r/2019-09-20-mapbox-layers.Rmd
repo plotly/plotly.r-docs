@@ -35,30 +35,47 @@ packageVersion('plotly')
 
 ### Mapbox Access Tokens and When You Need Them
 
-  The word "mapbox" in the trace names and `layout.mapbox` refers to the Mapbox.js open-source library. If your basemap in `layout.mapbox.style` uses data from the Mapbox *service*, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token. This token should be provided either in `mapboxAccessToken`  in `setPlotConfig` function, or as a variable that would be passed as an argument of `newPlot`.
-    If your `layout.mapbox.style` does not use data from the Mapbox service, you do *not* need to register for a Mapbox account.
-    <h6>Base Maps in `layout.mapbox.style`</h6>
-    The accepted values for `layout.mapbox.style` are one of the following tiles.
-    <ol>
-        <li> `"white-bg"` yields an empty white canvas which results in no external HTTP requests </li>
-        <li> `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens </li>
-        <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
-        <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
-        <li> A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/ </li>
-    </ol>
+The [`plot_ly(layout(mapbox()))`](https://plot.ly/r/reference/#layout-mapbox) call signature contains base maps which are collected from the [MapBox](https://mapbox.com) API.
 
-### How Layers work in Mapbox Maps
+If the base map you specify in the `plot_ly(layout(mapbox(style())))` call signature uses data from the Mapbox *service* that requires a MapBox Access Token, then you will need to register for a free account at https://mapbox.com/ and obtain and use your own Mapbox Access token. 
 
-  If your figure contains one or more traces of type `Scattermapbox`, `Choroplethmapbox` or `Densitymapbox`, the `layout` object in your figure contains configuration information for the map itself. The map is composed of various layers, of three different types.
-    <ol>
-        <li> `layout.mapbox.style` defines the lowest layers, also known as your "base map"</li>
-        <li> The various traces in `data` are by default rendered above the base map (although this can be controlled via the `below` attribute).</li>
-        <li> `layout.mapbox.layers` is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).</li>
-    </ol>
+If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+
+#### - The following values of the `style` attribute **DO** require an Access Token:
+<ol>
+  <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
+  <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
+  <li> A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/ </li>
+</ol>
+
+- We recommend setting your MapBox Access Token as an environment variable in your R environment. That way, your token will not be committed to version control. See [Basemap Requiring MapBox Access Token](#basemap-requiring-mapbox-access-token)
+
+#### - The following values of the style attribute **DO NOT** require an Access Token:
+<ol>
+  <li> `"white-bg"` yields an empty white canvas which results in no external HTTP requests </li>
+  <li> `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens </li>
+</ol>
+
+### How Layers Work in Mapbox Maps
+
+If your figure contains one or more traces of type `scattermapbox`, `choroplethmapbox` or `densitymapbox`, the `layout` call signature of your figure contains configuration information for the map itself. 
+
+The map is composed of layers of three different types.
+<ol>
+  <li> `layout(mapbox(style))` call signature defines the lowest layers, also known as your "base map"</li>
+  <li> The various traces in the `plot_ly` call signature are by default rendered above the base map (this can be controlled via the use of `below` attribute).</li>
+  <li> `layout.mapbox.layers` is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).</li>
+</ol>
+
+#### Using the `plot_ly(layout(mapbox(layers())))` to Specify a Base Map
+
+If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set use the `layout(mapbox(style()))` call signature to `"white-bg"` and then the use `layout(mapbox(layers()))` call signature with the `below` attribute to specify a custom base map.
+
+> If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
 
 ### OpenStreetMap Tiles, no Token Needed
 
-   Here is a simple map rendered with "open-street-map" tiles, without needing a Mapbox Access Token.
+This chart demonstrates how to use "open-street-map" tiles as the base map for a chart. A Mapbox Access Token is not required.
 
 ```{r}
 library(plotly)
@@ -81,15 +98,9 @@ p <- us_cities %>%
 p
 ```
 
-### Using `layout.mapbox.layers` to Specify a Base Map
+### Base Map Below A Trace: No Token Needed
 
-If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set `layout.mapbox.style` to `"white-bg"` and to use `layout.mapbox.layers` with `below` to specify a custom base map.
-
-> If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
-
-### Base Tiles from the USGS: no Token Needed
-
-Here is an example of a map which uses a public USGS imagery map, specified in `layout.mapbox.layers`, and which is rendered *below* the `data` layer.
+This chart demonstrates how to use a public USGS imagery map as a base map, specified in the `layout(mapbox(layers()))` call signature, and which is rendered *below* the trace.
 
 ```{r}
 library(plotly)
@@ -115,9 +126,9 @@ p <-  us_cities %>%
 p
 ```
 
-#### Base Tiles from the USGS, Radar Overlay from Environment Canada: no Token Needed
+#### Maps Below and Above A Trace: No Token Needed
 
-Here is the same example, with in addition, a WMS layer from Environment Canada which displays near-real-time radar imagery in partly-transparent raster tiles, rendered above the `go.Scattermapbox` trace, as is the default:
+This example uses the same basemap as the one above. However, in this case, partly-transparent raster tiles are rendered above the trace as well.
 
 ```{r}
 library(plotly)
@@ -145,17 +156,17 @@ p <- us_cities %>%
 p
 ```
 
-#### Dark Tiles from Mapbox Service: Free Token Needed
+#### Map Requiring MapBox Access Token
 
-Here is a map rendered with the `"dark"` style from the Mapbox service, which requires an Access Token:
+This example demonstrates how to use a MapBox Access token in order to use a "dark" base map from MapBox, which requires API authentication. 
+
+In this case, the Access Token is stored in an environment variable which is then passed to the chart configuration call signature. 
 
 ```{r}
 library(plotly)
 
 mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
-
-# Setting mapbox token for R environment 
-Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 us_cities = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
@@ -171,7 +182,7 @@ p <- us_cities %>%
       style = 'dark',
       zoom =2.5,
       center = list(lon = -88, lat = 34))) %>%
-  config(mapboxAccessToken = mapboxToken)
+  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
 p
 ```
