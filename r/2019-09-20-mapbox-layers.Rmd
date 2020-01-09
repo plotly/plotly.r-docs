@@ -62,14 +62,14 @@ If your figure contains one or more traces of type `scattermapbox`, `choroplethm
 
 The map is composed of layers of three different types.
 <ol>
-  <li> `layout(mapbox(style))` call signature defines the lowest layers, also known as your "base map"</li>
+  <li> the `layout(mapbox(style))` call signature defines the lowest layers, also known as your "base map"</li>
   <li> The various traces in the `plot_ly` call signature are by default rendered above the base map (this can be controlled via the use of `below` attribute).</li>
-  <li> `layout.mapbox.layers` is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).</li>
+  <li> the `layout(mapbox(layers()))` call signature is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).</li>
 </ol>
 
-#### Using the `plot_ly(layout(mapbox(layers())))` to Specify a Base Map
+#### Using `plot_ly(layout(mapbox(layers())))` to Specify a Base Map
 
-If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set use the `layout(mapbox(style()))` call signature to `"white-bg"` and then the use `layout(mapbox(layers()))` call signature with the `below` attribute to specify a custom base map.
+If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set use the `layout(mapbox(style()))` call signature to `"white-bg"` and then the use the `layout(mapbox(layers()))` call signature with the `below` attribute to specify a custom base map.
 
 > If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
 
