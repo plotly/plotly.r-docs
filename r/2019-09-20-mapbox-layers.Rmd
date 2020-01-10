@@ -33,15 +33,24 @@ library(plotly)
 packageVersion('plotly')
 ```
 
+### How Layers Work in Mapbox Maps
+
+If your figure contains one or more traces of type `scattermapbox`, `choroplethmapbox` or `densitymapbox`, the `layout` call signature of your figure contains configuration information for the map itself. 
+
+The map is composed of layers of three different types.
+<ol>
+  <li> `layout(mapbox(style))` defines the lowest layers, also known as your "base map"</li>
+  <li> the various traces in the `plot_ly` call signature are by default rendered above the base map (this can be controlled via the use of `below` attribute).</li>
+  <li> `layout(mapbox(layers()))` accepts an array that defines layers that are by default rendered above the traces in the `plot_ly` call signature (although this can also be controlled via the `below` attribute).</li>
+</ol>
+
 ### Mapbox Access Tokens and When You Need Them
 
-The [`plot_ly(layout(mapbox()))`](https://plot.ly/r/reference/#layout-mapbox) call signature contains base maps which are collected from the [MapBox](https://mapbox.com) API.
-
-If the base map you specify in the `plot_ly(layout(mapbox(style())))` call signature uses data from the Mapbox *service* that requires a MapBox Access Token, then you will need to register for a free account at https://mapbox.com/ and obtain and use your own Mapbox Access token. 
+The word "mapbox" in the trace names and `layout(mapbox())` refers to the Mapbox.js open-source library. If the basemap you define in `layout(mapbox(style()))` uses data from the Mapbox *service* that requires API authentication, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token.
 
 If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
-#### - The following values of the `style` attribute **DO** require an Access Token:
+#### - The following values of `layout(mapbox(style()))` **DO** require an Access Token:
 <ol>
   <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
   <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
@@ -50,21 +59,10 @@ If you're using a Chart Studio Enterprise server, please see additional instruct
 
 - We recommend setting your MapBox Access Token as an environment variable in your R environment. That way, your token will not be committed to version control. See [Basemap Requiring MapBox Access Token](#basemap-requiring-mapbox-access-token)
 
-#### - The following values of the style attribute **DO NOT** require an Access Token:
+#### - The following values of `layout(mapbox(style()))` **DO NOT** require an Access Token:
 <ol>
   <li> `"white-bg"` yields an empty white canvas which results in no external HTTP requests </li>
   <li> `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens </li>
-</ol>
-
-### How Layers Work in Mapbox Maps
-
-If your figure contains one or more traces of type `scattermapbox`, `choroplethmapbox` or `densitymapbox`, the `layout` call signature of your figure contains configuration information for the map itself. 
-
-The map is composed of layers of three different types.
-<ol>
-  <li> the `layout(mapbox(style))` call signature defines the lowest layers, also known as your "base map"</li>
-  <li> The various traces in the `plot_ly` call signature are by default rendered above the base map (this can be controlled via the use of `below` attribute).</li>
-  <li> the `layout(mapbox(layers()))` call signature is an array that defines more layers that are by default rendered above the traces in `data` (although this can also be controlled via the `below` attribute).</li>
 </ol>
 
 #### Using `plot_ly(layout(mapbox(layers())))` to Specify a Base Map
@@ -128,7 +126,7 @@ p
 
 #### Maps Below and Above A Trace: No Token Needed
 
-This example uses the same basemap as the one above. However, in this case, partly-transparent raster tiles are rendered above the trace as well.
+This example uses the same base map as the one above. In addition, a WMS layer from Environment Canada (which displays near-real-time radar imagery in partly-transparent raster tiles) is rendered above the `scattermapbox` trace, as is the default:
 
 ```{r}
 library(plotly)
