@@ -35,22 +35,22 @@ packageVersion('plotly')
 
 ### How Layers Work in Mapbox Maps
 
-If your figure contains one or more traces of type `scattermapbox`, `choroplethmapbox` or `densitymapbox`, the `layout` call signature of your figure contains configuration information for the map itself. 
+If your figure contains one or more traces of type `scattermapbox`, `choroplethmapbox` or `densitymapbox`, the `layout` of your figure contains configuration information for the map itself. 
 
 The map is composed of layers of three different types.
 <ol>
-  <li> `layout(mapbox(style))` defines the lowest layers, also known as your "base map"</li>
+  <li> `layout.mapbox.style` defines the lowest layers, also known as your "base map"</li>
   <li> the various traces in the `plot_ly` call signature are by default rendered above the base map (this can be controlled via the use of `below` attribute).</li>
-  <li> `layout(mapbox(layers()))` accepts an array that defines layers that are by default rendered above the traces in the `plot_ly` call signature (although this can also be controlled via the `below` attribute).</li>
+  <li> the `layout.mapbox.layers` attribute accepts an array that defines layers that are by default rendered above the traces in the `plot_ly` call signature (this can be controlled via the `below` attribute).</li>
 </ol>
 
 ### Mapbox Access Tokens and When You Need Them
 
-The word "mapbox" in the trace names and `layout(mapbox())` refers to the Mapbox.js open-source library. If the basemap you define in `layout(mapbox(style()))` uses data from the Mapbox *service* that requires API authentication, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token.
+The word "mapbox" in trace names and the `layout.mapbox` attribute refers to the Mapbox.js open-source library. If the basemap you define using `layout.mapbox.style` uses data from the Mapbox *service* that requires API authentication, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token.
 
 If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
-#### - The following values of `layout(mapbox(style()))` **DO** require an Access Token:
+#### - The following values of `layout.mapbox.style` **DO** require an Access Token:
 <ol>
   <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
   <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
@@ -59,17 +59,17 @@ If you're using a Chart Studio Enterprise server, please see additional instruct
 
 - We recommend setting your MapBox Access Token as an environment variable in your R environment. That way, your token will not be committed to version control. See [Basemap Requiring MapBox Access Token](#basemap-requiring-mapbox-access-token)
 
-#### - The following values of `layout(mapbox(style()))` **DO NOT** require an Access Token:
+#### - The following values of `layout.mapbox.style` **DO NOT** require an Access Token:
 <ol>
   <li> `"white-bg"` yields an empty white canvas which results in no external HTTP requests </li>
   <li> `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens </li>
 </ol>
 
-#### Using `plot_ly(layout(mapbox(layers())))` to Specify a Base Map
+#### Using `layout.mapbox.layers` to Specify a Base Map
 
-If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to set use the `layout(mapbox(style()))` call signature to `"white-bg"` and then the use the `layout(mapbox(layers()))` call signature with the `below` attribute to specify a custom base map.
+If you have access to your own private tile servers, or wish to use a tile server not included in the list above, the recommended approach is to first set `layout.mapbox.style` to `"white-bg"` and then set `layout.mapbox.layers` to `below` to specify a custom base map.
 
-> If you omit the `below` attribute when using this approach, your data will likely be hidden by fully-opaque raster tiles!
+> If you omit setting `layout.mapbox.layers` to `below`, when using this approach, your data will likely be hidden by fully-opaque raster tiles!
 
 ### OpenStreetMap Tiles, no Token Needed
 
@@ -98,7 +98,7 @@ p
 
 ### Base Map Below A Trace: No Token Needed
 
-This chart demonstrates how to use a public USGS imagery map as a base map, specified in the `layout(mapbox(layers()))` call signature, and which is rendered *below* the trace.
+This chart demonstrates how to use a public USGS imagery map as a base map using `layout.mapbox.layers`. The map is rendered *below* the trace.
 
 ```{r}
 library(plotly)
@@ -126,7 +126,9 @@ p
 
 #### Maps Below and Above A Trace: No Token Needed
 
-This example uses the same base map as the one above. In addition, a WMS layer from Environment Canada (which displays near-real-time radar imagery in partly-transparent raster tiles) is rendered above the `scattermapbox` trace, as is the default:
+This example uses the same base map *below* the trace as the one above. 
+
+In addition, a WMS layer map from Environment Canada (which displays near-real-time radar imagery in partly-transparent raster tiles) is rendered *above* the `scattermapbox` trace, as is the default:
 
 ```{r}
 library(plotly)
