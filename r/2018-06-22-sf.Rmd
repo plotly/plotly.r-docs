@@ -16,15 +16,6 @@ thumbnail: thumbnail/sf.jpg
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-```{r, echo = FALSE}
-# Mapbox token for plotly | this one is for plot_mapbox figure
-mapboxToken <- paste("pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNqdnBvNDMyaT",
-                "AxYzkzeW5ubWdpZ2VjbmMifQ.TXcBE-xg9BFdV2ocecc_7g", sep = "")
-
-# Setting mapbox token for R environment 
-Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
-```
-
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
@@ -49,7 +40,11 @@ In order to complete the examples below, you'll require installing additional pa
 
 The examples below use the library [simple features](https://r-spatial.github.io/sf/) to read in the shape files before plotting the features with Plotly.
 
-### Basic sf 
+### Mapbox Access Token
+
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+
+### Basic sf
 
 ``` {r}
 library(plotly)
@@ -81,6 +76,9 @@ Or `plot_mapbox`:
 library(plotly)
 library(sf)
 
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
+
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
 p <- plot_mapbox(nc, split=~NAME) %>%
@@ -88,7 +86,8 @@ p <- plot_mapbox(nc, split=~NAME) %>%
     mapbox = list(
       zoom = 6
     )
-  )
+  ) %>%
+  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
 p
 ```

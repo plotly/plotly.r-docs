@@ -16,15 +16,6 @@ thumbnail: thumbnail/county-level-choropleth.jpg
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-```{r, echo = FALSE}
-# Mapbox token for plotly | this one is for plot_mapbox figure
-mapboxToken <- paste("pk.eyJ1IjoicGxvdGx5bWFwYm94IiwiYSI6ImNqdnBvNDMyaT",
-                "AxYzkzeW5ubWdpZ2VjbmMifQ.TXcBE-xg9BFdV2ocecc_7g", sep = "")
-
-# Setting mapbox token for R environment 
-Sys.setenv("MAPBOX_TOKEN" = mapboxToken)
-```
-
 ### New to Plotly?
 
 Plotly's R library is free and open source!<br>
@@ -43,7 +34,7 @@ packageVersion('plotly')
 
 ### Mapbox Access Token
 
-To create mapbox maps with Plotly, you'll need a Mapbox account and a [Mapbox Access Token](https://www.mapbox.com/studio/) that you can add to your [Plotly Settings](https://plot.ly/settings/mapbox). If you're using a Chart Studio Enterprise server, please see additional instructions here: https://help.plot.ly/mapbox-atlas/.
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
 ### Creating Polygon Boundaries
 
@@ -147,18 +138,11 @@ p
 ```
 
 ### Add Polygon to Mapbox
-
-To create mapbox maps with Plotly, you'll need a Mapbox account and a [Mapbox Access Token](https://www.mapbox.com/studio/) that you can add to your [Plotly Settings](https://plot.ly/settings/mapbox).
-
-```{r, results = 'hide'}
-library(plotly)
-
-Sys.setenv('MAPBOX_TOKEN' = 'your_mapbox_token_here')
-```
-
-
 ```{r}
 library(plotly)
+
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 p <- cali_pop %>%
   group_by(group) %>%
@@ -179,7 +163,8 @@ p <- cali_pop %>%
       zoom = 4,
       center = list(lat = ~median(lat), lon = ~median(long))),
     margin = list(l = 0, r = 0, b = 0, t = 0, pad = 0)
-  )
+  ) %>%
+  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
 p
 ```
