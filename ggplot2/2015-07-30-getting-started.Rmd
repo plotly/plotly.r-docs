@@ -10,6 +10,10 @@ output:
     keep_md: true
 ---
 
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
 # Getting Started with Plotly for R
 
 Plotly is an R package for creating interactive web-based graphs via the open source JavaScript graphing library [plotly.js](http://plot.ly/javascript).
