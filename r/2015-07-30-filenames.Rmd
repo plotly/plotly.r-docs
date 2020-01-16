@@ -1,0 +1,59 @@
+---
+description: How to update Chart Studio graphs in R.
+display_as: chart_studio
+language: r
+layout: base
+name: Updating Chart Studio Graphs
+order: 1
+output:
+  html_document:
+    keep_md: true
+page_type: example_index
+permalink: r/file-options/
+thumbnail: thumbnail/horizontal-bar.jpg
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+### New to Plotly?
+
+Plotly's R library is free and open source!<br>
+[Get started](https://plot.ly/r/getting-started/) by downloading the client and [reading the primer](https://plot.ly/r/getting-started/).<br>
+You can set up Plotly to work in [online](https://plot.ly/r/getting-started/#hosting-graphs-in-your-online-plotly-account) or [offline](https://plot.ly/r/offline/) mode.<br>
+We also have a quick-reference [cheatsheet](https://images.plot.ly/plotly-documentation/images/r_cheat_sheet.pdf) (new!) to help you get started!
+
+### Version Check
+
+Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
+Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
+```{r}
+library(plotly)
+packageVersion('plotly')
+```
+
+#### Save Plot to Chart Studio
+To create a Chart Studio figure, use the `api_create()` function.
+
+```{r}
+library(plotly)
+p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+api_create(p)
+```
+
+#### Overwrite Plot
+
+If you don't include a filename, a new plot will be made on your online plotly account. If you want to overwrite a plot (i.e., keep the graph served from the same plotly URL), specify a filename. This implicitly overwrites your plotly graph.
+
+```{r}
+api_create(p, filename = "name-of-my-plotly-file")
+```
+
+#### Save your Plot in a Folder
+If the filename contains "/", it will automatically create a folder in your Chart Studio account. This option is only available for [Chart Studio Enterprise subscripbers](https://plot.ly/online-chart-maker/)
+
+```{r}
+api_create(p, filename="r-docs/name-of-my-chart-studio-file")
+```
+
+View your Chart Studio graphs at [https://plot.ly/organize](https://plot.ly/organize).
