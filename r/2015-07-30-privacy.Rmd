@@ -64,8 +64,8 @@ Below is the URL of the private plot above. Only the owner can view the private 
 ```{r}
 library(plotly)
 p <- plot_ly(x = c(0, 2, 4), y = c(0, 4, 2), type = 'scatter', mode = 'markers+lines')
-chart_link = api_create(p, filename = "secret-graph", sharing = "secret")
-chart_link
+secret_graph = api_create(p, filename = "secret-graph-file", sharing = "secret")
+secret_graph
 ```
 
 Below is the URL of this secret plot. Anyone with the secret link can view this chart. However, it will not appear in the Plotly feed, your profile, or search engines. <br> Try it out:
