@@ -20,6 +20,8 @@ thumbnail: thumbnail/ipythonnb.jpg
 
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE)
+Sys.setenv("plotly_username"="RPlotBot")
+Sys.setenv("plotly_api_key"="q0lz6r5efr")
 ```
 ### New to Plotly?
 
