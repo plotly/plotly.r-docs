@@ -41,15 +41,13 @@ RStudio users should download the latest [RStudio release](https://www.rstudio.c
 
 By default, Plotly for R runs locally in your web browser or in the R Studio viewer.
 
-```r
+```{r}
 library(plotly)
 p <- plot_ly(midwest, x = ~percollege, color = ~state, type = "box")
 p
 ```
 
 Simply printing the Plotly object will render the chart locally in your web browser or in the R Studio viewer.
-
-<iframe style="border: none; width: 100%; height: 500px;" src="https://plot.ly/~chriddyp/1799.embed"></iframe>
 
 Plotly graphs are interactive. Click on legend entries to toggle traces, click-and-drag on the chart to zoom, double-click to autoscale, shift-and-drag to pan.
 
