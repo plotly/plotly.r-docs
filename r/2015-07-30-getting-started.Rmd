@@ -44,7 +44,7 @@ devtools::install_github("ropensci/plotly")
 
 ## Rendering Charts
 
-By default, the `plotly` R package runs locally in your web browser or in the ` viewer.
+By default, the `plotly` R package runs locally in your web browser or in the `RStudio` viewer.
 
 ```{r}
 library(plotly)
