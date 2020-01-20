@@ -40,7 +40,7 @@ To use Orca to export static images of the graphs you create with the `plotly` R
 
 In order to use the `orca()` function, you need to have the [`processx`](https://github.com/r-lib/processx) R package installed. 
 
-The `orca()` function accepts two parameters. The frist is the plot to be exported and second is the filename. 
+The `orca()` function accepts two parameters. The first is the plot to be exported and second is the filename. 
 
 For example, the running the following commands in an R session would export the graph stored in `p` in a file called `surface-plot.svg`:
 
