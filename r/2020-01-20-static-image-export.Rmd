@@ -9,7 +9,7 @@ output:
   html_document:
     keep_md: true
 page_type: u-guide
-permalink: r/image-export-orca/
+permalink: r/static-image-export/
 thumbnail: thumbnail/sizing.png
 ---
 
@@ -31,18 +31,23 @@ Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-abov
 library(plotly)
 packageVersion('plotly')
 ```
+### Supported File Formats
+
+With the `plotly` R package, you can export graphs you create as static images in the `.png`, `.jpg`/`.jpeg`, `.eps`, `.svg`, and/or `.pdf` formats using[Orca](https://github.com/plotly/orca), an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plot.ly/graphing-libraries).  
+
+**Note:** It is important to be aware that R graphs containing WebGL-based traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, and/or `parcoords`) will include encapsulated rasters instead of vectors for some parts of the image if they are exported as static images in a vector format like `.eps`, `.svg`, and/or `.pdf`.
+
+**Note** Orca runs entirely locally and does not require internet access. No network requests are made to the Chart Studio or any other web service when you invoke the `orca()` function to export static images in your R session. 
 
 ### Export R Graphs As Static Images Using `orca()`
 
-[Orca](https://github.com/plotly/orca) is an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plot.ly/graphing-libraries). 
+To use Orca to export static images of the graphs you create with the `plotly` R package, you can use the built-in `orca()` function in versions `4.7.900` and above. 
 
-To use Orca to export static images of the graphs you create with the `plotly` R package, you can use the built-in `orca()` funciton in versions `4.7.900` and above.
-
-In order to use the `orca()` function, you need to have the [`processx`](https://github.com/r-lib/processx) R package installed. 
+You need to have the [`processx`](https://github.com/r-lib/processx) R package installed as well. 
 
 The `orca()` function accepts two parameters. The first is the plot to be exported and second is the filename. 
 
-For example, the running the following commands in an R session would export the graph stored in `p` in a file called `surface-plot.svg`:
+For example, running the following commands in an R session would export the graph stored in `p` in a file called `surface-plot.svg`:
 
 ```{r, eval = FALSE}
 if (!require("processx")) install.packages("processx")
