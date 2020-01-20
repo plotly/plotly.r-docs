@@ -1,0 +1,51 @@
+---
+description: How to export R graphs as static images.
+display_as: file_settings
+language: r
+layout: base
+name: Exporting Graphs as Static Images
+order: 21
+output:
+  html_document:
+    keep_md: true
+page_type: u-guide
+permalink: r/image-export-orca/
+thumbnail: thumbnail/sizing.png
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+### New to Plotly?
+
+Plotly's R library is free and open source!<br>
+[Get started](https://plot.ly/r/getting-started/) by downloading the client and [reading the primer](https://plot.ly/r/getting-started/).<br>
+You can set up Plotly to work in [online](https://plot.ly/r/getting-started/#hosting-graphs-in-your-online-plotly-account) or [offline](https://plot.ly/r/offline/) mode.<br>
+We also have a quick-reference [cheatsheet](https://images.plot.ly/plotly-documentation/images/r_cheat_sheet.pdf) (new!) to help you get started!
+
+### Version Check
+
+Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
+Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
+```{r}
+library(plotly)
+packageVersion('plotly')
+```
+
+### Export R Graphs As Static Images Using `orca()`
+
+[Orca](https://github.com/plotly/orca) is an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plot.ly/graphing-libraries). 
+
+To use Orca to export static images of the graphs you create with the `plotly` R package, you can use the built-in `orca()` funciton in versions `4.7.900` and above.
+
+In order to use the `orca()` function, you need to have the [`processx`](https://github.com/r-lib/processx) R package installed. 
+
+The `orca()` function accepts two parameters. The frist is the plot to be exported and second is the filename. 
+
+For example, the running the following commands in an R session would export the graph stored in `p` in a file called `surface-plot.svg`:
+
+```{r, eval = FALSE}
+if (!require("processx")) install.packages("processx")
+p <- plot_ly(z = ~volcano) %>% add_surface()
+orca(p, "surface-plot.svg")
+```
