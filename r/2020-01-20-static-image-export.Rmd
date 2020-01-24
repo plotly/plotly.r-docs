@@ -53,7 +53,7 @@ The `orca()` function accepts two parameters. The first is the plot to be export
 
 For example, running the following commands in an R session would export the graph stored in `p` in a file called `surface-plot.svg`:
 
-```{r, eval = TRUE}
+```{r, eval = FALSE}
 if (!require("processx")) install.packages("processx")
 p <- plot_ly(z = ~volcano) %>% add_surface()
 orca(p, "surface-plot.svg")
