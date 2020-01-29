@@ -16,19 +16,6 @@ output:
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
-
-
-
-### Version Check
-
-Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
-Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
-
-```{r}
-library(plotly)
-packageVersion('plotly')
-```
-
 ### Basic Example
 While common linear regression is a method of estimating the conditional mean of variable y based on the values of variable(s) x, quantile regression is a method that can give the conditional median (50th percentile) as well as any other quantile.
 

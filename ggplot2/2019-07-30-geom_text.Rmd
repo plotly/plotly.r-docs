@@ -16,19 +16,6 @@ output:
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
-
-
-
-### Version Check
-
-Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
-Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
-
-```{r}
-library(plotly)
-packageVersion('plotly')
-```
-
 ### Basic Text Graph
 Sources: [International IDEA](https://www.idea.int/data-tools/continent-view/Europe/40?st=par#rep) for national turnout and [European Parliament](https://election-results.eu/turnout/) for European turnout, while regional classifications are based on [EuroVoc](https://publications.europa.eu/en/web/eu-vocabularies/th-concept-scheme/-/resource/eurovoc/100277?target=Browse).
 

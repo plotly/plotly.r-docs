@@ -16,19 +16,6 @@ output:
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
-
-
-
-### Version Check
-
-Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
-Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
-
-```{r}
-library(plotly)
-packageVersion('plotly')
-```
-
 ### Basic geom\_qq graph
 A quantile-quantile graph is used to determine whether a range of numbers follows a certain distribution: the closer the data points are to being a straight line, the closer the data is to the distribution. (The default distribution is normal.) This dataset gives the daily change in the S&P 500, as well as Apple, Microsoft, IBM, and Starbucks stocks between January 2007 and February 2016.
 

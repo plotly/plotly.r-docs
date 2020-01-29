@@ -16,19 +16,6 @@ output:
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
-
-
-
-### Version Check
-
-Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
-Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
-
-```{r}
-library(plotly)
-packageVersion('plotly')
-```
-
 ### Basic geom\_count Plot
 geom\_count is a way to plot two variables that are not continuous. Here's a modified version of the nycflights13 dataset that comes with R; it shows 2013 domestic flights leaving New York's three airports. This graph maps two categorical variables: which of America's major airports it was headed to, and which major carrier was operating it.
 

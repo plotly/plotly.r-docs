@@ -16,19 +16,6 @@ thumbnail: thumbnail/scatter-mapbox.jpg
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
-
-
-
-### Version Check
-
-Version 4 of Plotly's R package is now [available](https://plot.ly/r/getting-started/#installation)!<br>
-Check out [this post](http://moderndata.plot.ly/upgrading-to-plotly-4-0-and-above/) for more information on breaking changes and new features available in this version.
-
-```{r}
-library(plotly)
-packageVersion('plotly')
-```
-
 ### Mapbox Access Token
 
 To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
