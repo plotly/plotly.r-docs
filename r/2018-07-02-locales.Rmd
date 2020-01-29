@@ -19,7 +19,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ### Setting Locale
 To change the localization, you can use the `locale` argument in the `config()` function. 
 
-``` {r, results = 'hide'}
+```{r, results = 'hide'}
 library(plotly)
 
 x <- seq.Date(Sys.Date(), Sys.Date() + 360, by = "day")

@@ -18,6 +18,8 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 # Dot and Dumbbell Plots
 
 ```{r}
+library(plotly)
+
 s <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv")
 s <- s[order(s$Men), ]
 

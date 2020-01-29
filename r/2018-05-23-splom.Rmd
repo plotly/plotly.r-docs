@@ -22,7 +22,7 @@ The Plotly splom trace implementation for the scaterplot matrix does not require
 
 A trace of type splom is defined as follows:
 
-``` {r, results = 'hide', eval=FALSE}
+```{r, results = 'hide', eval=FALSE}
 p <- plot_ly() %>%
   add_trace(
     dimensions = list(
@@ -45,7 +45,7 @@ marker sets the markers attributes in all scatter plots.
 
 #### Splom of the Iris data set
 
-``` {r, results = 'hide'}
+```{r, results = 'hide'}
 library(plotly)
 
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv')
@@ -55,7 +55,7 @@ The Iris dataset contains four data variables, sepal length, sepal width, petal 
 
 Define a discrete colorscale with three colors corresponding to the three flower classes:
 
-``` {r, results = 'hide'}
+```{r, results = 'hide'}
 pl_colorscale=list(c(0.0, '#19d3f3'),
                c(0.333, '#19d3f3'),
                c(0.333, '#e763fa'),

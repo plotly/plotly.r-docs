@@ -28,7 +28,7 @@ To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public 
 
 ### Basic sf
 
-``` {r}
+```{r}
 library(plotly)
 library(sf)
 
@@ -41,7 +41,7 @@ p
 
 You can also use `plot_geo`:
 
-``` {r}
+```{r}
 library(plotly)
 library(sf)
 
@@ -54,7 +54,7 @@ p
 
 Or `plot_mapbox`:
 
-``` {r}
+```{r}
 library(plotly)
 library(sf)
 
