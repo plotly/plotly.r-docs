@@ -25,7 +25,7 @@ The examples below use the library [simple features](https://r-spatial.github.io
 
 ### Basic sf 
 
-``` {r}
+```{r}
 library(plotly)
 library(sf)
 
