@@ -19,6 +19,8 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ### Ambient
 
 ```{r}
+library(plotly)
+
 p1 <- plot_ly(z = ~volcano, scene='scene1', lighting = list(ambient = 0.2)) %>%
   add_surface(showscale=FALSE)
 
@@ -40,6 +42,8 @@ p
 ### Roughness
 
 ```{r}
+library(plotly)
+
 p1 <- plot_ly(z = ~volcano, scene='scene1', lighting = list(roughness = 0.1)) %>%
   add_surface(showscale=FALSE)
 
@@ -61,6 +65,8 @@ p
 ### Diffuse
 
 ```{r}
+library(plotly)
+
 p1 <- plot_ly(z = ~volcano, scene='scene1', lighting = list(diffuse = 0.1)) %>%
   add_surface(showscale=FALSE)
 
@@ -82,6 +88,8 @@ p
 ### Specular
 
 ```{r}
+library(plotly)
+
 p1 <- plot_ly(z = ~volcano, scene='scene1', lighting = list(specular = 0.1)) %>%
   add_surface(showscale=FALSE)
 
@@ -103,6 +111,8 @@ p
 ### Fresnel
 
 ```{r}
+library(plotly)
+
 p1 <- plot_ly(z = ~volcano, scene='scene1', lighting = list(fresnel = 0.1)) %>%
   add_surface(showscale=FALSE)
 

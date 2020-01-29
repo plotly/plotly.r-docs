@@ -82,8 +82,8 @@ p <- plot_ly(z = ~volcano) %>% add_surface(
 
 
 p
-``` 
+```
 
-#Reference
+# Reference
 
 See [https://plot.ly/r/reference/#layout-scene-xaxis](https://plot.ly/r/reference/#layout-scene-xaxis) and [https://plot.ly/r/reference/#surface-contours](https://plot.ly/r/reference/#surface-contours) for more information and options!
