@@ -111,9 +111,7 @@ p <- df %>%
     meanline = list(
       visible = T
     ),
-    line = list(
-      color = 'blue'
-    )
+    color = I("blue")
   ) %>%
   add_trace(
     x = ~day[df$sex == 'Female'],
@@ -127,9 +125,7 @@ p <- df %>%
     meanline = list(
       visible = T
     ),
-    line = list(
-      color = 'pink'
-    )
+    color = I("pink")
   ) %>% 
   layout(
     yaxis = list(
@@ -163,9 +159,7 @@ p <- df %>%
     meanline = list(
       visible = T
     ),
-    line = list(
-      color = 'blue'
-    )
+    color = I("blue")
   ) %>%
   add_trace(
     x = ~day[df$smoker == 'No'],
@@ -180,9 +174,7 @@ p <- df %>%
     meanline = list(
       visible = T
     ),
-    line = list(
-      color = 'green'
-    )
+    color = I("green")
   ) %>% 
   layout(
     xaxis = list(
@@ -234,9 +226,7 @@ for (i in 1:length(unique(df$day))) {
     meanline = list(
       visible = T
     ),
-    line = list(
-      color = "#8dd3c7"
-    ),
+    color = I("#8dd3c7"),
     marker = list(
       line = list(
         width = 2,
@@ -264,9 +254,7 @@ for (i in 1:length(unique(df$day))) {
       meanline = list(
         visible = T
       ),
-      line = list(
-        color = "#bebada"
-      ),
+      color = I("#bebada"),
       marker = list(
         line = list(
           width = 2,

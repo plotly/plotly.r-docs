@@ -1,0 +1,63 @@
+---
+name: Getting Started with Plotly
+permalink: r/getting-started/
+description: How to get started making charts with Plotly's R graphing library.
+page_type: example_index
+layout: base
+language: r
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+# Getting Started with Plotly for R
+
+[`plotly`](https://github.com/ropensci/plotly) is an R package for creating interactive web-based graphs via the open source JavaScript graphing library [`plotly.js`](http://plot.ly/javascript).
+
+As of version 2.0 (November 17, 2015), graphs created with the `plotly` R package are rendered *locally* through the [`htmlwidgets`](http://www.htmlwidgets.org/) framework.
+
+## Installation
+
+### Download from CRAN
+
+Use the `install.package()` function to install the [`plotly R package`](https://cran.r-project.org/web/packages/plotly/index.html) from [CRAN](https://cran.r-project.org/!
+
+```r
+install.packages("plotly")
+```
+
+### Download from GitHub
+
+Alternatively, you can install the latest development version of `plotly` from GitHub via the [`devtools`](https://cran.r-project.org/web/packages/devtools/index.html) R package:
+
+```r
+devtools::install_github("ropensci/plotly")
+```
+
+### Note For `RStudio` Users
+
+`RStudio` users should ensure that they are using the latest [RStudio release](https://www.rstudio.com/products/rstudio/download/) in order to ensure compatibility with the `htmlwidgets` R package.
+
+## Rendering Charts
+
+By default, the `plotly` R package runs locally in your web browser or in the `RStudio` viewer.
+
+```{r}
+library(plotly)
+p <- plot_ly(midwest, x = ~percollege, color = ~state, type = "box")
+p
+```
+
+Simply printing the plot object will render the chart locally in your web browser or in the `RStudio` viewer.
+
+Graphs created with the `plotly` R package are interactive! 
+
+Click on legend entries to hide/show traces, click-and-drag on the chart to zoom, double-click to autoscale, shift-and-drag to pan.
+
+## Next Steps
+
+Once you have installed the `plotly` R package, learn more about the [fundamentals of making charts](https://plot.ly/r/plotly-fundamentals/) and start making [basic charts](https://plot.ly/r/basic-charts/).
