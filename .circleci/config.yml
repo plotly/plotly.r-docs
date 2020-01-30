@@ -69,7 +69,7 @@ jobs:
             fi
 
       - run:
-          name: trigger plotly/documentation build
+          name: trigger plotly/graphing-library-docs build
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               git clone --depth=1 git@github.com:plotly/graphing-library-docs.git
