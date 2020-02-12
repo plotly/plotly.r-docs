@@ -25,32 +25,32 @@ These polar charts are legacy and will likely be deprecated in [Plotly 2.0](http
 
 ```{r}
 library(plotly)
-p <- plot_ly(
+fig <- plot_ly(
   plotly::mic, r = ~r, t = ~t, color = ~nms, alpha = 0.5, type = "scatter"
 )
 
-p <- layout(p, title = "Mic Patterns", orientation = -90)
+fig <- layout(p, title = "Mic Patterns", orientation = -90)
 
-p
+fig
 ```
 
 ```{r}
-p <- plot_ly(
+fig <- plot_ly(
   plotly::hobbs, r = ~r, t = ~t, color = ~nms, alpha = 0.5, type = "scatter"
 )
 
-p <- layout(p, title = "Hobbs-Pearson Trials", plot_bgcolor = toRGB("grey90"))
+fig <- layout(fig, title = "Hobbs-Pearson Trials", plot_bgcolor = toRGB("grey90"))
 
-p
+fig
 ```
 
 ### Polar Area Chart
 
 ```{r}
-p <- plot_ly(plotly::wind, r = ~r, t = ~t) %>% add_area(color = ~nms)
-p <- layout(p, radialaxis = list(ticksuffix = "%"), orientation = 270)
+fig <- plot_ly(plotly::wind, r = ~r, t = ~t) %>% add_area(color = ~nms)
+fig <- layout(fig, radialaxis = list(ticksuffix = "%"), orientation = 270)
 
-p
+fig
 ```
 
 ### Reference

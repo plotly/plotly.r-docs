@@ -22,9 +22,10 @@ n <- 1e6
 x <- rnorm(n)
 y <- 2*x + rnorm(n, sd = 5)
 
-p <- plot_ly(x = x, y = y, alpha  = 0.01) %>% toWebGL()
+fig <- plot_ly(x = x, y = y, alpha  = 0.01)
+fig <- fig %>% toWebGL()
 
-p
+fig
 ```
 
 # Reference

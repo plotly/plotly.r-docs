@@ -26,17 +26,17 @@ Bodywt <- c(10.0, 207.0, 62.0, 6.8, 52.2)
 Brainwt <- c(115, 406, 1320, 179, 440)
 data <- data.frame(Primates, Bodywt, Brainwt)
 
-p <- plot_ly(data, x = ~Bodywt, y = ~Brainwt, type = 'scatter',
+fig <- plot_ly(data, x = ~Bodywt, y = ~Brainwt, type = 'scatter',
         mode = 'text', text = ~Primates, textposition = 'middle right',
-        textfont = list(color = '#000000', size = 16)) %>%
-  layout(title = 'Primates Brain and Body Weight',
+        textfont = list(color = '#000000', size = 16))
+fig <- fig %>% layout(title = 'Primates Brain and Body Weight',
          xaxis = list(title = 'Body Weight (kg)',
                       zeroline = TRUE,
                       range = c(0, 250)),
          yaxis = list(title = 'Brain Weight (g)',
                       range = c(0,1400)))
 
-p
+fig
 ```
 
 See more options on the textposition argument [here](https://plot.ly/r/reference/#scatter-textposition).
@@ -53,13 +53,13 @@ t <- list(
   size = 14,
   color = toRGB("grey50"))
 
-p <- plot_ly(data, x = ~wt, y = ~mpg, text = rownames(data)) %>%
-  add_markers() %>%
-  add_text(textfont = t, textposition = "top right") %>%
-  layout(xaxis = list(range = c(1.6, 3.2)),
+fig <- plot_ly(data, x = ~wt, y = ~mpg, text = rownames(data))
+fig <- fig %>% add_markers()
+fig <- fig %>% add_text(textfont = t, textposition = "tofig right")
+fig <- fig %>% layout(xaxis = list(range = c(1.6, 3.2)),
          showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Adding Informations to Default Hover Text
@@ -67,10 +67,10 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(iris, x = ~Petal.Length, y = ~Petal.Width, type = 'scatter', mode = 'markers',
+fig <- plot_ly(iris, x = ~Petal.Length, y = ~Petal.Width, type = 'scatter', mode = 'markers',
         text = ~paste('Species: ', Species))
 
-p
+fig
 ```
 
 ### Custom Hover Text
@@ -78,13 +78,13 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(iris, x = ~Petal.Length, y = ~Petal.Width, type = 'scatter', mode = 'markers',
+fig <- plot_ly(iris, x = ~Petal.Length, y = ~Petal.Width, type = 'scatter', mode = 'markers',
         hoverinfo = 'text',
-        text = ~paste('Species: ', Species,
+        text = ~paste('</br> Species: ', Species,
                       '</br> Petal Length: ', Petal.Length,
                       '</br> Petal Width: ', Petal.Width))
 
-p
+fig
 ```
 
 ### Single Annotation
@@ -106,11 +106,11 @@ a <- list(
   ay = -40
 )
 
-p <- plot_ly(mtcars, x = ~wt, y = ~mpg) %>%
-  add_markers() %>%
-  layout(annotations = a)
+fig <- plot_ly(mtcars, x = ~wt, y = ~mpg)
+fig <- fig %>% add_markers()
+fig <- fig %>% layout(annotations = a)
 
-p
+fig
 ```
 
 ### Multiple Annotations
@@ -120,9 +120,9 @@ library(plotly)
 
 data <- mtcars[which(mtcars$am == 1 & mtcars$gear == 4),]
 
-p <- plot_ly(data, x = ~wt, y = ~mpg, type = 'scatter', mode = 'markers',
-        marker = list(size = 10)) %>%
-  add_annotations(x = data$wt,
+fig <- plot_ly(data, x = ~wt, y = ~mpg, type = 'scatter', mode = 'markers',
+        marker = list(size = 10))
+fig <- fig %>% add_annotations(x = data$wt,
                   y = data$mpg,
                   text = rownames(data),
                   xref = "x",
@@ -133,7 +133,7 @@ p <- plot_ly(data, x = ~wt, y = ~mpg, type = 'scatter', mode = 'markers',
                   ax = 20,
                   ay = -40)
 
-p
+fig
 ```
 
 ### Subplot Annotations
@@ -181,16 +181,16 @@ y <- list(
   title = "y Axis",
   titlefont = f)
 
-p1 <- plot_ly(economics, x = ~date, y = ~unemploy) %>%
-  add_lines(name = ~"unemploy") %>%
-  layout(annotations = a, xaxis = x, yaxis = y)
-p2 <- plot_ly(economics, x = ~date, y = ~uempmed) %>%
-  add_lines(name = ~"uempmed") %>%
-  layout(annotations = b, xaxis = x, yaxis = y)
-p <- subplot(p1, p2, titleX = TRUE, titleY = TRUE) %>%
-  layout(showlegend = FALSE)
+fig1 <- plot_ly(economics, x = ~date, y = ~unemploy)
+fig1 <- fig1 %>% add_lines(name = ~"unemploy")
+fig1 <- fig1 %>% layout(annotations = a, xaxis = x, yaxis = y)
+fig2 <- plot_ly(economics, x = ~date, y = ~uempmed)
+fig2 <- fig2 %>% add_lines(name = ~"uempmed")
+fig2 <- fig2 %>% layout(annotations = b, xaxis = x, yaxis = y)
+fig <- subplot(fig1, fig2, titleX = TRUE, titleY = TRUE)
+fig2 <- fig2 %>% layout(showlegend = FALSE)
 
-p
+fig
 ```
 
 ### 3D Annotations
@@ -198,15 +198,15 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly() %>%
-  add_trace(
+fig <- plot_ly()
+fig <- fig %>% add_trace(
     x = c("2017-01-01", "2017-02-10", "2017-03-20"), 
     y = c("A", "B", "C"), 
     z = c(1, 1000, 100000), 
     name = "z", 
     type = "scatter3d"
-  ) %>% 
-  layout(
+  )
+fig <- fig %>% layout(
     scene = list(
       aspectratio = list(
         x = 1,
@@ -284,7 +284,7 @@ p <- plot_ly() %>%
     yaxis = list(title = "y")
   )
 
-p
+fig
 ```
 
 ### Styling Annotations
@@ -294,9 +294,9 @@ library(plotly)
 
 data <- mtcars[which(mtcars$am == 1 & mtcars$gear == 4),]
 
-p <- plot_ly(data, x = ~wt, y = ~mpg, type = 'scatter', mode = 'markers',
-        marker = list(size = 10)) %>%
-  add_annotations(x = data$wt,
+fig <- plot_ly(data, x = ~wt, y = ~mpg, type = 'scatter', mode = 'markers',
+        marker = list(size = 10))
+fig <- fig %>% add_annotations(x = data$wt,
                   y = data$mpg,
                   text = rownames(data),
                   xref = "x",
@@ -311,7 +311,7 @@ p <- plot_ly(data, x = ~wt, y = ~mpg, type = 'scatter', mode = 'markers',
                               family = 'sans serif',
                               size = 14))
 
-p
+fig
 ```
 
 ### Set Annotation Text Anchors
@@ -319,23 +319,23 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly() %>%
-  add_markers(
+fig <- plot_ly()
+fig <- fig %>% add_markers(
     x = 1,
     y = 1,
     showlegend = F
-  ) %>%
-  add_markers(
+  )
+fig <- fig %>% add_markers(
     x = 1,
     y = 2,
     showlegend = F
-  ) %>%
-  add_markers(
+  )
+fig <- fig %>% add_markers(
     x = 1,
     y = 3,
     showlegend = F
-  ) %>%
-  add_annotations(
+  )
+fig <- fig %>% add_annotations(
     x=1,
     y=1,
     xref = "x",
@@ -343,8 +343,8 @@ p <- plot_ly() %>%
     text = "Right Anchor",
     xanchor = 'right',
     showarrow = F
-  ) %>%
-  add_annotations(
+  )
+fig <- fig %>% add_annotations(
     x=1,
     y=2,
     xref = "x",
@@ -352,8 +352,8 @@ p <- plot_ly() %>%
     text = "Center Anchor",
     xanchor = 'center',
     showarrow = F
-  ) %>%
-  add_annotations(
+  )
+fig <- fig %>% add_annotations(
     x=1,
     y=3,
     xref = "x",
@@ -363,7 +363,7 @@ p <- plot_ly() %>%
     showarrow = F
   )
 
-p
+fig
 ```
 
 ### Set Annotation Coordinate References
@@ -371,21 +371,21 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly() %>%
-  add_markers(
+fig <- plot_ly()
+fig <- fig %>% add_markers(
     x = 0.5,
     y = 1,
     showlegend = F
-  ) %>%
-  add_annotations(
+  )
+fig <- fig %>% add_annotations(
     x= 0.5,
     y= 1,
     xref = "paper",
     yref = "paper",
     text = "<b>paper reference = [0.5, 1]</b>",
     showarrow = F
-  ) %>%
-  add_annotations(
+  )
+fig <- fig %>% add_annotations(
     x= 0.5,
     y= 1,
     xref = "x",
@@ -394,13 +394,13 @@ p <- plot_ly() %>%
     showarrow = T,
     ax = 20,
     ay = -40
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     xaxis = list(zeroline = F),
     yaxis = list(zeroline = F)
   )
 
-p
+fig
 ```
 
 #Reference

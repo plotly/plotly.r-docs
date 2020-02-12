@@ -24,12 +24,12 @@ library(plotly)
 USPersonalExpenditure <- data.frame("Categorie"=rownames(USPersonalExpenditure), USPersonalExpenditure)
 data <- USPersonalExpenditure[,c('Categorie', 'X1960')]
 
-p <- plot_ly(data, labels = ~Categorie, values = ~X1960, type = 'pie') %>%
-  layout(title = 'United States Personal Expenditures by Categories in 1960',
+fig <- plot_ly(data, labels = ~Categorie, values = ~X1960, type = 'pie')
+fig <- fig %>% layout(title = 'United States Personal Expenditures by Categories in 1960',
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
-p
+fig
 ```
 
 ### Styled Pie Chart
@@ -42,7 +42,7 @@ data <- USPersonalExpenditure[, c('Categorie', 'X1960')]
 
 colors <- c('rgb(211,94,96)', 'rgb(128,133,133)', 'rgb(144,103,167)', 'rgb(171,104,87)', 'rgb(114,147,203)')
 
-p <- plot_ly(data, labels = ~Categorie, values = ~X1960, type = 'pie',
+fig <- plot_ly(data, labels = ~Categorie, values = ~X1960, type = 'pie',
         textposition = 'inside',
         textinfo = 'label+percent',
         insidetextfont = list(color = '#FFFFFF'),
@@ -51,12 +51,12 @@ p <- plot_ly(data, labels = ~Categorie, values = ~X1960, type = 'pie',
         marker = list(colors = colors,
                       line = list(color = '#FFFFFF', width = 1)),
                       #The 'pull' attribute can also be used to create space between the sectors
-        showlegend = FALSE) %>%
-  layout(title = 'United States Personal Expenditures by Categories in 1960',
+        showlegend = FALSE)
+fig <- fig %>% layout(title = 'United States Personal Expenditures by Categories in 1960',
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
-p
+fig
 ```
 
 ### Subplots
@@ -65,18 +65,18 @@ In order to create pie chart subplots, you need to use the [domain](https://plot
 library(plotly)
 library(dplyr)
 
-p <- plot_ly() %>%
-  add_pie(data = count(diamonds, cut), labels = ~cut, values = ~n,
-          name = "Cut", domain = list(x = c(0, 0.4), y = c(0.4, 1))) %>%
-  add_pie(data = count(diamonds, color), labels = ~color, values = ~n,
-          name = "Color", domain = list(x = c(0.6, 1), y = c(0.4, 1))) %>%
-  add_pie(data = count(diamonds, clarity), labels = ~clarity, values = ~n,
-          name = "Clarity", domain = list(x = c(0.25, 0.75), y = c(0, 0.6))) %>%
-  layout(title = "Pie Charts with Subplots", showlegend = F,
+fig <- plot_ly()
+fig <- fig %>% add_pie(data = count(diamonds, cut), labels = ~cut, values = ~n,
+          name = "Cut", domain = list(x = c(0, 0.4), y = c(0.4, 1)))
+fig <- fig %>% add_pie(data = count(diamonds, color), labels = ~color, values = ~n,
+          name = "Color", domain = list(x = c(0.6, 1), y = c(0.4, 1)))
+fig <- fig %>% add_pie(data = count(diamonds, clarity), labels = ~clarity, values = ~n,
+          name = "Clarity", domain = list(x = c(0.25, 0.75), y = c(0, 0.6)))
+fig <- fig %>% layout(title = "Pie Charts with Subplots", showlegend = F,
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
-p
+fig
 ```
 
 ### Subplots Using Grid
@@ -85,21 +85,21 @@ This example uses a plotly [grid](https://plot.ly/javascript/reference/#layout-g
 library(plotly)
 library(dplyr)
 
-p <- plot_ly() %>%
-  add_pie(data = count(diamonds, cut), labels = ~cut, values = ~n,
-          name = "Cut", domain = list(row = 0, column = 0)) %>%
-  add_pie(data = count(diamonds, color), labels = ~color, values = ~n,
-          name = "Color", domain = list(row = 0, column = 1)) %>%
-  add_pie(data = count(diamonds, clarity), labels = ~clarity, values = ~n,
-          name = "Clarity", domain = list(row = 1, column = 0)) %>%
-  add_pie(data = count(diamonds, cut), labels = ~cut, values = ~n,
-          name = "Clarity", domain = list(row = 1, column = 1)) %>%
-  layout(title = "Pie Charts with Subplots", showlegend = F,
-         grid=list(rows=2, columns=2),
-         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+fig <- plot_ly()
+fig <- fig %>% add_pie(data = count(diamonds, cut), labels = ~cut, values = ~n,
+                         name = "Cut", domain = list(row = 0, column = 0))
+fig <- fig %>% add_pie(data = count(diamonds, color), labels = ~color, values = ~n,
+                       name = "Color", domain = list(row = 0, column = 1))
+fig <- fig %>% add_pie(data = count(diamonds, clarity), labels = ~clarity, values = ~n,
+                       name = "Clarity", domain = list(row = 1, column = 0))
+fig <- fig %>% add_pie(data = count(diamonds, cut), labels = ~cut, values = ~n,
+                       name = "Clarity", domain = list(row = 1, column = 1))
+fig <- fig %>% layout(title = "Pie Charts with Subplots", showlegend = F,
+                      grid=list(rows=2, columns=2),
+                      xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                      yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
-p
+fig
 ```
 
 See more examples of subplots [here](https://plot.ly/r/subplots/).
@@ -112,16 +112,16 @@ library(plotly)
 # Get Manufacturer
 mtcars$manuf <- sapply(strsplit(rownames(mtcars), " "), "[[", 1)
 
-p <- mtcars %>%
-  group_by(manuf) %>%
-  summarize(count = n()) %>%
-  plot_ly(labels = ~manuf, values = ~count) %>%
-  add_pie(hole = 0.6) %>%
-  layout(title = "Donut charts using Plotly",  showlegend = F,
-         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+fig <- mtcars
+fig <- fig %>% group_by(manuf)
+fig <- fig %>% summarize(count = n())
+fig <- fig %>% plot_ly(labels = ~manuf, values = ~count)
+fig <- fig %>% add_pie(hole = 0.6)
+fig <- fig %>% layout(title = "Donut charts using Plotly",  showlegend = F,
+       xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+       yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
-p
+fig
 ```
 
 #Reference

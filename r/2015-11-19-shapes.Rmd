@@ -23,7 +23,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 library(plotly)
 
 s <- seq.int(0, 15)
-p <- plot_ly(x = ~s, y = ~sin(s), mode = "lines")
+fig <- plot_ly(x = ~s, y = ~sin(s), mode = "lines")
 
 # initiate a line shape object
 line <- list(
@@ -41,18 +41,18 @@ for (i in c(0, 3, 5, 7, 9, 13)) {
   lines <- c(lines, list(line))
 }
 
-p <- layout(p, title = 'Highlighting with Lines', shapes = lines)
+fig <- layout(p, title = 'Highlighting with Lines', shapes = lines)
 
-p
+fig
 ```
 
 ### Rectangles
 ```{r}
 library(plotly)
-p <- plot_ly(economics, x = ~date, y = ~uempmed, name = "unemployment")
+fig <- plot_ly(economics, x = ~date, y = ~uempmed, name = "unemployment")
 
 # add shapes to the layout
-p <- layout(p, title = 'Highlighting with Rectangles',
+fig <- layout(fig, title = 'Highlighting with Rectangles',
              shapes = list(
                list(type = "rect",
                     fillcolor = "blue", line = list(color = "blue"), opacity = 0.3,
@@ -63,7 +63,7 @@ p <- layout(p, title = 'Highlighting with Rectangles',
                  x0 = "2000-01-01", x1 = "2005-01-01", xref = "x",
                  y0 = 4, y1 = 12.5, yref = "y")))
 
-p
+fig
 ```
 
 ### Circles
@@ -72,10 +72,10 @@ Circles are centered around  ((`x0`+`x1`)/2, (`y0`+`y1`)/2))
 
 ```{r}
 library(plotly)
-d <- diamonds[sample(nrow(diamonds), 1000), ]
-d <- plot_ly(d, x = ~carat, y = ~price, text = ~paste("Clarity: ", clarity),
+fig <- diamonds[sample(nrow(diamonds), 1000), ]
+fig <- plot_ly(fig, x = ~carat, y = ~price, text = ~paste("Clarity: ", clarity),
              mode = "markers", color = ~carat, size = ~carat)
-d <- layout(d, title = 'Highlighting Regions with Circles',
+fig <- layout(fig, title = 'Highlighting Regions with Circles',
             shapes = list(
               list(type = 'circle',
                    xref = 'x', x0 = .2, x1 = .7,
@@ -93,7 +93,7 @@ d <- layout(d, title = 'Highlighting Regions with Circles',
                    fillcolor = 'rgb(90, 200, 75)', line = list(color = 'rgb(90, 200, 75)'),
                    opacity = 0.2)))
 
-d
+fig
 ```
 
 ### Reference

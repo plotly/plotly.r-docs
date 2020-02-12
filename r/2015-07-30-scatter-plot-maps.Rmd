@@ -35,17 +35,17 @@ g <- list(
   subunitwidth = 0.5
 )
 
-p <- plot_geo(df, lat = ~lat, lon = ~long) %>%
-  add_markers(
+fig <- plot_geo(df, lat = ~lat, lon = ~long)
+fig <- fig %>% add_markers(
     text = ~paste(airport, city, state, paste("Arrivals:", cnt), sep = "<br />"),
     color = ~cnt, symbol = I("square"), size = I(8), hoverinfo = "text"
-  ) %>%
-  colorbar(title = "Incoming flights<br />February 2011") %>%
-  layout(
+  )
+fig <- fig %>% colorbar(title = "Incoming flights<br />February 2011")
+fig <- fig %>% layout(
     title = 'Most trafficked US airports<br />(Hover for airport)', geo = g
   )
 
-p
+fig
 ```
 
 ### Style Scatter Map Layout
@@ -87,11 +87,11 @@ g <- list(
   )
 )
 
-p <- plot_geo(df, lat = ~Lat, lon = ~Lon, color = ~Globvalue) %>%
-  add_markers(
+fig <- plot_geo(df, lat = ~Lat, lon = ~Lon, color = ~Globvalue)
+fig <- fig %>% add_markers(
     text = ~paste(df$Globvalue, "inches"), hoverinfo = "text"
-  ) %>%
-  layout(title = 'US Precipitation 06-30-2015<br>Source: NOAA', geo = g)
+  )
+fig <- fig %>% layout(title = 'US Precipitation 06-30-2015<br>Source: NOAA', geo = g)
 
-p
+fig
 ```

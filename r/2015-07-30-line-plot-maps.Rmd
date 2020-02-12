@@ -38,23 +38,23 @@ geo <- list(
   countrycolor = toRGB("gray80")
 )
 
-p <- plot_geo(locationmode = 'USA-states', color = I("red")) %>%
-  add_markers(
-    data = air, x = ~long, y = ~lat, text = ~airport,
-    size = ~cnt, hoverinfo = "text", alpha = 0.5
-  ) %>%
-  add_segments(
+fig <- plot_geo(locationmode = 'USA-states', color = I("red"))
+fig <- fig %>% add_markers(
+  data = air, x = ~long, y = ~lat, text = ~airport,
+  size = ~cnt, hoverinfo = "text", alpha = 0.5
+)
+fig <- fig %>% add_segments(
     data = group_by(flights, id),
     x = ~start_lon, xend = ~end_lon,
     y = ~start_lat, yend = ~end_lat,
     alpha = 0.3, size = I(1), hoverinfo = "none"
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     title = 'Feb. 2011 American Airline flight paths<br>(Hover for airport names)',
     geo = geo, showlegend = FALSE, height=800
   )
 
-p
+fig
 ```
 
 ### London to NYC Great Circle
@@ -62,9 +62,9 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_geo(lat = c(40.7127, 51.5072), lon = c(-74.0059, 0.1275)) %>%
-  add_lines(color = I("blue"), size = I(2)) %>%
-  layout(
+fig <- plot_geo(lat = c(40.7127, 51.5072), lon = c(-74.0059, 0.1275))
+fig <- fig %>% add_lines(color = I("blue"), size = I(2))
+fig <- fig %>% layout(
     title = 'London to NYC Great Circle',
     showlegend = FALSE,
     geo = list(
@@ -91,7 +91,7 @@ p <- plot_geo(lat = c(40.7127, 51.5072), lon = c(-74.0059, 0.1275)) %>%
     )
   )
 
-p
+fig
 ```
 
 ### Contour lines on globe
@@ -135,13 +135,13 @@ geo <- list(
   )
 )
 
-p <- plot_geo(d) %>%
-  group_by(line) %>%
-  add_lines(x = ~lon, y = ~lat) %>%
-  layout(
+fig <- plot_geo(d)
+fig <- fig %>% group_by(line)
+fig <- fig %>% add_lines(x = ~lon, y = ~lat)
+fig <- fig %>% layout(
     showlegend = FALSE, geo = geo,
     title = 'Contour lines over globe<br>(Click and drag to rotate)'
   )
 
-p
+fig
 ```

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   x = c(0, 1, 2, 0),
   y = c(0, 0, 1, 2),
   z = c(0, 2, 0, 1),
@@ -30,7 +30,7 @@ p <- plot_ly(
   facecolor = toRGB(viridisLite::viridis(4))
 )
 
-p
+fig
 ```
 
 
@@ -39,7 +39,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   x = c(0, 0, 1, 1, 0, 0, 1, 1),
   y = c(0, 1, 1, 0, 0, 1, 1, 0),
   z = c(0, 0, 0, 0, 1, 1, 1, 1),
@@ -49,7 +49,7 @@ p <- plot_ly(
   facecolor = rep(toRGB(viridisLite::inferno(6)), each = 2)
 )
 
-p
+fig
 ```
 
 ### Helicopter
@@ -76,14 +76,14 @@ facecolor = colour_ramp(
   brewer_pal(palette="RdBu")(9)
 )(rescale(x=zmean))
 
-p <- plot_ly(
+fig <- plot_ly(
   x = x, y = y, z = z,
   i = mesh$it[1,]-1, j = mesh$it[2,]-1, k = mesh$it[3,]-1,
   facecolor = facecolor,
   type = "mesh3d"
 )
 
-p
+fig
 ```
 
 ### Maps
@@ -116,13 +116,13 @@ facecolor = colour_ramp(
   brewer_pal(palette="RdBu")(9)
 )(rescale(x=zmean))
 
-p <- plot_ly(
+fig <- plot_ly(
   x = x, y = y, z = z,
   i = mesh$it[1,]-1, j = mesh$it[2,]-1, k = mesh$it[3,]-1,
   facecolor = facecolor,
   type = "mesh3d"
 )
 
-p
+fig
 ```
 Inspired by <a href="http://rpubs.com/cyclemumner/rangl-plotly"> Michael Sumner</a>

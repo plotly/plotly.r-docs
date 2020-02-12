@@ -22,15 +22,15 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(plotly)
 d <- diamonds[sample(nrow(diamonds), 1000), ]
 # without log scales
-p <- plot_ly(d, x = ~carat, y = ~price) %>% add_markers()
+fig <- plot_ly(d, x = ~carat, y = ~price) %>% add_markers()
 
-p
+fig
 ```
 
 ```{r}
 # with log scales
-p <- layout(p, xaxis = list(type = "log"),
+fig <- layout(fig, xaxis = list(type = "log"),
        yaxis = list(type = "log"))
 
-p
+fig
 ```

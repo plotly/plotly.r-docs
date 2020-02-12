@@ -28,12 +28,12 @@ data <- data.frame(data_mean, data_sd$length)
 data <- rename(data, c("data_sd.length" = "sd"))
 data$dose <- as.factor(data$dose)
 
-p <- plot_ly(data = data[which(data$supp == 'OJ'),], x = ~dose, y = ~length, type = 'bar', name = 'OJ',
+fig <- plot_ly(data = data[which(data$supp == 'OJ'),], x = ~dose, y = ~length, type = 'bar', name = 'OJ',
         error_y = ~list(array = sd,
-                        color = '#000000')) %>%
-  add_trace(data = data[which(data$supp == 'VC'),], name = 'VC')
+                        color = '#000000'))
+fig <- fig %>% add_trace(data = data[which(data$supp == 'VC'),], name = 'VC')
 
-p
+fig
 ```
 
 ### Scatterplot with Error Bars
@@ -48,13 +48,13 @@ data <- data.frame(data_mean, data_sd$length)
 data <- rename(data, c("data_sd.length" = "sd"))
 data$dose <- as.factor(data$dose)
 
-p <- plot_ly(data = data[which(data$supp == 'OJ'),], x = ~dose, y = ~length, type = 'scatter', mode = 'markers',
+fig <- plot_ly(data = data[which(data$supp == 'OJ'),], x = ~dose, y = ~length, type = 'scatter', mode = 'markers',
         name = 'OJ',
         error_y = ~list(array = sd,
-                        color = '#000000')) %>%
-  add_trace(data = data[which(data$supp == 'VC'),], name = 'VC')
+                        color = '#000000'))
+fig <- fig %>% add_trace(data = data[which(data$supp == 'VC'),], name = 'VC')
 
-p
+fig
 ```
 
 ### Line Graph with Error Bars
@@ -69,13 +69,13 @@ data <- data.frame(data_mean, data_sd$length)
 data <- rename(data, c("data_sd.length" = "sd"))
 data$dose <- as.factor(data$dose)
 
-p <- plot_ly(data = data[which(data$supp == 'OJ'),], x = ~dose, y = ~length, type = 'scatter', mode = 'lines+markers',
+fig <- plot_ly(data = data[which(data$supp == 'OJ'),], x = ~dose, y = ~length, type = 'scatter', mode = 'lines+markers',
         name = 'OJ',
         error_y = ~list(array = sd,
-                        color = '#000000')) %>%
-  add_trace(data = data[which(data$supp == 'VC'),], name = 'VC')
+                        color = '#000000'))
+fig <- fig %>% add_trace(data = data[which(data$supp == 'VC'),], name = 'VC')
 
-p
+fig
 ```
 
 ### Reference

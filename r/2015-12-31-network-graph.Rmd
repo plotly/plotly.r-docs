@@ -72,7 +72,7 @@ for(i in 1:Ne) {
 ```{r}
 axis <- list(title = "", showgrid = FALSE, showticklabels = FALSE, zeroline = FALSE)
 
-p <- layout(
+fig <- layout(
   network,
   title = 'Karate Network',
   shapes = edge_shapes,
@@ -80,7 +80,7 @@ p <- layout(
   yaxis = axis
 )
 
-p
+fig
 ```
 
 ### Reference

@@ -26,11 +26,12 @@ Recent versions of the R package include the `toWebGL()` function, which convert
 
 ```{r}
 library(plotly)
-p <- ggplot(data = diamonds, aes(x = carat, y = price, color = cut)) +
+fig <- ggplot(data = diamonds, aes(x = carat, y = price, color = cut)) +
   geom_point(alpha = 0.01)
-p <- ggplotly(p) %>% toWebGL()
+fig <- ggplotly(fig)
+fig <- fig %>% toWebGL()
 
-p
+fig
 ```
 
 ## More examples

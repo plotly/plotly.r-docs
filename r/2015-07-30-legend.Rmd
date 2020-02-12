@@ -27,13 +27,13 @@ library(plyr)
 data <- spread(Orange, Tree, circumference)
 data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1') %>%
-  add_trace(y = ~Tree2, name = 'Tree 2') %>%
-  add_trace(y = ~Tree3, name = 'Tree 3') %>%
-  add_trace(y = ~Tree4, name = 'Tree 4') %>%
-  add_trace(y = ~Tree5, name = 'Tree 5')
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, name = 'Tree 2')
+fig <- fig %>% add_trace(y = ~Tree3, name = 'Tree 3')
+fig <- fig %>% add_trace(y = ~Tree4, name = 'Tree 4')
+fig <- fig %>% add_trace(y = ~Tree5, name = 'Tree 5')
 
-p
+fig
 ```
 
 ### Hiding the Legend
@@ -46,14 +46,14 @@ library(plyr)
 data <- spread(Orange, Tree, circumference)
 data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines') %>%
-  add_trace(y = ~Tree2) %>%
-  add_trace(y = ~Tree3) %>%
-  add_trace(y = ~Tree4) %>%
-  add_trace(y = ~Tree5) %>%
-  layout(showlegend = FALSE)
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines')
+fig <- fig %>% add_trace(y = ~Tree2)
+fig <- fig %>% add_trace(y = ~Tree3)
+fig <- fig %>% add_trace(y = ~Tree4)
+fig <- fig %>% add_trace(y = ~Tree5)
+fig <- fig %>% layout(showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Hiding Legend Entries
@@ -66,13 +66,13 @@ library(plyr)
 data <- spread(Orange, Tree, circumference)
 data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1') %>%
-  add_trace(y = ~Tree2, name = 'Tree 2') %>%
-  add_trace(y = ~Tree3, name = 'Tree 3', showlegend = FALSE) %>%
-  add_trace(y = ~Tree4, name = 'Tree 4') %>%
-  add_trace(y = ~Tree5, name = 'Tree 5')
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, name = 'Tree 2')
+fig <- fig %>% add_trace(y = ~Tree3, name = 'Tree 3', showlegend = FALSE)
+fig <- fig %>% add_trace(y = ~Tree4, name = 'Tree 4')
+fig <- fig %>% add_trace(y = ~Tree5, name = 'Tree 5')
 
-p
+fig
 ```
 
 ### Positioning the Legend Inside the Plot
@@ -85,14 +85,14 @@ library(plyr)
 data <- spread(Orange, Tree, circumference)
 data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1') %>%
-  add_trace(y = ~Tree2, name = 'Tree 2') %>%
-  add_trace(y = ~Tree3, name = 'Tree 3') %>%
-  add_trace(y = ~Tree4, name = 'Tree 4') %>%
-  add_trace(y = ~Tree5, name = 'Tree 5') %>%
-  layout(legend = list(x = 0.1, y = 0.9))
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, name = 'Tree 2')
+fig <- fig %>% add_trace(y = ~Tree3, name = 'Tree 3')
+fig <- fig %>% add_trace(y = ~Tree4, name = 'Tree 4')
+fig <- fig %>% add_trace(y = ~Tree5, name = 'Tree 5')
+fig <- fig %>% layout(legend = list(x = 0.1, y = 0.9))
 
-p
+fig
 ```
 
 ### Positioning the Legend Outside the Plot
@@ -105,14 +105,14 @@ library(plyr)
 data <- spread(Orange, Tree, circumference)
 data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1') %>%
-  add_trace(y = ~Tree2, name = 'Tree 2') %>%
-  add_trace(y = ~Tree3, name = 'Tree 3') %>%
-  add_trace(y = ~Tree4, name = 'Tree 4') %>%
-  add_trace(y = ~Tree5, name = 'Tree 5') %>%
-  layout(legend = list(x = 100, y = 0.5))
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, name = 'Tree 2')
+fig <- fig %>% add_trace(y = ~Tree3, name = 'Tree 3')
+fig <- fig %>% add_trace(y = ~Tree4, name = 'Tree 4')
+fig <- fig %>% add_trace(y = ~Tree5, name = 'Tree 5')
+fig <- fig %>% layout(legend = list(x = 100, y = 0.5))
 
-p
+fig
 ```
 
 ### Changing the Legend Orientation
@@ -125,14 +125,14 @@ library(plyr)
 data <- spread(Orange, Tree, circumference)
 data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1') %>%
-  add_trace(y = ~Tree2, name = 'Tree 2') %>%
-  add_trace(y = ~Tree3, name = 'Tree 3') %>%
-  add_trace(y = ~Tree4, name = 'Tree 4') %>%
-  add_trace(y = ~Tree5, name = 'Tree 5') %>%
-  layout(legend = list(orientation = 'h'))
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, name = 'Tree 2')
+fig <- fig %>% add_trace(y = ~Tree3, name = 'Tree 3')
+fig <- fig %>% add_trace(y = ~Tree4, name = 'Tree 4')
+fig <- fig %>% add_trace(y = ~Tree5, name = 'Tree 5')
+fig <- fig %>% layout(legend = list(orientation = 'h'))
 
-p
+fig
 ```
 
 ### Styling the Legend
@@ -155,14 +155,14 @@ l <- list(
   borderwidth = 2)
 
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1') %>%
-  add_trace(y = ~Tree2, name = 'Tree 2') %>%
-  add_trace(y = ~Tree3, name = 'Tree 3') %>%
-  add_trace(y = ~Tree4, name = 'Tree 4') %>%
-  add_trace(y = ~Tree5, name = 'Tree 5') %>%
-  layout(legend = l)
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', name = 'Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, name = 'Tree 2')
+fig <- fig %>% add_trace(y = ~Tree3, name = 'Tree 3')
+fig <- fig %>% add_trace(y = ~Tree4, name = 'Tree 4')
+fig <- fig %>% add_trace(y = ~Tree5, name = 'Tree 5')
+fig <- fig %>% layout(legend = l)
 
-p
+fig
 ```
 
 ### Grouped Legend
@@ -177,14 +177,14 @@ library(plyr)
 data <- spread(Orange, Tree, circumference)
 data <- rename(data, c("1" = "Tree1", "2" = "Tree2", "3" = "Tree3", "4" = "Tree4", "5" = "Tree5"))
 
-p <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines', 
-        legendgroup = 'group1', name = 'Zone 1 - Tree 1') %>%
-  add_trace(y = ~Tree2, legendgroup = 'group2', name = 'Zone 2 - Tree 1') %>%
-  add_trace(y = ~Tree3, legendgroup = 'group1', name = 'Zone 1 - Tree 2') %>%
-  add_trace(y = ~Tree4, legendgroup = 'group2', name = 'Zone 2 - Tree 2') %>%
-  add_trace(y = ~Tree5, legendgroup = 'group1', name = 'Zone 1 - Tree 3') 
+fig <- plot_ly(data, x = ~age, y = ~Tree1, type = 'scatter', mode = 'lines',
+        legendgroup = 'group1', name = 'Zone 1 - Tree 1')
+fig <- fig %>% add_trace(y = ~Tree2, legendgroup = 'group2', name = 'Zone 2 - Tree 1')
+fig <- fig %>% add_trace(y = ~Tree3, legendgroup = 'group1', name = 'Zone 1 - Tree 2')
+fig <- fig %>% add_trace(y = ~Tree4, legendgroup = 'group2', name = 'Zone 2 - Tree 2')
+fig <- fig %>% add_trace(y = ~Tree5, legendgroup = 'group1', name = 'Zone 1 - Tree 3')
 
-p
+fig
 ```
 
 ### Subplot Grouped Legend
@@ -194,15 +194,15 @@ library(plotly)
 
 df <- data.frame(x = c("a","b","c"), y = c(2,3,2), y2 = c(4,2,4))
 
-p1 <- df %>%
-  plot_ly(
+fig1 <- df
+fig1 <- fig1 %>% plot_ly(
     type = 'bar', 
     x = ~x, 
     y = ~y, 
     color = ~x, 
     legendgroup = ~x
-  ) %>% 
-  layout(
+  )
+fig1 <- fig1 %>% layout(
     xaxis = list(
       showgrid = F
     ),
@@ -211,16 +211,16 @@ p1 <- df %>%
     )
   )
 
-p2 <- df%>% 
-  plot_ly(
+fig2 <- df
+fig2 <- fig2 %>% plot_ly(
     type = 'bar', 
     x = ~x, 
     y = ~y2, 
     color =  ~x, 
     legendgroup = ~x, 
     showlegend = F
-  ) %>% 
-  layout(
+  )
+fig2 <- fig2 %>% layout(
     xaxis = list(
       showgrid = F
     ),
@@ -229,9 +229,9 @@ p2 <- df%>%
     )
   )
 
-p <- subplot(p1, p2, nrows = 2, shareX = T) 
+fig <- subplot(fig1, fig2, nrows = 2, shareX = T)
 
-p
+fig
 ```
 
 Reference
