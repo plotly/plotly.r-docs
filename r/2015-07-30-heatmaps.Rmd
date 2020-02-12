@@ -21,9 +21,9 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 
 ```{r}
 library(plotly)
-p <- plot_ly(z = volcano, type = "heatmap")
+fig <- plot_ly(z = volcano, type = "heatmap")
 
-p
+fig
 ```
 
 
@@ -31,12 +31,12 @@ p
 
 ```{r}
 m <- matrix(rnorm(9), nrow = 3, ncol = 3)
-p <- plot_ly(
+fig <- plot_ly(
 	x = c("a", "b", "c"), y = c("d", "e", "f"),
 	z = m, type = "heatmap"
 )
 
-p
+fig
 ```
 
 #### Sequential Colorscales: Greys
@@ -44,9 +44,9 @@ p
 The `colors` argument understands color brewer palettes (see `RColorBrewer::brewer.pal.info` for valid names).
 
 ```{r}
-p <- plot_ly(z = volcano, colors = "Greys", type = "heatmap")
+fig <- plot_ly(z = volcano, colors = "Greys", type = "heatmap")
 
-p
+fig
 ```
 
 #### Custom colorscales
@@ -54,9 +54,9 @@ p
 The `colors` argument also accepts a color interpolation function like `colorRamp()`
 
 ```{r}
-p <- plot_ly(z = volcano, colors = colorRamp(c("red", "green")), type = "heatmap")
+fig <- plot_ly(z = volcano, colors = colorRamp(c("red", "green")), type = "heatmap")
 
-p
+fig
 ```
 
 Or, you can do the scaling yourself and use the colorscale attribute directly...
@@ -66,7 +66,7 @@ vals <- unique(scales::rescale(c(volcano)))
 o <- order(vals, decreasing = FALSE)
 cols <- scales::col_numeric("Blues", domain = NULL)(vals)
 colz <- setNames(data.frame(vals[o], cols[o]), NULL)
-p <- plot_ly(z = volcano, colorscale = colz, type = "heatmap")
+fig <- plot_ly(z = volcano, colorscale = colz, type = "heatmap")
 
-p
+fig
 ```

@@ -22,13 +22,13 @@ library(plotly)
 
 data <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv")
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers',
-        marker = list(size = ~Gap, opacity = 0.5)) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers',
+        marker = list(size = ~Gap, opacity = 0.5))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE))
 
-p
+fig
 ```
 
 ### Setting Markers Color
@@ -38,13 +38,13 @@ library(plotly)
 
 data <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv")
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers',
-        marker = list(size = ~Gap, opacity = 0.5, color = 'rgb(255, 65, 54)')) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers',
+        marker = list(size = ~Gap, opacity = 0.5, color = 'rgb(255, 65, 54)'))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE))
 
-p
+fig
 ```
 
 ### Setting Multiple Colors
@@ -62,13 +62,13 @@ colors <- c('rgba(204,204,204,1)', 'rgba(222,45,38,0.8)', 'rgba(204,204,204,1)',
 # Note: The colors will be assigned to each observations based on the order of the observations in the dataframe.
 
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers',
-        marker = list(size = ~Gap, opacity = 0.5, color = colors)) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers',
+        marker = list(size = ~Gap, opacity = 0.5, color = colors))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE))
 
-p
+fig
 ```
 
 ### Mapping a Color Variable (Continuous)
@@ -78,13 +78,13 @@ library(plotly)
 
 data <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv")
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', color = ~Gap, colors = 'Reds',
-        marker = list(size = ~Gap, opacity = 0.5)) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', color = ~Gap, colors = 'Reds',
+        marker = list(size = ~Gap, opacity = 0.5))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE))
 
-p
+fig
 ```
 
 ### Mapping a Color Variable (Categorical)
@@ -98,14 +98,14 @@ data$State <- as.factor(c('Massachusetts', 'California', 'Massachusetts', 'Penns
                           'Massachusetts', 'Connecticut', 'New York', 'North Carolina', 'New Hampshire', 'New York', 'Indiana',
                           'New York', 'Michigan', 'Rhode Island', 'California', 'Georgia', 'California', 'California'))
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
-        marker = list(opacity = 0.5, sizemode = 'diameter')) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
+        marker = list(opacity = 0.5, sizemode = 'diameter'))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE),
          showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Scaling the Size of Bubble Charts
@@ -119,16 +119,16 @@ data$State <- as.factor(c('Massachusetts', 'California', 'Massachusetts', 'Penns
                           'Massachusetts', 'Connecticut', 'New York', 'North Carolina', 'New Hampshire', 'New York', 'Indiana',
                           'New York', 'Michigan', 'Rhode Island', 'California', 'Georgia', 'California', 'California'))
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
         #Choosing the range of the bubbles' sizes:
         sizes = c(10, 50),
-        marker = list(opacity = 0.5, sizemode = 'diameter')) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+        marker = list(opacity = 0.5, sizemode = 'diameter'))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE),
          showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Scaling using Sizeref
@@ -155,15 +155,15 @@ desired_maximum_marker_size <- 40
 your_list_of_size_values <- data['Gap']
 sizeref <- 2.0 * max(your_list_of_size_values) / (desired_maximum_marker_size**2)
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', color = ~State, colors = 'Paired',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', color = ~State, colors = 'Paired',
         sizes = c(10, 50),
-        marker = list(size = your_list_of_size_values, opacity = 0.5, sizemode = 'area', sizeref = sizeref)) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+        marker = list(size = your_list_of_size_values, opacity = 0.5, sizemode = 'area', sizeref = sizeref))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE),
          showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Scaling V2
@@ -178,16 +178,16 @@ data$State <- as.factor(c('Massachusetts', 'California', 'Massachusetts', 'Penns
                           'Massachusetts', 'Connecticut', 'New York', 'North Carolina', 'New Hampshire', 'New York', 'Indiana',
                           'New York', 'Michigan', 'Rhode Island', 'California', 'Georgia', 'California', 'California'))
 
-p <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
         #Choosing the range of the bubbles' sizes:
         sizes = c(10, 50),
-        marker = list(opacity = 0.5, sizemode = 'diameter')) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+        marker = list(opacity = 0.5, sizemode = 'diameter'))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE),
          showlegend = FALSE)
 
-p
+fig
 ```
 
 
@@ -202,17 +202,17 @@ data$State <- as.factor(c('Massachusetts', 'California', 'Massachusetts', 'Penns
                           'Massachusetts', 'Connecticut', 'New York', 'North Carolina', 'New Hampshire', 'New York', 'Indiana',
                           'New York', 'Michigan', 'Rhode Island', 'California', 'Georgia', 'California', 'California'))
 
-p <- plot_ly(data, x = ~Women, y = ~Men, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
+fig <- plot_ly(data, x = ~Women, y = ~Men, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
         sizes = c(10, 50),
         marker = list(opacity = 0.5, sizemode = 'diameter'),
         hoverinfo = 'text',
-        text = ~paste('School:', School, '<br>Gender Gap:', Gap)) %>%
-  layout(title = 'Gender Gap in Earnings per University',
+        text = ~paste('School:', School, '<br>Gender Gap:', Gap))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
          xaxis = list(showgrid = FALSE),
          yaxis = list(showgrid = FALSE),
          showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Styled Buble Chart
@@ -228,13 +228,13 @@ slope <- 2.666051223553066e-05
 data_2007$size <- sqrt(data_2007$pop * slope)
 colors <- c('#4AC6B7', '#1972A4', '#965F8A', '#FF7070', '#C61951')
 
-p <- plot_ly(data_2007, x = ~gdpPercap, y = ~lifeExp, color = ~continent, size = ~size, colors = colors,
+fig <- plot_ly(data_2007, x = ~gdpPercap, y = ~lifeExp, color = ~continent, size = ~size, colors = colors,
         type = 'scatter', mode = 'markers', sizes = c(min(data_2007$size), max(data_2007$size)),
         marker = list(symbol = 'circle', sizemode = 'diameter',
                       line = list(width = 2, color = '#FFFFFF')),
         text = ~paste('Country:', country, '<br>Life Expectancy:', lifeExp, '<br>GDP:', gdpPercap,
-                      '<br>Pop.:', pop)) %>%
-  layout(title = 'Life Expectancy v. Per Capita GDP, 2007',
+                      '<br>Pop.:', pop))
+fig <- fig %>% layout(title = 'Life Expectancy v. Per Capita GDP, 2007',
          xaxis = list(title = 'GDP per capita (2000 dollars)',
                       gridcolor = 'rgb(255, 255, 255)',
                       range = c(2.003297660701705, 5.191505530708712),
@@ -251,7 +251,7 @@ p <- plot_ly(data_2007, x = ~gdpPercap, y = ~lifeExp, color = ~continent, size =
          paper_bgcolor = 'rgb(243, 243, 243)',
          plot_bgcolor = 'rgb(243, 243, 243)')
 
-p
+fig
 ```
 
 #Reference

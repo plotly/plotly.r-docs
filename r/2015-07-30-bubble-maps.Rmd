@@ -37,12 +37,12 @@ g <- list(
   countrycolor = toRGB("white")
 )
 
-p <- plot_geo(df, locationmode = 'USA-states', sizes = c(1, 250)) %>%
-  add_markers(
+fig <- plot_geo(df, locationmode = 'USA-states', sizes = c(1, 250))
+fig <- fig %>% add_markers(
     x = ~lon, y = ~lat, size = ~pop, color = ~q, hoverinfo = "text",
     text = ~paste(df$name, "<br />", df$pop/1e6, " million")
-  ) %>%
-  layout(title = '2014 US city populations<br>(Click legend to toggle)', geo = g)
+  )
+fig <- fig %>% layout(title = '2014 US city populations<br>(Click legend to toggle)', geo = g)
 
-p
+fig
 ```

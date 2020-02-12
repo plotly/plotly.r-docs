@@ -22,9 +22,9 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(z = ~volcano, type = "contour")
+fig <- plot_ly(z = ~volcano, type = "contour")
 
-p
+fig
 ```
 
 ### Set X and Y Coordinates
@@ -32,7 +32,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   x = c(-9, -6, -5, -3, -1), 
   y = c(0, 1, 4, 5, 7), 
   z = matrix(c(10, 10.625, 12.5, 15.625, 20, 5.625, 6.25, 8.125, 11.25, 15.625, 2.5, 3.125, 5, 8.125, 12.5, 0.625, 1.25, 3.125,
@@ -40,7 +40,7 @@ p <- plot_ly(
   type = "contour" 
 )
 
-p
+fig
 ```
 
 ### Set Size and Range of a Contours
@@ -48,7 +48,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   type = 'contour',
   z = matrix(c(10, 10.625, 12.5, 15.625, 20, 5.625, 6.25, 8.125, 
                11.25, 15.625, 2.5, 3.125, 5, 8.125, 12.5, 0.625, 
@@ -63,7 +63,7 @@ p <- plot_ly(
   )
 )
 
-p
+fig
 ```
 
 ### Smoothing Contour Lines
@@ -71,7 +71,7 @@ p
 ```{r}
 library(plotly)
 
-p1 <- plot_ly(
+fig1 <- plot_ly(
   type = "contour", 
   z = matrix(c(2, 4, 7, 12, 13, 14, 15, 16, 3, 1, 6, 11, 12, 13, 
                16, 17, 4, 2, 7, 7, 11, 14, 17, 18, 5, 3, 8, 8, 13, 
@@ -87,7 +87,7 @@ p1 <- plot_ly(
   line = list(smoothing = 0)
 )
 
-p2 <- plot_ly(
+fig2 <- plot_ly(
   type = "contour", 
   z = matrix(c(2, 4, 7, 12, 13, 14, 15, 16, 3, 1, 6, 11, 12, 13, 
                16, 17, 4, 2, 7, 7, 11, 14, 17, 18, 5, 3, 8, 8, 13, 
@@ -103,9 +103,9 @@ p2 <- plot_ly(
   line = list(smoothing = 0.85)
 ) 
 
-p <- subplot(p1,p2)
+fig <- subplot(fig1,fig2)
 
-p
+fig
 ```
 
 ### Smoothing Contour Coloring
@@ -113,7 +113,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   type = 'contour',
   z = matrix(c(10, 10.625, 12.5, 15.625, 20, 5.625, 6.25, 8.125, 
                11.25, 15.625, 2.5, 3.125, 5, 8.125, 12.5, 0.625, 
@@ -124,7 +124,7 @@ p <- plot_ly(
   )
 )
 
-p
+fig
 ```
 
 ### Add Contour Labels
@@ -132,10 +132,10 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(z = volcano, type = "contour", contours = list(showlabels = TRUE)) %>%
-  colorbar(title = "Elevation \n in meters")
+fig <- plot_ly(z = volcano, type = "contour", contours = list(showlabels = TRUE))
+fig <- fig %>% colorbar(title = "Elevation \n in meters")
 
-p
+fig
 ```
 
 ### Create Matrix and Plot Contour
@@ -166,10 +166,10 @@ names(mtrx.melt) <- c('wt', 'hp', 'qsec')
 mtrx.melt$wt <- as.numeric(str_sub(mtrx.melt$wt, str_locate(mtrx.melt$wt, '=')[1,1] + 1))
 mtrx.melt$hp <- as.numeric(str_sub(mtrx.melt$hp, str_locate(mtrx.melt$hp, '=')[1,1] + 1))
 
-p <- plot_ly(mtrx.melt, x = ~wt, y = ~hp, z = ~qsec, type = "contour", 
+fig <- plot_ly(mtrx.melt, x = ~wt, y = ~hp, z = ~qsec, type = "contour",
              width = 600, height = 500)
 
-p
+fig
 ```
 
 ### 2D Density Contour Plot
@@ -185,9 +185,9 @@ s <- subplot(
   nrows = 2, heights = c(0.2, 0.8), widths = c(0.8, 0.2), margin = 0,
   shareX = TRUE, shareY = TRUE, titleX = FALSE, titleY = FALSE
 )
-p <- layout(s, showlegend = FALSE)
+fig <- layout(s, showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Contour Colorscales

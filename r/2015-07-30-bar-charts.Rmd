@@ -21,14 +21,14 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   x = c("giraffes", "orangutans", "monkeys"),
   y = c(20, 14, 23),
   name = "SF Zoo",
   type = "bar"
 )
 
-p
+fig
 ```
 
 ### Grouped Bar Chart
@@ -41,11 +41,11 @@ SF_Zoo <- c(20, 14, 23)
 LA_Zoo <- c(12, 18, 29)
 data <- data.frame(Animals, SF_Zoo, LA_Zoo)
 
-p <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo') %>%
-  add_trace(y = ~LA_Zoo, name = 'LA Zoo') %>%
-  layout(yaxis = list(title = 'Count'), barmode = 'group')
+fig <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo')
+fig <- fig %>% add_trace(y = ~LA_Zoo, name = 'LA Zoo')
+fig <- fig %>% layout(yaxis = list(title = 'Count'), barmode = 'group')
 
-p
+fig
 ```
 
 ### Stacked Bar Chart
@@ -58,11 +58,11 @@ SF_Zoo <- c(20, 14, 23)
 LA_Zoo <- c(12, 18, 29)
 data <- data.frame(Animals, SF_Zoo, LA_Zoo)
 
-p <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo') %>%
-  add_trace(y = ~LA_Zoo, name = 'LA Zoo') %>%
-  layout(yaxis = list(title = 'Count'), barmode = 'stack')
+fig <- plot_ly(data, x = ~Animals, y = ~SF_Zoo, type = 'bar', name = 'SF Zoo')
+fig <- fig %>% add_trace(y = ~LA_Zoo, name = 'LA Zoo')
+fig <- fig %>% layout(yaxis = list(title = 'Count'), barmode = 'stack')
 
-p
+fig
 ```
 
 ### Bar Chart with Hover Text
@@ -75,15 +75,15 @@ y <- c(20, 14, 23)
 text <- c('27% market share', '24% market share', '19% market share')
 data <- data.frame(x, y, text)
 
-p <- plot_ly(data, x = ~x, y = ~y, type = 'bar', text = text,
+fig <- plot_ly(data, x = ~x, y = ~y, type = 'bar', text = text,
         marker = list(color = 'rgb(158,202,225)',
                       line = list(color = 'rgb(8,48,107)',
-                      			  width = 1.5))) %>%
-  layout(title = "January 2013 Sales Report",
+                      			  width = 1.5)))
+fig <- fig %>% layout(title = "January 2013 Sales Report",
          xaxis = list(title = ""),
          yaxis = list(title = ""))
 
-p
+fig
 ```
 
 ### Bar Chart with Direct Labels
@@ -96,15 +96,15 @@ y <- c(20, 14, 23)
 text <- c('27% market share', '24% market share', '19% market share')
 data <- data.frame(x, y, text)
 
-p <- plot_ly(data, x = ~x, y = ~y, type = 'bar', 
+fig <- plot_ly(data, x = ~x, y = ~y, type = 'bar',
              text = y, textposition = 'auto',
              marker = list(color = 'rgb(158,202,225)',
-                           line = list(color = 'rgb(8,48,107)', width = 1.5))) %>%
-  layout(title = "January 2013 Sales Report",
+                           line = list(color = 'rgb(8,48,107)', width = 1.5)))
+fig <- fig %>% layout(title = "January 2013 Sales Report",
          xaxis = list(title = ""),
          yaxis = list(title = ""))
 
-p
+fig
 ```
 
 ### Grouped Bar Chart with Direct Labels
@@ -118,22 +118,22 @@ y2 <- c(16,12,27)
 text <- c('27% market share', '24% market share', '19% market share')
 data <- data.frame(x, y, y2, text)
 
-p <- data %>% 
-  plot_ly() %>%
-  add_trace(x = ~x, y = ~y, type = 'bar', 
+fig <- data
+fig <- fig %>% plot_ly()
+fig <- fig %>% add_trace(x = ~x, y = ~y, type = 'bar',
              text = y, textposition = 'auto',
              marker = list(color = 'rgb(158,202,225)',
-                           line = list(color = 'rgb(8,48,107)', width = 1.5))) %>%
-  add_trace(x = ~x, y = ~y2, type = 'bar', 
+                           line = list(color = 'rgb(8,48,107)', width = 1.5)))
+fig <- fig %>% add_trace(x = ~x, y = ~y2, type = 'bar',
             text = y2, textposition = 'auto',
             marker = list(color = 'rgb(58,200,225)',
-                          line = list(color = 'rgb(8,48,107)', width = 1.5))) %>%
-  layout(title = "January 2013 Sales Report",
+                          line = list(color = 'rgb(8,48,107)', width = 1.5)))
+fig <- fig %>% layout(title = "January 2013 Sales Report",
          barmode = 'group',
          xaxis = list(title = ""),
          yaxis = list(title = ""))
 
-p
+fig
 ```
 
 ### Rotated Bar Chart Labels
@@ -149,14 +149,14 @@ data <- data.frame(x, y1, y2)
 #The default order will be alphabetized unless specified as below:
 data$x <- factor(data$x, levels = data[["x"]])
 
-p <- plot_ly(data, x = ~x, y = ~y1, type = 'bar', name = 'Primary Product', marker = list(color = 'rgb(49,130,189)')) %>%
-  add_trace(y = ~y2, name = 'Secondary Product', marker = list(color = 'rgb(204,204,204)')) %>%
-  layout(xaxis = list(title = "", tickangle = -45),
+fig <- plot_ly(data, x = ~x, y = ~y1, type = 'bar', name = 'Primary Product', marker = list(color = 'rgb(49,130,189)'))
+fig <- fig %>% add_trace(y = ~y2, name = 'Secondary Product', marker = list(color = 'rgb(204,204,204)'))
+fig <- fig %>% layout(xaxis = list(title = "", tickangle = -45),
          yaxis = list(title = ""),
          margin = list(b = 100),
          barmode = 'group')
 
-p
+fig
 ```
 
 ### Customizing Bar Color
@@ -168,12 +168,12 @@ x <- c('Feature A', 'Feature B', 'Feature C', 'Feature D', 'Feature E')
 y <- c(20, 14, 23, 25, 22)
 data <- data.frame(x, y)
 
-p <- plot_ly(data, x = ~x, y = ~y, type = 'bar', color = I("black")) %>%
-  layout(title = "Features",
+fig <- plot_ly(data, x = ~x, y = ~y, type = 'bar', color = I("black"))
+fig <- fig %>% layout(title = "Features",
          xaxis = list(title = ""),
          yaxis = list(title = ""))
 
-p
+fig
 ```
 
 ### Customizing Individual Bar Colors
@@ -185,15 +185,15 @@ x <- c('Feature A', 'Feature B', 'Feature C', 'Feature D', 'Feature E')
 y <- c(20, 14, 23, 25, 22)
 data <- data.frame(x, y)
 
-p <- plot_ly(data, x = ~x, y = ~y, type = 'bar',
+fig <- plot_ly(data, x = ~x, y = ~y, type = 'bar',
         marker = list(color = c('rgba(204,204,204,1)', 'rgba(222,45,38,0.8)',
                                 'rgba(204,204,204,1)', 'rgba(204,204,204,1)',
-                                'rgba(204,204,204,1)'))) %>%
-  layout(title = "Least Used Features",
+                                'rgba(204,204,204,1)')))
+fig <- fig %>% layout(title = "Least Used Features",
          xaxis = list(title = ""),
          yaxis = list(title = ""))
 
-p
+fig
 ```
 
 ### Customizing Individual Bar Widths
@@ -206,14 +206,14 @@ y= c(10, 8, 6, 4, 2)
 width = c(0.8, 0.8, 0.8, 3.5, 4)
 data <- data.frame(x, y, width)
 
-p <- plot_ly(data) %>%
-  add_bars(
+fig <- plot_ly(data)
+fig <- fig %>% add_bars(
     x= ~x,
     y= ~y,
     width = ~width
   )
 
-p
+fig
 ```
 
 ### Customizing Individual Bar Base
@@ -221,8 +221,8 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly() %>%
-  add_bars(
+fig <- plot_ly()
+fig <- fig %>% add_bars(
     x = c("2016", "2017", "2018"),
     y = c(500,600,700),
     base = c(-500,-600,-700),
@@ -230,8 +230,8 @@ p <- plot_ly() %>%
       color = 'red'
     ),
     name = 'expenses'
-  ) %>%
-  add_bars(
+  )
+fig <- fig %>% add_bars(
     x = c("2016", "2017", "2018"),
     y = c(300,400,700),
     base = 0,
@@ -241,7 +241,7 @@ p <- plot_ly() %>%
     name = 'revenue'
   )
 
-p
+fig
 ```
 
 ### Mapping a Color Variable
@@ -250,10 +250,11 @@ p
 library(plotly)
 library(dplyr)
 
-p <- ggplot2::diamonds %>% count(cut, clarity) %>%
-  plot_ly(x = ~cut, y = ~n, color = ~clarity)
+fig <- ggplot2::diamonds
+fig <- fig %>% count(cut, clarity)
+fig <- fig %>% plot_ly(x = ~cut, y = ~n, color = ~clarity)
 
-p
+fig
 ```
 
 ### Colored and Styled Bar Chart
@@ -266,10 +267,10 @@ roW <- c(219, 146, 112, 127, 124, 180, 236, 207, 236, 263, 350, 430, 474, 526, 4
 China <- c(16, 13, 10, 11, 28, 37, 43, 55, 56, 88, 105, 156, 270, 299, 340, 403, 549, 499)
 data <- data.frame(x, roW, China)
 
-p <- plot_ly(data, x = ~x, y = ~roW, type = 'bar', name = 'Rest of the World',
-        marker = list(color = 'rgb(55, 83, 109)')) %>%
-  add_trace(y = ~China, name = 'China', marker = list(color = 'rgb(26, 118, 255)')) %>%
-  layout(title = 'US Export of Plastic Scrap',
+fig <- plot_ly(data, x = ~x, y = ~roW, type = 'bar', name = 'Rest of the World',
+        marker = list(color = 'rgb(55, 83, 109)'))
+fig <- fig %>% add_trace(y = ~China, name = 'China', marker = list(color = 'rgb(26, 118, 255)'))
+fig <- fig %>% layout(title = 'US Export of Plastic Scrap',
          xaxis = list(
            title = "",
            tickfont = list(
@@ -286,7 +287,7 @@ p <- plot_ly(data, x = ~x, y = ~roW, type = 'bar', name = 'Rest of the World',
          legend = list(x = 0, y = 1, bgcolor = 'rgba(255, 255, 255, 0)', bordercolor = 'rgba(255, 255, 255, 0)'),
          barmode = 'group', bargap = 0.15, bargroupgap = 0.1)
 
-p
+fig
 ```
 
 ### Waterfall Bar Chart
@@ -306,24 +307,24 @@ data <- data.frame(x, base, revenue, costs, profit, text)
 #The default order will be alphabetized unless specified as below:
 data$x <- factor(data$x, levels = data[["x"]])
 
-p <- plot_ly(data, x = ~x, y = ~base, type = 'bar', marker = list(color = 'rgba(1,1,1, 0.0)')) %>%
-  add_trace(y = ~revenue, marker = list(color = 'rgba(55, 128, 191, 0.7)',
+fig <- plot_ly(data, x = ~x, y = ~base, type = 'bar', marker = list(color = 'rgba(1,1,1, 0.0)'))
+fig <- fig %>% add_trace(y = ~revenue, marker = list(color = 'rgba(55, 128, 191, 0.7)',
                                         line = list(color = 'rgba(55, 128, 191, 0.7)',
-                                                    width = 2))) %>%
-  add_trace(y = ~costs, marker = list(color = 'rgba(219, 64, 82, 0.7)',
+                                                    width = 2)))
+fig <- fig %>% add_trace(y = ~costs, marker = list(color = 'rgba(219, 64, 82, 0.7)',
                                       line = list(color = 'rgba(219, 64, 82, 1.0)',
-                                                  width = 2))) %>%
-  add_trace(y = ~profit, marker = list(color = 'rgba(50, 171, 96, 0.7)',
+                                                  width = 2)))
+fig <- fig %>% add_trace(y = ~profit, marker = list(color = 'rgba(50, 171, 96, 0.7)',
                                       line = list(color = 'rgba(50, 171, 96, 1.0)',
-                                                  width = 2))) %>%
-  layout(title = 'Annual Profit - 2015',
+                                                  width = 2)))
+fig <- fig %>% layout(title = 'Annual Profit - 2015',
          xaxis = list(title = ""),
          yaxis = list(title = ""),
          barmode = 'stack',
          paper_bgcolor = 'rgba(245, 246, 249, 1)',
          plot_bgcolor = 'rgba(245, 246, 249, 1)',
-         showlegend = FALSE) %>%
-  add_annotations(text = text,
+         showlegend = FALSE)
+fig <- fig %>% add_annotations(text = text,
                   x = x,
                   y = y,
                   xref = "x",
@@ -333,7 +334,7 @@ p <- plot_ly(data, x = ~x, y = ~base, type = 'bar', marker = list(color = 'rgba(
                               color = 'rgba(245, 246, 249, 1)'),
                   showarrow = FALSE)
 
-p
+fig
 ```
 
 ### Horizontal Bar Chart

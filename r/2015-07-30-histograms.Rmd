@@ -20,20 +20,20 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 
 ```{r}
 library(plotly)
-p <- plot_ly(x = ~rnorm(50), type = "histogram")
+fig <- plot_ly(x = ~rnorm(50), type = "histogram")
 
-p
+fig
 ```
 
 #### Normalized Histogram
 
 ```{r}
 library(plotly)
-p <- plot_ly(x = ~rnorm(50),
+fig <- plot_ly(x = ~rnorm(50),
              type = "histogram",
              histnorm = "probability")
 
-p
+fig
 ```
 
 #### Specify Binning Function
@@ -44,52 +44,52 @@ library(plotly)
 x = c("Apples","Apples","Apples","Organges", "Bananas")
 y = c("5","10","3","10","5")
 
-p <- plot_ly(y=y, x=x, histfunc='sum', type = "histogram") %>%
-  layout(yaxis=list(type='linear'))
+fig <- plot_ly(y=y, x=x, histfunc='sum', type = "histogram")
+fig <- fig %>% layout(yaxis=list(type='linear'))
 
-p
+fig
 ```
 
 #### Horizontal Histogram
 
 ```{r}
 library(plotly)
-p <- plot_ly(y = ~rnorm(50), type = "histogram")
+fig <- plot_ly(y = ~rnorm(50), type = "histogram")
 
-p
+fig
 ```
 
 #### Overlaid Histograms
 
 ```{r}
-p <- plot_ly(alpha = 0.6) %>%
-  add_histogram(x = ~rnorm(500)) %>%
-  add_histogram(x = ~rnorm(500) + 1) %>%
-  layout(barmode = "overlay")
+fig <- plot_ly(alpha = 0.6)
+fig <- fig %>% add_histogram(x = ~rnorm(500))
+fig <- fig %>% add_histogram(x = ~rnorm(500) + 1)
+fig <- fig %>% layout(barmode = "overlay")
 
-p
+fig
 ```
 
 #### Stacked Histograms
 
 ```{r}
-p <- plot_ly(alpha = 0.6) %>%
-  add_histogram(x = ~rnorm(500)) %>%
-  add_histogram(x = ~rnorm(500) + 1) %>%
-  layout(barmode = "overlay")
+fig <- plot_ly(alpha = 0.6)
+fig <- fig %>% add_histogram(x = ~rnorm(500))
+fig <- fig %>% add_histogram(x = ~rnorm(500) + 1)
+fig <- fig %>% layout(barmode = "overlay")
 
-p
+fig
 ```
 
 #### Cumulative Histogram
 
 ```{r}
 library(plotly)
-p <- plot_ly(x = ~rnorm(50),
+fig <- plot_ly(x = ~rnorm(50),
              type = "histogram",
              cumulative = list(enabled=TRUE))
 
-p
+fig
 ```
 
 ### Reference

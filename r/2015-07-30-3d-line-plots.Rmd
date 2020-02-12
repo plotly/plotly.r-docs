@@ -24,10 +24,10 @@ library(plotly)
 data <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/3d-line1.csv')
 data$color <- as.factor(data$color)
 
-p <- plot_ly(data, x = ~x, y = ~y, z = ~z, type = 'scatter3d', mode = 'lines',
+fig <- plot_ly(data, x = ~x, y = ~y, z = ~z, type = 'scatter3d', mode = 'lines',
         opacity = 1, line = list(width = 6, color = ~color, reverscale = FALSE))
 
-p
+fig
 ```
 
 ### 3D Line and Markers Plot
@@ -50,11 +50,11 @@ for (i in 1:62) {
 
 data <- data.frame(x, y, z, c)
 
-p <- plot_ly(data, x = ~x, y = ~y, z = ~z, type = 'scatter3d', mode = 'lines+markers',
+fig <- plot_ly(data, x = ~x, y = ~y, z = ~z, type = 'scatter3d', mode = 'lines+markers',
         line = list(width = 6, color = ~c, colorscale = 'Viridis'),
         marker = list(size = 3.5, color = ~c, colorscale = 'Greens', cmin = -20, cmax = 50))
 
-p
+fig
 ```
 
 ### Custom Color Scale
@@ -79,10 +79,10 @@ for (i in 1:count) {
 
 data <- data.frame(x, y, z, c)
 
-p <- plot_ly(data, x = ~x, y = ~y, z = ~z, type = 'scatter3d', mode = 'lines',
+fig <- plot_ly(data, x = ~x, y = ~y, z = ~z, type = 'scatter3d', mode = 'lines',
         line = list(width = 4, color = ~c, colorscale = list(c(0,'#BA52ED'), c(1,'#FCB040'))))
 
-p
+fig
 ```
 
 ### 3D Random Walk Plot
@@ -92,14 +92,14 @@ library(plotly)
 
 data <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/_3d-line-plot.csv')
 
-p <- plot_ly(data, x = ~x1, y = ~y1, z = ~z1, type = 'scatter3d', mode = 'lines',
-        line = list(color = '#1f77b4', width = 1)) %>%
-  add_trace(x = ~x2, y = ~y2, z = ~z2,
-            line = list(color = 'rgb(44, 160, 44)', width = 1)) %>%
-  add_trace(x = ~x3, y = ~y3, z = ~z3,
+fig <- plot_ly(data, x = ~x1, y = ~y1, z = ~z1, type = 'scatter3d', mode = 'lines',
+        line = list(color = '#1f77b4', width = 1))
+fig <- fig %>% add_trace(x = ~x2, y = ~y2, z = ~z2,
+            line = list(color = 'rgb(44, 160, 44)', width = 1))
+fig <- fig %>% add_trace(x = ~x3, y = ~y3, z = ~z3,
             line = list(color = 'bcbd22', width = 1))
 
-p
+fig
 ```
 
 ### 3D Density Plot
@@ -113,9 +113,9 @@ data <- data.frame(
   y = unlist(lapply(dens, "[[", "y")),
   cut = rep(names(dens), each = length(dens[[1]]$x)))
 
-p <- plot_ly(data, x = ~x, y = ~y, z = ~cut, type = 'scatter3d', mode = 'lines', color = ~cut)
+fig <- plot_ly(data, x = ~x, y = ~y, z = ~cut, type = 'scatter3d', mode = 'lines', color = ~cut)
 
-p
+fig
 ```
 
 #Reference

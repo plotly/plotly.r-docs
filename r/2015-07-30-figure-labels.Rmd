@@ -32,10 +32,10 @@ y <- list(
   title = "y Axis",
   titlefont = f
 )
-p <- plot_ly(x = ~rnorm(10), y = ~rnorm(10), mode = "markers") %>%
-  layout(xaxis = x, yaxis = y)
+fig <- plot_ly(x = ~rnorm(10), y = ~rnorm(10), mode = "markers")
+fig <- fig %>% layout(xaxis = x, yaxis = y)
 
-p
+fig
 ```
 
 #### Figure Labels for 3D Charts
@@ -48,8 +48,8 @@ n <- 100
 theta <- runif(n, 0, 2*pi)
 u <- runif(n, -1, 1)
 
-p <- plot_ly(x = ~sqrt(1 - u^2) * cos(theta), y = ~sqrt(1 - u^2) * sin(theta), z = ~u) %>%
-  layout(
+fig <- plot_ly(x = ~sqrt(1 - u^2) * cos(theta), y = ~sqrt(1 - u^2) * sin(theta), z = ~u)
+fig <- fig %>% layout(
     title = "Layout options in a 3d scatter plot",
     scene = list(
       xaxis = list(title = "Cos"),
@@ -57,5 +57,5 @@ p <- plot_ly(x = ~sqrt(1 - u^2) * cos(theta), y = ~sqrt(1 - u^2) * sin(theta), z
       zaxis = list(title = "Z")
     ))
 
-p
+fig
 ```
