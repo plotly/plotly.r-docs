@@ -40,10 +40,10 @@ x <- 70*(runif(70, 0, 1))
 y <- 55*(runif(70, 0, 1))
 z <- 40*(runif(70, 0, 1))
 
-p <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') %>%
-  layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
+fig <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') 
+fig <- fig %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
 
-p
+fig
 ```
 
 ### Fixed Ratio Axes
@@ -60,21 +60,21 @@ axx <- list(
 )
 
 # individual plots
-p1 <- plot_ly(z = ~volcano, scene='scene1') %>%
-  add_surface(showscale=FALSE)
+fig1 <- plot_ly(z = ~volcano, scene='scene1') 
+fig1 <- fig1 %>% add_surface(showscale=FALSE)
 
-p2 <- plot_ly(z = ~volcano, scene='scene2') %>%
-  add_surface(showscale=FALSE)
+fig2 <- plot_ly(z = ~volcano, scene='scene2') 
+fig2 <- fig2 %>% add_surface(showscale=FALSE)
 
-p3 <- plot_ly(z = ~volcano, scene='scene3') %>%
-  add_surface(showscale=FALSE)
+fig3 <- plot_ly(z = ~volcano, scene='scene3') 
+fig3 <- fig3 %>% add_surface(showscale=FALSE)
 
-p4 <- plot_ly(z = ~volcano, scene='scene4') %>%
-  add_surface(showscale=FALSE)
+fig4 <- plot_ly(z = ~volcano, scene='scene4') 
+fig4 <- fig4 %>% add_surface(showscale=FALSE)
 
 # subplot and define scene
-p <- subplot(p1, p2, p3, p4) %>%
-  layout(title = "3D Subplots",
+fig <- subplot(fig1, fig2, fig3, fig4) 
+fig <- fig %>% layout(title = "3D Subplots",
          scene = list(domain=list(x=c(0,0.5),y=c(0.5,1)),
                       xaxis=axx, yaxis=axx, zaxis=axx,
                       
@@ -93,7 +93,7 @@ p <- subplot(p1, p2, p3, p4) %>%
                        # set your manual fixed aspect ratio
                        aspectratio = list(x=1, y=1, z=2)))
 
-p
+fig
 ```
 
 ### Set Axes Title
@@ -117,10 +117,10 @@ x <- 70*(runif(70, 0, 1))
 y <- 55*(runif(70, 0, 1))
 z <- 40*(runif(70, 0, 1))
 
-p <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') %>%
-  layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
+fig <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') 
+fig <- fig %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
 
-p
+fig
 ```
 
 ### Ticks Formatting
@@ -149,10 +149,10 @@ x <- 70*(runif(70, 0, 1))
 y <- 55*(runif(70, 0, 1))
 z <- 40*(runif(70, 0, 1))
 
-p <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') %>%
-  layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
+fig <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') 
+fig <- fig %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
 
-p
+fig
 ```
 
 ### Background and Grid Color
@@ -185,10 +185,10 @@ x <- 70*(runif(70, 0, 1))
 y <- 55*(runif(70, 0, 1))
 z <- 40*(runif(70, 0, 1))
 
-p <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') %>%
-  layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
+fig <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d') 
+fig <- fig %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz))
 
-p
+fig
 ```
 
 #Reference

@@ -37,11 +37,11 @@ library(plotly)
 x <- seq(-2*pi, 2*pi, length.out = 1000)
 df <- data.frame(x, y1 = sin(x))
 
-p <- plot_ly(df, x = ~x) %>%
-  add_lines(y = ~y1)
+fig <- plot_ly(df, x = ~x)
+fig <- fig %>% add_lines(y = ~y1)
 
 
-p <- p %>% layout(
+fig <- fig %>% layout(
   title = "Button Restyle",
   xaxis = list(domain = c(0.1, 1)),
   yaxis = list(title = "y"),
@@ -60,7 +60,7 @@ p <- p %>% layout(
              label = "Red")))
   ))
 
-p
+fig
 ```
 
 **Update Several Data Attributes** 
@@ -69,7 +69,7 @@ This example demostrates how to update several data attributes: colorscale, char
 ```{r}
 library(plotly)
 
-p <- plot_ly(z = ~volcano, type = "heatmap", colorscale='Rainbow')
+fig <- plot_ly(z = ~volcano, type = "heatmap", colorscale='Rainbow')
 
 # chart option buttons
 chart_types <- list(
@@ -127,13 +127,13 @@ annot <- list(list(text = "Chart<br>Type", x=0.2, y=1.25, xref='paper', yref='pa
               list(text = "Color<br>Type", x=0.2, y=1.15, xref='paper', yref='paper', showarrow=FALSE))
 
 # plot
-p <- p %>% layout(
+fig <- fig %>% layout(
   xaxis = list(domain = c(0.1, 1)),
   yaxis = list(title = "y"),
   updatemenus = list(chart_types,color_types),
   annotations = annot)
 
-p
+fig
 ```
 
 ### Relayout Button
@@ -215,14 +215,14 @@ updatemenus <- list(
   )
 )
 
-p <- plot_ly(type = 'scatter', mode='markers') %>%
-  add_trace(x=x0, y=y0, mode='markers', marker=list(color='#835AF1')) %>%
-  add_trace(x=x1, y=y1, mode='markers', marker=list(color='#7FA6EE')) %>%
-  add_trace(x=x2, y=y2, mode='markers', marker=list(color='#B8F7D4')) %>%
-  layout(title = "Highlight Clusters", showlegend = FALSE,
+fig <- plot_ly(type = 'scatter', mode='markers') 
+fig <- fig %>% add_trace(x=x0, y=y0, mode='markers', marker=list(color='#835AF1')) 
+fig <- fig %>% add_trace(x=x1, y=y1, mode='markers', marker=list(color='#7FA6EE')) 
+fig <- fig %>% add_trace(x=x2, y=y2, mode='markers', marker=list(color='#B8F7D4')) 
+fig <- fig %>% layout(title = "Highlight Clusters", showlegend = FALSE,
          updatemenus = updatemenus)
 
-p
+fig
 ```
 
 ### Update Button
@@ -287,19 +287,19 @@ updatemenus <- list(
   )
 )
 
-p <- df %>%
-  plot_ly(type = 'scatter', mode = 'lines') %>%
-  add_lines(x=~Date, y=~AAPL.High, name="High",
-            line=list(color="#33CFA5")) %>%
-  add_lines(x=~Date, y=~AAPL.Low, name="Low",
-            line=list(color="#F06A6A")) %>%
-  layout(title = "Apple", showlegend=FALSE,
+fig <- df 
+fig <- fig %>% plot_ly(type = 'scatter', mode = 'lines') 
+fig <- fig %>% add_lines(x=~Date, y=~AAPL.High, name="High",
+            line=list(color="#33CFA5")) 
+fig <- fig %>% add_lines(x=~Date, y=~AAPL.Low, name="Low",
+            line=list(color="#F06A6A")) 
+fig <- fig %>% layout(title = "Apple", showlegend=FALSE,
          xaxis=list(title="Date"),
          yaxis=list(title="Price ($)"),
          updatemenus=updatemenus)
 
 
-p
+fig
 ```
 
 ### Animate Button
@@ -312,7 +312,7 @@ When adding buttons to Plotly charts, users have the option of styling the color
 
 #### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Mafig Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
 ```{r}
 library(plotly)
@@ -348,7 +348,7 @@ buttons <- function(i) {
        label = df_farms$Wind.Farm[i]) 
 }
 
-# map style buttons
+# mafig style buttons
 basic <- list(method = "relayout",
               args = list(list(mapbox.style = "basic")),
               label = "Basic")
@@ -362,16 +362,16 @@ satellite <- list(method = "relayout",
                   label = "Satellite")  
 
 # plot scattermapbox with buttons 
-p <- plot_mapbox(df_sub, lat = ~lat_DD, lon = ~long_DD, mode = 'scattermapbox',
-                 split = ~manufac, size=3) %>%
-  add_annotations(x = 0.05, y = 0.05,
+fig <- plot_mapbox(df_sub, lat = ~lat_DD, lon = ~long_DD, mode = 'scattermapbox',
+                 split = ~manufac, size=3) 
+fig <- fig %>% add_annotations(x = 0.05, y = 0.05,
                   text = "All US wind turbines (scroll to zoom)",
                   xref = "page",
                   yref = "page",
                   showarrow = FALSE,
                   font = list(color = 'magenta',
-                              size = 14)) %>%
-  layout(plot_bgcolor = 'black', 
+                              size = 14)) 
+fig <- fig %>% layout(plot_bgcolor = 'black', 
          paper_bgcolor = 'black', 
          mapbox = list(center = list(lat = median(df_sub$lat_DD), 
                                      lon = median(df_sub$long_DD)), 
@@ -406,10 +406,10 @@ p <- plot_mapbox(df_sub, lat = ~lat_DD, lon = ~long_DD, mode = 'scattermapbox',
                 yanchor = "bottom",
                 x = 1,
                 y = 0,
-                buttons=list(dark,basic,satellite)))) %>%
-  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
+                buttons=list(dark,basic,satellite)))) 
+fig <- fig %>% config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
-p
+fig
 ```
 
 #Reference

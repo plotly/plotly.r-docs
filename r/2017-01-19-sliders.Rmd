@@ -43,13 +43,13 @@ steps <- list(
                     )
   )
 
-p <- df %>%
-  plot_ly(x = ~x, y = ~y,
+fig<- df 
+fig <- fig %>% plot_ly(x = ~x, y = ~y,
           mode = "markers", 
           marker = list(size = 20,
                         color = 'green'), 
-          type = "scatter") %>%
-  layout(title = "Basic Slider",
+          type = "scatter") 
+fig <- fig %>% layout(title = "Basic Slider",
          sliders = list(
            list(
              active = 1, 
@@ -57,7 +57,7 @@ p <- df %>%
              pad = list(t = 60), 
              steps = steps))) 
 
-p
+fig
 ```
 
 ### Sine Wave Slider
@@ -79,12 +79,12 @@ aval[3][[1]]$visible = TRUE
 
 # create steps and plot all traces
 steps <- list()
-p <- plot_ly()
+fig <- plot_ly()
 for (i in 1:11) {
-  p <- add_lines(p,x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
-                 name = aval[i][[1]]$name, type = 'scatter', mode = 'lines', hoverinfo = 'name', 
-                 line=list(color='00CED1'), showlegend = FALSE)
-
+  fig<- add_lines(fig,x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
+                  name = aval[i][[1]]$name, type = 'scatter', mode = 'lines', hoverinfo = 'name', 
+                  line=list(color='00CED1'), showlegend = FALSE)
+  
   step <- list(args = list('visible', rep(FALSE, length(aval))),
                method = 'restyle')
   step$args[[2]][i] = TRUE  
@@ -92,12 +92,12 @@ for (i in 1:11) {
 }  
 
 # add slider control to plot
-p <- p %>%
-  layout(sliders = list(list(active = 3,
-                             currentvalue = list(prefix = "Frequency: "),
-                             steps = steps)))
+fig<- fig
+fig <- fig %>% layout(sliders = list(list(active = 3,
+                                          currentvalue = list(prefix = "Frequency: "),
+                                          steps = steps)))
 
-p
+fig
 ```
 
 ### Mulitple Slider Controls
@@ -109,9 +109,9 @@ df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/globe_c
 df$id <- seq_len(nrow(df))
 
 library(tidyr)
-d <- df %>%
-  gather(key, value, -id) %>%
-  separate(key, c("l", "line"), "\\.") %>%
+d <- df %>% 
+  gather(key, value, -id) %>% 
+  separate(key, c("l", "line"), "\\.") %>% 
   spread(l, value)
 
 geo <- list(
@@ -185,35 +185,36 @@ annot <- list(x = 0, y=0.8, text = "Projection", yanchor = 'bottom',
 
 
 # original d3-globe with contours
-p <- plot_geo(d) %>%
-  group_by(line) %>%
-  add_lines(x = ~lon, y = ~lat, color = ~line, colors = 'Reds') %>%
-  layout(
-    showlegend = FALSE, geo = geo
-  )
+fig<- plot_geo(d) 
+fig <- fig %>% group_by(line) 
+fig <- fig %>% add_lines(x = ~lon, y = ~lat, color = ~line, colors = 'Reds') 
+fig <- fig %>% layout(
+  showlegend = FALSE, geo = geo
+)
 
 # plot with custom events
-p <- p %>%
-  layout(annotations = annot,
-         updatemenus = list(list(active = 2, x = 0, y = 0.8, 
-                                 buttons=all_buttons)),
-         sliders = list(
-           
-           list(
-             active = (length(lon_range[,])-1)/2, 
-             currentvalue = list(prefix = "Longitude: "), 
-             pad = list(t = 20), 
-             
-             steps = all_lon),
-           
-           list(
-             active = (length(lat_range[,])-1)/2, 
-             currentvalue = list(prefix = "Latitude: "), 
-             pad = list(t = 100), 
-             
-             steps = all_lat)))
+fig<- fig
+fig <- fig %>% layout(annotations = annot,
+                      updatemenus = list(list(active = 2, x = 0, y = 0.8, 
+                                              buttons=all_buttons)),
+                      sliders = list(
+                        
+                        list(
+                          active = (length(lon_range[,])-1)/2, 
+                          currentvalue = list(prefix = "Longitude: "), 
+                          pad = list(t = 20), 
+                          
+                          steps = all_lon),
+                        
+                        list(
+                          active = (length(lat_range[,])-1)/2, 
+                          currentvalue = list(prefix = "Latitude: "), 
+                          pad = list(t = 100), 
+                          
+                          steps = all_lat)))
 
-p
+fig
+
 ```
 
 #Reference

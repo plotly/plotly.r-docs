@@ -34,14 +34,14 @@ cols <- RColorBrewer::brewer.pal(length(unique(df$Resource)), name = "Set3")
 df$color <- factor(df$Resource, labels = cols)
 
 # Initialize empty plot
-p <- plot_ly()
+fig <- plot_ly()
 
 # Each task is a separate trace
 # Each trace is essentially a thick line plot
 # x-axis ticks are dates and handled automatically
 
 for(i in 1:(nrow(df) - 1)){
-  p <- add_trace(p,
+  fig <- add_trace(fig,
                  x = c(df$Start[i], df$Start[i] + df$Duration[i]),  # x0, x1
                  y = c(i, i),  # y0, y1
                  mode = "lines",
@@ -59,7 +59,7 @@ for(i in 1:(nrow(df) - 1)){
   )
 }
 
-p
+fig
 ```
 
 ### Alter Layout
@@ -67,7 +67,7 @@ p
 ```{r}
 # Add information to plot and make the chart more presentable
 
-p <- layout(p,
+fig <- layout(fig,
 
             # Axis options:
             # 1. Remove gridlines
@@ -83,7 +83,7 @@ p <- layout(p,
             paper_bgcolor = "#333333") # Axis area color
 
 
-p
+fig
 ```
 
 ### Add Annotations
@@ -118,9 +118,10 @@ b <- list(xref = "paper",
           showarrow = FALSE)
 
 
-p <- p %>% layout(annotations = a) %>% layout(annotations = b)
+fig <- fig %>% layout(annotations = a) 
+fig <- fig %>% layout(annotations = b)
 
-p
+fig
 ```
 
 for more information please refer to http://moderndata.plot.ly/gantt-charts-in-r-using-plotly/

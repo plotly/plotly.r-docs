@@ -27,13 +27,13 @@ getSymbols("AAPL",src='yahoo')
 df <- data.frame(Date=index(AAPL),coredata(AAPL))
 df <- tail(df, 30)
 
-p <- df %>%
-  plot_ly(x = ~Date, type="ohlc",
+fig <- df 
+fig <- fig %>% plot_ly(x = ~Date, type="ohlc",
           open = ~AAPL.Open, close = ~AAPL.Close,
-          high = ~AAPL.High, low = ~AAPL.Low) %>%
-  layout(title = "Basic OHLC Chart")
+          high = ~AAPL.High, low = ~AAPL.Low) 
+fig <- fig %>% layout(title = "Basic OHLC Chart")
 
-p
+fig
 ```
 
 ### OHLC Chart without Rangeslider
@@ -47,14 +47,14 @@ getSymbols("AAPL",src='yahoo')
 df <- data.frame(Date=index(AAPL),coredata(AAPL))
 df <- tail(df, 30)
 
-p <- df %>%
-  plot_ly(x = ~Date, type="ohlc",
+fig <- df 
+fig <- fig %>% plot_ly(x = ~Date, type="ohlc",
           open = ~AAPL.Open, close = ~AAPL.Close,
-          high = ~AAPL.High, low = ~AAPL.Low) %>%
-  layout(title = "Basic OHLC Chart",
+          high = ~AAPL.High, low = ~AAPL.Low) 
+fig <- fig %>% layout(title = "Basic OHLC Chart",
          xaxis = list(rangeslider = list(visible = F)))
 
-p
+fig
 ```
 
 ### Customise the Figure with Shapes and Annotations
@@ -89,15 +89,15 @@ l <- list(type = line,
                       width = 0.5)
           )
 
-p <- df %>%
-  plot_ly(x = ~Date, type="ohlc",
+fig <- df 
+fig <- fig %>% plot_ly(x = ~Date, type="ohlc",
           open = ~AAPL.Open, close = ~AAPL.Close,
-          high = ~AAPL.High, low = ~AAPL.Low) %>%
-  layout(title = "Custom Colors",
+          high = ~AAPL.High, low = ~AAPL.Low) 
+fig <- fig %>% layout(title = "Custom Colors",
          annotations = a,
          shapes = l)
 
-p
+fig
 ```
 
 ### Custom OHLC Chart Colors
@@ -116,13 +116,13 @@ df <- tail(df, 30)
 i <- list(line = list(color = '#FFD700'))
 d <- list(line = list(color = '#0000ff'))
 
-p <- df %>%
-  plot_ly(x = ~Date, type="ohlc",
+fig <- df 
+fig <- fig %>% plot_ly(x = ~Date, type="ohlc",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low,
           increasing = i, decreasing = d)
 
-p
+fig
 ```
 
 #Reference

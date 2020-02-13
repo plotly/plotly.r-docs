@@ -26,12 +26,12 @@ t <- list(
   size = 14,
   color = 'blue')
 
-p <- plot_ly(x=c(1,2,3,4,5), y=c(1,2,3,2,1)) %>%
-  layout(title="Font Styling",
+fig <- plot_ly(x=c(1,2,3,4,5), y=c(1,2,3,2,1))
+fig <- fig %>% layout(title="Font Styling",
          font=t)
 
 
-p
+fig
 ```
 
 #Reference
