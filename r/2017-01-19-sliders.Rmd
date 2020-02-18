@@ -81,21 +81,21 @@ aval[3][[1]]$visible = TRUE
 steps <- list()
 fig <- plot_ly()
 for (i in 1:11) {
-  fig<- add_lines(fig,x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
-                  name = aval[i][[1]]$name, type = 'scatter', mode = 'lines', hoverinfo = 'name', 
-                  line=list(color='00CED1'), showlegend = FALSE)
+  fig <- add_lines(fig,x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
+                 name = aval[i][[1]]$name, type = 'scatter', mode = 'lines', hoverinfo = 'name', 
+                 line=list(color='00CED1'), showlegend = FALSE)
   
-  stefig <-  list(args = list('visible', rep(FALSE, length(aval))),
+  step <- list(args = list('visible', rep(FALSE, length(aval))),
                method = 'restyle')
   step$args[[2]][i] = TRUE  
   steps[[i]] = step 
 }  
 
 # add slider control to plot
-fig<- fig
-fig <- fig %>% layout(sliders = list(list(active = 3,
-                                          currentvalue = list(prefix = "Frequency: "),
-                                          steps = steps)))
+fig <- fig %>%
+  layout(sliders = list(list(active = 3,
+                             currentvalue = list(prefix = "Frequency: "),
+                             steps = steps)))
 
 fig
 ```
@@ -109,15 +109,9 @@ df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/globe_c
 df$id <- seq_len(nrow(df))
 
 library(tidyr)
-d <- df 
-
-fig <- fig %>%
-  gather(key, value, -id) 
-
-fig <- fig %>%
-  separate(key, c("l", "line"), "\\.") 
-
-fig <- fig %>%
+d <- df %>%
+  gather(key, value, -id) %>%
+  separate(key, c("l", "line"), "\\.") %>%
   spread(l, value)
 
 geo <- list(
