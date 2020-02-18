@@ -37,13 +37,13 @@ df <- with(df, { #Make sure variables properly show up as categories
              ptd, ht = (ht > 0), ui = (ui > 0), ftv, bwt)
 })
 
-p <- ggplot(df, aes(lwt, bwt, colour = smoke)) +
+fig <-  ggplot(df, aes(lwt, bwt, colour = smoke)) +
   geom_point(size = 1) +
   geom_quantile(quantiles = 0.5)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 
@@ -68,13 +68,13 @@ df <- with(df, {
              ptd, ht = (ht > 0), ui = (ui > 0), ftv, bwt)
 })
 
-p <- ggplot(df, aes(lwt, bwt, colour=smoke)) +
+fig <-  ggplot(df, aes(lwt, bwt, colour=smoke)) +
   geom_point(size = 1) +
   geom_quantile(quantiles = c(0.1, 0.5, 0.9), size = 2, aes(alpha = ..quantile..)) +
   scale_alpha(range = c(0.3, 0.7))
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 Reference: [ggplot2 docs](http://ggplot2.tidyverse.org/reference/geom_quantile.html#examples)

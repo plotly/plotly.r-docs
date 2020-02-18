@@ -29,7 +29,7 @@ fig <- plot_ly(
   plotly::mic, r = ~r, t = ~t, color = ~nms, alpha = 0.5, type = "scatter"
 )
 
-fig <- layout(p, title = "Mic Patterns", orientation = -90)
+fig <- layout(fig, title = "Mic Patterns", orientation = -90)
 
 fig
 ```

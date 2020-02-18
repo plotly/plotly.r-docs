@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'table',
   columnwidth = c(100, 100),
   columnorder = c(0, 1),
@@ -38,7 +38,7 @@ p <- plot_ly(
     font = list(family = "Arial", size = 12, color = c("black"))
   ))
 
-p
+fig
 ```
 
 ### Styled Table
@@ -46,7 +46,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'table',
   header = list(
     values = c('<b>EXPENSES</b>', '<b>Q1</b>','<b>Q2</b>','<b>Q3</b>','<b>Q4</b>'),
@@ -68,7 +68,7 @@ p <- plot_ly(
     font = list(color = c('#506784'), size = 12)
     ))
 
-p
+fig
 ```
 
 ### Table From a Dataframe
@@ -76,7 +76,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'table',
   header = list(
     values = c("<b>Cars</b>", names(mtcars)),
@@ -96,7 +96,7 @@ p <- plot_ly(
     font = list(family = "Arial", size = 12, color = c("black"))
   ))
 
-p
+fig
 ```
 
 ### Changing Size of Rows and Columns
@@ -108,7 +108,7 @@ values <- rbind(c('Salaries', 'Office', 'Merchandise', 'Legal', '<b>TOTAL<br>EXP
      "Lorem ipsum dolor sit amet, tollit discere inermis pri ut. Eos ea iusto timeam, an prima laboramus vim. Id usu aeterno adversarium, summo mollis timeam vel ad", 
     "Lorem ipsum dolor sit amet, tollit discere inermis pri ut. Eos ea iusto timeam, an prima laboramus vim. Id usu aeterno adversarium, summo mollis timeam vel ad"))
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'table',
   columnorder = c(1,2),
   columnwidth = c(80,400),
@@ -129,7 +129,7 @@ p <- plot_ly(
     height = 30
     ))
 
-p
+fig
 ```
 
 #Reference

@@ -23,7 +23,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "indicator",
   mode = "number+gauge+delta",
   gauge = list(shape = "bullet"),
@@ -33,7 +33,7 @@ p <- plot_ly(
   title= list(text = "Profit"),
   height = 150)
 
-p
+fig
 ```
 
 ### Add Steps, and Threshold
@@ -43,7 +43,7 @@ Below is the same example using "steps" attribute, which is shown as shading, an
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "indicator",
   mode = "number+gauge+delta",
   value = 220,
@@ -60,10 +60,11 @@ p <- plot_ly(
     steps = list(
       list(range = c(0, 150), color = "lightgray"),
       list(range = c(150, 250), color = "gray"))),
-  height = 150, width = 600) %>%
+  height = 150, width = 600) 
+fig <- fig %>%
   layout(margin = list(l= 100, r= 10))
 
-p
+fig
 ```
 
 ### Custom Bullet Chart
@@ -73,7 +74,7 @@ The following example shows how to customize your charts. For more information a
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "indicator",
   mode = "number+gauge+delta",
   value = 220,
@@ -94,7 +95,7 @@ p <- plot_ly(
     bar = list(color = "darkblue")),
   height = 150)
 
-p
+fig
 ```
 ### Multi Bullet
 
@@ -103,7 +104,8 @@ Bullet charts can be stacked for comparing several values at once as illustrated
 ```{r}
 library(plotly)
 
-p <- plot_ly() %>%
+fig <-  plot_ly() 
+fig <- fig %>%
   add_trace(
     type = "indicator",
     mode = "number+gauge+delta",
@@ -121,7 +123,8 @@ p <- plot_ly() %>%
       steps = list(
         list(range = c(0, 150), color = "gray"),
         list(range = c(150, 250), color = "lightgray")),
-      bar = list(color = "black"))) %>%
+      bar = list(color = "black"))) 
+fig <- fig %>%
   add_trace(
     type = "indicator",
     mode = "number+gauge+delta",
@@ -139,7 +142,8 @@ p <- plot_ly() %>%
       steps = list(
         list(range = c(0, 25), color = "gray"),
         list(range = c(25, 75), color = "lightgray")),
-      bar = list(color = "black"))) %>%
+      bar = list(color = "black"))) 
+fig <- fig %>%
   add_trace(
     type =  "indicator",
     mode = "number+gauge+delta",
@@ -159,7 +163,7 @@ p <- plot_ly() %>%
         list(range = c(100, 250), color = "lightgray")),
       bar = list(color = "black")))
 
-p
+fig
 ```
 
 #Reference

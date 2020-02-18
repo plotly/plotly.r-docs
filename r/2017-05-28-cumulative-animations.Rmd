@@ -34,11 +34,13 @@ accumulate_by <- function(dat, var) {
   dplyr::bind_rows(dats)
 }
 
-d <- txhousing %>%
-  filter(year > 2005, city %in% c("Abilene", "Bay Area")) %>%
-  accumulate_by(~date)
+d <- txhousing 
+fig <- fig %>%
+  filter(year > 2005, city %in% c("Abilene", "Bay Area"))
+fig <- d %>% accumulate_by(~date)
 
-p <- d %>%
+
+fig <- fig %>%
   plot_ly(
     x = ~date, 
     y = ~median,
@@ -47,30 +49,30 @@ p <- d %>%
     type = 'scatter',
     mode = 'lines', 
     line = list(simplyfy = F)
-  ) %>% 
-  layout(
-    xaxis = list(
-      title = "Date",
-      zeroline = F
-    ),
-    yaxis = list(
-      title = "Median",
-      zeroline = F
-    )
-  ) %>% 
-  animation_opts(
-    frame = 100, 
-    transition = 0, 
-    redraw = FALSE
-  ) %>%
-  animation_slider(
-    hide = T
-    ) %>%
-  animation_button(
-    x = 1, xanchor = "right", y = 0, yanchor = "bottom"
   )
+fig <- fig %>% layout(
+  xaxis = list(
+    title = "Date",
+    zeroline = F
+  ),
+  yaxis = list(
+    title = "Median",
+    zeroline = F
+  )
+) 
+fig <- fig %>% animation_opts(
+  frame = 100, 
+  transition = 0, 
+  redraw = FALSE
+)
+fig <- fig %>% animation_slider(
+  hide = T
+)
+fig <- fig %>% animation_button(
+  x = 1, xanchor = "right", y = 0, yanchor = "bottom"
+)
 
-p
+fig
 ```
 
 ### Filled-Area Animation
@@ -94,11 +96,12 @@ accumulate_by <- function(dat, var) {
   dplyr::bind_rows(dats)
 }
 
-df <- df %>%
+df <- df 
+fig <- fig %>%
   accumulate_by(~ID)
 
-p <- df %>%
-  plot_ly(
+fig <- df
+fig <- fig %>% plot_ly(
     x = ~ID, 
     y = ~AAPL.Close, 
     frame = ~frame,
@@ -109,8 +112,8 @@ p <- df %>%
     line = list(color = 'rgb(114, 186, 59)'),
     text = ~paste("Day: ", ID, "<br>Close: $", AAPL.Close), 
     hoverinfo = 'text'
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     title = "AAPL: Last 30 days",
     yaxis = list(
       title = "Close", 
@@ -124,19 +127,19 @@ p <- df %>%
       zeroline = F, 
       showgrid = F
     )
-  ) %>% 
-  animation_opts(
+  ) 
+fig <- fig %>% animation_opts(
     frame = 100, 
     transition = 0, 
     redraw = FALSE
-  ) %>%
-  animation_slider(
+  )
+fig <- fig %>% animation_slider(
     currentvalue = list(
       prefix = "Day "
     )
   )
 
-p
+fig
 ```
 
 ### Reference 

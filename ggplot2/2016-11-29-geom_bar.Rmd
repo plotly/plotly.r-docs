@@ -26,12 +26,12 @@ dat <- data.frame(
     total_bill = c(14.89, 17.23)
 )
 
-p <- ggplot(data=dat, aes(x=time, y=total_bill)) +
+fig <-  ggplot(data=dat, aes(x=time, y=total_bill)) +
     geom_bar(stat="identity")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Colored Bar Chart
@@ -45,12 +45,12 @@ dat <- data.frame(
     total_bill = c(14.89, 17.23)
 )
 
-p <- ggplot(data=dat, aes(x=time, y=total_bill, fill=time)) +
+fig <-  ggplot(data=dat, aes(x=time, y=total_bill, fill=time)) +
     geom_bar(stat="identity")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### No Legend
@@ -65,14 +65,14 @@ dat <- data.frame(
 )
 
 # No legend, since the information is redundant
-p <- ggplot(data=dat, aes(x=time, y=total_bill, fill=time)) +
+fig <-  ggplot(data=dat, aes(x=time, y=total_bill, fill=time)) +
     geom_bar(colour="black", stat="identity") +
     guides(fill=FALSE)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Position Dodge
@@ -88,12 +88,12 @@ dat1 <- data.frame(
 )
 
 # Bar graph, time on x-axis, color fill grouped by sex -- use position_dodge()
-p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
+fig <-  ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
     geom_bar(stat="identity", position=position_dodge())
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Custom Colors
@@ -108,13 +108,13 @@ dat1 <- data.frame(
     total_bill = c(13.53, 16.81, 16.24, 17.42)
 )
 
-p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
+fig <-  ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
     geom_bar(stat="identity", position=position_dodge(), colour="black") +
     scale_fill_manual(values=c("#999999", "#E69F00"))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Styles & Themes
@@ -130,7 +130,7 @@ dat1 <- data.frame(
 )
 
 # A bar graph
-p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
+fig <-  ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
     geom_bar(colour="black", stat="identity",
              position=position_dodge(),
              size=.3) +                        # Thinner lines
@@ -138,10 +138,10 @@ p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
     ggtitle("Average bill for 2 people") +     # Set title
     theme_bw()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Variable Comparison
@@ -159,12 +159,12 @@ DF <- read.table(text="Rank F1     F2     F3
 library(reshape2)
 DF1 <- melt(DF, id.var="Rank")
 
-p <- ggplot(DF1, aes(x = Rank, y = value, fill = variable)) +
+fig <-  ggplot(DF1, aes(x = Rank, y = value, fill = variable)) +
   geom_bar(stat = "identity")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Error Bars
@@ -179,14 +179,14 @@ df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
 df.summ <- df %>% group_by(cut) %>% summarize(Mean = mean(table), Min = min(table), Max = max(table))
 
-p <- ggplot(df.summ, aes(x = cut, y = Mean, ymin = Min, ymax = Max, fill = cut)) + 
+fig <-  ggplot(df.summ, aes(x = cut, y = Mean, ymin = Min, ymax = Max, fill = cut)) + 
   geom_bar(stat = "identity") + 
   geom_errorbar() + 
   ggtitle("Bar chart with Error Bars")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Stacked Bar Chart
@@ -200,12 +200,12 @@ df <- structure(c(106487, 495681, 1597442, 2452577, 2065141, 2271925, 4735484, 3
 df.m <- melt(df)
 df.m <- rename(df.m, Period = Var1, Region = Var2)
 
-p <- ggplot(df.m, aes(x = Period, y = value/1e+06,fill = Region)) + ggtitle("Migration to the United States by Source Region (1820-2006), In Millions")
-p <- p + geom_bar(stat = "identity", position = "stack")
+fig <-  ggplot(df.m, aes(x = Period, y = value/1e+06,fill = Region)) + ggtitle("Migration to the United States by Source Region (1820-2006), In Millions")
+fig <-  p + geom_bar(stat = "identity", position = "stack")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Ordered Bar Chart
@@ -218,12 +218,12 @@ library(plyr)
 dane<-data.frame(x=1:10,y=seq(-5,4),g=rep(c('A','B'),each=5))
 dane$x<-as.factor(dane$x)
 
-p <- ggplot(data=dane,aes(x=x,y=y,fill=g)) +
+fig <-  ggplot(data=dane,aes(x=x,y=y,fill=g)) +
     geom_bar(stat="identity")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Precentages
@@ -235,15 +235,15 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(x = color)) + 
+fig <-  ggplot(df, aes(x = color)) + 
   geom_bar(aes(y = ..count../sum(..count..), fill = cut)) + 
   scale_fill_brewer(palette = "Set3") + 
   ylab("Percent") + 
   ggtitle("Show precentages in bar chart")
   
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Manuel Colors
@@ -257,14 +257,14 @@ set.seed(123)
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
 # Simply use fill = a vector of colors
-p <- ggplot(df, aes(x = color)) +
+fig <-  ggplot(df, aes(x = color)) +
   geom_bar(fill = brewer.pal(length(unique(df$color)), "Set3")) + 
   ylab("Count") + 
   ggtitle("Specify manual colors in a bar chart")
   
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Reordered Bar Chart
@@ -280,11 +280,11 @@ df <- data.frame(x = as.factor(LETTERS[1:5]),
 df$x <- factor(df$x, levels = c("C", "B", "A", "D", "E"))
 
 # Plot
-p <- ggplot(df, aes(x, y, fill = x)) + 
+fig <-  ggplot(df, aes(x, y, fill = x)) + 
   geom_bar(stat = "identity") +
   ggtitle("Bar Chart with changed factor levels")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```

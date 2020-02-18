@@ -23,10 +23,12 @@ library(plotly)
 s <- matrix(c(1, -.75, -.75, 1), ncol = 2)
 obs <- mvtnorm::rmvnorm(500, sigma = s)
 
-p <- plot_ly(x = obs[,1], y = obs[,2]) %>% 
+fig <-  plot_ly(x = obs[,1], y = obs[,2]) 
+
+fig <- fig %>%
   add_trace(type='histogram2dcontour')
 
-p
+fig
 ```
 
 #### Styled 2D Histogram Contour
@@ -36,7 +38,8 @@ library(plotly)
 
 cnt <- with(diamonds, table(cut, clarity))
 
-p <- plot_ly(diamonds, x = ~cut, y = ~clarity, z = ~cnt) %>%
+fig <-  plot_ly(diamonds, x = ~cut, y = ~clarity, z = ~cnt) 
+fig <- fig %>%
   add_trace(
     type='histogram2dcontour',
     contours = list(
@@ -56,7 +59,7 @@ p <- plot_ly(diamonds, x = ~cut, y = ~clarity, z = ~cnt) %>%
     )
 )
 
-p
+fig
 ```
 
 #### 2D Histogram Contour Subplot
@@ -75,9 +78,9 @@ s <- subplot(
   shareX = TRUE, shareY = TRUE, titleX = FALSE, titleY = FALSE
 )
 
-p <- layout(s, showlegend = FALSE)
+fig <-  layout(s, showlegend = FALSE)
 
-p
+fig
 ```
 
 #### Reference

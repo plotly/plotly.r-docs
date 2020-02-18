@@ -34,13 +34,14 @@ The following example uses the `Scattermapbox` trace and sets `fill = 'toself'`
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   fill = "toself",
   lon = c(-74, -70, -70, -74),
   lat = c(47, 47, 45, 45),
   type = 'scattermapbox',
   marker = list(size = 10, color = 'orange'),
-  fillcolor = 'color') %>%
+  fillcolor = 'color') 
+fig <- fig %>%
   layout(
     mapbox = list(
       style = "stamen-terrain",
@@ -48,7 +49,7 @@ p <- plot_ly(
       zoom = 5),
     showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Provide Gaps on Map
@@ -58,12 +59,13 @@ The following example shows how to use missing values in your data to provide ga
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   mode = "lines",
   fill = "toself",
   type = 'scattermapbox',
   lon = c(-10, -10, 8, 8, NaN, 30, 30, 50, 50, NaN, 100, 100, 80, 80),
-  lat = c(30, 6, 6, 30, NaN, 20, 30, 30, 20, NaN, 40, 50, 50, 40)) %>%
+  lat = c(30, 6, 6, 30, NaN, 20, 30, 30, 20, NaN, 40, 50, 50, 40)) 
+fig <- fig %>%
 layout(
   mapbox = list(
     style = "stamen-terrain",
@@ -71,7 +73,7 @@ layout(
     zoom = 2),
   showlegend = FALSE)
 
-p
+fig
 ```
 
 
@@ -82,11 +84,12 @@ The second way is using the `scattermapbox` trace with the corresponding geojson
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'scattermapbox',
   mode = "markers",
   lon = c(-73.605), lat = c(45.51),
-  marker = list(size = 20, color = c("cyan"))) %>%
+  marker = list(size = 20, color = c("cyan"))) 
+fig <- fig %>%
   layout(
     mapbox = list(
     style = "stamen-terrain",
@@ -123,7 +126,7 @@ p <- plot_ly(
         ),
       type = "fill", below = "traces", color = "royalblue"))))
 
-p
+fig
 ```
 
 #Reference

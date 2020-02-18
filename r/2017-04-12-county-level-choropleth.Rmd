@@ -17,7 +17,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 ### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Mafig Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
 ### Creating Polygon Boundaries
 
@@ -30,21 +30,21 @@ blank_layer <- list(
   showticklabels = F,
   zeroline = F)
 
-p <- map_data("county") %>%
-  filter(region == 'california') %>%
-  group_by(group) %>%
-  plot_ly(
+fig <- map_data("county") 
+fig <- fig %>% filter(region == 'california') 
+fig <- fig %>% group_by(group) 
+fig <- fig %>% plot_ly(
     x = ~long,
     y = ~lat,
     fillcolor = 'white',
-    hoverinfo = "none") %>%
-  add_polygons(
-    line = list(color = 'black', width = 0.5)) %>%
-  layout(
+    hoverinfo = "none") 
+fig <- fig %>% add_polygons(
+    line = list(color = 'black', width = 0.5)) 
+fig <- fig %>% layout(
     xaxis = blank_layer,
     yaxis = blank_layer)
 
-p
+fig
 ```
 
 ### Add County-Level Data
@@ -55,30 +55,30 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/bcdunbar/datasets/master/californiaPopulation.csv")
 
-cali <- map_data("county") %>%
+cali <- map_data("county") 
   filter(region == 'california')
 
-pop <- df %>%
-  group_by(County.Name) %>%
+pofig <-  df 
+  group_by(County.Name) 
   summarise(Pop = sum(Population))
 
 pop$County.Name <- tolower(pop$County.Name) # matching string
 
-cali_pop <- merge(cali, pop, by.x = "subregion", by.y = "County.Name")
+cali_pofig <-  merge(cali, pop, by.x = "subregion", by.y = "County.Name")
 
 cali_pop$pop_cat <- cut(cali_pop$Pop, breaks = c(seq(0, 11000000, by = 500000)), labels=1:22)
 
-p <- cali_pop %>%
-  group_by(group) %>%
-  plot_ly(x = ~long, y = ~lat, color = ~pop_cat, colors = c('#ffeda0','#f03b20'),
-          text = ~subregion, hoverinfo = 'text') %>%
-  add_polygons(line = list(width = 0.4)) %>%
-  add_polygons(
+fig <- cali_pop 
+fig <- fig %>% group_by(group) 
+fig <- fig %>% plot_ly(x = ~long, y = ~lat, color = ~pop_cat, colors = c('#ffeda0','#f03b20'),
+          text = ~subregion, hoverinfo = 'text') 
+fig <- fig %>% add_polygons(line = list(width = 0.4)) 
+fig <- fig %>% add_polygons(
     fillcolor = 'transparent',
     line = list(color = 'black', width = 0.5),
     showlegend = FALSE, hoverinfo = 'none'
-  ) %>%
-  layout(
+  ) 
+fig <- fig %>% layout(
     title = "California Population by County",
     titlefont = list(size = 10),
     xaxis = list(title = "", showgrid = FALSE,
@@ -87,7 +87,7 @@ p <- cali_pop %>%
                  zeroline = FALSE, showticklabels = FALSE)
   )
 
-p
+fig
 ```
 
 ### Add Polygon to a Map Projection
@@ -102,22 +102,22 @@ geo <- list(
   countrycolor = toRGB("gray80")
 )
 
-p <- cali_pop %>%
-  group_by(group) %>%
-  plot_geo(
+fig <- cali_pop 
+fig <- fig %>% group_by(group) 
+fig <- fig %>% plot_geo(
     x = ~long, y = ~lat, color = ~pop_cat, colors = c('#ffeda0','#f03b20'),
-    text = ~subregion, hoverinfo = 'text') %>%
-  add_polygons(line = list(width = 0.4)) %>%
-  add_polygons(
+    text = ~subregion, hoverinfo = 'text') 
+fig <- fig %>% add_polygons(line = list(width = 0.4)) 
+fig <- fig %>% add_polygons(
     fillcolor = 'transparent',
     line = list(color = 'black', width = 0.5),
     showlegend = FALSE, hoverinfo = 'none'
-  ) %>%
-  layout(
+  ) 
+fig <- fig %>% layout(
     title = "California Population by County",
     geo = geo)
 
-p
+fig
 ```
 
 ### Add Polygon to Mapbox
@@ -127,18 +127,18 @@ library(plotly)
 mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
 Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
-p <- cali_pop %>%
-  group_by(group) %>%
-  plot_mapbox(x = ~long, y = ~lat, color = ~pop_cat, colors = c('#ffeda0','#f03b20'),
-          text = ~subregion, hoverinfo = 'text', showlegend = FALSE) %>%
-  add_polygons(
+fig <- cali_pofig 
+fig <- fig %>% group_by(group) 
+fig <- fig %>% plot_mapbox(x = ~long, y = ~lat, color = ~pop_cat, colors = c('#ffeda0','#f03b20'),
+          text = ~subregion, hoverinfo = 'text', showlegend = FALSE) 
+fig <- fig %>% add_polygons(
     line = list(width = 0.4)
-  ) %>%
-  add_polygons(fillcolor = 'transparent',
+  ) 
+fig <- fig %>% add_polygons(fillcolor = 'transparent',
     line = list(color = 'black', width = 0.5),
     showlegend = FALSE, hoverinfo = 'none'
-  ) %>%
-  layout(
+  ) 
+fig <- fig %>% layout(
     xaxis = list(title = "", showgrid = FALSE, showticklabels = FALSE),
     yaxis = list(title = "", showgrid = FALSE, showticklabels = FALSE),
     mapbox = list(
@@ -146,8 +146,8 @@ p <- cali_pop %>%
       zoom = 4,
       center = list(lat = ~median(lat), lon = ~median(long))),
     margin = list(l = 0, r = 0, b = 0, t = 0, pad = 0)
-  ) %>%
-  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
+  ) 
+fig <- fig %>% config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
-p
+fig
 ```

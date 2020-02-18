@@ -26,14 +26,14 @@ y <- sin(seq(1, 2*pi, length.out = 100))
 x <- 1:100
 plotdata <- data.frame(x=x, y=y, lower = (y+runif(100, -1, -0.5)), upper = (y+runif(100, 0.5, 1)))
 
-p <- ggplot(plotdata) + geom_line(aes(y=y, x=x, colour = "sin"))+
+fig <-  ggplot(plotdata) + geom_line(aes(y=y, x=x, colour = "sin"))+
     geom_ribbon(aes(ymin=lower, ymax=upper, x=x, fill = "band"), alpha = 0.3)+
     scale_colour_manual("",values="blue")+
     scale_fill_manual("",values="grey12")
 
-p <- ggplotly()
+fig <-  ggplotly()
 
-p
+fig
 ```
 Inspired by <a href="">ggplot2 docs</a>
 
@@ -76,17 +76,17 @@ sim.data$mean <- inv.logit(pred$fit)
 sim.data$lo <- inv.logit(pred$fit - 2 * pred$se.fit)
 sim.data$hi <- inv.logit(pred$fit + 2 * pred$se.fit)
 
-p <- ggplot(titanic3, aes(x = age, y = survived))
-p <- p + geom_point()
-p <- p + facet_grid(sex ~ pclass)
-p <- p + geom_line(data = sim.data, aes(y = mean))
-p <- p + geom_ribbon(data = sim.data, aes(y = mean, ymin = lo, ymax = hi),
+fig <-  ggplot(titanic3, aes(x = age, y = survived))
+fig <-  p + geom_point()
+fig <-  p + facet_grid(sex ~ pclass)
+fig <-  p + geom_line(data = sim.data, aes(y = mean))
+fig <-  p + geom_ribbon(data = sim.data, aes(y = mean, ymin = lo, ymax = hi),
                      alpha = .25)
-p <- p + labs(x = "Passenger Age", y = "Probability of Survival")
+fig <-  p + labs(x = "Passenger Age", y = "Probability of Survival")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://zmjones.com/titanic/">Zachary Jones</a>
 
@@ -115,15 +115,15 @@ new.data$pred.full <- preds$fit
 new.data$ymin <- new.data$pred.full - 2*preds$se.fit
 new.data$ymax <- new.data$pred.full + 2*preds$se.fit
 
-p <- ggplot(df,aes(x = score, y = pass)) +
+fig <-  ggplot(df,aes(x = score, y = pass)) +
     facet_wrap(~location) +
     geom_point(size=1) +
     geom_ribbon(data = new.data,aes(y = pred.full, ymin = ymin, ymax = ymax),alpha = 0.25) +
     geom_line(data = new.data,aes(y = pred.full),colour = "blue")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/8662018/ggplot2-stat-smooth-for-logistic-outcomes-with-facet-wrap-returning-full-or">Stack Overflow</a>
 
@@ -158,16 +158,16 @@ new.dat$SE <- sqrt(predvar)
 new.dat$SE2 <- sqrt(predvar+model.mx$sigma^2)
 
 library(ggplot2) 
-p <- ggplot(new.dat,aes(x=x,y=pred)) + 
+fig <-  ggplot(new.dat,aes(x=x,y=pred)) + 
 geom_line() +
 geom_ribbon(aes(ymin=pred-2*SE2,ymax=pred+2*SE2),alpha=0.2,fill="red") +
 geom_ribbon(aes(ymin=pred-2*SE,ymax=pred+2*SE),alpha=0.2,fill="blue") +
 geom_point(data=dtfr,aes(x=x,y=y), size=1) +
 scale_y_continuous("y")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/14358811/extract-prediction-band-from-lme-fit/14435982#14435982">Stack Overflow</a>
 
@@ -179,10 +179,10 @@ library(plotly)
 require(nlme)
 
 set.seed(101)
-mp <-data.frame(year=1990:2010)
+mfig <- data.frame(year=1990:2010)
 N <- nrow(mp)
 
-mp <- within(mp,
+mfig <-  within(mp,
          {
              wav <- rnorm(N)*cos(2*pi*year)+rnorm(N)*sin(2*pi*year)+5
              wow <- rnorm(N)*wav+rnorm(N)*wav^3
@@ -199,14 +199,14 @@ se.fit <- sqrt(diag(X %*% V %*% t(X)))
 predframe <- with(mp,data.frame(year,wav,
                                 wow=fit,lwr=fit-1.96*se.fit,upr=fit+1.96*se.fit))
 
-p <- ggplot(mp, aes(year, wow))+
+fig <-  ggplot(mp, aes(year, wow))+
     geom_point()+
     geom_line(data=predframe)+
     geom_ribbon(data=predframe,aes(ymin=lwr,ymax=upr),alpha=0.3)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/14033551/r-plotting-confidence-bands-with-ggplot/14033770#14033770">Stack overflow</a>
 
@@ -225,7 +225,7 @@ ribbon=data.frame(x.ribbon,
                   dnorm(x.ribbon,mean=5,sd=1))
 names(ribbon)=c('x.ribbon','max','min','avg')
 
-p <- ggplot()+geom_ribbon(data=ribbon,aes(ymin=min,ymax=max,x=x.ribbon,fill='lightgreen'))+
+fig <-  ggplot()+geom_ribbon(data=ribbon,aes(ymin=min,ymax=max,x=x.ribbon,fill='lightgreen'))+
     geom_line(data=ribbon,aes(x=x.ribbon,y=avg,color='black'))+
     geom_line(data=data,aes(x=x,y=new.data,color='red'))+
     xlab('x')+ylab('density') + 
@@ -233,8 +233,8 @@ p <- ggplot()+geom_ribbon(data=ribbon,aes(ymin=min,ymax=max,x=x.ribbon,fill='lig
     scale_colour_manual(name = 'the colour', 
          values =c('black'='black','red'='red'))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/18394391/r-custom-legend-for-multiple-layer-ggplot/18395012#18395012">Stack Overflow</a>

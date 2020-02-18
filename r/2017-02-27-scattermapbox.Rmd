@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 ### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Mafig Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
 ### Basic Example
 
@@ -29,18 +29,19 @@ mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need y
 Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 
-dat <- map_data("world", "canada") %>% group_by(group)
+dat <- map_data("world", "canada") 
+dat <- dat %>% group_by(group)
 
-p <- plot_mapbox(dat, x = ~long, y = ~lat) %>%
-  add_paths(size = I(2)) %>%
-  add_segments(x = -100, xend = -50, y = 50, 75) %>%
-  layout(mapbox = list(zoom = 0,
+fig <- plot_mapbox(dat, x = ~long, y = ~lat)
+fig <- fig %>% add_paths(size = I(2))
+fig <- fig %>% add_segments(x = -100, xend = -50, y = 50, 75)
+fig <- fig %>% layout(mapbox = list(zoom = 0,
                        center = list(lat = ~median(lat),
                                      lon = ~median(long))
-  )) %>%
-  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
+  ))
+fig <- fig %>% config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
-p
+fig
 ```
 
 ### Multiple Markers
@@ -53,11 +54,11 @@ Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 df = read.csv('https://raw.githubusercontent.com/bcdunbar/datasets/master/meteorites_subset.csv')
 
-p <- df %>%
-  plot_mapbox(lat = ~reclat, lon = ~reclong,
+fig <- df 
+fig <- fig %>% plot_mapbox(lat = ~reclat, lon = ~reclong,
               split = ~class, size=2,
-              mode = 'scattermapbox', hoverinfo='name') %>%
-  layout(title = 'Meteorites by Class',
+              mode = 'scattermapbox', hoverinfo='name') 
+fig <- fig %>% layout(title = 'Meteorites by Class',
          font = list(color='white'),
          plot_bgcolor = '#191A1A', paper_bgcolor = '#191A1A',
          mapbox = list(style = 'dark'),
@@ -65,10 +66,10 @@ p <- df %>%
                        font = list(size = 8)),
          margin = list(l = 25, r = 25,
                        b = 25, t = 25,
-                       pad = 2)) %>%
-  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
+                       pad = 2)) 
+fig <- fig %>% config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
-p
+fig
 ```
 
 ### Adding lines to Mapbox
@@ -87,17 +88,17 @@ air <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_f
 flights <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/2011_february_aa_flight_paths.csv')
 flights$id <- seq_len(nrow(flights))
 
-p <- plot_mapbox(mode = 'scattermapbox') %>%
-  add_markers(
+fig <- plot_mapbox(mode = 'scattermapbox') 
+fig <- fig %>% add_markers(
     data = air, x = ~long, y = ~lat, text=~airport, color=I("red"),
-    size = ~cnt, hoverinfo = "text", alpha = 0.5) %>%
-  add_segments(
+    size = ~cnt, hoverinfo = "text", alpha = 0.5) 
+fig <- fig %>% add_segments(
     data = group_by(flights, id),
     x = ~start_lon, xend = ~end_lon,
     y = ~start_lat, yend = ~end_lat,
     alpha = 0.3, size = I(1), hoverinfo = "none",
-    color=I("red")) %>%
-  layout(
+    color=I("red")) 
+fig <- fig %>% layout(
     plot_bgcolor = '#191A1A', paper_bgcolor = '#191A1A',
     mapbox = list(style = 'dark',
                   zoom = 1.5,
@@ -106,10 +107,10 @@ p <- plot_mapbox(mode = 'scattermapbox') %>%
     margin = list(l = 0, r = 0,
                   b = 0, t = 0,
                   pad = 0),
-    showlegend=FALSE) %>%
-  config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
+    showlegend=FALSE) 
+fig <- fig %>% config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
-p
+fig
 ```
 
 #Reference

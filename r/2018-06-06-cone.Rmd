@@ -21,11 +21,12 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type= "cone",
   x= 1, y= 1, z= 1,
   u= 1, v= 1, w= 0
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     scene= list(
       camera= list(
@@ -34,7 +35,7 @@ p <- plot_ly(
     )
 )
 
-p
+fig
 ```
 
 ### Mulitple 3D Cones
@@ -42,7 +43,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type="cone",
   x= c(1, 2, 3),
   y= c(1, 2, 3),
@@ -58,7 +59,8 @@ p <- plot_ly(
     xanchor= "right",
     side= "left"
   )
-) %>%
+) 
+fig <- fig %>%
   layout(
     scene= list(
       domain= list(x= c(0, 1)),
@@ -68,7 +70,7 @@ p <- plot_ly(
     )
 )
 
-p
+fig
 ```
 
 ### 3D Cone Lighting
@@ -76,7 +78,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     type="cone",
     y= c(1, 2, 3),
     z= c(1, 1, 1),
@@ -85,46 +87,55 @@ p <- plot_ly(
     w= c(4, 4, 1),
     showscale= F,
     hoverinfo= "u+v+w+name"
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "base",
     x= c(1, 1, 1)
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "opacity=0.3",
     x= c(2, 2, 2),
     opacity= 0.3
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "lighting.ambient=0.3",
     x= c(3, 3, 3),
     lighting= list(ambient= 0.3)
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "lighting.diffuse=0.3",
     x= c(4, 4, 4),
     lighting= list(diffuse= 0.3)
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "lighting.specular=2",
     x= c(5, 5, 5),
     lighting= list(specular= 2)
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "lighting.roughness=1",
     x= c(6, 6, 6),
     lighting= list(roughness= 1)
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "lighting.fresnel=2",
     x= c(7, 7, 7),
     lighting= list(fresnel= 2)
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     name= "lighting.position x=0,y=0,z=1e5",
     x= c(8, 8, 8),
     lightposition= list(x= 0, y= 0, z= 1e5)
-  ) %>%
+  ) 
+fig <- fig %>%
     layout(
       scene= list(
         aspectmode= "data",
@@ -135,7 +146,7 @@ p <- plot_ly(
       margin= list(t= 0, b= 0, l= 0, r= 0)
   )
 
-p
+fig
 ```
 
 ### 3D Cone of Wind Dataset
@@ -146,7 +157,7 @@ library(rjson)
 
 dat <- fromJSON(file='https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/gl3d_cone-wind.json')
 
-p <- plot_ly(
+fig <-  plot_ly(
   type="cone",
   x= dat$data[[1]]$x,
   y= dat$data[[1]]$y,
@@ -161,14 +172,15 @@ p <- plot_ly(
     cmin=0,
     cmax=100
   )
-) %>%
+) 
+fig <- fig %>%
 layout(
   scene= list(
     aspectratio= list(x= -1.57, y= 1.36, z= 0.58)
   )
 )
 
-p
+fig
 ```
 
 ### 3D Cone Vortex
@@ -179,7 +191,7 @@ library(rjson)
 
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/vortex.csv')
 
-p <- plot_ly(
+fig <-  plot_ly(
   df,
   type="cone",
   x= ~x,
@@ -190,7 +202,8 @@ p <- plot_ly(
   w= ~w,
   sizemode= 'absolute',
   sizeref= 40
-) %>%
+) 
+fig <- fig %>%
 layout(
   scene= list(
     aspectratio= list(x= 1, y= 1, z= 0.8),
@@ -198,7 +211,7 @@ layout(
   )
 )
 
-p
+fig
 ```
 
 ### Reference

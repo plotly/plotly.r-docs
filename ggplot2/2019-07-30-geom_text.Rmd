@@ -24,15 +24,15 @@ recent_turnout <- read.csv("https://raw.githubusercontent.com/plotly/datasets/ma
 recent_turnout$region <- factor(recent_turnout$region, levels=c("British","Northern","Western","Mediterranean","Central/Eastern"))
 
 library(plotly)
-p <- recent_turnout %>%
+fig <-  recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   geom_text(aes(size=population/3.5, label=abbreviation, colour=region), alpha=1) +
   labs(title = "Recent turnout in European Union countries",
        x = "Latest legislative or presidential election (whichever had higher turnout)",
        y = "May 2019 European Parliament election")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Overlaid Points
@@ -45,16 +45,16 @@ recent_turnout <- read.csv("https://raw.githubusercontent.com/plotly/datasets/ma
 recent_turnout$region <- factor(recent_turnout$region, levels=c("British","Northern","Western","Mediterranean","Central/Eastern"))
 
 library(plotly)
-p <- recent_turnout %>%
+fig <-  recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
   geom_text(aes(size=population/3.5, label=abbreviation), colour="gray20", alpha=1) +
   labs(title = "Recent turnout in European Union countries",
        x = "Latest legislative or presidential election (whichever had higher turnout)",
        y = "May 2019 European Parliament election")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Customed Colour and Size Scale
@@ -66,7 +66,7 @@ recent_turnout$region <- factor(recent_turnout$region, levels=c("British","North
 
 library(plotly)
 library(LaCroixColoR)
-p <- recent_turnout %>%
+fig <-  recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
   geom_text(aes(size=population/3.5, label=abbreviation), colour="gray20", alpha=1) +
@@ -75,9 +75,9 @@ p <- recent_turnout %>%
   labs(title = "Recent turnout in European Union countries",
        x = "Latest legislative or presidential election (whichever had higher turnout)",
        y = "May 2019 European Parliament election")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Adding a regression
@@ -90,7 +90,7 @@ m <- lm(euro_turnout ~ nat_turnout, data = recent_turnout)
 
 library(plotly)
 library(LaCroixColoR)
-p <- recent_turnout %>%
+fig <-  recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   stat_smooth(geom="line", method="lm", alpha=0.3, se=FALSE) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
@@ -104,9 +104,9 @@ p <- recent_turnout %>%
                                                   round(unname(coef(m)[2]),2),
                                                   "x national turnout",
                                                   round(unname(coef(m)[1]),1)))
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Customized Formatting
@@ -119,7 +119,7 @@ m <- lm(euro_turnout ~ nat_turnout, data = recent_turnout)
 
 library(plotly)
 library(LaCroixColoR)
-p <- recent_turnout %>%
+fig <-  recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   stat_smooth(geom="line", method="lm", alpha=0.3, se=FALSE) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
@@ -137,8 +137,8 @@ p <- recent_turnout %>%
   theme(plot.title = element_text(hjust = 0.5)) +
   guides(size=guide_legend(""), fill = FALSE) +
   theme(text = element_text(family = 'Fira Sans'))
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 

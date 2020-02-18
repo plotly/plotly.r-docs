@@ -26,16 +26,16 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin, colour=region)) +
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, colour=region)) +
   geom_jitter(aes(text=paste("district: ", cd_code)), width=0.25, alpha=0.5, ) +
   geom_hline(yintercept=0) +
   theme(axis.text.x = element_text(angle = -30, hjust = 0.1)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Add Boxplot
@@ -43,7 +43,7 @@ p
 ```{r}
 library(plotly)
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin)) +
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin)) +
   geom_boxplot(fill=NA, alpha=0.5) +
   geom_jitter(aes(colour=region, text=paste("district: ", cd_code)), width=0.25, alpha=0.5) +
   geom_hline(yintercept=0) +
@@ -51,9 +51,9 @@ p <- ggplot(district_density,aes(x=cluster, y=dem_margin)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Facetting
@@ -61,7 +61,7 @@ p
 ```{r}
 library(plotly)
 
-p <- ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
+fig <-  ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
   geom_jitter(aes(text=paste("district: ", cd_code)), width=0.25, alpha=0.5, ) +
   geom_hline(yintercept=0) +
   facet_grid(.~cluster) +
@@ -69,9 +69,9 @@ p <- ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Adding Text
@@ -85,7 +85,7 @@ density_sum <- district_density %>%
   group_by(cluster, region) %>%
   dplyr::summarise(count = n())
 
-p <- ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
+fig <-  ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
   geom_jitter(aes(text=paste("district: ", cd_code)), width=0.25, alpha=0.5, ) +
   geom_hline(yintercept=0) +
   facet_grid(.~cluster) +
@@ -95,9 +95,9 @@ p <- ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Customized Appearance
@@ -106,7 +106,7 @@ Centre the title, add colours to the facet label, rotate the labels, change the 
 ```{r}
 library(plotly)
 
-p <- ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
+fig <-  ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
   geom_jitter(aes(text=paste("district: ", cd_code)), width=0.25, alpha=0.5, ) +
   geom_hline(yintercept=0) +
   facet_grid(.~cluster) +
@@ -120,9 +120,9 @@ p <- ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
        y = "Democratic Margin of Victory/Defeat") +
   theme(text = element_text(family = 'Fira Sans'),
         legend.position = "none")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Position Jitterdodge
@@ -133,7 +133,7 @@ Make sure to specify the "group" variable: this graph specifies three potential 
 ```{r}
 library(plotly)
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin, colour=region, 
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, colour=region, 
                                  district=cd_code, group=paste(cluster, region))) +
   geom_point(position=position_jitterdodge(), alpha=0.5) +
   geom_hline(yintercept=0) +
@@ -143,7 +143,7 @@ p <- ggplot(district_density,aes(x=cluster, y=dem_margin, colour=region,
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat") +
   theme(text = element_text(family = 'Fira Sans'))
-p <- ggplotly(p, tooltip=c("district","y"))
+fig <-  ggplotly(p, tooltip=c("district","y"))
 
-p
+fig
 ```

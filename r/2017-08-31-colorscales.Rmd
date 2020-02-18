@@ -21,7 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   type = 'scatter',
   mode='markers',
   y=rep(5, 40),
@@ -34,8 +34,8 @@ p <- plot_ly(
     colorscale='Viridis',
     reversescale =T
   )
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     xaxis = list(
       showgrid = F,
       zeroline = F
@@ -52,7 +52,7 @@ p <- plot_ly(
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   type = 'contour',
   z=matrix(c(10, 10.625, 12.5, 15.625, 20,
       5.625, 6.25, 8.125, 11.25, 15.625,
@@ -62,7 +62,7 @@ p <- plot_ly(
       nrow=5, ncol=5)
 )
 
-p
+fig
 ```
 
 ### Share Color Axis
@@ -74,20 +74,20 @@ Below we show how to set a reference coloraxis1 to a shared coloraxis, which are
 
 library(plotly)
 
-p1 <- plot_ly(
+fig1 <- plot_ly(
     type = "heatmap",
     x = c(1,2,3,4),
     z = list(c(1,2,3,4), c(4,-3,-1,1)),
     coloraxis = 'coloraxis')
-p2 <- plot_ly(
+fig2 <- plot_ly(
     type = "heatmap",
     x = c(3,4,5,6),
     z = list(c(10,2,1,0), c(4,3,5,6)),
     coloraxis = 'coloraxis')
-p <- subplot(p1, p2) %>%
-  layout(coloraxis=list(colorscale='Jet'))
+fig <- subplot(fig1, fig2)
+fig <- fig %>% layout(coloraxis=list(colorscale='Jet'))
 
-p
+fig
 ```
 
 #Reference

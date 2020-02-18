@@ -27,15 +27,16 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     domain = list(x = c(0, 1), y = c(0, 1)),
     value = 270,
     title = list(text = "Speed"),
     type = "indicator",
-    mode = "gauge+number") %>%
+    mode = "gauge+number") 
+fig <- fig %>%
   layout(margin = list(l=20,r=30))
 
-p
+fig
 ```
 ### Add Steps, Threshold, and Delta
 
@@ -45,7 +46,7 @@ The following examples include "steps" attribute shown as shading inside the rad
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   domain = list(x = c(0, 1), y = c(0, 1)),
   value = 450,
   title = list(text = "Speed"),
@@ -60,10 +61,11 @@ p <- plot_ly(
     threshold = list(
       line = list(color = "red", width = 4),
       thickness = 0.75,
-      value = 490))) %>%
+      value = 490))) 
+fig <- fig %>%
   layout(margin = list(l=20,r=30))
 
-p
+fig
 ```
 
 ### Custom Gauge Chart
@@ -72,7 +74,7 @@ The following example shows how to style your gauge charts. For more information
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "indicator",
   mode = "gauge+number+delta",
   value = 420,
@@ -90,13 +92,14 @@ p <- plot_ly(
     threshold = list(
       line = list(color = "red", width = 4),
       thickness = 0.75,
-      value = 490))) %>%
+      value = 490))) 
+fig <- fig %>%
   layout(
     margin = list(l=20,r=30),
     paper_bgcolor = "lavender",
     font = list(color = "darkblue", family = "Arial"))
 
-p
+fig
 ```
 
 #Reference

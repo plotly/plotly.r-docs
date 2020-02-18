@@ -34,9 +34,9 @@ library(sf)
 
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
-p <- plot_ly(nc)
+fig <-  plot_ly(nc)
 
-p
+fig
 ```
 
 You can also use `plot_geo`:
@@ -47,9 +47,9 @@ library(sf)
 
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
-p <- plot_geo(nc)
+fig <-  plot_geo(nc)
 
-p
+fig
 ```
 
 Or `plot_mapbox`:
@@ -63,15 +63,17 @@ Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
-p <- plot_mapbox(nc, split=~NAME) %>%
+fig <-  plot_mapbox(nc, split=~NAME) 
+fig <- fig %>%
   layout(
     mapbox = list(
       zoom = 6
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 
-p
+fig
 ```
 
 ### Using ggplot2

@@ -41,7 +41,7 @@ for (i in c(0, 3, 5, 7, 9, 13)) {
   lines <- c(lines, list(line))
 }
 
-fig <- layout(p, title = 'Highlighting with Lines', shapes = lines)
+fig <- layout(fig, title = 'Highlighting with Lines', shapes = lines)
 
 fig
 ```

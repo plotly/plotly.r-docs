@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(type = 'parcoords', line = list(color = 'blue'),
+fig <- plot_ly(type = 'parcoords', line = list(color = 'blue'),
              dimensions = list(
                list(range = c(1,5),
                     constraintrange = c(1,2),
@@ -37,7 +37,7 @@ p <- plot_ly(type = 'parcoords', line = list(color = 'blue'),
                )
              )
 
-p
+fig
 ```
 
 
@@ -48,8 +48,8 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/bcdunbar/datasets/master/iris.csv")
 
-p <- df %>%
-  plot_ly(type = 'parcoords',
+fig <- df 
+fig <- fig %>% plot_ly(type = 'parcoords',
           line = list(color = ~species_id,
                       colorscale = list(c(0,'red'),c(0.5,'green'),c(1,'blue'))),
           dimensions = list(
@@ -65,7 +65,7 @@ p <- df %>%
             )
           )
 
-p
+fig
 ```
 
 ### Advanced Parallel Coordinates Plot
@@ -75,9 +75,10 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/bcdunbar/datasets/master/parcoords_data.csv")
 
-p <- df %>%
-  plot_ly(width = 1000, height = 600) %>%
-  add_trace(type = 'parcoords',
+fig <- df 
+fig <- fig %>%
+  plot_ly(width = 1000, height = 600) 
+fig <- fig %>% add_trace(type = 'parcoords',
           line = list(color = ~colorVal,
                       colorscale = 'Jet',
                       showscale = TRUE,
@@ -113,7 +114,7 @@ p <- df %>%
           )
 
 
-p
+fig
 ```
 
 #Reference

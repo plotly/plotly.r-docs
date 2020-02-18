@@ -29,8 +29,10 @@ mtcars$am[which(mtcars$am == 0)] <- 'Automatic'
 mtcars$am[which(mtcars$am == 1)] <- 'Manual'
 mtcars$am <- as.factor(mtcars$am)
 
-p <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec, opacity = 0.8, color = ~am, colors = c('#BF382A', '#0C4B8E')) %>%
-  add_markers() %>%
+fig <-  plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec, opacity = 0.8, color = ~am, colors = c('#BF382A', '#0C4B8E')) 
+fig <- fig %>%
+  add_markers() 
+fig <- fig %>%
   layout(
     scene = list(
       xaxis = list(
@@ -50,7 +52,7 @@ p <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec, opacity = 0.8, color = ~am, co
     )
   )
 
-p
+fig
 ```
 
 ### Customize Hover for Surface Contours
@@ -62,7 +64,7 @@ attribute in the surface trace.
 ```{r}
 library(plotly)
 
-p <- plot_ly(z = ~volcano) %>% add_surface(
+fig <-  plot_ly(z = ~volcano) %>% add_surface(
   contours = list(
     x = list( 
       highlight = TRUE,
@@ -71,7 +73,8 @@ p <- plot_ly(z = ~volcano) %>% add_surface(
       y = list(highlight = FALSE),
       z = list(highlight = FALSE)
   )
-) %>%
+) 
+fig <- fig %>%
   layout(
     scene = list(
       xaxis = list(showspikes=FALSE),
@@ -81,7 +84,7 @@ p <- plot_ly(z = ~volcano) %>% add_surface(
   )
 
 
-p
+fig
 ```
 
 # Reference

@@ -24,22 +24,22 @@ set.seed(123)
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
 # To set x-axis and y-axis labels use labs()
-p <- ggplot(df, aes(carat, price)) + 
+fig <-  ggplot(df, aes(carat, price)) + 
   geom_point() + 
   labs(title = "Diamonds", x = "x-axis -> Carat", y = "y-axis -> Price")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
 # Alternatively use
-p <- ggplot(df, aes(carat, price)) + 
+fig <-  ggplot(df, aes(carat, price)) + 
   geom_point() + 
   ggtitle("Diamonds") + 
   xlab("x-axis -> Carat") + 
   ylab("y-axis -> Price")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Axis Title Size
@@ -50,16 +50,16 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(carat, price)) +
+fig <-  ggplot(df, aes(carat, price)) +
   geom_point() + 
   labs(title = "Diamonds", x = "x-axis -> Carat", y = "y-axis -> Price") +
   theme(plot.title = element_text(size = 50),  
         axis.title.x = element_text(size = 20),  
         axis.title.y = element_text(size = 20))  
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Axis Title Colors
@@ -70,15 +70,15 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(carat, price)) +
+fig <-  ggplot(df, aes(carat, price)) +
   geom_point() + 
   labs(title = "Diamonds", x = "x-axis -> Carat", y = "y-axis -> Price") +
   theme(plot.title = element_text(size = 50, colour = "#668cff"),  
         axis.title.x = element_text(size = 20, colour = "#6699ff"),  
         axis.title.y = element_text(size = 20, colour = "#ff8080"))  
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://docs.ggplot2.org/current/">ggplot2 documentation</a>

@@ -85,7 +85,7 @@ for (i in 1:11) {
                   name = aval[i][[1]]$name, type = 'scatter', mode = 'lines', hoverinfo = 'name', 
                   line=list(color='00CED1'), showlegend = FALSE)
   
-  step <- list(args = list('visible', rep(FALSE, length(aval))),
+  stefig <-  list(args = list('visible', rep(FALSE, length(aval))),
                method = 'restyle')
   step$args[[2]][i] = TRUE  
   steps[[i]] = step 
@@ -109,9 +109,15 @@ df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/globe_c
 df$id <- seq_len(nrow(df))
 
 library(tidyr)
-d <- df %>% 
-  gather(key, value, -id) %>% 
-  separate(key, c("l", "line"), "\\.") %>% 
+d <- df 
+
+fig <- fig %>%
+  gather(key, value, -id) 
+
+fig <- fig %>%
+  separate(key, c("l", "line"), "\\.") 
+
+fig <- fig %>%
   spread(l, value)
 
 geo <- list(

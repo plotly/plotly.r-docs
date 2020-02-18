@@ -20,14 +20,14 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   labels = c("Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"),
   parents = c("", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"),
   values = c(10, 14, 12, 10, 2, 6, 6, 4, 4),
   type = 'sunburst'
 )
 
-p
+fig
 ```
 
 ### Branchvalues
@@ -44,7 +44,7 @@ not take up all of the space below their parent (unless the parent is the root a
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   labels = c("Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"),
   parents = c("", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"),
   values = c(65, 14, 12, 10, 2, 6, 6, 4, 4),
@@ -52,7 +52,7 @@ p <- plot_ly(
   branchvalues = 'total'
 )
 
-p
+fig
 ```
 
 ### Sunburst with Repeated Labels
@@ -83,9 +83,9 @@ d <- data.frame(
   stringsAsFactors = FALSE
 )
 
-p <- plot_ly(d, ids = ~ids, labels = ~labels, parents = ~parents, type = 'sunburst')
+fig <-  plot_ly(d, ids = ~ids, labels = ~labels, parents = ~parents, type = 'sunburst')
 
-p
+fig
 ```
 
 ### Subplots
@@ -95,7 +95,8 @@ library(plotly)
 
 d1 <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/coffee-flavors.csv')
 d2 <- read.csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
-p <- plot_ly() %>%
+fig <-  plot_ly() 
+fig <- fig %>%
   add_trace(
     ids = d1$ids,
     labels = d1$labels,
@@ -103,7 +104,8 @@ p <- plot_ly() %>%
     type = 'sunburst',
     maxdepth = 2,
     domain = list(column = 0)
-    ) %>%
+    ) 
+fig <- fig %>%
   add_trace(
     ids = d2$ids,
     labels = d2$labels,
@@ -111,7 +113,8 @@ p <- plot_ly() %>%
     type = 'sunburst',
     maxdepth = 3,
     domain = list(column = 1)
-  ) %>%
+  ) 
+fig <- fig %>%
     layout(
       grid = list(columns =2, rows = 1),
       margin = list(l = 0, r = 0, b = 0, t = 0),
@@ -120,7 +123,7 @@ p <- plot_ly() %>%
         "#e763fa", "#FECB52","#FFA15A","#FF6692","#B6E880"
       ),
       extendsunburstcolors = TRUE)
-p
+fig
 ```
 
 

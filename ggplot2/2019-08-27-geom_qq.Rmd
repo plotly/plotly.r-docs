@@ -24,7 +24,7 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-p <- ggplot(stocks, aes(sample=change)) +
+fig <-  ggplot(stocks, aes(sample=change)) +
   geom_qq()
 
 ggplotly(p)
@@ -38,7 +38,7 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-p <- ggplot(stocks, aes(sample=change))+
+fig <-  ggplot(stocks, aes(sample=change))+
   geom_qq() + geom_qq_line()
 
 ggplotly(p)
@@ -52,7 +52,7 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-p <- ggplot(stocks, aes(sample=change))+
+fig <-  ggplot(stocks, aes(sample=change))+
   geom_qq_line() + geom_qq(aes(colour=stock), alpha=0.3, size=0.1) + 
   ylim(-10,10)
 
@@ -67,7 +67,7 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-p <- ggplot(stocks, aes(x=change)) +
+fig <-  ggplot(stocks, aes(x=change)) +
   geom_density(aes(color=stock))
 
 ggplotly(p)
@@ -80,7 +80,7 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-p <- ggplot(stocks, aes(sample=change))+
+fig <-  ggplot(stocks, aes(sample=change))+
   geom_qq_line() + geom_qq(aes(colour=stock), alpha=0.3, size=0.1) +
   facet_wrap(~stock) +
   ylim(-10,10)

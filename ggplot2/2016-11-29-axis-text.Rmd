@@ -23,14 +23,14 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(carat, price, color = color, alpha = cut)) + 
+fig <-  ggplot(df, aes(carat, price, color = color, alpha = cut)) + 
   geom_point() + 
   theme(axis.text.x = element_text(colour = "#ff6666", size = 20), 
         axis.text.y = element_text(colour = "#668cff", size = 20))
   
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Axis Text Blank
@@ -41,13 +41,13 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(carat, price, color = cut)) + 
+fig <-  ggplot(df, aes(carat, price, color = cut)) + 
   geom_point() + 
   theme(axis.text = element_blank())
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Vertical Text
@@ -60,14 +60,14 @@ lab <- paste("Vertical Label", c(1, 2, 3, 4, 5))
 ds <- data.frame(x = sample(lab, size = 1000, replace = T),
                  y = sample(LETTERS[1:5], size = 1000, replace = T))
 
-p <- ggplot(ds, aes(x = x, fill = y)) + 
+fig <-  ggplot(ds, aes(x = x, fill = y)) + 
   geom_bar() + 
   theme(axis.text.x = element_text(angle = 90)) + 
   ggtitle("Vertical Axis Labels")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Angled Text
@@ -80,13 +80,13 @@ lab <- paste("Angle Label", c(1, 2, 3, 4, 5))
 ds <- data.frame(x = sample(lab, size = 1000, replace = T),
                  y = sample(LETTERS[1:5], size = 1000, replace = T))
 
-p <- ggplot(ds, aes(x = x, fill = y)) + 
+fig <-  ggplot(ds, aes(x = x, fill = y)) + 
   geom_bar() + 
   theme(axis.text.x = element_text(angle = 45)) + 
   ggtitle("Angle Axis Labels")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://docs.ggplot2.org/current/">ggplot2 documentation</a>

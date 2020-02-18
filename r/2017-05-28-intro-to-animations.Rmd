@@ -31,7 +31,8 @@ df <- data.frame(
   f = c(1,2,3)
 )
 
-p <- df %>%
+fig <- df 
+fig <- fig %>%
   plot_ly(
     x = ~x,
     y = ~y,
@@ -41,7 +42,7 @@ p <- df %>%
     showlegend = F
   )
 
-p
+fig
 ```
 
 ### Mulitple Trace Animations
@@ -50,7 +51,8 @@ p
 library(plotly)
 library(gapminder)
 
-p <- gapminder %>%
+fig <- gapminder 
+fig <- fig %>%
   plot_ly(
     x = ~gdpPercap, 
     y = ~lifeExp, 
@@ -61,14 +63,14 @@ p <- gapminder %>%
     hoverinfo = "text",
     type = 'scatter',
     mode = 'markers'
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     xaxis = list(
       type = "log"
     )
   )
 
-p
+fig
 ```
 
 ### Add Animation Options
@@ -76,12 +78,14 @@ p
 ```{r}
 library(plotly)
 
-p <- p %>% 
+
+
+fig <- fig %>%
   animation_opts(
     1000, easing = "elastic", redraw = FALSE
   )
 
-p
+fig
 ```
 
 ### Add Button Options
@@ -89,12 +93,14 @@ p
 ```{r}
 library(plotly)
 
-p <- p %>% 
+
+
+fig <- fig %>%
   animation_button(
     x = 1, xanchor = "right", y = 0, yanchor = "bottom"
   )
 
-p
+fig
 ```
 
 ### Add Slider Options
@@ -102,12 +108,13 @@ p
 ```{r}
 library(plotly)
 
-p <- p %>%
+
+fig <- fig %>%
   animation_slider(
     currentvalue = list(prefix = "YEAR ", font = list(color="red"))
   )
 
-p
+fig
 ```
 
 ### Advanced Example
@@ -115,7 +122,8 @@ p
 ```{r}
 library(plotly)
 
-p <- gapminder %>%
+fig <- gapminder 
+fig <- fig %>%
   plot_ly(
     x = ~gdpPercap, 
     y = ~lifeExp, 
@@ -126,23 +134,23 @@ p <- gapminder %>%
     hoverinfo = "text",
     type = 'scatter',
     mode = 'markers'
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     xaxis = list(
       type = "log"
     )
-  ) %>% 
-  animation_opts(
+  )
+fig <- fig %>% animation_opts(
     1000, easing = "elastic", redraw = FALSE
-  ) %>% 
-  animation_button(
+  )
+fig <- fig %>% animation_button(
     x = 1, xanchor = "right", y = 0, yanchor = "bottom"
-  ) %>%
-  animation_slider(
+  )
+fig <- fig %>% animation_slider(
     currentvalue = list(prefix = "YEAR ", font = list(color="red"))
   )
 
-p
+fig
 ```
 
 ### Reference 

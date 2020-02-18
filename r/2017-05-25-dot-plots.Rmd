@@ -23,17 +23,17 @@ library(plotly)
 s <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv")
 s <- s[order(s$Men), ]
 
-p <- plot_ly(s, x = ~Women, y = ~School, name = "Women", type = 'scatter',
-             mode = "markers", marker = list(color = "pink")) %>%
-  add_trace(x = ~Men, y = ~School, name = "Men",type = 'scatter',
-            mode = "markers", marker = list(color = "blue")) %>%
-  layout(
+fig <- plot_ly(s, x = ~Women, y = ~School, name = "Women", type = 'scatter',
+             mode = "markers", marker = list(color = "pink"))
+fig <- fig %>% add_trace(x = ~Men, y = ~School, name = "Men",type = 'scatter',
+            mode = "markers", marker = list(color = "blue"))
+fig <- fig %>% layout(
     title = "Gender earnings disparity",
     xaxis = list(title = "Annual Salary (in thousands)"),
     margin = list(l = 100)
   )
 
-p
+fig
 ```
 
 #Reference

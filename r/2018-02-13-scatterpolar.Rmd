@@ -25,14 +25,14 @@ Looking for the old polar chart docs? See [legacy polar charts](https://plot.ly/
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'scatterpolar',
   r = c(0,1,2,2),
   theta = c(0,45,90,0),
   mode = 'markers'
 )
 
-p
+fig
 ```
 
 #### Line Polar Charts
@@ -42,11 +42,12 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/polar_dataset.csv")
 
-p <- plot_ly(
+fig <-  plot_ly(
   df,
   type = 'scatterpolar',
   mode = 'lines'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = ~x1,
     theta = ~y,
@@ -54,7 +55,8 @@ p <- plot_ly(
     line = list(
       color = 'peru'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = ~x2,
     theta = ~y,
@@ -62,7 +64,8 @@ p <- plot_ly(
     line = list(
       color = 'darkviolet'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = ~x3,
     theta = ~y,
@@ -70,7 +73,8 @@ p <- plot_ly(
     line = list(
       color = 'deepskyblue'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = ~x4,
     theta = ~y,
@@ -78,7 +82,8 @@ p <- plot_ly(
     line = list(
       color = 'orangered'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = ~x5,
     theta = ~y,
@@ -86,7 +91,9 @@ p <- plot_ly(
     line = list(
       color = 'green'
     )
-  ) %>% 
+  ) 
+
+fig <- fig %>%
   layout(
     title = 'Mic Patterns',
     font = list(
@@ -97,7 +104,7 @@ p <- plot_ly(
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Area Polar Charts
@@ -105,10 +112,11 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     type = 'scatterpolar',
     mode = 'lines'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(0, 1.5, 1.5, 0, 2.5, 2.5, 0),
     theta = c(0, 10, 25, 0, 205, 215, 0),
@@ -117,7 +125,8 @@ p <- plot_ly(
     line = list(
       color = 'black'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(0, 3.5, 3.5, 0),
     theta = c(0, 55, 75, 0),
@@ -126,7 +135,8 @@ p <- plot_ly(
     line = list(
       color = 'black'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(0, 4.5, 4.5, 0, 4.5, 4.5, 0),
     theta = c(0, 100, 120, 0, 305, 320, 0),
@@ -135,7 +145,8 @@ p <- plot_ly(
     line = list(
       color = 'black'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(0, 4, 4, 0),
     theta = c(0, 165, 195, 0),
@@ -144,7 +155,8 @@ p <- plot_ly(
     line = list(
       color = 'black'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(0, 3, 3, 0),
     theta = c(0, 262.5, 277.5, 0),
@@ -153,7 +165,8 @@ p <- plot_ly(
     line = list(
       color = 'black'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     polar = list(
       radialaxis = list(
@@ -164,7 +177,7 @@ p <- plot_ly(
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Categorical Polar Charts
@@ -172,16 +185,18 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     type = 'scatterpolar',
     mode = 'lines'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(5, 4, 2, 4, 5),
     theta = c("a", "b", "c", "d", "a"),
     name = 'angular categories',
     fill = 'toself'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c("a", "b", "c", "d", "b", "f", "a"),
     theta = c(1, 4, 2, 1.5, 1.5, 6, 5),
@@ -189,21 +204,24 @@ p <- plot_ly(
     name = 'radial categories',
     fill = 'toself',
     subplot = 'polar2'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(5, 4, 2, 4, 5),
     theta = c("a", "b", "c", "d", "a"),
     name = 'angular categories (w/ categoryarray)',
     fill = 'toself',
     subplot = 'polar3'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c("a", "b", "c", "d", "b", "f", "a", "a"),
     theta = c(45, 90, 180, 200, 300, 15, 20, 45),
     name = 'radial categories (w/ category descending)',
     fill = 'toself',
     subplot = 'polar4'
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     polar = list(
       domain = list(
@@ -256,7 +274,7 @@ p <- plot_ly(
     )
   )
 
-p
+fig
 ```
 
 #### Polar Charts Directions
@@ -264,10 +282,11 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     type = 'scatterpolar',
     mode = "lines+markers"
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(1,2,3,4,5),
     theta = c(0,90,180,360,0),
@@ -280,7 +299,8 @@ p <- plot_ly(
       size = 8
     ),
     text = "sector: 135->225<br>rotation: 90<br>direction: counterclockwise"
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(1,2,3,4,5),
     theta = c(0,90,180,360,0),
@@ -294,7 +314,8 @@ p <- plot_ly(
     ),
     text = "sector: 135->225<br>rotation: 90<br>direction: counterclockwise",
     subplot = 'polar2'
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     polar = list(
       domain = list(
@@ -335,7 +356,7 @@ p <- plot_ly(
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Polar Charts Sector
@@ -343,10 +364,11 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'scatterpolar',
   mode = "lines+markers"
-) %>%
+) 
+fig <- fig %>%
   add_trace(
     r = c(1,2,3,4,5),
     theta = c(0,90,180,360,0),
@@ -358,7 +380,8 @@ p <- plot_ly(
       symbol = 'square',
       size = 8
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(1,2,3,4,5),
     theta = c(0,90,180,360,0),
@@ -371,7 +394,8 @@ p <- plot_ly(
       size = 8
     ),
     subplot = 'polar2'
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     polar = list(
       domain = list(
@@ -409,7 +433,7 @@ p <- plot_ly(
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Polar Charts Subplot
@@ -417,38 +441,44 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     type = 'scatterpolar',
     mode = 'lines'
-) %>%
+) 
+fig <- fig %>%
   add_trace(
     r = c(1,2,3),
     theta = c(50,100,200),
     marker = list(
       symbol = 'square'
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(1,2,3),
     theta = c(1,2,3),
     thetaunit = 'radians'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c("a", "b", "c", "d"),
     theta = c("D","C","B","A"),
     subplot = 'polar2'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(50,300,900),
     theta = c(0,90,180),
     subplot = 'polar3'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(3,3,4,3),
     theta = c(0,45,90,270),
     fill = 'toself',
     subplot = 'polar4'
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     polar = list(
       domain = list(
@@ -492,7 +522,7 @@ p <- plot_ly(
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Webgl Polar Charts
@@ -502,7 +532,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/hobbs-pearson-trials.csv")
 
-p <- plot_ly(
+fig <-  plot_ly(
     type = 'scatterpolargl',
     mode = 'markers'
   )
@@ -510,8 +540,8 @@ p <- plot_ly(
 j = 1
 k = 2
 for (i in 1:(length(df)/2)){
-  p <- add_trace(
-    p,
+  fig <-  add_trace(
+    fig,
     r = df[,j],
     theta = df[,k],
     name = paste('Trial ', i),
@@ -527,8 +557,8 @@ for (i in 1:(length(df)/2)){
   k <- k + 2
 }
 
-p <- layout(
-  p,
+fig <-  layout(
+  fig,
   title = "Hobbs-Pearson Trials",
   showlegend = F,
   paper_bgcolor = "rgb(223, 223, 223)",
@@ -550,7 +580,7 @@ p <- layout(
   )
 )
 
-p
+fig
 ```
 
 #### Reference

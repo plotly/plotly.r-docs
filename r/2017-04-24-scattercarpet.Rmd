@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     type = 'carpet',
     a = c(4, 4, 4, 4.5, 4.5, 4.5, 5, 5, 5, 6, 6, 6),
     b = c(1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3),
@@ -39,7 +39,7 @@ p <- plot_ly(
       )
     )
 
-p
+fig
 ```
 
 ### Add Carpet Scatter Trace
@@ -47,7 +47,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     type = 'carpet',
     a = c(4, 4, 4, 4.5, 4.5, 4.5, 5, 5, 5, 6, 6, 6),
     b = c(1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3),
@@ -64,8 +64,8 @@ p <- plot_ly(
       smoothing = 1,
       minorgridcount = 9
       )
-    ) %>%
-  add_trace(
+    )
+fig <- fig %>% add_trace(
     type = 'scattercarpet',
     a = c(4, 4.5, 5, 6),
     b = c(2.5, 2.5, 2.5, 2.5),
@@ -77,7 +77,7 @@ p <- plot_ly(
     marker = list(color = "blue")
   )
 
-p
+fig
 ```
 
 
@@ -86,8 +86,8 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly() %>%
-  add_trace(
+fig <- plot_ly()
+fig <- fig %>% add_trace(
     type = 'carpet',
     a = c(4, 4, 4, 4.5, 4.5, 4.5, 5, 5, 5, 6, 6, 6),
     b = c(1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3),
@@ -104,8 +104,8 @@ p <- plot_ly() %>%
       smoothing = 1,
       minorgridcount = 9
     )
-  ) %>%
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     type = 'scattercarpet',
     a = c(4, 4.5, 5, 6),
     b = c(2.5, 2.5, 2.5, 2.5),
@@ -116,8 +116,8 @@ p <- plot_ly() %>%
       color = "blue"
     ),
     marker = list(color = "blue")
-  ) %>%
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     type = 'scattercarpet',
     a = c(4, 4.5, 5, 6),
     b = c(1.5, 1.5, 1.5, 1.5),
@@ -127,8 +127,8 @@ p <- plot_ly() %>%
       smoothing = 1,
       color = "green"
     )
-  ) %>%
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     type = 'scattercarpet',
     a = c(5, 5, 5, 5),
     b = c(1, 1.5, 2, 3),
@@ -137,8 +137,8 @@ p <- plot_ly() %>%
       color = "red",
       size = c(0,0,20,0)
     )
-  ) %>%
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     type = 'scattercarpet',
     a = c(4.5, 4.5, 4.5, 4.5),
     b = c(1, 1.5, 2, 3),
@@ -149,7 +149,7 @@ p <- plot_ly() %>%
     )
   )
 
-p
+fig
 ```
 
 #Reference

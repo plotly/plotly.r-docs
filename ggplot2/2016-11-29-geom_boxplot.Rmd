@@ -24,11 +24,11 @@ library(plotly)
 set.seed(1234)
 dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200),rnorm(200, mean=.8)))
 
-p <- ggplot(dat, aes(x=cond, y=rating)) + geom_boxplot()
+fig <-  ggplot(dat, aes(x=cond, y=rating)) + geom_boxplot()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Colored Boxplot
@@ -39,11 +39,11 @@ library(plotly)
 set.seed(1234)
 dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200),rnorm(200, mean=.8)))
 
-p <- ggplot(dat, aes(x=cond, y=rating, fill=cond)) + geom_boxplot()
+fig <-  ggplot(dat, aes(x=cond, y=rating, fill=cond)) + geom_boxplot()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Flipped Boxplot
@@ -54,12 +54,12 @@ library(plotly)
 set.seed(1234)
 dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200),rnorm(200, mean=.8)))
 
-p <- ggplot(dat, aes(x=cond, y=rating, fill=cond)) + geom_boxplot() +
+fig <-  ggplot(dat, aes(x=cond, y=rating, fill=cond)) + geom_boxplot() +
     guides(fill=FALSE) + coord_flip()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Boxplot w/ Stats
@@ -70,12 +70,12 @@ library(plotly)
 set.seed(1234)
 dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200),rnorm(200, mean=.8)))
 
-p <- ggplot(dat, aes(x=cond, y=rating)) + geom_boxplot() +
+fig <-  ggplot(dat, aes(x=cond, y=rating)) + geom_boxplot() +
     stat_summary(fun.y=mean, geom="point", shape=5, size=4)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Boxplot Facets
@@ -96,15 +96,15 @@ df<- (as.data.frame(cbind(x,y.1,y.2,y.3,y.4)))
 
 dfmelt<-melt(df, measure.vars = 2:5)
 
-p <- ggplot(dfmelt, aes(x=factor(round_any(x,0.5)), y=value,fill=variable))+
+fig <-  ggplot(dfmelt, aes(x=factor(round_any(x,0.5)), y=value,fill=variable))+
     geom_boxplot()+
     facet_grid(.~variable)+
     labs(x="X (binned)")+
     theme(axis.text.x=element_text(angle=-90, vjust=0.4,hjust=1))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Time Series Facets
@@ -120,13 +120,13 @@ dat <- read.dta("https://stats.idre.ucla.edu/stat/data/ologit.dta")
 invisible(lapply(dat[, c("apply", "pared", "public")], table))
 invisible(ftable(xtabs(~ public + apply + pared, data = dat)))
 
-p <- ggplot(dat, aes(x = apply, y = gpa)) +
+fig <-  ggplot(dat, aes(x = apply, y = gpa)) +
     geom_boxplot(size = .75) +
     facet_grid(pared ~ public, margins = TRUE)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Outliers
@@ -137,19 +137,19 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(cut, price, fill = cut)) + 
+fig <-  ggplot(df, aes(cut, price, fill = cut)) + 
   geom_boxplot(outlier.shape = NA) + 
   ggtitle("Ignore outliers in ggplot2")
 
 # Need to modify the plotly object and make outlier points have opacity equal to 0
-p <- plotly_build(p)
+fig <-  plotly_build(p)
 
 p$data <- lapply(p$data, FUN = function(x){
   x$marker = list(opacity = 0)
   return(x)
 })
 
-p
+fig
 ```
 
 ### Linewidth
@@ -160,19 +160,19 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(cut, price, fill = cut)) + 
+fig <-  ggplot(df, aes(cut, price, fill = cut)) + 
   geom_boxplot(size = 1) + 
   ggtitle("Adjust line width of boxplot in ggplot2")
 
 # Need to modify the plotly object to make sure line width is larger than default
-p <- plotly_build(p)
+fig <-  plotly_build(p)
 
 p$data <- lapply(p$data, FUN = function(x){
   x$line = list(width = 10)
   return(x)
 })
 
-p
+fig
 ```
 
 ### Whiskers
@@ -184,19 +184,19 @@ set.seed(123)
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
 # This is how it needs to be done in ggplot
-p <- ggplot(df, aes(color, price)) +
+fig <-  ggplot(df, aes(color, price)) +
   stat_boxplot(geom ='errorbar') + 
   geom_boxplot()+
   ggtitle("Add horizontal lines to whiskers using ggplot2")
 
 # Note that plotly will automatically add horozontal lines to the whiskers
-p <- ggplot(df, aes(cut, price, fill = cut)) +
+fig <-  ggplot(df, aes(cut, price, fill = cut)) +
   geom_boxplot()+
   ggtitle("Add horizontal lines to whiskers using ggplot2")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 These example were inspired by <a href="http://www.cookbook-r.com/Graphs/Plotting_distributions_(ggplot2)/">Cookbook for R</a>.

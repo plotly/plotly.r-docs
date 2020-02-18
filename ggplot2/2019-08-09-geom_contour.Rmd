@@ -24,12 +24,12 @@ library(plotly)
 library(reshape2)
 df <- melt(volcano)
 
-p <- ggplot(df, aes(Var1, Var2, z= value)) +
+fig <-  ggplot(df, aes(Var1, Var2, z= value)) +
   geom_contour() +
   scale_fill_distiller(palette = "Spectral", direction = -1)
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Coloured Plot
@@ -40,7 +40,7 @@ library(plotly)
 library(reshape2)
 df <- melt(volcano)
 
-p <- ggplot(df, aes(Var1, Var2, z= value, colour=stat(level))) +
+fig <-  ggplot(df, aes(Var1, Var2, z= value, colour=stat(level))) +
   geom_contour() +
   scale_colour_distiller(palette = "YlGn", direction = 1)
 
@@ -55,7 +55,7 @@ library(plotly)
 library(reshape2)
 df <- melt(volcano)
 
-p <- ggplot(df, aes(Var1, Var2, z= value)) +
+fig <-  ggplot(df, aes(Var1, Var2, z= value)) +
   stat_contour(geom="polygon",aes(fill=stat(level))) +
   scale_fill_distiller(palette = "Spectral", direction = -1)
 

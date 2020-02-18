@@ -27,18 +27,20 @@ To draw a line on your map, you either can use [Scattermapbox](https://plot.ly/r
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'scattermapbox',
   mode = "markers+lines",
   lon = c(10, 20, 30),
   lat = c(10, 20,30),
-  marker = list(size = 10)) %>%
+  marker = list(size = 10)) 
+fig <- fig %>%
   add_trace(
     type = 'scattermapbox',
     mode = "markers+lines",
     lon = c(-50, -60,40),
     lat = c(30, 10, -20),
-    marker = list(size = 10)) %>%
+    marker = list(size = 10)) 
+fig <- fig %>%
   layout(
     mapbox = list(
       style = "stamen-terrain",
@@ -46,7 +48,7 @@ p <- plot_ly(
       zoom = 1),
     margin =list(l=0,t=0,b=0,r=0))
 
-p
+fig
 ```
 #Reference
 

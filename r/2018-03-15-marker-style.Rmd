@@ -25,7 +25,8 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-p <- plot_ly(type = 'scatter', mode = 'markers') %>%
+fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- fig %>%
   add_trace(
     x = x,
     y = y,
@@ -38,7 +39,8 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
       )
     ),
     showlegend = F
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     x = c(2),
     y = c(4.5),
@@ -53,7 +55,7 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Fully Opaque
@@ -65,7 +67,8 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-p <- plot_ly(type = 'scatter', mode = 'markers') %>%
+fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- fig %>%
   add_trace(
     x = x,
     y = y,
@@ -78,7 +81,8 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
       )
     ),
     showlegend = F
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     x = c(2,2),
     y = c(4.25,4.75),
@@ -93,7 +97,7 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Opacity
@@ -107,7 +111,8 @@ y <- runif(500, min=3, max=4.5)
 x2 <- runif(500, min=3, max=6)
 y2 <- runif(500, min=4.5, max=6)
 
-p <- plot_ly(type = 'scatter', mode = 'markers') %>%
+fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- fig %>%
   add_trace(
     x = x,
     y = y,
@@ -121,7 +126,8 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
       )
     ),
     name = 'Opacity 0.5'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     x = x2,
     y = y2,
@@ -134,7 +140,8 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
       )
     ),
     name = 'Opacity 1.0'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     x = c(2,2),
     y = c(4.25,4.75),
@@ -150,7 +157,7 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Marker Opacity
@@ -162,7 +169,8 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-p <- plot_ly(type = 'scatter', mode = 'markers') %>%
+fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- fig %>%
   add_trace(
     x = x,
     y = y,
@@ -176,7 +184,8 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
       )
     ),
     showlegend = F
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     x = c(2,2),
     y = c(4.25,4.75),
@@ -192,7 +201,7 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Color Opacity
@@ -204,7 +213,8 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-p <- plot_ly(type = 'scatter', mode = 'markers') %>%
+fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- fig %>%
   add_trace(
     x = x,
     y = y,
@@ -217,7 +227,8 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
       )
     ),
     showlegend = F
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     x = c(2,2),
     y = c(4.25,4.75),
@@ -232,7 +243,7 @@ p <- plot_ly(type = 'scatter', mode = 'markers') %>%
     showlegend = F
   )
 
-p
+fig
 ```
 
 ### Reference

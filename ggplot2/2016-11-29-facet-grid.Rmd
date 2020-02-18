@@ -22,14 +22,14 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(reshape2)
 library(plotly)
 
-p <- ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
+fig <-  ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 
 # Divide by levels of "sex", in the vertical direction
-p <- p + facet_grid(sex ~ .)
+fig <-  p + facet_grid(sex ~ .)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Horizontal Grid
@@ -38,14 +38,14 @@ p
 library(reshape2)
 library(plotly)
 
-p <- ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
+fig <-  ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 
 # Divide by levels of "sex", in the horizontal direction
-p <- p + facet_grid(. ~ sex)
+fig <-  p + facet_grid(. ~ sex)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Free Scale
@@ -54,14 +54,14 @@ p
 library(reshape2)
 library(plotly)
 
-p <- ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
+fig <-  ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 
 # Histogram of total_bill, divided by sex and smoker
-p <- p + facet_grid(sex ~ smoker)
+fig <-  p + facet_grid(sex ~ smoker)
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Free Y Axis
@@ -70,14 +70,14 @@ p
 library(reshape2)
 library(plotly)
 
-p <- ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
+fig <-  ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 
 # Same as above, with scales="free_y"
-p <- p + facet_grid(sex ~ smoker, scales="free_y")
+fig <-  p + facet_grid(sex ~ smoker, scales="free_y")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Varied Range
@@ -86,14 +86,14 @@ p
 library(reshape2)
 library(plotly)
 
-p <- ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
+fig <-  ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 
 # With panels that have the same scaling, but different range (and therefore different physical sizes)
-p <- p + facet_grid(sex ~ smoker, scales="free", space="free")
+fig <-  p + facet_grid(sex ~ smoker, scales="free", space="free")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Time Series Data
@@ -108,7 +108,7 @@ mymelt <- structure(list(mydate = structure(c(15340, 15340, 15340, 15340, 15340,
 myvals <- mymelt[mymelt$mydate == mymelt$mydate[nrow(mymelt)],] ## last date in mymelt should always be same as plotenddate as we subset earlier
 mymelt <- within(mymelt, variable <- factor(variable, as.character(myvals[order(myvals$value, decreasing = T),]$variable), ordered = TRUE))
 
-p <- ggplot(mymelt, aes(x = mydate, y = value)) +
+fig <-  ggplot(mymelt, aes(x = mydate, y = value)) +
     geom_line(lwd=0.3) +
     facet_grid(. ~ variable) +
     theme(axis.text.x = element_text(size = 5, angle = 90),
@@ -117,9 +117,9 @@ p <- ggplot(mymelt, aes(x = mydate, y = value)) +
           axis.ticks = element_blank(),
           panel.grid.minor = element_blank())
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Geom Line
@@ -137,11 +137,11 @@ value <- c(sample(1:10, size=365, replace=T),sample(1:3, size=365, replace=T),
            sample(1:100, size=365, replace=T))
 dat<-data.frame(date,location,product,value)
 
-p <- ggplot(dat, aes(x=date, y=value, color=location, group=location)) +
+fig <-  ggplot(dat, aes(x=date, y=value, color=location, group=location)) +
     geom_line()+
     facet_grid(product ~ ., scale = "free_y")
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```

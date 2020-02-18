@@ -28,7 +28,7 @@ colors = c('#8dd3c7','#ffffb3','#bebada',
           '#b3de69','#fccde5','#d9d9d9',
           '#bc80bd','#ccebc5','#ffed6f');
 
-p <- plot_ly()
+fig <- plot_ly()
 
 for (i in 1:length(df)) {
   l = c()
@@ -41,8 +41,8 @@ for (i in 1:length(df)) {
     n[[j]] <- df[[i]][[j]]$silt
   }
   
-  p <- add_trace(
-    p,
+  fig <- add_trace(
+    fig,
     type = 'scatterternary',
     a = l,
     b = m,
@@ -58,8 +58,8 @@ for (i in 1:length(df)) {
     )
 }
 
-p <- layout(
-  p,
+fig <- layout(
+  fig,
   title = "Simple Ternary Contour Plot in R",
   ternary = list(
     sum = 100,
@@ -87,7 +87,7 @@ p <- layout(
   )
 )
 
-p
+fig
 ```
 
 #Reference

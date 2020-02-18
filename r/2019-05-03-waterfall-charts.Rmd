@@ -27,17 +27,18 @@ text= c("+60", "+80", "", "-40", "-20", "Total")
 y= c(60, 80, 0, -40, -20, 0)
 data = data.frame(x=factor(x,levels=x),measure,text,y)
 
-p <- plot_ly(
+fig <-  plot_ly(
   data, name = "20", type = "waterfall", measure = ~measure,
   x = ~x, textposition = "outside", y= ~y, text =~text,
-  connector = list(line = list(color= "rgb(63, 63, 63)"))) %>%
+  connector = list(line = list(color= "rgb(63, 63, 63)"))) 
+fig <- fig %>%
   layout(title = "Profit and loss statement 2018",
         xaxis = list(title = ""),
         yaxis = list(title = ""),
         autosize = TRUE,
         showlegend = TRUE)
 
-p
+fig
 ```
 
 
@@ -53,14 +54,15 @@ x = c("Sales", "Consulting", "Maintenance", "Net revenue", "Purchases", "Materia
 measure = c("relative", "relative", "relative", "total", "relative", "relative", "total", "relative", "relative", "total", "relative", "total")
 data = data.frame(x=factor(x,levels = x), y, measure)
 
-P <- plot_ly(data, x = ~x, y = ~y, measure = ~measure, type = "waterfall", base = 300, decreasing = list(marker = list(color = "Maroon", line = list(color = "red", width = 2))),
+fig <-  plot_ly(data, x = ~x, y = ~y, measure = ~measure, type = "waterfall", base = 300, decreasing = list(marker = list(color = "Maroon", line = list(color = "red", width = 2))),
 increasing = (marker = list(color = "Teal")),
-totals = list(marker = list(color = "deep sky blue", line = list(color = 'blue', width = 3))))%>%
+totals = list(marker = list(color = "deep sky blue", line = list(color = 'blue', width = 3))))
+fig <- fig %>%
 layout(title = "Profit and loss statement", xaxis = list(title = "", tickfont = "16", ticks = "outside"),
 yaxis = list(title = ""), waterfallgap = "0.3")
 
 
-P
+fig
 ```
 
 ```{r}
@@ -74,8 +76,9 @@ measure = c("relative", "relative", "relative", "relative", "total", "relative",
 "relative", "total", "relative", "relative", "total", "relative", "total")
 data = data.frame(x,y=factor(y,levels = y), measure)
 
-P <- plot_ly(data, x = ~x, y = ~y, measure = ~measure, type = "waterfall", name = "2018",
-orientation = "h", connector = list(mode = "between", line = list(width = 4, color = "rgb(0, 0, 0)", dash = 0)))%>%
+fig <-  plot_ly(data, x = ~x, y = ~y, measure = ~measure, type = "waterfall", name = "2018",
+orientation = "h", connector = list(mode = "between", line = list(width = 4, color = "rgb(0, 0, 0)", dash = 0)))
+fig <- fig %>%
 layout(title = "Profit and loss statement 2018<br>waterfall chart displaying positive and negative",
 xaxis = list(title = "", tickfont = "16", ticks = "outside"),
 yaxis = list(title = "", type = "category", autorange = "reversed"),
@@ -84,5 +87,5 @@ yaxis = list(title = "", type = "category", autorange = "reversed"),
         showlegend = TRUE)
 
 
-P
+fig
 ```

@@ -21,11 +21,12 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9), 
-  mode = "markers+lines") %>%
+  mode = "markers+lines") 
+fig <- fig %>%
   layout(
     xaxis = list(
       dtick = 0.75, 
@@ -33,7 +34,7 @@ p <- plot_ly(
       tickmode = "linear"
   ))
 
-p
+fig
 ```
 
 ### Tickmode - Array
@@ -41,11 +42,12 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9), 
-  mode = "markers+lines") %>%
+  mode = "markers+lines") 
+fig <- fig %>%
   layout(
     xaxis = list(
       ticktext = list("One", "Three", "Five", "Seven", "Nine", "Eleven"), 
@@ -53,7 +55,7 @@ p <- plot_ly(
       tickmode = "array"
   ))
 
-p
+fig
 ```
 
 
@@ -62,17 +64,18 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(0.18, 0.38, 0.56, 0.46, 0.59, 0.4, 0.78, 0.77, 0.74, 0.42, 0.45, 0.39), 
-  mode = "markers+lines") %>%
+  mode = "markers+lines") 
+fig <- fig %>%
   layout(
     yaxis = list(
         tickformat = "%"
   ))
 
-p
+fig
 ```
 
 ### Using Tickformat (Date)
@@ -82,7 +85,7 @@ library(plotly)
 
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "scatter",
   x = df$Date, 
   y = df$AAPL.High,
@@ -90,7 +93,8 @@ p <- plot_ly(
   mode = "lines",
   line = list(
         color = '#17BECF'
-  )) %>%
+  )) 
+fig <- fig %>%
   add_trace(
     type = "scatter",
     x = df$Date, 
@@ -99,7 +103,8 @@ p <- plot_ly(
     mode = "lines",
     line = list(
         color = '#7F7F7F'
-  )) %>%
+  )) 
+fig <- fig %>%
   layout(
     title = "Time Series with Custom Date-Time Format",
     xaxis = list(
@@ -107,7 +112,7 @@ p <- plot_ly(
         tickformat = "%d %B (%a)<br>%Y"
   ))
 
-p
+fig
 ```
 
 ### Tickformatstops to customize for different zoom levels
@@ -115,11 +120,12 @@ p
 ```{r}
 library(plotly)
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-p <- plot_ly(
+fig <-  plot_ly(
   type = "scatter",
   x = df$Date, 
   y = df$mavg,
-  mode = "lines") %>%
+  mode = "lines") 
+fig <- fig %>%
   layout(
     xaxis = list(
       type='date',
@@ -160,7 +166,7 @@ p <- plot_ly(
     )
   )
 
-p
+fig
 ```
 
 ### Using Exponentformat
@@ -168,11 +174,12 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(68000, 52000, 60000, 20000, 95000, 40000, 60000, 79000, 74000, 42000, 20000, 90000),
-  mode = "markers+lines") %>%
+  mode = "markers+lines") 
+fig <- fig %>%
   layout(
     yaxis = list(
       showexponent = "all",
@@ -180,5 +187,5 @@ p <- plot_ly(
     )
   )
 
-p
+fig
 ```

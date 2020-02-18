@@ -26,7 +26,8 @@ library(plotly)
 
 df = read.csv('https://raw.githubusercontent.com/plotly/datasets/master/streamtube-basic.csv')
 
-p <- df %>%
+fig <-  df 
+fig <- fig %>%
   plot_ly(
     type = 'streamtube',
     x = ~x,
@@ -38,7 +39,8 @@ p <- df %>%
     sizeref = 0.5,
     cmin = 0,
     cmax = 3
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     scene = list(
       camera = list(
@@ -51,7 +53,7 @@ p <- df %>%
     )
   )
 
-p
+fig
 ```
 
 #### Starting Position and Segments
@@ -61,7 +63,8 @@ library(plotly)
 
 df = read.csv('https://raw.githubusercontent.com/plotly/datasets/master/streamtube-wind.csv')
 
-p <- df %>%
+fig <-  df 
+fig <- fig %>%
   plot_ly(
     type = 'streamtube',
     x = ~x,
@@ -78,7 +81,8 @@ p <- df %>%
     sizeref = 0.3,
     showscale = F,
     maxdisplayed = 3000
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     scene = list(
       aspectratio = list(
@@ -92,7 +96,7 @@ p <- df %>%
     )
   )
 
-p
+fig
 ```
 
 

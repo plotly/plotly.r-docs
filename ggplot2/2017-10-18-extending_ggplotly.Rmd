@@ -21,7 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
+fig <-  ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
 gg <- ggplotly(p)
 
@@ -35,7 +35,7 @@ gg
 ```{r}
 library(plotly)
 
-p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
+fig <-  ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
 gg <- ggplotly(p)
 
@@ -51,10 +51,10 @@ gg
 ```{r}
 library(plotly)
 
-p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+fig <-  ggplot(mtcars, aes(x = wt, y = mpg)) +
    geom_point() + geom_smooth()
 
-p <- p %>%
+fig <-  p %>%
   ggplotly(layerData = 2, originalData = F) %>%
   add_fun(function(p) {
     p %>% slice(which.max(se)) %>%
@@ -67,7 +67,7 @@ p <- p %>%
       add_annotations("Minimum uncertainty")
   })
 
-p
+fig
 ```
 
 ### Reference

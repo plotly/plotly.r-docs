@@ -34,15 +34,15 @@ require(lubridate)
 MySample$date <- as.Date(MySample$x, "%m-%d-%y")
 MySample$year <- year(MySample$date)
 
-p <- ggplot(MySample, aes(date, y, fill = year)) +
+fig <-  ggplot(MySample, aes(date, y, fill = year)) +
     geom_bar(stat="identity") +
     facet_grid(. ~ year, scales = "free") +
     scale_x_date(labels = date_format("%b/%y")) +
     scale_fill_gradient(breaks=unique(MySample$year))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/11472856/month-year-bar-graph-plot-faceted-and-filled-on-year-with-data-input-as-date-in?rq=1">Stack Overflow</a>.
 
@@ -65,15 +65,15 @@ df$MonthDay <- format(df$Date, "%d-%b")
 
 df$CommonDate <- as.Date(paste0("2000-",format(df$Date, "%j")), "%Y-%j")
 
-p <- ggplot(data = df,
+fig <-  ggplot(data = df,
      mapping = aes(x = CommonDate, y = Y, shape = Year, colour = Year)) +
      geom_point() +
      geom_line() +
      facet_grid(facets = Year ~ .) +
      scale_x_date(labels = function(x) format(x, "%d-%b"))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/11472856/month-year-bar-graph-plot-faceted-and-filled-on-year-with-data-input-as-date-in?rq=1">Stack Overflow</a>.

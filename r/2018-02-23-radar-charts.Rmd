@@ -20,12 +20,13 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     type = 'scatterpolar',
     r = c(39, 28, 8, 7, 28, 39),
     theta = c('A','B','C', 'D', 'E', 'A'),
     fill = 'toself'
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     polar = list(
       radialaxis = list(
@@ -36,7 +37,7 @@ p <- plot_ly(
     showlegend = F
   )
 
-p
+fig
 ```
 
 #### Multiple Trace Radar Charts
@@ -44,20 +45,23 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
     type = 'scatterpolar',
     fill = 'toself'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(39, 28, 8, 7, 28, 39),
     theta = c('A','B','C', 'D', 'E', 'A'),
     name = 'Group A'
-  ) %>%
+  ) 
+fig <- fig %>%
   add_trace(
     r = c(1.5, 10, 39, 31, 15, 1.5),
     theta = c('A','B','C', 'D', 'E', 'A'),
     name = 'Group B'
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     polar = list(
       radialaxis = list(
@@ -67,7 +71,7 @@ p <- plot_ly(
     )
   )
 
-p
+fig
 ```
 
 #### Reference

@@ -28,19 +28,21 @@ library(plotly)
 
 quakes = read.csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
 
-p <- quakes %>%
+fig <-  quakes 
+fig <- fig %>%
   plot_ly(
     type = 'densitymapbox',
     lat = ~Latitude,
     lon = ~Longitude,
     coloraxis = 'coloraxis',
-    radius = 10) %>%
+    radius = 10) 
+fig <- fig %>%
   layout(
     mapbox = list(
       style="stamen-terrain",
       center= list(lon=180)), coloraxis = list(colorscale = "Viridis"))
 
-p
+fig
 ```
 
 #Reference

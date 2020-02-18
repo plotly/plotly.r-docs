@@ -27,7 +27,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
@@ -46,7 +46,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
@@ -66,7 +66,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   facet_wrap(~region) +
@@ -87,7 +87,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   facet_wrap(~region) +
@@ -113,7 +113,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   facet_grid(.~region) +

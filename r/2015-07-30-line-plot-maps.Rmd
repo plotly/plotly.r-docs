@@ -101,9 +101,12 @@ df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/globe_c
 df$id <- seq_len(nrow(df))
 
 library(tidyr)
-d <- df %>%
-  gather(key, value, -id) %>%
-  separate(key, c("l", "line"), "\\.") %>%
+d <- df 
+fig <- fig %>%
+  gather(key, value, -id) 
+fig <- fig %>%
+  separate(key, c("l", "line"), "\\.") 
+fig <- fig %>%
   spread(l, value)
 
 geo <- list(

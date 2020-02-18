@@ -22,7 +22,8 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(plotly)
 
 fig <- plot_ly(x = c(1, 2, 3), y = c(1, 2, 3))
-fig <- fig %>% add_lines() %>%
+fig <- fig %>% add_lines() 
+fig <- fig %>%
   layout(
     images = list(
       list(source = "https://images.plot.ly/language-icons/api-home/python-logo.png",

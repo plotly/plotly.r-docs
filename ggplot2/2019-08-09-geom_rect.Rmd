@@ -35,7 +35,7 @@ df <- data.frame(name = c("Nixon", "Ford", "Carter", "Reagan", "Bush", "Clinton"
                    stringsAsFactors = FALSE) %>%
   mutate(median_x = start + floor((end-start)/2))
 
-p <- ggplot(economics, aes(x=date,y=unemploy)) +
+fig <-  ggplot(economics, aes(x=date,y=unemploy)) +
   geom_rect(data=df, aes(NULL,NULL,xmin=start,xmax=end,fill=party),
             ymin=0,ymax=16000, colour="white", size=0.5, alpha=0.2) +
   scale_fill_manual(values=c("R" = "red", "D" = "blue")) +
@@ -43,9 +43,9 @@ p <- ggplot(economics, aes(x=date,y=unemploy)) +
   geom_text(data=df,aes(x=median_x,y=3000,label=name), size=3) +
   labs(title = "Unemmployment numbers since 1967",
        y = "No. unemployed (x 1000)")
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### A Timeline Using geom\_rect
@@ -66,7 +66,7 @@ european_leaders <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
          median_x = as.Date(median_x),
          left_right = as.character(left_right))
 
-p <- ggplot(european_leaders, aes(xmin=stint_start, xmax=stint_end, ymin=vert_min, ymax=vert_max, fill=left_right)) +
+fig <-  ggplot(european_leaders, aes(xmin=stint_start, xmax=stint_end, ymin=vert_min, ymax=vert_max, fill=left_right)) +
   geom_rect(colour="white", size=0.1) +
   geom_text(aes(x=median_x, y=median_y, size=size, label=pm_name, #all names of separate variables
                 text=paste(party_name_english, " (",country_name,")", sep=""))) +
@@ -78,8 +78,8 @@ p <- ggplot(european_leaders, aes(xmin=stint_start, xmax=stint_end, ymin=vert_mi
        size = NULL) +
   theme(axis.text.y = element_blank(), #y-axis doesn't have actual values; no need for labels
         axis.ticks.y = element_blank())
-p <- ggplotly(p, tooltip = c("label", "text")) #how to select what shows on the tooltip
+fig <-  ggplotly(p, tooltip = c("label", "text")) #how to select what shows on the tooltip
 
-p
+fig
 ```
 

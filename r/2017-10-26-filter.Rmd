@@ -21,7 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <-  plot_ly(
   type = 'scatter',
   x = mtcars$hp,
   y = mtcars$qsec,
@@ -38,7 +38,7 @@ p <- plot_ly(
   )
 )
 
-p
+fig
 ```
 
 #### Reference

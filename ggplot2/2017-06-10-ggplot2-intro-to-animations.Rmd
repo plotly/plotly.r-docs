@@ -31,12 +31,12 @@ df <- data.frame(
   f = c(1,2,3,4)
 )
 
-p <- ggplot(df, aes(x, y)) +
+fig <-  ggplot(df, aes(x, y)) +
     geom_point(aes(frame = f))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Mulitple Trace Animations
@@ -46,13 +46,13 @@ library(plotly)
 library(gapminder)
 
 
-p <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
+fig <-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
   geom_point(aes(size = pop, frame = year, ids = country)) +
   scale_x_log10()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Add Animation Options
@@ -60,12 +60,12 @@ p
 ```{r}
 library(plotly)
 
-p <- p %>% 
+fig <-  p %>% 
   animation_opts(
     1000, easing = "elastic", redraw = FALSE
   )
 
-p
+fig
 ```
 
 ### Add Button Options
@@ -73,12 +73,12 @@ p
 ```{r}
 library(plotly)
 
-p <- p %>% 
+fig <-  p %>% 
   animation_button(
     x = 1, xanchor = "right", y = 0, yanchor = "bottom"
   )
 
-p
+fig
 ```
 
 ### Add Slider Options
@@ -86,12 +86,12 @@ p
 ```{r}
 library(plotly)
 
-p <- p %>%
+fig <-  p %>%
   animation_slider(
     currentvalue = list(prefix = "YEAR ", font = list(color="red"))
   )
 
-p
+fig
 ```
 
 ### Advanced Example
@@ -100,11 +100,11 @@ p
 library(plotly)
 library(gapminder)
 
-p <- ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
+fig <-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
   geom_point(aes(size = pop, frame = year, ids = country)) +
   scale_x_log10()
 
-p <- ggplotly(p) %>% 
+fig <-  ggplotly(p) %>% 
   animation_opts(
     1000, easing = "elastic", redraw = FALSE
   ) %>% 
@@ -115,7 +115,7 @@ p <- ggplotly(p) %>%
     currentvalue = list(prefix = "YEAR ", font = list(color="red"))
   )
 
-p
+fig
 ```
 
 ### Reference 

@@ -24,8 +24,10 @@ library(plotly)
 
 x <- seq.Date(Sys.Date(), Sys.Date() + 360, by = "day")
 
-p <- plot_ly(x = x, y = rnorm(length(x))) %>%
-   add_lines() %>%
+fig <-  plot_ly(x = x, y = rnorm(length(x))) 
+fig <- fig %>%
+   add_lines() 
+fig <- fig %>%
   config(locale = 'zh-CN')
 ```
 

@@ -24,7 +24,7 @@ library(plotly)
 spinrates <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/spinrates.csv",
                       stringsAsFactors = FALSE)
 
-p <- ggplot(spinrates, aes(x=velocity, y=spinrate)) +
+fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   geom_tile(aes(fill = swing_miss)) +
   scale_fill_distiller(palette = "YlGnBu") +
   labs(title = "Likelihood of swinging and missing on a fastball",
@@ -43,7 +43,7 @@ library(plotly)
 spinrates <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/spinrates.csv",
                       stringsAsFactors = FALSE)
 
-p <- ggplot(spinrates, aes(x=velocity, y=spinrate)) +
+fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   geom_tile(aes(fill = swing_miss)) +
   scale_fill_distiller(palette = "YlGnBu", direction = 1) +
   theme_light() +
@@ -61,7 +61,7 @@ library(plotly)
 spinrates <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/spinrates.csv",
                       stringsAsFactors = FALSE)
 
-p <- ggplot(spinrates, aes(x=velocity, y=spinrate)) +
+fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   geom_tile(aes(fill = swing_miss)) +
   scale_fill_viridis_c(option = "B", direction = -1) +
   labs(title = "Likelihood of swinging and missing on a fastball",

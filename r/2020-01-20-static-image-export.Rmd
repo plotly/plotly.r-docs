@@ -42,6 +42,6 @@ For example, running the following commands in an R session would export the gra
 library(plotly)
 
 if (!require("processx")) install.packages("processx")
-p <- plot_ly(z = ~volcano) %>% add_surface()
-orca(p, "surface-plot.svg")
+fig <-  plot_ly(z = ~volcano) %>% add_surface()
+orca(fig, "surface-plot.svg")
 ```

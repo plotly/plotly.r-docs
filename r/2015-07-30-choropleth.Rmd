@@ -116,7 +116,8 @@ g2 <- c(
   list(domain = list(x = c(0, .6), y = c(0, .6)))
 )
 
-fig <- df %>%
+fig <- df 
+fig <- fig %>%
   plot_geo(
     locationmode = 'country names', sizes = c(1, 600), color = I("black")
   )

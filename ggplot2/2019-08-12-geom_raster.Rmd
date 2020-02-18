@@ -25,7 +25,7 @@ library(plotly)
 
 df <- melt(volcano)
 
-p <- ggplot(df, aes(Var1, Var2)) +
+fig <-  ggplot(df, aes(Var1, Var2)) +
   geom_raster(aes(fill=value)) +
   labs(x="West to East",
        y="North to South",
@@ -43,7 +43,7 @@ library(plotly)
 
 df <- melt(volcano)
 
-p <- ggplot(df, aes(Var1, Var2)) +
+fig <-  ggplot(df, aes(Var1, Var2)) +
   geom_raster(aes(fill=value)) +
   scale_fill_distiller(palette = "Spectral", direction = -1) +
   labs(x="West to East",

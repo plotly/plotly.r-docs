@@ -38,11 +38,11 @@ positions <- data.frame(
 
 datapoly <- merge(values, positions, by=c("id"))
 
-p <- ggplot(datapoly, aes(x=x, y=y)) + geom_polygon(aes(fill=value, group=id))
+fig <-  ggplot(datapoly, aes(x=x, y=y)) + geom_polygon(aes(fill=value, group=id))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://docs.ggplot2.org/current/geom_polygon.html">ggplot2 docs</a>
 
@@ -64,12 +64,12 @@ library(devtools)
 library(ggplot2)
 library(proto) #source_url("https://raw.github.com/JoFrhwld/FAAV/master/r/stat-ellipse.R")
 
-p <- qplot(data = df, x = x, y = y, colour = class) +
+fig <-  qplot(data = df, x = x, y = y, colour = class) +
   stat_ellipse(geom = "polygon", alpha = 1/2, aes(fill = class))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### Highlighting
@@ -77,15 +77,15 @@ p
 ```{r}
 library(plotly)
 
-tmp <- with(mtcars, data.frame(x=c(0, 0, max(wt)*35), y=c(0, max(wt), max(wt))))
+tmfig <-  with(mtcars, data.frame(x=c(0, 0, max(wt)*35), y=c(0, max(wt), max(wt))))
 
-p <- ggplot(mtcars, aes(hp, wt)) +
+fig <-  ggplot(mtcars, aes(hp, wt)) +
   geom_polygon(data=tmp, aes(x, y), fill="#d8161688") +
   geom_point()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/3610291/highlighting-regions-of-interest-in-ggplot2/3610506#3610506">Stack Overflow</a>
 
@@ -103,12 +103,12 @@ df.t<-data.table(rbind( df[,list(Product,X=minX,Y=minY)],
        df[,list(Product,X=maxX,Y=maxY)]))[
       order(Product,X,Y)]
 
-p <- ggplot(df,aes(xmin=minX,xmax=maxX,ymin=minY,ymax=maxY,fill=Product))+
+fig <-  ggplot(df,aes(xmin=minX,xmax=maxX,ymin=minY,ymax=maxY,fill=Product))+
   geom_rect()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/22100486/r-ggplot2-convert-row-records-to-vertical-values-and-use-in-geom-polygon">Stack Overflow</a>
 
@@ -122,16 +122,16 @@ dat <- data.frame(
   norm = dnorm(x,mean=0,sd=0.2),
   logistic = dlogis(x,location=0,scale=0.2), x = x
 )
-p <- ggplot(data=dat, aes(x=x)) +
+fig <-  ggplot(data=dat, aes(x=x)) +
   geom_polygon(aes(y=norm), fill="red", alpha=0.6) +
   geom_polygon(aes(y=logistic), fill="blue", alpha=0.6) +
   xlab("z") + ylab("") +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/7474106/geom-polygon-to-draw-normal-and-logistic-distributions">Stack Overflow</a>
 
@@ -166,9 +166,9 @@ zp3 <- zp3 + geom_point(size=1)
 zp3 <- zp3 + coord_equal()
 zp3 <- zp3 + scale_fill_manual(values = colorRampPalette(rev(brewer.pal(11, "Spectral")))(setK))
 
-p <- ggplotly(zp3)
+fig <-  ggplotly(zp3)
 
-p
+fig
 ```
 Inspired by <a href="http://is-r.tumblr.com/post/33356702763/from-holey-polygons-to-convex-hulls">is.R()</a>
 
@@ -182,14 +182,14 @@ county_df <- map_data("county")
 state_df <- map_data("state")
 
 # create state boundaries
-p <- ggplot(county_df, aes(long, lat, group = group)) +
+fig <-  ggplot(county_df, aes(long, lat, group = group)) +
   geom_polygon(colour = alpha("black", 1/2), fill = NA) +
   geom_polygon(data = state_df, colour = "black", fill = NA) + 
   theme_void()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
 
 ### County-Level Choropleths
@@ -236,7 +236,7 @@ blue <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
 red <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
 
 #plot
-p <- ggplot(US, aes(long, lat, group = group)) +
+fig <-  ggplot(US, aes(long, lat, group = group)) +
   geom_polygon(aes(fill = Percent),
                colour = alpha("white", 1/2), size = 0.05)  +
   geom_polygon(data = state_df, colour = "white", fill = NA) +
@@ -244,7 +244,7 @@ p <- ggplot(US, aes(long, lat, group = group)) +
   scale_fill_gradientn(colours=c(blue,"white", red))  +
   theme_void()
 
-p <- ggplotly(p)
+fig <-  ggplotly(p)
 
-p
+fig
 ```
