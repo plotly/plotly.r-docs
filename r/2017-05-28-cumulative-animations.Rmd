@@ -35,9 +35,9 @@ accumulate_by <- function(dat, var) {
 }
 
 d <- txhousing 
-fig <- fig %>%
+fig <- d %>%
   filter(year > 2005, city %in% c("Abilene", "Bay Area"))
-fig <- d %>% accumulate_by(~date)
+fig <- fig %>% accumulate_by(~date)
 
 
 fig <- fig %>%
@@ -73,6 +73,7 @@ fig <- fig %>% animation_button(
 )
 
 fig
+
 ```
 
 ### Filled-Area Animation
@@ -96,48 +97,44 @@ accumulate_by <- function(dat, var) {
   dplyr::bind_rows(dats)
 }
 
-df <- df 
-fig <- fig %>%
-  accumulate_by(~ID)
-
-fig <- df
+fig <- df %>% accumulate_by(~ID)
 fig <- fig %>% plot_ly(
-    x = ~ID, 
-    y = ~AAPL.Close, 
-    frame = ~frame,
-    type = 'scatter', 
-    mode = 'lines', 
-    fill = 'tozeroy', 
-    fillcolor='rgba(114, 186, 59, 0.5)',
-    line = list(color = 'rgb(114, 186, 59)'),
-    text = ~paste("Day: ", ID, "<br>Close: $", AAPL.Close), 
-    hoverinfo = 'text'
-  )
+  x = ~ID, 
+  y = ~AAPL.Close, 
+  frame = ~frame,
+  type = 'scatter', 
+  mode = 'lines', 
+  fill = 'tozeroy', 
+  fillcolor='rgba(114, 186, 59, 0.5)',
+  line = list(color = 'rgb(114, 186, 59)'),
+  text = ~paste("Day: ", ID, "<br>Close: $", AAPL.Close), 
+  hoverinfo = 'text'
+)
 fig <- fig %>% layout(
-    title = "AAPL: Last 30 days",
-    yaxis = list(
-      title = "Close", 
-      range = c(0,250), 
-      zeroline = F,
-      tickprefix = "$"
-    ),
-    xaxis = list(
-      title = "Day", 
-      range = c(0,30), 
-      zeroline = F, 
-      showgrid = F
-    )
-  ) 
+  title = "AAPL: Last 30 days",
+  yaxis = list(
+    title = "Close", 
+    range = c(0,250), 
+    zeroline = F,
+    tickprefix = "$"
+  ),
+  xaxis = list(
+    title = "Day", 
+    range = c(0,30), 
+    zeroline = F, 
+    showgrid = F
+  )
+) 
 fig <- fig %>% animation_opts(
-    frame = 100, 
-    transition = 0, 
-    redraw = FALSE
-  )
+  frame = 100, 
+  transition = 0, 
+  redraw = FALSE
+)
 fig <- fig %>% animation_slider(
-    currentvalue = list(
-      prefix = "Day "
-    )
+  currentvalue = list(
+    prefix = "Day "
   )
+)
 
 fig
 ```
