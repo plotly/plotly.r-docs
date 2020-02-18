@@ -32,27 +32,24 @@ g <- list(
   subunitcolor = toRGB("white")
 )
 
-one_mafig <-  function(dat) {
-  plot_geo(dat) 
-fig <- fig %>%
-    add_markers(x = ~LON, y = ~LAT, color = I("blue"), alpha = 0.5) 
-fig <- fig %>%
-    add_text(x = -78, y = 47, text = ~unique(YEAR), color = I("black")) 
-fig <- fig %>%
-    layout(geo = g)
-}
+one_map <- function(dat) {
+  plot_geo(dat) %>%
+    add_markers(x = ~LON, y = ~LAT, color = I("blue"), alpha = 0.5) %>%
+    add_text(x = -78, y = 47, text = ~unique(YEAR), color = I("black")) %>%
+    layout(geo = g)}
 
 fig <- df
 fig <- fig %>% group_by(YEAR)
 fig <- fig %>% do(mafig = one_map(.))
 fig <- fig %>% subplot(nrows = 9)
 fig <- fig %>% layout(
-    showlegend = FALSE,
-    title = 'New Walmart Stores per year 1962-2006<br> Source: <a href="http://www.econ.umn.edu/~holmes/data/WalMart/index.html">University of Minnesota</a>',
-    width = 1000,
-    height = 900,
-    hovermode = FALSE
-  )
+  showlegend = FALSE,
+  title = 'New Walmart Stores per year 1962-2006<br> Source: <a href="http://www.econ.umn.edu/~holmes/data/WalMart/index.html">University of Minnesota</a>',
+  width = 1000,
+  height = 900,
+  hovermode = FALSE
+)
 
 fig
+
 ```
