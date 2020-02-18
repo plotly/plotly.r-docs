@@ -56,15 +56,15 @@ library(plotly)
 df <- read.csv("https://raw.githubusercontent.com/bcdunbar/datasets/master/californiaPopulation.csv")
 
 cali <- map_data("county") 
-  filter(region == 'california')
+cali <- cali %>% filter(region == 'california')
 
-pofig <-  df 
-  group_by(County.Name) 
-  summarise(Pop = sum(Population))
+pop <-  df 
+pop <- pop %>% group_by(County.Name) 
+pop <- pop %>% summarise(Pop = sum(Population))
 
 pop$County.Name <- tolower(pop$County.Name) # matching string
 
-cali_pofig <-  merge(cali, pop, by.x = "subregion", by.y = "County.Name")
+cali_pop <-  merge(cali, pop, by.x = "subregion", by.y = "County.Name")
 
 cali_pop$pop_cat <- cut(cali_pop$Pop, breaks = c(seq(0, 11000000, by = 500000)), labels=1:22)
 
@@ -127,7 +127,7 @@ library(plotly)
 mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
 Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
-fig <- cali_pofig 
+fig <- cali_pop
 fig <- fig %>% group_by(group) 
 fig <- fig %>% plot_mapbox(x = ~long, y = ~lat, color = ~pop_cat, colors = c('#ffeda0','#f03b20'),
           text = ~subregion, hoverinfo = 'text', showlegend = FALSE) 
