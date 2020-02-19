@@ -64,6 +64,7 @@ fig
 
 ``` {r}
 library(plotly)
+library(listviewer)
 
 s <- schema()
 agg <- s$transforms$aggregate$attributes$aggregations$items$aggregation$func$values
@@ -117,8 +118,6 @@ fig <- fig %>% layout(
 
 fig
 ```
-
-
 #### Histogram Binning
 
 ``` {r}
@@ -134,8 +133,7 @@ labels <- function(size, label) {
   )
 }
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     x = ~date,
     autobinx = FALSE, 
@@ -149,31 +147,31 @@ fig <- fig %>%
       start = "1983-12-31 12:00"
     )
   )
-  fig <- fig %>% layout(
-    paper_bgcolor = "rgb(240, 240, 240)", 
-    plot_bgcolor = "rgb(240, 240, 240)", 
-    title = "<b>Shooting Incidents</b><br>use dropdown to change bin size",
-    xaxis = list(
-      type = 'date'
-    ),
-    yaxis = list(
-      title = "Incidents"
-    ),
-    updatemenus = list(
-      list(
-        x = 0.1, 
-        y = 1.15,
-        active = 1, 
-        showactive = TRUE,
-        buttons = list(
-          labels("D1", "Day"),
-          labels("M1", "Month"),
-          labels("M6", "Half Year"),
-          labels("M12", "Year")
-        )
+fig <- fig %>% layout(
+  paper_bgcolor = "rgb(240, 240, 240)", 
+  plot_bgcolor = "rgb(240, 240, 240)", 
+  title = "<b>Shooting Incidents</b><br>use dropdown to change bin size",
+  xaxis = list(
+    type = 'date'
+  ),
+  yaxis = list(
+    title = "Incidents"
+  ),
+  updatemenus = list(
+    list(
+      x = 0.1, 
+      y = 1.15,
+      active = 1, 
+      showactive = TRUE,
+      buttons = list(
+        labels("D1", "Day"),
+        labels("M1", "Month"),
+        labels("M6", "Half Year"),
+        labels("M12", "Year")
       )
     )
   )
+)
 
 fig
 ```
@@ -197,8 +195,7 @@ for (i in 1:length(agg)) {
   l[[i]] = ll
 }
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     type = 'choropleth',
     locationmode = 'country names',
