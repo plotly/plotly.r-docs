@@ -100,7 +100,7 @@ library(plotly)
 set.seed(123)
 
 df <- data.frame(x <- rchisq(1000, 5, 10),
-                 groufig <-  sample(LETTERS[1:5], size = 1000, replace = T))
+                 group <-  sample(LETTERS[1:5], size = 1000, replace = T))
 
 fig <-  ggplot(df, aes(x, fill = group)) + 
   geom_density(alpha = 0.5, position = "stack") + 
@@ -118,7 +118,7 @@ library(plotly)
 set.seed(123)
 
 df <- data.frame(x <- rchisq(1000, 5, 10),
-                 groufig <-  sample(LETTERS[1:5], size = 1000, replace = T))
+                 group <-  sample(LETTERS[1:5], size = 1000, replace = T))
 
 fig <-  ggplot(df, aes(x)) + 
   geom_histogram(aes(y = ..density..), alpha = 0.7, fill = "#333333") + 
