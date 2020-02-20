@@ -40,7 +40,7 @@ fig <-  ggplot(MySample, aes(date, y, fill = year)) +
     scale_x_date(labels = date_format("%b/%y")) +
     scale_fill_gradient(breaks=unique(MySample$year))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -72,7 +72,7 @@ fig <-  ggplot(data = df,
      facet_grid(facets = Year ~ .) +
      scale_x_date(labels = function(x) format(x, "%d-%b"))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

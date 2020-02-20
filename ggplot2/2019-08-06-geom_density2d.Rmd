@@ -29,7 +29,7 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Filled
@@ -45,7 +45,7 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Preset Colourscale
@@ -63,7 +63,7 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Customized Colourscale
@@ -80,7 +80,7 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Overlaid Points
@@ -99,6 +99,6 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        title = "Craft beers from American breweries",
        colour = "Beer types")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 

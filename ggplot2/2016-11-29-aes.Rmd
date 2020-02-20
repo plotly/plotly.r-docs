@@ -29,7 +29,7 @@ fig <-  ggplot(ds, aes(x, y)) +
   geom_bar(aes(fill = group), stat = "identity") +
   ggtitle("Filled bar chart")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -57,7 +57,7 @@ fig <-  ggplot(ds, aes(x, y)) +
   geom_line(aes(group = group, color = group), size = 2) +
   ggtitle("Group specific line chart")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -76,7 +76,7 @@ fig <-  ggplot(ds, aes(x, y)) +
   geom_text(aes(label = group), size = 4) +
   ggtitle("Annotation with labels")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -96,7 +96,7 @@ fig <-  ggplot(ds, aes(x, y)) +
   geom_line(aes(group = group, linetype = group)) +
   ggtitle("Groupwise shapes and line types")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

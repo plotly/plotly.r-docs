@@ -47,7 +47,7 @@ df <- df %>%
 fig <-  ggplot(df,aes(ID, AAPL.Close, frame = frame)) +
   geom_line()
   
-fig <-  ggplotly(p) %>%
+fig <-  ggplotly(fig) %>%
   layout(
     title = "AAPL: Last 30 days",
     yaxis = list(

@@ -32,7 +32,7 @@ fig <-  ggplot(dat, aes(x=rating)) +
     geom_vline(aes(xintercept=mean(rating, na.rm=T)),   # Ignore NA values for mean
                color="red", linetype="dashed", size=1)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 
 fig
@@ -52,7 +52,7 @@ fig <-  ggplot(dat, aes(x=rating, fill=cond)) +
     geom_vline(data=cdat, aes(xintercept=rating.mean),
                linetype="dashed", size=1)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 
 fig
@@ -72,7 +72,7 @@ fig <-  ggplot(dat, aes(x=rating)) + geom_histogram(binwidth=.5, colour="black",
     geom_vline(data=cdat, aes(xintercept=rating.mean),
                linetype="dashed", size=1, colour="red")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 
 fig
@@ -93,7 +93,7 @@ fig <-  ggplot(dat, aes(x=rating, colour=cond)) +
                linetype="dashed", size=1)
 
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 
 fig
@@ -134,9 +134,9 @@ fig <-  ggplot(dat, aes(x=xval, y=yval, colour=cond)) +
   geom_point()
 
 # Add a horizontal line
-fig <-  p + geom_hline(aes(yintercept=10))
+fig <-  fig  geom_hline(aes(yintercept=10))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 
 fig
@@ -180,11 +180,11 @@ mean1 <- mean(dat[dat$cond == "control", "xval"])
 mean2 <- mean(dat[dat$cond == "treatment", "xval"])
 
 # Add colored lines for the mean xval of each group
-fig <-  p + 
+fig <-  fig  
   geom_vline(aes(xintercept=mean1), colour="green") + 
   geom_vline(aes(xintercept=mean2), colour="lightblue")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 
 fig
@@ -224,10 +224,10 @@ dat <- read.table(header=TRUE, text='
 fig <-  ggplot(dat, aes(x=xval, y=yval, colour=cond)) + geom_point()
 
 # Add a red dashed vertical line
-fig <-  p + geom_hline(aes(yintercept=10)) +
+fig <-  fig  geom_hline(aes(yintercept=10)) +
     geom_vline(aes(xintercept=11.5), colour="#BB0000", linetype="dashed")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

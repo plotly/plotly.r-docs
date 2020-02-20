@@ -22,9 +22,9 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(plotly)
 
 fig <-  qplot(speed, dist, data=cars)
-fig <-  p + geom_smooth(method = "glm", formula = y~x, family = gaussian(link = 'log'))
+fig <-  fig  geom_smooth(method = "glm", formula = y~x, family = gaussian(link = 'log'))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -78,7 +78,7 @@ fig <-  ggplot(the.data, aes( year, value ) ) +
     geom_smooth(aes( group = 1 )) +
     geom_hline(yintercept = 50)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -124,7 +124,7 @@ fig <-  ggplot(data = Batting_early_top10, aes(x = career.year, y = HR/AB)) +
   facet_wrap(~playerID, ncol = 3) + 
   geom_smooth()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

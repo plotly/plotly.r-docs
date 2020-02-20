@@ -28,7 +28,7 @@ fig <-  ggplot(df, aes(carat, price, color = color, alpha = cut)) +
   theme(axis.text.x = element_text(colour = "#ff6666", size = 20), 
         axis.text.y = element_text(colour = "#668cff", size = 20))
   
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -45,7 +45,7 @@ fig <-  ggplot(df, aes(carat, price, color = cut)) +
   geom_point() + 
   theme(axis.text = element_blank())
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -65,7 +65,7 @@ fig <-  ggplot(ds, aes(x = x, fill = y)) +
   theme(axis.text.x = element_text(angle = 90)) + 
   ggtitle("Vertical Axis Labels")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -85,7 +85,7 @@ fig <-  ggplot(ds, aes(x = x, fill = y)) +
   theme(axis.text.x = element_text(angle = 45)) + 
   ggtitle("Angle Axis Labels")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

@@ -27,7 +27,7 @@ df <- melt(volcano)
 fig <-  ggplot(df, aes(Var1, Var2, z= value)) +
   geom_contour() +
   scale_fill_distiller(palette = "Spectral", direction = -1)
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -44,7 +44,7 @@ fig <-  ggplot(df, aes(Var1, Var2, z= value, colour=stat(level))) +
   geom_contour() +
   scale_colour_distiller(palette = "YlGn", direction = 1)
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Filled Plot
@@ -59,6 +59,6 @@ fig <-  ggplot(df, aes(Var1, Var2, z= value)) +
   stat_contour(geom="polygon",aes(fill=stat(level))) +
   scale_fill_distiller(palette = "Spectral", direction = -1)
 
-ggplotly(p)
+ggplotly(fig)
 ```
 

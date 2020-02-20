@@ -30,7 +30,7 @@ fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   labs(title = "Likelihood of swinging and missing on a fastball",
        y = "spin rate (rpm)")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Adjusting appearance
@@ -50,7 +50,7 @@ fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   labs(title = "Likelihood of swinging and missing on a fastball",
        y = "spin rate (rpm)")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### geom\_tile with viridis colour scheme
@@ -68,6 +68,6 @@ fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
        y = "spin rate (rpm)") +
   theme_light()
 
-ggplotly(p)
+ggplotly(fig)
 ```
 

@@ -33,7 +33,7 @@ fig <-  ggplot(data = df,aes(x = x,y = y)) +
     geom_errorbar(aes(ymin = ymin,ymax = ymax)) + 
     geom_errorbarh(aes(xmin = xmin,xmax = xmax))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -54,7 +54,7 @@ fig <-  ggplot(population, aes(x=Year, y=Population,
   geom_point(pch=2)+
   geom_errorbar(width=0.9)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

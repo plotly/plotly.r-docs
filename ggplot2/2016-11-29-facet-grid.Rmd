@@ -25,9 +25,9 @@ library(plotly)
 fig <-  ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 
 # Divide by levels of "sex", in the vertical direction
-fig <-  p + facet_grid(sex ~ .)
+fig <-  fig  facet_grid(sex ~ .)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -41,9 +41,9 @@ library(plotly)
 fig <-  ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 
 # Divide by levels of "sex", in the horizontal direction
-fig <-  p + facet_grid(. ~ sex)
+fig <-  fig  facet_grid(. ~ sex)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -57,9 +57,9 @@ library(plotly)
 fig <-  ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 
 # Histogram of total_bill, divided by sex and smoker
-fig <-  p + facet_grid(sex ~ smoker)
+fig <-  fig  facet_grid(sex ~ smoker)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -73,9 +73,9 @@ library(plotly)
 fig <-  ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 
 # Same as above, with scales="free_y"
-fig <-  p + facet_grid(sex ~ smoker, scales="free_y")
+fig <-  fig  facet_grid(sex ~ smoker, scales="free_y")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -89,9 +89,9 @@ library(plotly)
 fig <-  ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 
 # With panels that have the same scaling, but different range (and therefore different physical sizes)
-fig <-  p + facet_grid(sex ~ smoker, scales="free", space="free")
+fig <-  fig  facet_grid(sex ~ smoker, scales="free", space="free")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -117,7 +117,7 @@ fig <-  ggplot(mymelt, aes(x = mydate, y = value)) +
           axis.ticks = element_blank(),
           panel.grid.minor = element_blank())
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -141,7 +141,7 @@ fig <-  ggplot(dat, aes(x=date, y=value, color=location, group=location)) +
     geom_line()+
     facet_grid(product ~ ., scale = "free_y")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

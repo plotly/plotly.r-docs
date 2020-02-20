@@ -43,7 +43,7 @@ fig <-  ggplot(economics, aes(x=date,y=unemploy)) +
   geom_text(data=df,aes(x=median_x,y=3000,label=name), size=3) +
   labs(title = "Unemmployment numbers since 1967",
        y = "No. unemployed (x 1000)")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -78,7 +78,7 @@ fig <-  ggplot(european_leaders, aes(xmin=stint_start, xmax=stint_end, ymin=vert
        size = NULL) +
   theme(axis.text.y = element_blank(), #y-axis doesn't have actual values; no need for labels
         axis.ticks.y = element_blank())
-fig <-  ggplotly(p, tooltip = c("label", "text")) #how to select what shows on the tooltip
+fig <-  ggplotly(fig, tooltip = c("label", "text")) #how to select what shows on the tooltip
 
 fig
 ```

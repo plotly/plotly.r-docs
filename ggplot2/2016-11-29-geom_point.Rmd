@@ -31,7 +31,7 @@ dat <- data.frame(cond = rep(c("A", "B"), each=10),
 fig <-  ggplot(dat, aes(x=xvar, y=yvar)) +
     geom_point(shape=1)      # Use hollow circles
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -52,7 +52,7 @@ fig <-  ggplot(dat, aes(x=xvar, y=yvar)) +
     geom_smooth(method=lm)   # Add linear regression line
 
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -73,7 +73,7 @@ fig <-  ggplot(dat, aes(x=xvar, y=yvar)) +
     geom_smooth(method=lm,   # Add linear regression line
                 se=FALSE)    # Don't add shaded confidence region
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -95,7 +95,7 @@ fig <-  ggplot(dat, aes(x=xvar, y=yvar)) +
 # > geom_smooth: method="auto" and size of largest group is less than 1000, so using loess.
 # Use 'method = x' to change the smoothing method.
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -117,9 +117,9 @@ df <- data.frame(x = c(x1, x2), y = c(y1, y2), A = A)
 fm <- lm(y ~ x + A, data = df)
 
 fig <-  ggplot(data = cbind(df, pred = predict(fm)), aes(x = x, y = y, color = A))
-fig <-  p + geom_point() + geom_line(aes(y = pred))
+fig <-  fig  geom_point() + geom_line(aes(y = pred))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -137,7 +137,7 @@ fig <-  ggplot(hist, aes(x=weekday, y=counts, group=1)) +
     geom_point(stat='summary', fun.y=sum) +
     stat_summary(fun.y=sum, geom="line")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -152,7 +152,7 @@ dat <- data.frame(x = sample(1:10), y = sample(1:10), order = sample(1:10))
 fig <-  ggplot(dat[order(dat$order),], aes(x, y)) + geom_point() + geom_text(aes(y = y + 0.25,label =      order)) +
      geom_path()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -165,7 +165,7 @@ library(plotly)
 fig <-  ggplot(mtcars,aes(mpg,qsec))+geom_point() +
   geom_segment(aes(x=15,xend=20,y=18,yend=18))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -183,9 +183,9 @@ df <- data.frame(time=as.factor(c(1,1,2,2,3,3,4,4,5,5)),
 
 fig <-  ggplot(df, aes(time, value, group=side, colour=side)) + 
      geom_line(size=1)
-fig <-  p + geom_point()
+fig <-  fig  geom_point()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -204,7 +204,7 @@ fig <-  qplot(data=dd, x=x, y=y, color=fac)+
     geom_abline(slope=coef["x:faca"], intercept=coef["(Intercept)"])+
     geom_abline(slope=coef["x:facb"], intercept=coef["(Intercept)"])
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

@@ -34,7 +34,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
        x = "Density Index\nfrom CityLab",
        y = "Margin of Victory/Defeat")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Flipping the Axes
@@ -54,7 +54,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
        y = "Margin of Victory/Defeat") +
   coord_flip()
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Add facetting
@@ -75,7 +75,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
        y = "Margin of Victory/Defeat") +
   coord_flip()
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Customized Appearance
@@ -101,7 +101,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
         text = element_text(family = 'Fira Sans'),
         legend.position = "none")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Rotated Axis Text
@@ -126,5 +126,5 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
         text = element_text(family = 'Fira Sans'),
         legend.position = "none")
 
-ggplotly(p)
+ggplotly(fig)
 ```

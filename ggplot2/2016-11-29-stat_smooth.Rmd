@@ -22,9 +22,9 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(plotly)
 
 fig <-  ggplot(mpg, aes(displ, hwy))
-fig <-  p + geom_point() + stat_smooth()
+fig <-  fig  geom_point() + stat_smooth()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -46,7 +46,7 @@ fig <-  ggplot(DF, aes(x = x, y = y)) + geom_point() +
     stat_smooth(method = 'nls', formula = y ~ a * log(x) +b, aes(colour = 'logarithmic'), se = FALSE, start = list(a=1,b=1)) +
     stat_smooth(method = 'nls', formula = y ~ a*exp(b *x), aes(colour = 'Exponential'), se = FALSE, start = list(a=1,b=1))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -70,7 +70,7 @@ fig <-  ggplot(df,aes(x=x,y=y)) +
     facet_grid(f1~f2) +
     stat_smooth(method="lm")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -103,7 +103,7 @@ fig <-  ggplot(ds, aes(x = data)) +
   scale_linetype_manual(name = "Fit Type", values = c(2, 2)) + 
   ggtitle("Manual Legend for Stat Smooth")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

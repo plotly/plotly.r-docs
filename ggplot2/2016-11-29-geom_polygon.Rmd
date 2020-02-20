@@ -40,7 +40,7 @@ datapoly <- merge(values, positions, by=c("id"))
 
 fig <-  ggplot(datapoly, aes(x=x, y=y)) + geom_polygon(aes(fill=value, group=id))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -67,7 +67,7 @@ library(proto) #source_url("https://raw.github.com/JoFrhwld/FAAV/master/r/stat-e
 fig <-  qplot(data = df, x = x, y = y, colour = class) +
   stat_ellipse(geom = "polygon", alpha = 1/2, aes(fill = class))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -83,7 +83,7 @@ fig <-  ggplot(mtcars, aes(hp, wt)) +
   geom_polygon(data=tmp, aes(x, y), fill="#d8161688") +
   geom_point()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -106,7 +106,7 @@ df.t<-data.table(rbind( df[,list(Product,X=minX,Y=minY)],
 fig <-  ggplot(df,aes(xmin=minX,xmax=maxX,ymin=minY,ymax=maxY,fill=Product))+
   geom_rect()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -129,7 +129,7 @@ fig <-  ggplot(data=dat, aes(x=x)) +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -187,7 +187,7 @@ fig <-  ggplot(county_df, aes(long, lat, group = group)) +
   geom_polygon(data = state_df, colour = "black", fill = NA) + 
   theme_void()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -244,7 +244,7 @@ fig <-  ggplot(US, aes(long, lat, group = group)) +
   scale_fill_gradientn(colours=c(blue,"white", red))  +
   theme_void()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

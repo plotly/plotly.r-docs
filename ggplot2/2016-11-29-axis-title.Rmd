@@ -28,7 +28,7 @@ fig <-  ggplot(df, aes(carat, price)) +
   geom_point() + 
   labs(title = "Diamonds", x = "x-axis -> Carat", y = "y-axis -> Price")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 # Alternatively use
 fig <-  ggplot(df, aes(carat, price)) + 
@@ -37,7 +37,7 @@ fig <-  ggplot(df, aes(carat, price)) +
   xlab("x-axis -> Carat") + 
   ylab("y-axis -> Price")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -57,7 +57,7 @@ fig <-  ggplot(df, aes(carat, price)) +
         axis.title.x = element_text(size = 20),  
         axis.title.y = element_text(size = 20))  
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -77,7 +77,7 @@ fig <-  ggplot(df, aes(carat, price)) +
         axis.title.x = element_text(size = 20, colour = "#6699ff"),  
         axis.title.y = element_text(size = 20, colour = "#ff8080"))  
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

@@ -32,7 +32,7 @@ fig <-  ggplot(flightdata, aes(y=airline, x=dest, colour = dest, group=airport))
        y = "Airline",
        size = "")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Adding a Third Variable
@@ -50,7 +50,7 @@ fig <-  ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport
        y = "Airline",
        size = "")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Customized appearance
@@ -72,7 +72,7 @@ fig <-  ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport
        y = "Airline",
        size = "")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### geom\_count vs geom\_point
@@ -93,7 +93,7 @@ fig <-  ggplot(df, aes(x=abv, y=ibu, colour=style2)) +
   theme(legend.position = "none") +
   facet_wrap(~style2)
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ```{r}
@@ -111,5 +111,5 @@ fig <-  ggplot(df, aes(x=abv, y=ibu, colour=style2)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(p)
+ggplotly(fig)
 ```

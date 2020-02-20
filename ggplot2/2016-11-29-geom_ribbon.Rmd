@@ -77,14 +77,14 @@ sim.data$lo <- inv.logit(pred$fit - 2 * pred$se.fit)
 sim.data$hi <- inv.logit(pred$fit + 2 * pred$se.fit)
 
 fig <-  ggplot(titanic3, aes(x = age, y = survived))
-fig <-  p + geom_point()
-fig <-  p + facet_grid(sex ~ pclass)
-fig <-  p + geom_line(data = sim.data, aes(y = mean))
-fig <-  p + geom_ribbon(data = sim.data, aes(y = mean, ymin = lo, ymax = hi),
+fig <-  fig + geom_point()
+fig <-  fig + facet_grid(sex ~ pclass)
+fig <-  fig + geom_line(data = sim.data, aes(y = mean))
+fig <-  fig + geom_ribbon(data = sim.data, aes(y = mean, ymin = lo, ymax = hi),
                      alpha = .25)
-fig <-  p + labs(x = "Passenger Age", y = "Probability of Survival")
+fig <-  fig + labs(x = "Passenger Age", y = "Probability of Survival")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -101,8 +101,8 @@ n <- 100
 df <- data.frame(location = rep(LETTERS[1:4], n),
                  score    = sample(45:80, 4*n, replace = TRUE))
 
-df$p    <- inv.logit(0.075 * df$score + rep(c(-4.5, -5, -6, -2.8), n))
-df$pass <- sapply(df$p, function(x){rbinom(1, 1, x)})
+df$fig    <- inv.logit(0.075 * df$score + rep(c(-4.5, -5, -6, -2.8), n))
+df$pass <- sapply(df$fig, function(x){rbinom(1, 1, x)})
 
 g <- glm(pass ~ location + score, data = df, family = 'binomial')
 
@@ -121,7 +121,7 @@ fig <-  ggplot(df,aes(x = score, y = pass)) +
     geom_ribbon(data = new.data,aes(y = pred.full, ymin = ymin, ymax = ymax),alpha = 0.25) +
     geom_line(data = new.data,aes(y = pred.full),colour = "blue")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -165,7 +165,7 @@ geom_ribbon(aes(ymin=pred-2*SE,ymax=pred+2*SE),alpha=0.2,fill="blue") +
 geom_point(data=dtfr,aes(x=x,y=y), size=1) +
 scale_y_continuous("y")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -188,7 +188,7 @@ mfig <-  within(mp,
              wow <- rnorm(N)*wav+rnorm(N)*wav^3
          })
 
-m01 <- gls(wow~poly(wav,3), data=mp, correlation = corARMA(p=1))
+m01 <- gls(wow~poly(wav,3), data=mp, correlation = corARMA(fig=1))
 
 fit <- predict(m01)
 
@@ -204,7 +204,7 @@ fig <-  ggplot(mp, aes(year, wow))+
     geom_line(data=predframe)+
     geom_ribbon(data=predframe,aes(ymin=lwr,ymax=upr),alpha=0.3)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -233,7 +233,7 @@ fig <-  ggplot()+geom_ribbon(data=ribbon,aes(ymin=min,ymax=max,x=x.ribbon,fill='
     scale_colour_manual(name = 'the colour', 
          values =c('black'='black','red'='red'))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

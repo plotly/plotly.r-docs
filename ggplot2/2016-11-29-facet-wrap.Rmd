@@ -24,9 +24,9 @@ library(plotly)
 fig <-  ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 
 # Divide by day, going horizontally and wrapping with 2 columns
-fig <-  p + facet_wrap( ~ day, ncol=2)
+fig <-  fig  facet_wrap( ~ day, ncol=2)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -51,7 +51,7 @@ tolerance <- within(tolerance, {
 fig <-  ggplot(data = tolerance, aes(x = time, y = tolerance)) + geom_point() +
     stat_smooth(method = "lm", se = FALSE) + facet_wrap(~id)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -67,7 +67,7 @@ fig <-  ggplot(mpg, aes(displ, hwy))+
   stat_smooth()+
   facet_wrap(~year)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -89,7 +89,7 @@ fig <-  ggplot(df, aes(carat, price)) +
   geom_point() + 
   facet_wrap(~ clarity)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -112,7 +112,7 @@ fig <-  ggplot(df, aes(carat, price)) +
   facet_wrap(~ clarity) + 
   ggtitle("Diamonds dataset facetted by clarity")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -135,7 +135,7 @@ fig <-  ggplot(df, aes(carat, price)) +
   facet_wrap(~ clarity) + 
   ggtitle("Diamonds dataset facetted by clarity")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

@@ -34,7 +34,7 @@ df <- data.frame(
 fig <-  ggplot(df, aes(x, y)) +
     geom_point(aes(frame = f))
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -50,7 +50,7 @@ fig <-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
   geom_point(aes(size = pop, frame = year, ids = country)) +
   scale_x_log10()
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -60,7 +60,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  p %>% 
+fig <-  fig %>% 
   animation_opts(
     1000, easing = "elastic", redraw = FALSE
   )
@@ -73,7 +73,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  p %>% 
+fig <-  fig %>% 
   animation_button(
     x = 1, xanchor = "right", y = 0, yanchor = "bottom"
   )
@@ -86,7 +86,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  p %>%
+fig <-  fig %>%
   animation_slider(
     currentvalue = list(prefix = "YEAR ", font = list(color="red"))
   )
@@ -104,7 +104,7 @@ fig <-  ggplot(gapminder, aes(gdpPercap, lifeExp, color = continent)) +
   geom_point(aes(size = pop, frame = year, ids = country)) +
   scale_x_log10()
 
-fig <-  ggplotly(p) %>% 
+fig <-  ggplotly(fig) %>% 
   animation_opts(
     1000, easing = "elastic", redraw = FALSE
   ) %>% 

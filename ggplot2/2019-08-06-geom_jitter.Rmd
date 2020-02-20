@@ -33,7 +33,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, colour=region)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -51,7 +51,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -69,7 +69,7 @@ fig <-  ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -95,7 +95,7 @@ fig <-  ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -120,7 +120,7 @@ fig <-  ggplot(district_density,aes(x=region, y=dem_margin, colour=region)) +
        y = "Democratic Margin of Victory/Defeat") +
   theme(text = element_text(family = 'Fira Sans'),
         legend.position = "none")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -143,7 +143,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, colour=region,
        x = "Density Index from CityLab",
        y = "Democratic Margin of Victory/Defeat") +
   theme(text = element_text(family = 'Fira Sans'))
-fig <-  ggplotly(p, tooltip=c("district","y"))
+fig <-  ggplotly(fig, tooltip=c("district","y"))
 
 fig
 ```

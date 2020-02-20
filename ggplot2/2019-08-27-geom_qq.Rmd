@@ -27,7 +27,7 @@ stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/sto
 fig <-  ggplot(stocks, aes(sample=change)) +
   geom_qq()
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Adding geom\_qq\_line
@@ -41,7 +41,7 @@ stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/sto
 fig <-  ggplot(stocks, aes(sample=change))+
   geom_qq() + geom_qq_line()
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Comparing Multiple Distributions
@@ -56,7 +56,7 @@ fig <-  ggplot(stocks, aes(sample=change))+
   geom_qq_line() + geom_qq(aes(colour=stock), alpha=0.3, size=0.1) + 
   ylim(-10,10)
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Compared to Density Plot
@@ -70,7 +70,7 @@ stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/sto
 fig <-  ggplot(stocks, aes(x=change)) +
   geom_density(aes(color=stock))
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Facetted
@@ -85,5 +85,5 @@ fig <-  ggplot(stocks, aes(sample=change))+
   facet_wrap(~stock) +
   ylim(-10,10)
 
-ggplotly(p)
+ggplotly(fig)
 ```

@@ -30,7 +30,7 @@ fig <-  recent_turnout %>%
   labs(title = "Recent turnout in European Union countries",
        x = "Latest legislative or presidential election (whichever had higher turnout)",
        y = "May 2019 European Parliament election")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -52,7 +52,7 @@ fig <-  recent_turnout %>%
   labs(title = "Recent turnout in European Union countries",
        x = "Latest legislative or presidential election (whichever had higher turnout)",
        y = "May 2019 European Parliament election")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -75,7 +75,7 @@ fig <-  recent_turnout %>%
   labs(title = "Recent turnout in European Union countries",
        x = "Latest legislative or presidential election (whichever had higher turnout)",
        y = "May 2019 European Parliament election")
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -104,7 +104,7 @@ fig <-  recent_turnout %>%
                                                   round(unname(coef(m)[2]),2),
                                                   "x national turnout",
                                                   round(unname(coef(m)[1]),1)))
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -137,7 +137,7 @@ fig <-  recent_turnout %>%
   theme(plot.title = element_text(hjust = 0.5)) +
   guides(size=guide_legend(""), fill = FALSE) +
   theme(text = element_text(family = 'Fira Sans'))
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

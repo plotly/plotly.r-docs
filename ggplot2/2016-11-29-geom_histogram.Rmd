@@ -29,7 +29,7 @@ fig <-  ggplot(dat,aes(x=xx)) +
     geom_histogram(data=subset(dat,yy == 'b'),fill = "blue", alpha = 0.2) +
     geom_histogram(data=subset(dat,yy == 'c'),fill = "green", alpha = 0.2)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -48,7 +48,7 @@ fig <-  ggplot(data=df1, aes(x=rating, fill=cond)) +
     geom_vline(xintercept=c(.5,1)) +
     geom_histogram(binwidth=.5, position="dodge")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -67,7 +67,7 @@ fig <-  ggplot(df, aes(x=value, fill=subtype)) +
     geom_histogram(position="identity", alpha=0.4)+
     facet_grid(. ~ type)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```
@@ -83,7 +83,7 @@ fig <-  ggplot(df, aes(x=x)) +
     geom_histogram(aes(y = ..density..), binwidth=density(df$x)$bw) +
     geom_density(fill="red", alpha = 0.2)
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

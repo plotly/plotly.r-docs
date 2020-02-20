@@ -25,7 +25,7 @@ fig <-  ggplot(diamonds, aes(color, log10(price))) +
     geom_boxplot() +
     scale_y_continuous("Price, log10-scaling")
 
-fig <-  ggplotly(p)
+fig <-  ggplotly(fig)
 
 fig
 ```

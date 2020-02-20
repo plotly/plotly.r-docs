@@ -121,9 +121,9 @@ The scatter plots on the principal diagonal can be removed by setting `diagonal=
 ```{r}
 library(plotly)
 
-pfig <-  p %>% style(diagonal = list(visible = F))
+fig2 <-  fig %>% style(diagonal = list(visible = F))
 
-pp
+fig2
 ```
 
 To plot only the lower/upper half of the splom we switch the default `showlowerhalf=True` / `showupperhalf=False`:
@@ -131,9 +131,9 @@ To plot only the lower/upper half of the splom we switch the default `showlowerh
 ```{r}
 library(plotly)
 
-pfig <-  p %>% style(showupperhalf = F)
+fig2 <-  fig %>% style(showupperhalf = F)
 
-pp
+fig2
 ```
 
 Each list in the dimensions has a key, visible, set by default on True. We can choose to remove a variable from splom, by setting `visible=FALSE` in its corresponding dimension. In this case the default grid associated to the scatterplot matrix keeps its number of cells, but the cells in the row and column corresponding to the visible false dimension are empty:
@@ -141,10 +141,10 @@ Each list in the dimensions has a key, visible, set by default on True. We can c
 ```{r}
 library(plotly)
 
-pfig <-  plotly_build(p)
-pp$x$data[[1]]$dimensions[[3]] <- list(visible = F)
+fig2 <-  plotly_buildfig
+fig2$x$data[[1]]$dimensions[[3]] <- list(visible = F)
 
-pp
+fig2
 ```
 
 #### Splom for the diabetes dataset

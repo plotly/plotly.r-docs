@@ -31,7 +31,7 @@ fig <-  ggplot(df, aes(Var1, Var2)) +
        y="North to South",
        title = "Elevation map of Maunga Whau")
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
 ### Customized 2d Heatmap
@@ -53,6 +53,6 @@ fig <-  ggplot(df, aes(Var1, Var2)) +
   theme(text = element_text(family = 'Fira Sans'),
         plot.title = element_text(hjust = 0.5))
 
-ggplotly(p)
+ggplotly(fig)
 ```
 
