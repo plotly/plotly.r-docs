@@ -201,7 +201,7 @@ df.m <- melt(df)
 df.m <- rename(df.m, Period = Var1, Region = Var2)
 
 fig <-  ggplot(df.m, aes(x = Period, y = value/1e+06,fill = Region)) + ggtitle("Migration to the United States by Source Region (1820-2006), In Millions")
-fig <-  fig  geom_bar(stat = "identity", position = "stack")
+fig <-  fig + geom_bar(stat = "identity", position = "stack")
 
 fig <-  ggplotly(fig)
 

@@ -24,7 +24,7 @@ library(plotly)
 fig <-  ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 
 # Divide by day, going horizontally and wrapping with 2 columns
-fig <-  fig  facet_wrap( ~ day, ncol=2)
+fig <-  fig + facet_wrap( ~ day, ncol=2)
 
 fig <-  ggplotly(fig)
 

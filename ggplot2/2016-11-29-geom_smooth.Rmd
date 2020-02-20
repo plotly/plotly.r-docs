@@ -22,7 +22,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(plotly)
 
 fig <-  qplot(speed, dist, data=cars)
-fig <-  fig  geom_smooth(method = "glm", formula = y~x, family = gaussian(link = 'log'))
+fig <-  fig + geom_smooth(method = "glm", formula = y~x, family = gaussian(link = 'log'))
 
 fig <-  ggplotly(fig)
 

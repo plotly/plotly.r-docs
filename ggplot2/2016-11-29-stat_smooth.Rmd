@@ -22,7 +22,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(plotly)
 
 fig <-  ggplot(mpg, aes(displ, hwy))
-fig <-  fig  geom_point() + stat_smooth()
+fig <-  fig + geom_point() + stat_smooth()
 
 fig <-  ggplotly(fig)
 

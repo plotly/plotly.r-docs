@@ -134,7 +134,7 @@ fig <-  ggplot(dat, aes(x=xval, y=yval, colour=cond)) +
   geom_point()
 
 # Add a horizontal line
-fig <-  fig  geom_hline(aes(yintercept=10))
+fig <-  fig + geom_hline(aes(yintercept=10))
 
 fig <-  ggplotly(fig)
 
@@ -224,7 +224,7 @@ dat <- read.table(header=TRUE, text='
 fig <-  ggplot(dat, aes(x=xval, y=yval, colour=cond)) + geom_point()
 
 # Add a red dashed vertical line
-fig <-  fig  geom_hline(aes(yintercept=10)) +
+fig <-  fig + geom_hline(aes(yintercept=10)) +
     geom_vline(aes(xintercept=11.5), colour="#BB0000", linetype="dashed")
 
 fig <-  ggplotly(fig)

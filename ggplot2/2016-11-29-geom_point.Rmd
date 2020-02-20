@@ -117,7 +117,7 @@ df <- data.frame(x = c(x1, x2), y = c(y1, y2), A = A)
 fm <- lm(y ~ x + A, data = df)
 
 fig <-  ggplot(data = cbind(df, pred = predict(fm)), aes(x = x, y = y, color = A))
-fig <-  fig  geom_point() + geom_line(aes(y = pred))
+fig <-  fig + geom_point() + geom_line(aes(y = pred))
 
 fig <-  ggplotly(fig)
 
@@ -183,7 +183,7 @@ df <- data.frame(time=as.factor(c(1,1,2,2,3,3,4,4,5,5)),
 
 fig <-  ggplot(df, aes(time, value, group=side, colour=side)) + 
      geom_line(size=1)
-fig <-  fig  geom_point()
+fig <-  fig + geom_point()
 
 fig <-  ggplotly(fig)
 
