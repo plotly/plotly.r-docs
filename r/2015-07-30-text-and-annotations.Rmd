@@ -55,7 +55,7 @@ t <- list(
 
 fig <- plot_ly(data, x = ~wt, y = ~mpg, text = rownames(data))
 fig <- fig %>% add_markers()
-fig <- fig %>% add_text(textfont = t, textposition = "tofig right")
+fig <- fig %>% add_text(textfont = t, textposition = "top right")
 fig <- fig %>% layout(xaxis = list(range = c(1.6, 3.2)),
          showlegend = FALSE)
 

@@ -31,7 +31,7 @@ text = c(replicate(t*n, sample(c("A","T","G","C"), 1)))
 
 steps = list()
 for (e in c(0:(n-30))){
-  stefig <-  list(
+  step <-  list(
     list(
       args = list('xaxis.range', c(-0.5 + e, 30.5 + e)),
       method = "relayout",
