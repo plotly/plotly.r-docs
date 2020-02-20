@@ -142,7 +142,7 @@ fig <-  ggplot(df, aes(cut, price, fill = cut)) +
   ggtitle("Ignore outliers in ggplot2")
 
 # Need to modify the plotly object and make outlier points have opacity equal to 0
-fig <-  plotly_buildfig
+fig <-  plotly_build(fig)
 
 fig$data <- lapply(fig$data, FUN = function(x){
   x$marker = list(opacity = 0)
@@ -165,7 +165,7 @@ fig <-  ggplot(df, aes(cut, price, fill = cut)) +
   ggtitle("Adjust line width of boxplot in ggplot2")
 
 # Need to modify the plotly object to make sure line width is larger than default
-fig <-  plotly_buildfig
+fig <-  plotly_build(fig)
 
 fig$data <- lapply(fig$data, FUN = function(x){
   x$line = list(width = 10)

@@ -39,7 +39,7 @@ fig <-  ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
 gg <- ggplotly(fig)
 
-gg <- plotly_buildfig
+gg <- plotly_build(fig)
 
 gg$x$data[[1]]$line$color <- 'blue'
 
