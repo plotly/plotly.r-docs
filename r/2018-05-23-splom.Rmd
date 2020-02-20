@@ -141,7 +141,7 @@ Each list in the dimensions has a key, visible, set by default on True. We can c
 ```{r}
 library(plotly)
 
-fig2 <-  plotly_buildfig
+fig2 <-  plotly_build(fig)
 fig2$x$data[[1]]$dimensions[[3]] <- list(visible = F)
 
 fig2
