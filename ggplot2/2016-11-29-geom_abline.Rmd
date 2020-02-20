@@ -180,7 +180,7 @@ mean1 <- mean(dat[dat$cond == "control", "xval"])
 mean2 <- mean(dat[dat$cond == "treatment", "xval"])
 
 # Add colored lines for the mean xval of each group
-fig <-  fig  
+fig <-  fig +
   geom_vline(aes(xintercept=mean1), colour="green") + 
   geom_vline(aes(xintercept=mean2), colour="lightblue")
 
