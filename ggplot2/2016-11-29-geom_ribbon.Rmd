@@ -179,10 +179,10 @@ library(plotly)
 require(nlme)
 
 set.seed(101)
-mfig <- data.frame(year=1990:2010)
+mp <- data.frame(year=1990:2010)
 N <- nrow(mp)
 
-mfig <-  within(mp,
+mp <-  within(mp,
          {
              wav <- rnorm(N)*cos(2*pi*year)+rnorm(N)*sin(2*pi*year)+5
              wow <- rnorm(N)*wav+rnorm(N)*wav^3
