@@ -11,7 +11,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - cache2
+            - cache3
       - run:
           name: Install container-level dependencies
           command: |
@@ -25,9 +25,9 @@ jobs:
           name: install application-level dependencies
           command: |
             sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
-            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_deps(dependencies = TRUE) '
+            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_github("ropensci/plotly"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
-          key: cache2
+          key: cache3
           paths:
             - "/usr/local/lib/R/site-library"
       - store_artifacts:
