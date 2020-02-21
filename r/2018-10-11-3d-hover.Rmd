@@ -29,7 +29,7 @@ mtcars$am[which(mtcars$am == 0)] <- 'Automatic'
 mtcars$am[which(mtcars$am == 1)] <- 'Manual'
 mtcars$am <- as.factor(mtcars$am)
 
-fig <-  plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec, opacity = 0.8, color = ~am, colors = c('#BF382A', '#0C4B8E')) 
+fig <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec, opacity = 0.8, color = ~am, colors = c('#BF382A', '#0C4B8E')) 
 fig <- fig %>%
   add_markers() 
 fig <- fig %>%
@@ -64,7 +64,7 @@ attribute in the surface trace.
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(z = ~volcano) %>% add_surface(
+fig <- plot_ly(z = ~volcano) %>% add_surface(
   contours = list(
     x = list( 
       highlight = TRUE,

@@ -41,7 +41,7 @@ for (i in 1:length(df)) {
     n[[j]] <- df[[i]][[j]]$silt
   }
   
-  fig <- add_trace(
+ fig <- add_trace(
     fig,
     type = 'scatterternary',
     a = l,

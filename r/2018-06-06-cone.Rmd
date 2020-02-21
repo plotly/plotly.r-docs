@@ -21,7 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type= "cone",
   x= 1, y= 1, z= 1,
   u= 1, v= 1, w= 0
@@ -43,7 +43,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type="cone",
   x= c(1, 2, 3),
   y= c(1, 2, 3),
@@ -78,7 +78,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type="cone",
     y= c(1, 2, 3),
     z= c(1, 1, 1),
@@ -157,7 +157,7 @@ library(rjson)
 
 dat <- fromJSON(file='https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/gl3d_cone-wind.json')
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type="cone",
   x= dat$data[[1]]$x,
   y= dat$data[[1]]$y,
@@ -191,7 +191,7 @@ library(rjson)
 
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/vortex.csv')
 
-fig <-  plot_ly(
+fig <- plot_ly(
   df,
   type="cone",
   x= ~x,

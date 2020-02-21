@@ -21,7 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9), 
@@ -42,7 +42,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(28.8, 28.5, 37, 56.8, 69.7, 79.7, 78.5, 77.8, 74.1, 62.6, 45.3, 39.9), 
@@ -64,7 +64,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(0.18, 0.38, 0.56, 0.46, 0.59, 0.4, 0.78, 0.77, 0.74, 0.42, 0.45, 0.39), 
@@ -85,7 +85,7 @@ library(plotly)
 
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "scatter",
   x = df$Date, 
   y = df$AAPL.High,
@@ -120,7 +120,7 @@ fig
 ```{r}
 library(plotly)
 df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "scatter",
   x = df$Date, 
   y = df$mavg,
@@ -174,7 +174,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "scatter",
   x = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), 
   y = c(68000, 52000, 60000, 20000, 95000, 40000, 60000, 79000, 74000, 42000, 20000, 90000),

@@ -38,9 +38,9 @@ positions <- data.frame(
 
 datapoly <- merge(values, positions, by=c("id"))
 
-fig <-  ggplot(datapoly, aes(x=x, y=y)) + geom_polygon(aes(fill=value, group=id))
+p <- ggplot(datapoly, aes(x=x, y=y)) + geom_polygon(aes(fill=value, group=id))
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -64,10 +64,10 @@ library(devtools)
 library(ggplot2)
 library(proto) #source_url("https://raw.github.com/JoFrhwld/FAAV/master/r/stat-ellipse.R")
 
-fig <-  qplot(data = df, x = x, y = y, colour = class) +
+p <- qplot(data = df, x = x, y = y, colour = class) +
   stat_ellipse(geom = "polygon", alpha = 1/2, aes(fill = class))
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -79,11 +79,11 @@ library(plotly)
 
 tmp <-  with(mtcars, data.frame(x=c(0, 0, max(wt)*35), y=c(0, max(wt), max(wt))))
 
-fig <-  ggplot(mtcars, aes(hp, wt)) +
+p <- ggplot(mtcars, aes(hp, wt)) +
   geom_polygon(data=tmp, aes(x, y), fill="#d8161688") +
   geom_point()
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -103,10 +103,10 @@ df.t<-data.table(rbind( df[,list(Product,X=minX,Y=minY)],
        df[,list(Product,X=maxX,Y=maxY)]))[
       order(Product,X,Y)]
 
-fig <-  ggplot(df,aes(xmin=minX,xmax=maxX,ymin=minY,ymax=maxY,fill=Product))+
+p <- ggplot(df,aes(xmin=minX,xmax=maxX,ymin=minY,ymax=maxY,fill=Product))+
   geom_rect()
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -122,14 +122,14 @@ dat <- data.frame(
   norm = dnorm(x,mean=0,sd=0.2),
   logistic = dlogis(x,location=0,scale=0.2), x = x
 )
-fig <-  ggplot(data=dat, aes(x=x)) +
+p <- ggplot(data=dat, aes(x=x)) +
   geom_polygon(aes(y=norm), fill="red", alpha=0.6) +
   geom_polygon(aes(y=logistic), fill="blue", alpha=0.6) +
   xlab("z") + ylab("") +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0))
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -166,7 +166,7 @@ zp3 <- zp3 + geom_point(size=1)
 zp3 <- zp3 + coord_equal()
 zp3 <- zp3 + scale_fill_manual(values = colorRampPalette(rev(brewer.pal(11, "Spectral")))(setK))
 
-fig <-  ggplotly(zp3)
+fig <- ggplotly(zp3)
 
 fig
 ```
@@ -182,12 +182,12 @@ county_df <- map_data("county")
 state_df <- map_data("state")
 
 # create state boundaries
-fig <-  ggplot(county_df, aes(long, lat, group = group)) +
+p <- ggplot(county_df, aes(long, lat, group = group)) +
   geom_polygon(colour = alpha("black", 1/2), fill = NA) +
   geom_polygon(data = state_df, colour = "black", fill = NA) + 
   theme_void()
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -236,7 +236,7 @@ blue <- colorRampPalette(c("navy","royalblue","lightskyblue"))(200)
 red <- colorRampPalette(c("mistyrose", "red2","darkred"))(200)
 
 #plot
-fig <-  ggplot(US, aes(long, lat, group = group)) +
+p <- ggplot(US, aes(long, lat, group = group)) +
   geom_polygon(aes(fill = Percent),
                colour = alpha("white", 1/2), size = 0.05)  +
   geom_polygon(data = state_df, colour = "white", fill = NA) +
@@ -244,7 +244,7 @@ fig <-  ggplot(US, aes(long, lat, group = group)) +
   scale_fill_gradientn(colours=c(blue,"white", red))  +
   theme_void()
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

@@ -27,7 +27,7 @@ Funnel charts are often used to represent data in different stages of a business
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-fig <-  plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(
   type = "funnel",
@@ -48,7 +48,7 @@ This example uses [textposition](https://plot.ly/python/reference/#scatter-textp
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-fig <-  plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(type = "funnel",
             y = c("Website visit", "Downloads", "Potential customers", "Requested price", "Finalized"),
@@ -72,7 +72,7 @@ fig
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = "funnel",
     name = 'Montreal',
     y = c("Website visit", "Downloads", "Potential customers", "Requested price"),
@@ -109,7 +109,7 @@ fig
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "funnelarea",
   text = c("The 1st","The 2nd", "The 3rd", "The 4th", "The 5th"),
   values = c(5, 4, 3, 2, 1))
@@ -122,7 +122,7 @@ fig
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "funnelarea",
   values = c(5, 4, 3, 2, 1),
   text = c("The 1st","The 2nd", "The 3rd", "The 4th", "The 5th"),
@@ -140,7 +140,7 @@ fig
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = "funnelarea",
     scalegroup = "first",
     values = c(500, 450, 340, 230, 220, 110),

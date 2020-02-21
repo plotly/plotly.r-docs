@@ -27,7 +27,7 @@ To draw a line on your map, you either can use [Scattermapbox](https://plot.ly/r
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = 'scattermapbox',
   mode = "markers+lines",
   lon = c(10, 20, 30),

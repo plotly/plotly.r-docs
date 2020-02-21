@@ -29,7 +29,7 @@ fig2 <- plot_ly(z = ~volcano, scene='scene2', lighting = list(ambient = 0.9))
 fig2 <- fig2 %>%
   add_surface(showscale=FALSE)
 
-fig <-  subplot(fig1, fig2) 
+fig <- subplot(fig1, fig2) 
 fig <- fig %>%
   layout(title = "Ambient Lighting",
          grid = list(rows = 1, columns = 2,
@@ -55,7 +55,7 @@ fig2  <- plot_ly(z = ~volcano, scene='scene2', lighting = list(roughness = 0.9))
 fig2 <-  fig2 %>%
   add_surface(showscale=FALSE)
 
-fig <-  subplot(fig1, fig2) 
+fig <- subplot(fig1, fig2) 
 fig <- fig %>%
   layout(title = "Roughness",
          grid = list(rows = 1, columns = 2,
@@ -107,7 +107,7 @@ fig2 <- plot_ly(z = ~volcano, scene='scene2', lighting = list(specular = 1.9))
 fig2 <- fig2 %>%
   add_surface(showscale=FALSE)
 
-fig <-  subplot(fig1, fig2) 
+fig <- subplot(fig1, fig2) 
 fig <- fig %>%
   layout(title = "Specular Reflection",
          grid = list(rows = 1, columns = 2,
@@ -133,7 +133,7 @@ fig2 <- plot_ly(z = ~volcano, scene='scene2', lighting = list(fresnel = 4.5))
 fig2 <- fig2 %>%
   add_surface(showscale=FALSE)
 
-fig <-  subplot(fig1, fig2) 
+fig <- subplot(fig1, fig2) 
 fig <- fig %>%
   layout(title = "Fresnel",
          grid = list(rows = 1, columns = 2,

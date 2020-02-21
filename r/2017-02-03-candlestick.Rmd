@@ -28,7 +28,7 @@ getSymbols("AAPL",src='yahoo')
 df <- data.frame(Date=index(AAPL),coredata(AAPL))
 df <- tail(df, 30)
 
-fig  <- df 
+fig <- df 
 fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low) 
@@ -48,7 +48,7 @@ getSymbols("AAPL",src='yahoo')
 df <- data.frame(Date=index(AAPL),coredata(AAPL))
 df <- tail(df, 30)
 
-fig  <- df 
+fig <- df 
 fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low) 

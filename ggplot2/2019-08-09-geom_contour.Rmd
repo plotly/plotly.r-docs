@@ -24,10 +24,10 @@ library(plotly)
 library(reshape2)
 df <- melt(volcano)
 
-fig <-  ggplot(df, aes(Var1, Var2, z= value)) +
+p <- ggplot(df, aes(Var1, Var2, z= value)) +
   geom_contour() +
   scale_fill_distiller(palette = "Spectral", direction = -1)
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -40,11 +40,11 @@ library(plotly)
 library(reshape2)
 df <- melt(volcano)
 
-fig <-  ggplot(df, aes(Var1, Var2, z= value, colour=stat(level))) +
+p <- ggplot(df, aes(Var1, Var2, z= value, colour=stat(level))) +
   geom_contour() +
   scale_colour_distiller(palette = "YlGn", direction = 1)
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Filled Plot
@@ -55,10 +55,10 @@ library(plotly)
 library(reshape2)
 df <- melt(volcano)
 
-fig <-  ggplot(df, aes(Var1, Var2, z= value)) +
+p <- ggplot(df, aes(Var1, Var2, z= value)) +
   stat_contour(geom="polygon",aes(fill=stat(level))) +
   scale_fill_distiller(palette = "Spectral", direction = -1)
 
-ggplotly(fig)
+ggplotly(p)
 ```
 

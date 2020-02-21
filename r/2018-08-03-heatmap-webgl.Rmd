@@ -30,7 +30,7 @@ fr <- file.remove(tmpf) # remove the downloaded temp file
 
 zdata = rowSums(data*255, dims = 2)
 
-fig <-  plot_ly(
+fig <- plot_ly(
             z = zdata,
             colorscale = list(c(0,0.5,1),c("blue", "white", "red")),
             type = "heatmapgl"

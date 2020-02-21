@@ -23,7 +23,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "indicator",
   mode = "number+gauge+delta",
   gauge = list(shape = "bullet"),
@@ -43,7 +43,7 @@ Below is the same example using "steps" attribute, which is shown as shading, an
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "indicator",
   mode = "number+gauge+delta",
   value = 220,
@@ -74,7 +74,7 @@ The following example shows how to customize your charts. For more information a
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = "indicator",
   mode = "number+gauge+delta",
   value = 220,
@@ -104,7 +104,7 @@ Bullet charts can be stacked for comparing several values at once as illustrated
 ```{r}
 library(plotly)
 
-fig <-  plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(
     type = "indicator",

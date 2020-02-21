@@ -24,13 +24,13 @@ library(plotly)
 spinrates <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/spinrates.csv",
                       stringsAsFactors = FALSE)
 
-fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
+p <- ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   geom_tile(aes(fill = swing_miss)) +
   scale_fill_distiller(palette = "YlGnBu") +
   labs(title = "Likelihood of swinging and missing on a fastball",
        y = "spin rate (rpm)")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Adjusting appearance
@@ -43,14 +43,14 @@ library(plotly)
 spinrates <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/spinrates.csv",
                       stringsAsFactors = FALSE)
 
-fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
+p <- ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   geom_tile(aes(fill = swing_miss)) +
   scale_fill_distiller(palette = "YlGnBu", direction = 1) +
   theme_light() +
   labs(title = "Likelihood of swinging and missing on a fastball",
        y = "spin rate (rpm)")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### geom\_tile with viridis colour scheme
@@ -61,13 +61,13 @@ library(plotly)
 spinrates <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/spinrates.csv",
                       stringsAsFactors = FALSE)
 
-fig <-  ggplot(spinrates, aes(x=velocity, y=spinrate)) +
+p <- ggplot(spinrates, aes(x=velocity, y=spinrate)) +
   geom_tile(aes(fill = swing_miss)) +
   scale_fill_viridis_c(option = "B", direction = -1) +
   labs(title = "Likelihood of swinging and missing on a fastball",
        y = "spin rate (rpm)") +
   theme_light()
 
-ggplotly(fig)
+ggplotly(p)
 ```
 

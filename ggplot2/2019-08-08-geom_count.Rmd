@@ -25,14 +25,14 @@ It's good to show the full airport names for destinations, rather than just the 
 library(plotly)
 flightdata <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/flightdata.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(flightdata, aes(y=airline, x=dest, colour = dest, group=airport)) +
+p <- ggplot(flightdata, aes(y=airline, x=dest, colour = dest, group=airport)) +
   geom_count(alpha=0.5) +
   labs(title = "Flights from New York to major domestic destinations",
        x = "Origin and destination",
        y = "Airline",
        size = "")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Adding a Third Variable
@@ -42,7 +42,7 @@ By using facets, we can add a third variable: which of New York's three airports
 library(plotly)
 flightdata <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/flightdata.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport)) +
+p <- ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport)) +
   geom_count(alpha=0.5) +
   facet_grid(. ~ dest) +
   labs(title = "Flights from New York to major domestic destinations",
@@ -50,7 +50,7 @@ fig <-  ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport
        y = "Airline",
        size = "")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Customized appearance
@@ -61,7 +61,7 @@ library(plotly)
 library(LaCroixColoR)
 flightdata <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/flightdata.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport)) +
+p <- ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport)) +
   geom_count(alpha=0.5) +
   facet_grid(. ~ dest) +
   scale_colour_manual(values = lacroix_palette("PassionFruit", n=3)) +
@@ -72,7 +72,7 @@ fig <-  ggplot(flightdata, aes(y=airline, x=origin, colour=origin, group=airport
        y = "Airline",
        size = "")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### geom\_count vs geom\_point
@@ -88,12 +88,12 @@ df <- beers %>%
          ibu = round(ibu/10)*10) %>%
   filter(!is.na(style2))
 
-fig <-  ggplot(df, aes(x=abv, y=ibu, colour=style2)) +
+p <- ggplot(df, aes(x=abv, y=ibu, colour=style2)) +
   geom_count(alpha=0.5) +
   theme(legend.position = "none") +
   facet_wrap(~style2)
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ```{r}
@@ -103,7 +103,7 @@ beers <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/beer
 
 df <- filter(beers, !is.na(style2))
 
-fig <-  ggplot(df, aes(x=abv, y=ibu, colour=style2)) +
+p <- ggplot(df, aes(x=abv, y=ibu, colour=style2)) +
   geom_point(alpha=0.2, aes(text = label)) +
   theme(legend.position = "none") +
   facet_wrap(~style2) +
@@ -111,5 +111,5 @@ fig <-  ggplot(df, aes(x=abv, y=ibu, colour=style2)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(fig)
+ggplotly(p)
 ```

@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   labels = c("Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"),
   parents = c("", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"),
   values = c(10, 14, 12, 10, 2, 6, 6, 4, 4),
@@ -44,7 +44,7 @@ not take up all of the space below their parent (unless the parent is the root a
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   labels = c("Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"),
   parents = c("", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"),
   values = c(65, 14, 12, 10, 2, 6, 6, 4, 4),
@@ -83,7 +83,7 @@ d <- data.frame(
   stringsAsFactors = FALSE
 )
 
-fig <-  plot_ly(d, ids = ~ids, labels = ~labels, parents = ~parents, type = 'sunburst')
+fig <- plot_ly(d, ids = ~ids, labels = ~labels, parents = ~parents, type = 'sunburst')
 
 fig
 ```
@@ -95,7 +95,7 @@ library(plotly)
 
 d1 <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/coffee-flavors.csv')
 d2 <- read.csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/sunburst-coffee-flavors-complete.csv')
-fig <-  plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(
     ids = d1$ids,

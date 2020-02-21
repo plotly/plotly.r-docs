@@ -25,13 +25,13 @@ library(plotly)
 
 df <- melt(volcano)
 
-fig <-  ggplot(df, aes(Var1, Var2)) +
+p <- ggplot(df, aes(Var1, Var2)) +
   geom_raster(aes(fill=value)) +
   labs(x="West to East",
        y="North to South",
        title = "Elevation map of Maunga Whau")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Customized 2d Heatmap
@@ -43,7 +43,7 @@ library(plotly)
 
 df <- melt(volcano)
 
-fig <-  ggplot(df, aes(Var1, Var2)) +
+p <- ggplot(df, aes(Var1, Var2)) +
   geom_raster(aes(fill=value)) +
   scale_fill_distiller(palette = "Spectral", direction = -1) +
   labs(x="West to East",
@@ -53,6 +53,6 @@ fig <-  ggplot(df, aes(Var1, Var2)) +
   theme(text = element_text(family = 'Fira Sans'),
         plot.title = element_text(hjust = 0.5))
 
-ggplotly(fig)
+ggplotly(p)
 ```
 

@@ -81,7 +81,7 @@ aval[3][[1]]$visible = TRUE
 steps <- list()
 fig <- plot_ly()
 for (i in 1:11) {
-  fig <- add_lines(fig,x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
+ fig <- add_lines(fig,x=aval[i][[1]]$x,  y=aval[i][[1]]$y, visible = aval[i][[1]]$visible, 
                  name = aval[i][[1]]$name, type = 'scatter', mode = 'lines', hoverinfo = 'name', 
                  line=list(color='00CED1'), showlegend = FALSE)
   

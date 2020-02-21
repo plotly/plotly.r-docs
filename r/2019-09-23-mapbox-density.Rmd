@@ -28,7 +28,7 @@ library(plotly)
 
 quakes = read.csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv')
 
-fig <-  quakes 
+fig <- quakes 
 fig <- fig %>%
   plot_ly(
     type = 'densitymapbox',

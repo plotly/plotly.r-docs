@@ -24,12 +24,12 @@ library(plotly)
 
 dat <- data.frame(xx = c(runif(100,20,50),runif(100,40,80),runif(100,0,30)),yy = rep(letters[1:3],each = 100))
 
-fig <-  ggplot(dat,aes(x=xx)) +
+p <- ggplot(dat,aes(x=xx)) +
     geom_histogram(data=subset(dat,yy == 'a'),fill = "red", alpha = 0.2) +
     geom_histogram(data=subset(dat,yy == 'b'),fill = "blue", alpha = 0.2) +
     geom_histogram(data=subset(dat,yy == 'c'),fill = "green", alpha = 0.2)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -44,11 +44,11 @@ df1 <- data.frame(cond = factor( rep(c("A","B"), each=200) ),
 
 df2 <- data.frame(x=c(.5,1),cond=factor(c("A","B")))
 
-fig <-  ggplot(data=df1, aes(x=rating, fill=cond)) +
+p <- ggplot(data=df1, aes(x=rating, fill=cond)) +
     geom_vline(xintercept=c(.5,1)) +
     geom_histogram(binwidth=.5, position="dodge")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -63,11 +63,11 @@ df <- data.frame (type=rep(1:2, each=1000), subtype=rep(c("a","b"), each=500), v
 library(plyr)
 df.text<-ddply(df,.(type,subtype),summarise,mean.value=mean(value))
 
-fig <-  ggplot(df, aes(x=value, fill=subtype)) +
+p <- ggplot(df, aes(x=value, fill=subtype)) +
     geom_histogram(position="identity", alpha=0.4)+
     facet_grid(. ~ type)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -79,11 +79,11 @@ library(plotly)
 
 df <- data.frame(x = rnorm(1000))
 
-fig <-  ggplot(df, aes(x=x)) +
+p <- ggplot(df, aes(x=x)) +
     geom_histogram(aes(y = ..density..), binwidth=density(df$x)$bw) +
     geom_density(fill="red", alpha = 0.2)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

@@ -24,10 +24,10 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-fig <-  ggplot(stocks, aes(sample=change)) +
+p <- ggplot(stocks, aes(sample=change)) +
   geom_qq()
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Adding geom\_qq\_line
@@ -38,10 +38,10 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-fig <-  ggplot(stocks, aes(sample=change))+
+p <- ggplot(stocks, aes(sample=change))+
   geom_qq() + geom_qq_line()
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Comparing Multiple Distributions
@@ -52,11 +52,11 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-fig <-  ggplot(stocks, aes(sample=change))+
+p <- ggplot(stocks, aes(sample=change))+
   geom_qq_line() + geom_qq(aes(colour=stock), alpha=0.3, size=0.1) + 
   ylim(-10,10)
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Compared to Density Plot
@@ -67,10 +67,10 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-fig <-  ggplot(stocks, aes(x=change)) +
+p <- ggplot(stocks, aes(x=change)) +
   geom_density(aes(color=stock))
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Facetted
@@ -80,10 +80,10 @@ library(plotly)
 stocks <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/stockdata2.csv",
                    stringsAsFactors = FALSE)
 
-fig <-  ggplot(stocks, aes(sample=change))+
+p <- ggplot(stocks, aes(sample=change))+
   geom_qq_line() + geom_qq(aes(colour=stock), alpha=0.3, size=0.1) +
   facet_wrap(~stock) +
   ylim(-10,10)
 
-ggplotly(fig)
+ggplotly(p)
 ```

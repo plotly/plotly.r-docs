@@ -26,13 +26,13 @@ library(plotly)
 
 english_french <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/english_french.csv",stringsAsFactors = FALSE)
 
-fig <-  ggplot(english_french, aes(x=engperc,y=frenperc)) + 
+p <- ggplot(english_french, aes(x=engperc,y=frenperc)) + 
   geom_bin2d() +
   labs(title = "Distribution of Canadian areas by English and French fluency",
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "# of census \nsubdivisions")
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -43,14 +43,14 @@ Let's flip the colour scheme so that lighter colours denote larger numbers than 
 ```{r}
 library(plotly)
 
-fig <-  ggplot(english_french, aes(x=engperc,y=frenperc)) + 
+p <- ggplot(english_french, aes(x=engperc,y=frenperc)) + 
   geom_bin2d() +
   scale_fill_gradient(low="lightblue1",high="darkblue",trans="log10") +
   labs(title = "Distribution of Canadian towns by English and French fluency",
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "# of census \nsubdivisions")
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -61,14 +61,14 @@ In the previous graphs, each observation represented a single census subdivision
 ```{r}
 library(plotly)
 
-fig <-  ggplot(english_french, aes(x=engperc, y=frenperc, weight=total)) + 
+p <- ggplot(english_french, aes(x=engperc, y=frenperc, weight=total)) + 
   geom_bin2d() +
   scale_fill_gradient(low="lightblue1",high="darkblue",trans="log10") +
   labs(title = "Distribution of the Canadian population by English and French fluency",
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "population")
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 
 fig
@@ -80,7 +80,7 @@ We can facet the graphic with the "region" column, and set "bins" to 20, so that
 ```{r}
 library(plotly)
 
-fig <-  ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) + 
+p <- ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) + 
   geom_bin2d(bins = 20) +
   facet_wrap(~factor(region, levels = c("Atlantic","Québec","Ontario","Prairies","British Columbia"))) +
   scale_fill_gradient(low="lightblue1",high="darkblue",trans="log10") +
@@ -88,7 +88,7 @@ fig <-  ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) +
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "population")
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 
 fig
@@ -100,7 +100,7 @@ We can modify the graph's appearance - for example, if the grey background makes
 ```{r}
 library(plotly)
 
-fig <-  ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) + 
+p <- ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) + 
   geom_bin2d(bins = 20) +
   facet_wrap(~factor(region, levels = c("Atlantic","Québec","Ontario","Prairies","British Columbia"))) +
   scale_fill_gradient(low="lightblue1",high="darkblue",trans="log10") +
@@ -110,7 +110,7 @@ fig <-  ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) +
        fill = "population") +
   theme_bw() +
   theme(text = element_text(family = 'Fira Sans'))
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 
 fig

@@ -21,10 +21,10 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  ggplot(mpg, aes(displ, hwy))
-fig <-  fig + geom_point() + stat_smooth()
+p <- ggplot(mpg, aes(displ, hwy))
+p <- p + geom_point() + stat_smooth()
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -40,13 +40,13 @@ y <- jitter(x^2)
 
 DF <- data.frame(x, y)
 
-fig <-  ggplot(DF, aes(x = x, y = y)) + geom_point() +
+p <- ggplot(DF, aes(x = x, y = y)) + geom_point() +
     stat_smooth(method = 'lm', aes(colour = 'linear'), se = FALSE) +
     stat_smooth(method = 'lm', formula = y ~ poly(x,2), aes(colour = 'polynomial'), se= FALSE) +
     stat_smooth(method = 'nls', formula = y ~ a * log(x) +b, aes(colour = 'logarithmic'), se = FALSE, start = list(a=1,b=1)) +
     stat_smooth(method = 'nls', formula = y ~ a*exp(b *x), aes(colour = 'Exponential'), se = FALSE, start = list(a=1,b=1))
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -65,12 +65,12 @@ df <- data.frame(cbind(x,y))
 df$f1 <- f1
 df$f2 <- f2
 
-fig <-  ggplot(df,aes(x=x,y=y)) +
+p <- ggplot(df,aes(x=x,y=y)) +
     geom_point() +
     facet_grid(f1~f2) +
     stat_smooth(method="lm")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -94,7 +94,7 @@ ds <- data.frame(data = x,
 cols1 <- c("#ff8080", "#66b3ff")
 cols2 <- c("#ff4d4d", "#3399ff")
 
-fig <-  ggplot(ds, aes(x = data)) + 
+p <- ggplot(ds, aes(x = data)) + 
   geom_point(aes(y = Linear, color = "Linear"), size = 2, alpha = 0.5) + 
   geom_point(aes(y = Quadratic, color = "Non Linear"), size = 2, alpha = 0.5) + 
   stat_smooth(aes(x = data, y = Linear, linetype = "Linear Fit"), method = "lm", formula = y ~ x, se = F, size = 0.25, color = cols2[1]) + 
@@ -103,7 +103,7 @@ fig <-  ggplot(ds, aes(x = data)) +
   scale_linetype_manual(name = "Fit Type", values = c(2, 2)) + 
   ggtitle("Manual Legend for Stat Smooth")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

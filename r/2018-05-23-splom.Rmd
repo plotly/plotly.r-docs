@@ -23,7 +23,7 @@ The Plotly splom trace implementation for the scaterplot matrix does not require
 A trace of type splom is defined as follows:
 
 ```{r, results = 'hide', eval=FALSE}
-fig <-  plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(
     dimensions = list(
@@ -73,7 +73,7 @@ axis = list(showline=FALSE,
             gridcolor='#ffff',
             ticklen=4)
 
-fig <-  df 
+fig <- df 
 
 fig <- fig %>%
   plot_ly() 
@@ -175,7 +175,7 @@ axis = list(showline=FALSE,
             ticklen=4,
             titlefont=list(size=13))
 
-fig <-  df 
+fig <- df 
 
 fig <- fig %>%
   plot_ly() 

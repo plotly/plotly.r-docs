@@ -21,7 +21,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- plot_ly(type = 'scatter', mode = 'markers') 
 fig <- fig %>%
   add_trace(
     x = c(1:5), 
@@ -40,7 +40,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- plot_ly(type = 'scatter', mode = 'markers') 
 fig <- fig %>%
   add_trace(
     x = c(1:100), 
@@ -69,7 +69,7 @@ Set the horizontal alignment of the text within tooltip with [hoverlabel.align](
 ```{r}
 library(plotly)
 
-fig <-  plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(
     type = 'scatter',
@@ -97,7 +97,7 @@ fig
 
 ```{r}
 library(plotly)
-fig <-   plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(
     type = "pie",
@@ -118,7 +118,7 @@ library(plotly)
 
 d <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/job-automation-probability.csv')
 
-fig <-  d 
+fig <- d 
 
 fig <- fig %>%
   plot_ly(

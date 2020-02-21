@@ -34,7 +34,7 @@ library(sf)
 
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
-fig <-  plot_ly(nc)
+fig <- plot_ly(nc)
 
 fig
 ```
@@ -47,7 +47,7 @@ library(sf)
 
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
-fig <-  plot_geo(nc)
+fig <- plot_geo(nc)
 
 fig
 ```
@@ -63,7 +63,7 @@ Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 nc <- sf::st_read(system.file("shape/nc.shp", package = "sf"), quiet = TRUE)
 
-fig <-  plot_mapbox(nc, split=~NAME) 
+fig <- plot_mapbox(nc, split=~NAME) 
 fig <- fig %>%
   layout(
     mapbox = list(

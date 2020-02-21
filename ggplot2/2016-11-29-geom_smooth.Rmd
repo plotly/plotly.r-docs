@@ -21,10 +21,10 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  qplot(speed, dist, data=cars)
-fig <-  fig + geom_smooth(method = "glm", formula = y~x, family = gaussian(link = 'log'))
+p <- qplot(speed, dist, data=cars)
+p <- p + geom_smooth(method = "glm", formula = y~x, family = gaussian(link = 'log'))
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -73,12 +73,12 @@ the.data <- read.table( header=TRUE, sep=",",
 
 cutoff <- data.frame( x = c(-Inf, Inf), y = 50, cutoff = factor(50) )
 
-fig <-  ggplot(the.data, aes( year, value ) ) +
+p <- ggplot(the.data, aes( year, value ) ) +
     geom_point(aes( colour = source )) +
     geom_smooth(aes( group = 1 )) +
     geom_hline(yintercept = 50)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -119,12 +119,12 @@ tot_HR_late_srt <- arrange(tot_HR_late, desc(HR.total))
 top10_HR_hitters_late <- tot_HR_late_srt[1:10, "playerID"]
 Batting_early_top10 <- subset(Batting_early, playerID %in% top10_HR_hitters_early)
 
-fig <-  ggplot(data = Batting_early_top10, aes(x = career.year, y = HR/AB)) +
+p <- ggplot(data = Batting_early_top10, aes(x = career.year, y = HR/AB)) +
   geom_point() +
   facet_wrap(~playerID, ncol = 3) + 
   geom_smooth()
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

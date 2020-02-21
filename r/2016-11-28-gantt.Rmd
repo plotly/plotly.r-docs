@@ -41,7 +41,7 @@ fig <- plot_ly()
 # x-axis ticks are dates and handled automatically
 
 for(i in 1:(nrow(df) - 1)){
-  fig <- add_trace(fig,
+ fig <- add_trace(fig,
                  x = c(df$Start[i], df$Start[i] + df$Duration[i]),  # x0, x1
                  y = c(i, i),  # y0, y1
                  mode = "lines",

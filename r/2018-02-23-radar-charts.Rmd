@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = 'scatterpolar',
     r = c(39, 28, 8, 7, 28, 39),
     theta = c('A','B','C', 'D', 'E', 'A'),
@@ -45,7 +45,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = 'scatterpolar',
     fill = 'toself'
   ) 

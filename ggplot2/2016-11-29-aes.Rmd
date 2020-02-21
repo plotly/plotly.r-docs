@@ -25,11 +25,11 @@ ds <- data.frame(x = 1:10,
                  group = LETTERS[1:2])
 
 # Use the fill aesthetic to specify the fill color for the bars
-fig <-  ggplot(ds, aes(x, y)) +
+p <- ggplot(ds, aes(x, y)) +
   geom_bar(aes(fill = group), stat = "identity") +
   ggtitle("Filled bar chart")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -53,11 +53,11 @@ group <-  c(rep("A", length(x1)),
 ds <- data.frame(x, y, group)
 
 # Use the group aesthetic to ensure lines are drawn separately for each group
-fig <-  ggplot(ds, aes(x, y)) +
+p <- ggplot(ds, aes(x, y)) +
   geom_line(aes(group = group, color = group), size = 2) +
   ggtitle("Group specific line chart")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -71,12 +71,12 @@ ds <- data.frame(x = rnorm(10),
                  y = rnorm(10),
                  group = LETTERS[1:2])
 
-fig <-  ggplot(ds, aes(x, y)) +
+p <- ggplot(ds, aes(x, y)) +
   geom_point(aes(color = group), size = 7) +
   geom_text(aes(label = group), size = 4) +
   ggtitle("Annotation with labels")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -91,12 +91,12 @@ ds <- data.frame(x = letters[1:5],
                  group = LETTERS[1:4])
 
 # Use aes shape to map individual points and or different groups to different shapes
-fig <-  ggplot(ds, aes(x, y)) +
+p <- ggplot(ds, aes(x, y)) +
   geom_point(aes(color = group, shape = group), size = 5) +
   geom_line(aes(group = group, linetype = group)) +
   ggtitle("Groupwise shapes and line types")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

@@ -34,7 +34,7 @@ The following example uses the `Scattermapbox` trace and sets `fill = 'toself'`
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   fill = "toself",
   lon = c(-74, -70, -70, -74),
   lat = c(47, 47, 45, 45),
@@ -59,7 +59,7 @@ The following example shows how to use missing values in your data to provide ga
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   mode = "lines",
   fill = "toself",
   type = 'scattermapbox',
@@ -84,7 +84,7 @@ The second way is using the `scattermapbox` trace with the corresponding geojson
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = 'scattermapbox',
   mode = "markers",
   lon = c(-73.605), lat = c(45.51),

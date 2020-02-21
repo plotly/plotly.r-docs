@@ -30,10 +30,10 @@ dfGamma = data.frame(nu75 = rgamma(100, 0.75),
 
 dfGamma = stack(dfGamma)
 
-fig <-  ggplot(dfGamma, aes(x = values)) +
+p <- ggplot(dfGamma, aes(x = values)) +
   stat_density(aes(group = ind, color = ind),position="identity",geom="line")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -60,12 +60,12 @@ normaldens <- ddply(dd, "state", function(df) {
   )
 })
 
-fig <-  ggplot(dd, aes(predicted))  +
+p <- ggplot(dd, aes(predicted))  +
   geom_density() +
   geom_line(aes(y = density), data = normaldens, colour = "red") +
   facet_wrap(~ state)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -86,9 +86,9 @@ cukes$veg <- 'cuke'
 vegLengths <- rbind(carrots, cukes)
 
 #now make your lovely plot
-fig <-  ggplot(vegLengths, aes(length, fill = veg)) + geom_density(alpha = 0.2)
+p <- ggplot(vegLengths, aes(length, fill = veg)) + geom_density(alpha = 0.2)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -102,11 +102,11 @@ set.seed(123)
 df <- data.frame(x <- rchisq(1000, 5, 10),
                  group <-  sample(LETTERS[1:5], size = 1000, replace = T))
 
-fig <-  ggplot(df, aes(x, fill = group)) + 
+p <- ggplot(df, aes(x, fill = group)) + 
   geom_density(alpha = 0.5, position = "stack") + 
   ggtitle("stacked density chart")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -120,13 +120,13 @@ set.seed(123)
 df <- data.frame(x <- rchisq(1000, 5, 10),
                  group <-  sample(LETTERS[1:5], size = 1000, replace = T))
 
-fig <-  ggplot(df, aes(x)) + 
+p <- ggplot(df, aes(x)) + 
   geom_histogram(aes(y = ..density..), alpha = 0.7, fill = "#333333") + 
   geom_density(fill = "#ff4d4d", alpha = 0.5) + 
   theme(panel.background = element_rect(fill = '#ffffff')) + 
   ggtitle("Density with Histogram overlay")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -140,13 +140,13 @@ set.seed(123)
 df <- data.frame(x <- rchisq(1000, 10, 10),
                  y <- rnorm(1000))
 
-fig <-  ggplot(df, aes(x, y)) + 
+p <- ggplot(df, aes(x, y)) + 
   geom_point(alpha = 0.5) + 
   geom_density_2d() + 
   theme(panel.background = element_rect(fill = '#ffffff')) + 
   ggtitle("2D density plot with scatterplot overlay")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -156,12 +156,12 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  ggplot(diamonds, aes(x = price)) + 
+p <- ggplot(diamonds, aes(x = price)) + 
   geom_density(aes(fill = "epanechnikov"), kernel = "epanechnikov") + 
   facet_grid(~cut) + 
   ggtitle("Kernel density estimate with Facets")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -171,11 +171,11 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  ggplot(diamonds, aes(x = price)) + 
+p <- ggplot(diamonds, aes(x = price)) + 
   geom_density(aes(fill = color), alpha = 0.5) + 
   ggtitle("Kernel Density estimates by group")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

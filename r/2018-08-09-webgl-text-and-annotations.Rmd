@@ -42,7 +42,7 @@ for (e in c(0:(n-30))){
   steps[e] <- step
 }
 
-fig <-  plot_ly() 
+fig <- plot_ly() 
 fig <- fig %>%
   add_trace(
     type='heatmap',

@@ -26,13 +26,13 @@ library(plotly)
 
 english_french <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/english_french.csv",stringsAsFactors = FALSE)
 
-fig <-  ggplot(english_french, aes(x=engperc,y=frenperc)) + 
+p <- ggplot(english_french, aes(x=engperc,y=frenperc)) + 
   geom_hex() +
   labs(title = "Distribution of Canadian areas by English and French fluency",
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "# of census \nsubdivisions")
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -45,14 +45,14 @@ library(plotly)
 
 english_french <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/english_french.csv",stringsAsFactors = FALSE)
 
-fig <-  ggplot(english_french, aes(x=engperc,y=frenperc)) + 
+p <- ggplot(english_french, aes(x=engperc,y=frenperc)) + 
   geom_hex() +
   scale_fill_gradient(low="lightblue1",high="darkblue",trans="log10") +
   labs(title = "Distribution of Canadian towns by English and French fluency",
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "# of census \nsubdivisions")
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -65,14 +65,14 @@ library(plotly)
 
 english_french <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/english_french.csv",stringsAsFactors = FALSE)
 
-fig <-  ggplot(english_french, aes(x=engperc, y=frenperc, weight=total)) + 
+p <- ggplot(english_french, aes(x=engperc, y=frenperc, weight=total)) + 
   geom_hex() +
   scale_fill_gradient(low="lightblue1",high="darkblue",trans="log10") +
   labs(title = "Distribution of the Canadian population by English and French fluency",
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "population")
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -85,7 +85,7 @@ library(plotly)
 
 english_french <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/english_french.csv",stringsAsFactors = FALSE)
 
-fig <-  ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) + 
+p <- ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) + 
   geom_hex(bins = 20) +
   scale_fill_gradient(low="lightblue1",high="darkblue",trans="log10") +
   labs(title = "Distribution of Canadian towns by English and French fluency",
@@ -94,7 +94,7 @@ fig <-  ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) +
        fill = "population") +
   theme_bw() +
   theme(text = element_text(family = 'Fira Sans'))
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

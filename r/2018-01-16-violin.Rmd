@@ -22,7 +22,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <-  df 
+fig <- df 
 fig <- fig %>%
   plot_ly(
     y = ~total_bill,
@@ -54,7 +54,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <-  df 
+fig <- df 
 fig <- fig %>%
   plot_ly(
     x = ~day,
@@ -90,7 +90,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <-  df 
+fig <- df 
 fig <- fig %>%
   plot_ly(type = 'violin') 
 fig <- fig %>%
@@ -142,7 +142,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <-  df 
+fig <- df 
 fig <- fig %>%
   plot_ly(type = 'violin') 
 fig <- fig %>%
@@ -206,11 +206,11 @@ pointposMale <- c(-0.9,-1.1,-0.6,-0.3)
 pointposFemale <- c(0.45,0.55,1,0.4)
 showLegend <- c(T,F,F,F)
 
-fig <-  plot_ly(type = 'violin')
+fig <- plot_ly(type = 'violin')
 
 i = 0
 for (i in 1:length(unique(df$day))) {
-  fig <-  add_trace(
+ fig <- add_trace(
     fig,
     x = df$day[df$sex == 'Male' & df$day == unique(df$day)[i]],
     y = df$total_bill[df$sex == 'Male' & df$day == unique(df$day)[i]],

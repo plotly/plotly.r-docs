@@ -23,13 +23,13 @@ Source: [Brett Carpenter from Data.World](https://data.world/brettcarpenter/craf
 library(plotly)
 beers <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/beers.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
+p <- ggplot(beers, aes(x=abv, y=ibu)) +
   geom_density2d() +
   labs(y = "bitterness (IBU)",
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Filled
@@ -39,13 +39,13 @@ Since each of the lines (in the above graph) shows a different "level", setting 
 library(plotly)
 beers <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/beers.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
+p <- ggplot(beers, aes(x=abv, y=ibu)) +
   stat_density2d(aes(fill = stat(level)), geom="polygon") +
   labs(y = "bitterness (IBU)",
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Preset Colourscale
@@ -55,7 +55,7 @@ ggplotly(fig)
 library(plotly)
 beers <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/beers.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
+p <- ggplot(beers, aes(x=abv, y=ibu)) +
   stat_density2d(aes(fill = stat(level)), geom="polygon") +
   scale_fill_viridis_c(option = "plasma") +
   theme(legend.position = "magma") +
@@ -63,7 +63,7 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Customized Colourscale
@@ -72,7 +72,7 @@ You can also set your own colour gradients by defining a high and low point.
 library(plotly)
 beers <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/beers.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
+p <- ggplot(beers, aes(x=abv, y=ibu)) +
   stat_density2d(aes(fill = stat(level)), geom="polygon") +
   scale_fill_gradient(low = "lightskyblue1", high = "darkred") +
   theme(legend.position = "none") +
@@ -80,7 +80,7 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        x = "alcohol volume (ABV)",
        title = "Craft beers from American breweries")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Overlaid Points
@@ -91,7 +91,7 @@ library(plotly)
 library(dplyr)
 beers <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/beers.csv", stringsAsFactors = FALSE)
 
-fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
+p <- ggplot(beers, aes(x=abv, y=ibu)) +
   geom_density2d(alpha=0.5) +
   geom_point(data=filter(beers, !is.na(style2)), aes(colour=style2, text = label), alpha=0.3) +
   labs(y = "bitterness (IBU)",
@@ -99,6 +99,6 @@ fig <-  ggplot(beers, aes(x=abv, y=ibu)) +
        title = "Craft beers from American breweries",
        colour = "Beer types")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 

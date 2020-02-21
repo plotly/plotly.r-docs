@@ -32,11 +32,11 @@ df <- with(df, {
              ptd, ht = (ht > 0), ui = (ui > 0), ftv, bwt)
 })
 
-fig <-  ggplot(df, aes(lwt, bwt, colour = smoke)) +
+p <- ggplot(df, aes(lwt, bwt, colour = smoke)) +
   geom_point(size = 1) +
   geom_rug()
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

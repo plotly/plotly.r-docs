@@ -25,7 +25,7 @@ Looking for the old polar chart docs? See [legacy polar charts](https://plot.ly/
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = 'scatterpolar',
   r = c(0,1,2,2),
   theta = c(0,45,90,0),
@@ -42,7 +42,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/polar_dataset.csv")
 
-fig <-  plot_ly(
+fig <- plot_ly(
   df,
   type = 'scatterpolar',
   mode = 'lines'
@@ -112,7 +112,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = 'scatterpolar',
     mode = 'lines'
   ) 
@@ -185,7 +185,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = 'scatterpolar',
     mode = 'lines'
   ) 
@@ -282,7 +282,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = 'scatterpolar',
     mode = "lines+markers"
   ) 
@@ -364,7 +364,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
   type = 'scatterpolar',
   mode = "lines+markers"
 ) 
@@ -441,7 +441,7 @@ fig
 ```{r}
 library(plotly)
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = 'scatterpolar',
     mode = 'lines'
 ) 
@@ -532,7 +532,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/hobbs-pearson-trials.csv")
 
-fig <-  plot_ly(
+fig <- plot_ly(
     type = 'scatterpolargl',
     mode = 'markers'
   )
@@ -540,7 +540,7 @@ fig <-  plot_ly(
 j = 1
 k = 2
 for (i in 1:(length(df)/2)){
-  fig <-  add_trace(
+ fig <- add_trace(
     fig,
     r = df[,j],
     theta = df[,k],
@@ -557,7 +557,7 @@ for (i in 1:(length(df)/2)){
   k <- k + 2
 }
 
-fig <-  layout(
+fig <- layout(
   fig,
   title = "Hobbs-Pearson Trials",
   showlegend = F,

@@ -27,14 +27,14 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
        x = "Density Index\nfrom CityLab",
        y = "Margin of Victory/Defeat")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Flipping the Axes
@@ -46,7 +46,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   labs(title = "Democratic performance in the 2018 House elections, by region and density",
@@ -54,7 +54,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
        y = "Margin of Victory/Defeat") +
   coord_flip()
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Add facetting
@@ -66,7 +66,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   facet_wrap(~region) +
@@ -75,7 +75,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
        y = "Margin of Victory/Defeat") +
   coord_flip()
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Customized Appearance
@@ -87,7 +87,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   facet_wrap(~region) +
@@ -101,7 +101,7 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
         text = element_text(family = 'Fira Sans'),
         legend.position = "none")
 
-ggplotly(fig)
+ggplotly(p)
 ```
 
 ### Rotated Axis Text
@@ -113,7 +113,7 @@ district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
 
-fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
+p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
   facet_grid(.~region) +
@@ -126,5 +126,5 @@ fig <-  ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
         text = element_text(family = 'Fira Sans'),
         legend.position = "none")
 
-ggplotly(fig)
+ggplotly(p)
 ```

@@ -21,11 +21,11 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-fig <-  ggplot(diamonds, aes(color, log10(price))) +
+p <- ggplot(diamonds, aes(color, log10(price))) +
     geom_boxplot() +
     scale_y_continuous("Price, log10-scaling")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

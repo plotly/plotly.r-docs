@@ -23,11 +23,11 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-fig <-  ggplot(df, aes(carat, price)) + 
+p <- ggplot(df, aes(carat, price)) + 
   geom_point() + 
   theme(axis.ticks = element_line(size = 10))
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

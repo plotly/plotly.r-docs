@@ -23,7 +23,7 @@ library(plotly)
 s <- matrix(c(1, -.75, -.75, 1), ncol = 2)
 obs <- mvtnorm::rmvnorm(500, sigma = s)
 
-fig <-  plot_ly(x = obs[,1], y = obs[,2]) 
+fig <- plot_ly(x = obs[,1], y = obs[,2]) 
 
 fig <- fig %>%
   add_trace(type='histogram2dcontour')
@@ -38,7 +38,7 @@ library(plotly)
 
 cnt <- with(diamonds, table(cut, clarity))
 
-fig <-  plot_ly(diamonds, x = ~cut, y = ~clarity, z = ~cnt) 
+fig <- plot_ly(diamonds, x = ~cut, y = ~clarity, z = ~cnt) 
 fig <- fig %>%
   add_trace(
     type='histogram2dcontour',
@@ -78,7 +78,7 @@ s <- subplot(
   shareX = TRUE, shareY = TRUE, titleX = FALSE, titleY = FALSE
 )
 
-fig <-  layout(s, showlegend = FALSE)
+fig <- layout(s, showlegend = FALSE)
 
 fig
 ```

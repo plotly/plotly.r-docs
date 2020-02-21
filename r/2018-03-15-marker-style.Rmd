@@ -25,7 +25,7 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- plot_ly(type = 'scatter', mode = 'markers') 
 fig <- fig %>%
   add_trace(
     x = x,
@@ -67,7 +67,7 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- plot_ly(type = 'scatter', mode = 'markers') 
 fig <- fig %>%
   add_trace(
     x = x,
@@ -111,7 +111,7 @@ y <- runif(500, min=3, max=4.5)
 x2 <- runif(500, min=3, max=6)
 y2 <- runif(500, min=4.5, max=6)
 
-fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- plot_ly(type = 'scatter', mode = 'markers') 
 fig <- fig %>%
   add_trace(
     x = x,
@@ -169,7 +169,7 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- plot_ly(type = 'scatter', mode = 'markers') 
 fig <- fig %>%
   add_trace(
     x = x,
@@ -213,7 +213,7 @@ library(plotly)
 x <- runif(500, min=3, max=6)
 y <- runif(500, min=3, max=6)
 
-fig <-  plot_ly(type = 'scatter', mode = 'markers') 
+fig <- plot_ly(type = 'scatter', mode = 'markers') 
 fig <- fig %>%
   add_trace(
     x = x,

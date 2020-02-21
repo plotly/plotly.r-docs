@@ -21,12 +21,12 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 library(reshape2)
 library(plotly)
 
-fig <-  ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
+p <- ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 
 # Divide by day, going horizontally and wrapping with 2 columns
-fig <-  fig + facet_wrap( ~ day, ncol=2)
+p <- p + facet_wrap( ~ day, ncol=2)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -48,10 +48,10 @@ tolerance <- within(tolerance, {
 })
 
 
-fig <-  ggplot(data = tolerance, aes(x = time, y = tolerance)) + geom_point() +
+p <- ggplot(data = tolerance, aes(x = time, y = tolerance)) + geom_point() +
     stat_smooth(method = "lm", se = FALSE) + facet_wrap(~id)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -62,12 +62,12 @@ Inspired by <a href="http://www.ats.ucla.edu/stat/r/faq/growth.htm">The IDRE at 
 ```{r}
 library(plotly)
 
-fig <-  ggplot(mpg, aes(displ, hwy))+
+p <- ggplot(mpg, aes(displ, hwy))+
   geom_point()+
   stat_smooth()+
   facet_wrap(~year)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -85,11 +85,11 @@ df <- diamonds[sample(1:nrow(diamonds), size = 1000), ]
 labs <- c("Best","Second best","Third best","Average", "Average","Third Worst","Second Worst","Worst")
 levels(df$clarity) <- rev(labs)
 
-fig <-  ggplot(df, aes(carat, price)) + 
+p <- ggplot(df, aes(carat, price)) + 
   geom_point() + 
   facet_wrap(~ clarity)
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -107,12 +107,12 @@ df <- diamonds[sample(1:nrow(diamonds), size = 1000), ]
 labs <- c("Best","Second best","Third best","Average", "Average","Third Worst","Second Worst","Worst")
 levels(df$clarity) <- rev(labs)
 
-fig <-  ggplot(df, aes(carat, price)) + 
+p <- ggplot(df, aes(carat, price)) + 
   geom_point() + 
   facet_wrap(~ clarity) + 
   ggtitle("Diamonds dataset facetted by clarity")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```
@@ -130,12 +130,12 @@ df <- diamonds[sample(1:nrow(diamonds), size = 1000), ]
 
 levels(df$clarity) <- c("VS2", "VS1", "VVS2", "I1", "SI2", "IF", "VVS1", "SI1")
 
-fig <-  ggplot(df, aes(carat, price)) + 
+p <- ggplot(df, aes(carat, price)) + 
   geom_point() + 
   facet_wrap(~ clarity) + 
   ggtitle("Diamonds dataset facetted by clarity")
 
-fig <-  ggplotly(fig)
+fig <- ggplotly(p)
 
 fig
 ```

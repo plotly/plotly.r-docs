@@ -64,7 +64,7 @@ library(plotly)
 
 us_cities = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
-fig <-  us_cities 
+fig <- us_cities 
 fig <- fig %>%
   plot_ly(
     lat = ~lat,
@@ -91,7 +91,7 @@ library(plotly)
 
 us_cities = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
-fig <-   us_cities 
+fig <- us_cities 
 fig <- fig %>%
   plot_ly(
     lat = ~lat,
@@ -120,7 +120,7 @@ In addition, a WMS layer map from Environment Canada (which displays near-real-t
 
 ```{r}
 library(plotly)
-fig <-  us_cities 
+fig <- us_cities 
 fig <- fig %>%
   plot_ly(
     lat = ~lat,
@@ -160,7 +160,7 @@ Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 us_cities = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/us-cities-top-1k.csv")
 
-fig <-  us_cities 
+fig <- us_cities 
 fig <- fig %>%
   plot_ly(
     lat = ~lat,
