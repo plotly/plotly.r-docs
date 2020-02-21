@@ -171,13 +171,6 @@ p <- plot_ly(
 p
 ```
 
-```{r, echo=FALSE, message=FALSE, results="hide"}
-# Remove plotly install from github
-remove.packages("plotly")
-# Install plotly from CRAN
-install.packages("plotly", repos = "http://cran.us.r-project.org")
-```
-
 #Reference
 
 See [https://plot.ly/r/reference/#funnel](https://plot.ly/r/reference/#funnel) and [https://plot.ly/r/reference/#funnelarea](https://plot.ly/r/reference/#funnelarea) for more information and chart attribute options!
