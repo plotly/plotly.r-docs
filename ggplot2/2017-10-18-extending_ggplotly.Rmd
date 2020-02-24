@@ -25,9 +25,9 @@ p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
 fig <- ggplotly(p)
 
-fig <- style(gg, line = list(color = 'gold'), hoverinfo = "y", traces = 1)
+fig <- style(fig, line = list(color = 'gold'), hoverinfo = "y", traces = 1)
 
-gg
+fig
 ```
 
 ### Modify with Build
@@ -41,9 +41,9 @@ fig <- ggplotly(p)
 
 fig <- plotly_build(fig)
 
-gg$x$data[[1]]$line$color <- 'blue'
+fig$x$data[[1]]$line$color <- 'blue'
 
-gg
+fig
 ```
 
 ### Modify with LayerData
