@@ -56,12 +56,12 @@ p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 fig <- fig %>%
   ggplotly(layerData = 2, originalData = F) %>%
-  add_fun(functionfig {
+  add_fun(function(p) {
     fig %>% slice(which.max(se)) %>%
       add_segments(x = ~x, xend = ~x, y = ~ymin, yend = ~ymax) %>%
       add_annotations("Maximum uncertainty", ax = 60)
   }) %>%
-  add_fun(functionfig {
+  add_fun(function(p) {
     fig %>% slice(which.min(se)) %>%
       add_segments(x = ~x, xend = ~x, y = ~ymin, yend = ~ymax) %>%
       add_annotations("Minimum uncertainty")
