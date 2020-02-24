@@ -54,14 +54,14 @@ library(plotly)
 p <- ggplot(mtcars, aes(x = wt, y = mpg)) +
    geom_point() + geom_smooth()
 
-fig <- fig %>%
+fig <- p %>%
   ggplotly(layerData = 2, originalData = F) %>%
-  add_fun(function(p) {
+  add_fun(function(fig) {
     fig %>% slice(which.max(se)) %>%
       add_segments(x = ~x, xend = ~x, y = ~ymin, yend = ~ymax) %>%
       add_annotations("Maximum uncertainty", ax = 60)
-  }) %>%
-  add_fun(function(p) {
+  })
+fig <- fig %>% add_fun(function(p) {
     fig %>% slice(which.min(se)) %>%
       add_segments(x = ~x, xend = ~x, y = ~ymin, yend = ~ymax) %>%
       add_annotations("Minimum uncertainty")
