@@ -188,7 +188,7 @@ mp <-  within(mp,
              wow <- rnorm(N)*wav+rnorm(N)*wav^3
          })
 
-m01 <- gls(wow~poly(wav,3), data=mp, correlation = corARMA(fig=1))
+m01 <- gls(wow~poly(wav,3), data=mp, correlation = corARMA(p=1))
 
 fit <- predict(m01)
 
