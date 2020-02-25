@@ -24,7 +24,7 @@ recent_turnout <- read.csv("https://raw.githubusercontent.com/plotly/datasets/ma
 recent_turnout$region <- factor(recent_turnout$region, levels=c("British","Northern","Western","Mediterranean","Central/Eastern"))
 
 library(plotly)
-fig <- recent_turnout %>%
+p <- recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   geom_text(aes(size=population/3.5, label=abbreviation, colour=region), alpha=1) +
   labs(title = "Recent turnout in European Union countries",
@@ -45,7 +45,7 @@ recent_turnout <- read.csv("https://raw.githubusercontent.com/plotly/datasets/ma
 recent_turnout$region <- factor(recent_turnout$region, levels=c("British","Northern","Western","Mediterranean","Central/Eastern"))
 
 library(plotly)
-fig <- recent_turnout %>%
+p <- recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
   geom_text(aes(size=population/3.5, label=abbreviation), colour="gray20", alpha=1) +
@@ -66,7 +66,7 @@ recent_turnout$region <- factor(recent_turnout$region, levels=c("British","North
 
 library(plotly)
 library(LaCroixColoR)
-fig <- recent_turnout %>%
+p <- recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
   geom_text(aes(size=population/3.5, label=abbreviation), colour="gray20", alpha=1) +
@@ -90,7 +90,7 @@ m <- lm(euro_turnout ~ nat_turnout, data = recent_turnout)
 
 library(plotly)
 library(LaCroixColoR)
-fig <- recent_turnout %>%
+p <- recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   stat_smooth(geom="line", method="lm", alpha=0.3, se=FALSE) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
@@ -119,7 +119,7 @@ m <- lm(euro_turnout ~ nat_turnout, data = recent_turnout)
 
 library(plotly)
 library(LaCroixColoR)
-fig <- recent_turnout %>%
+p <- recent_turnout %>%
   ggplot(aes(x=nat_turnout,y=euro_turnout)) + 
   stat_smooth(geom="line", method="lm", alpha=0.3, se=FALSE) + 
   geom_point(aes(size=population, colour=region, text=paste("country:", country)), alpha=0.4) +
