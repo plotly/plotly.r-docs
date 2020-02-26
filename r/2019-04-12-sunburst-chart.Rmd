@@ -87,6 +87,26 @@ fig <- plot_ly(d, ids = ~ids, labels = ~labels, parents = ~parents, type = 'sunb
 
 fig
 ```
+#### Controlling text orientation inside sunburst sectors
+
+The `insidetextorientation` attribute controls the orientation of text inside sectors. With "auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential). Note that `plotly` may reduce the font size in order to fit the text with the requested orientation.
+
+```{r}
+df = read.csv('https://raw.githubusercontent.com/plotly/datasets/718417069ead87650b90472464c7565dc8c2cb1c/coffee-flavors.csv')
+
+fig <- plot_ly()
+
+fig <- fig %>% add_trace(
+  type='sunburst',
+  ids=df$ids,
+  labels=df$labels,
+  parents=df$parents,
+  domain=list(column=1),
+  maxdepth=2,
+  insidetextorientation='radial'
+)
+fig
+```
 
 ### Subplots
 In order to create sunburst chart subplots, we use the [domain](https://plot.ly/r/reference/#sunburst-domain) attribute and the layout [grid](https://plot.ly/r/reference/#layout-grid) attribute.

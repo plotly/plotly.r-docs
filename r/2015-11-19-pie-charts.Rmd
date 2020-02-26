@@ -104,6 +104,21 @@ fig
 
 See more examples of subplots [here](https://plot.ly/r/subplots/).
 
+#### Controlling text orientation inside sunburst sectors
+
+The `insidetextorientation` attribute controls the orientation of text inside sectors. With "auto" the texts may automatically be rotated to fit with the maximum size inside the slice. Using "horizontal" (resp. "radial", "tangential") forces text to be horizontal (resp. radial or tangential). Note that `plotly` may reduce the font size in order to fit the text with the requested orientation.
+
+```{r}
+library(plotly)
+
+labels = c('Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen')
+values = c(4500, 2500, 1053, 500)
+
+fig <- plot_ly(type='pie', labels=labels, values=values, 
+               textinfo='label+percent',
+               insidetextorientation='radial')
+fig
+```
 ### Donut Chart
 
 ```{r}
