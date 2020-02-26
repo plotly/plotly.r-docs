@@ -25,11 +25,11 @@ library(plotly)
 
 density <- density(diamonds$carat)
 
-p <- plot_ly(x = ~density$x, y = ~density$y, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>%
-  layout(xaxis = list(title = 'Carat'),
+fig <- plot_ly(x = ~density$x, y = ~density$y, type = 'scatter', mode = 'lines', fill = 'tozeroy')
+fig <- fig %>% layout(xaxis = list(title = 'Carat'),
          yaxis = list(title = 'Density'))
 
-p
+fig
 ```
 
 ### Filled Area Plot with Multiple Traces
@@ -45,12 +45,12 @@ density1 <- density(diamonds1$carat)
 diamonds2 <- diamonds[which(diamonds$cut == "Ideal"),]
 density2 <- density(diamonds2$carat)
 
-p <- plot_ly(x = ~density1$x, y = ~density1$y, type = 'scatter', mode = 'lines', name = 'Fair cut', fill = 'tozeroy') %>%
-  add_trace(x = ~density2$x, y = ~density2$y, name = 'Ideal cut', fill = 'tozeroy') %>%
-  layout(xaxis = list(title = 'Carat'),
+fig <- plot_ly(x = ~density1$x, y = ~density1$y, type = 'scatter', mode = 'lines', name = 'Fair cut', fill = 'tozeroy')
+fig <- fig %>% add_trace(x = ~density2$x, y = ~density2$y, name = 'Ideal cut', fill = 'tozeroy')
+fig <- fig %>% layout(xaxis = list(title = 'Carat'),
          yaxis = list(title = 'Density'))
 
-p
+fig
 ```
 
 ### Selecting Hover Points 
@@ -58,8 +58,8 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly() %>%
-  add_trace(
+fig <- plot_ly()
+fig <- fig %>% add_trace(
     x = c(0,0.5,1,1.5,2),
     y = c(0,1,2,1,0),
     type = 'scatter',
@@ -74,8 +74,8 @@ p <- plot_ly() %>%
     ),
     text = "Points + Fills",
     hoverinfo = 'text'
-  ) %>% 
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     x = c(3,3.5,4,4.5,5),
     y = c(0,1,2,1,0),
     type = 'scatter',
@@ -90,8 +90,8 @@ p <- plot_ly() %>%
     ),
     text = "Points only",
     hoverinfo = 'text'
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     title = "hover on <i>points</i> or <i>fill</i>",
     xaxis = list(
       range = c(0,5.2)
@@ -101,7 +101,7 @@ p <- plot_ly() %>%
     )
   )
 
-p
+fig
 ```
 
 ### Custom Colors
@@ -115,15 +115,15 @@ density1 <- density(diamonds1$carat)
 diamonds2 <- diamonds[which(diamonds$cut == "Ideal"),]
 density2 <- density(diamonds2$carat)
 
-p <- plot_ly(x = ~density1$x, y = ~density1$y, type = 'scatter', mode = 'lines', name = 'Fair cut', fill = 'tozeroy',
+fig <- plot_ly(x = ~density1$x, y = ~density1$y, type = 'scatter', mode = 'lines', name = 'Fair cut', fill = 'tozeroy',
         fillcolor = 'rgba(168, 216, 234, 0.5)',
-        line = list(width = 0.5)) %>%
-  add_trace(x = ~density2$x, y = ~density2$y, name = 'Ideal cut', fill = 'tozeroy',
-            fillcolor = 'rgba(255, 212, 96, 0.5)') %>%
-  layout(xaxis = list(title = 'Carat'),
+        line = list(width = 0.5))
+fig <- fig %>% add_trace(x = ~density2$x, y = ~density2$y, name = 'Ideal cut', fill = 'tozeroy',
+            fillcolor = 'rgba(255, 212, 96, 0.5)')
+fig <- fig %>% layout(xaxis = list(title = 'Carat'),
          yaxis = list(title = 'Density'))
 
-p
+fig
 ```
 
 ### Area Plot without Lines
@@ -139,14 +139,14 @@ density1 <- density(diamonds1$carat)
 diamonds2 <- diamonds[which(diamonds$cut == "Ideal"),]
 density2 <- density(diamonds2$carat)
 
-p <- plot_ly(x = ~density1$x, y = ~density1$y, type = 'scatter', mode = 'none', name = 'Fair cut', fill = 'tozeroy',
-        fillcolor = 'rgba(168, 216, 234, 0.5)') %>%
-  add_trace(x = ~density2$x, y = ~density2$y, name = 'Ideal cut', fill = 'tozeroy',
-            fillcolor = 'rgba(255, 212, 96, 0.5)') %>%
-  layout(xaxis = list(title = 'Carat'),
+fig <- plot_ly(x = ~density1$x, y = ~density1$y, type = 'scatter', mode = 'none', name = 'Fair cut', fill = 'tozeroy',
+        fillcolor = 'rgba(168, 216, 234, 0.5)')
+fig <- fig %>% add_trace(x = ~density2$x, y = ~density2$y, name = 'Ideal cut', fill = 'tozeroy',
+            fillcolor = 'rgba(255, 212, 96, 0.5)')
+fig <- fig %>% layout(xaxis = list(title = 'Carat'),
          yaxis = list(title = 'Density'))
 
-p
+fig
 ```
 
 ### Interior Filling for Area Chart
@@ -167,13 +167,13 @@ data$average_2014 <- rowMeans(data[,c("high_2014", "low_2014")])
 #The default order will be alphabetized unless specified as below:
 data$month <- factor(data$month, levels = data[["month"]])
 
-p <- plot_ly(data, x = ~month, y = ~high_2014, type = 'scatter', mode = 'lines',
+fig <- plot_ly(data, x = ~month, y = ~high_2014, type = 'scatter', mode = 'lines',
         line = list(color = 'rgba(0,100,80,1)'),
-        showlegend = FALSE, name = 'High 2014') %>%
-  add_trace(y = ~low_2014, type = 'scatter', mode = 'lines',
+        showlegend = FALSE, name = 'High 2014')
+fig <- fig %>% add_trace(y = ~low_2014, type = 'scatter', mode = 'lines',
             fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'rgba(0,100,80,1)'),
-            showlegend = FALSE, name = 'Low 2014') %>%
-  layout(title = "High and Low Temperatures in New York",
+            showlegend = FALSE, name = 'Low 2014')
+fig <- fig %>% layout(title = "High and Low Temperatures in New York",
          paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
          xaxis = list(title = "Months",
                       gridcolor = 'rgb(255,255,255)',
@@ -192,7 +192,7 @@ p <- plot_ly(data, x = ~month, y = ~high_2014, type = 'scatter', mode = 'lines',
                       ticks = 'outside',
                       zeroline = FALSE))
 
-p
+fig
 ```
 
 ### Stacked Area Chart with Original Values
@@ -203,18 +203,18 @@ library(plotly)
 data <- t(USPersonalExpenditure)
 data <- data.frame("year"=rownames(data), data)
 
-p <- plot_ly(data, x = ~year, y = ~Food.and.Tobacco, name = 'Food and Tobacco', type = 'scatter', mode = 'none', stackgroup = 'one', fillcolor = '#F5FF8D') %>%
-  add_trace(y = ~Household.Operation, name = 'Household Operation', fillcolor = '#50CB86') %>%
-  add_trace(y = ~Medical.and.Health, name = 'Medical and Health', fillcolor = '#4C74C9') %>%
-  add_trace(y = ~Personal.Care, name = 'Personal Care', fillcolor = '#700961') %>%
-  add_trace(y = ~Private.Education, name = 'Private Education', fillcolor = '#312F44') %>%
-  layout(title = 'United States Personal Expenditures by Categories',
+fig <- plot_ly(data, x = ~year, y = ~Food.and.Tobacco, name = 'Food and Tobacco', type = 'scatter', mode = 'none', stackgroup = 'one', fillcolor = '#F5FF8D')
+fig <- fig %>% add_trace(y = ~Household.Operation, name = 'Household Operation', fillcolor = '#50CB86')
+fig <- fig %>% add_trace(y = ~Medical.and.Health, name = 'Medical and Health', fillcolor = '#4C74C9')
+fig <- fig %>% add_trace(y = ~Personal.Care, name = 'Personal Care', fillcolor = '#700961')
+fig <- fig %>% add_trace(y = ~Private.Education, name = 'Private Education', fillcolor = '#312F44')
+fig <- fig %>% layout(title = 'United States Personal Expenditures by Categories',
          xaxis = list(title = "",
                       showgrid = FALSE),
          yaxis = list(title = "Expenditures (in billions of dollars)",
                       showgrid = FALSE))
 
-p
+fig
 ```
 
 ### Stacked Area Chart with Cumulative Values
@@ -225,19 +225,19 @@ library(plotly)
 data <- t(USPersonalExpenditure)
 data <- data.frame("year"=rownames(data), data)
 
-p <- plot_ly(data, x = ~year, y = ~Food.and.Tobacco, name = 'Food and Tobacco', type = 'scatter', mode = 'none', stackgroup = 'one', groupnorm = 'percent', fillcolor = '#F5FF8D') %>%
-  add_trace(y = ~Household.Operation, name = 'Household Operation', fillcolor = '#50CB86') %>%
-  add_trace(y = ~Medical.and.Health, name = 'Medical and Health', fillcolor = '#4C74C9') %>%
-  add_trace(y = ~Personal.Care, name = 'Personal Care', fillcolor = '#700961') %>%
-  add_trace(y = ~Private.Education, name = 'Private Education', fillcolor = '#312F44') %>%
-  layout(title = 'United States Personal Expenditures by Categories',
+fig <- plot_ly(data, x = ~year, y = ~Food.and.Tobacco, name = 'Food and Tobacco', type = 'scatter', mode = 'none', stackgroup = 'one', groupnorm = 'percent', fillcolor = '#F5FF8D')
+fig <- fig %>% add_trace(y = ~Household.Operation, name = 'Household Operation', fillcolor = '#50CB86')
+fig <- fig %>% add_trace(y = ~Medical.and.Health, name = 'Medical and Health', fillcolor = '#4C74C9')
+fig <- fig %>% add_trace(y = ~Personal.Care, name = 'Personal Care', fillcolor = '#700961')
+fig <- fig %>% add_trace(y = ~Private.Education, name = 'Private Education', fillcolor = '#312F44')
+fig <- fig %>% layout(title = 'United States Personal Expenditures by Categories',
          xaxis = list(title = "",
                       showgrid = FALSE),
          yaxis = list(title = "Proportion from the Total Expenditures",
                       showgrid = FALSE,
                       ticksuffix = '%'))
 
-p
+fig
 ```
 
 #Reference

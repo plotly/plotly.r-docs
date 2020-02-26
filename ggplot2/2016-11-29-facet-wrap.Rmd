@@ -26,9 +26,9 @@ p <- ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 # Divide by day, going horizontally and wrapping with 2 columns
 p <- p + facet_wrap( ~ day, ncol=2)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://www.cookbook-r.com/Graphs/Scatterplots_(ggplot2)/">Cookbook for R</a>
 
@@ -51,9 +51,9 @@ tolerance <- within(tolerance, {
 p <- ggplot(data = tolerance, aes(x = time, y = tolerance)) + geom_point() +
     stat_smooth(method = "lm", se = FALSE) + facet_wrap(~id)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://www.ats.ucla.edu/stat/r/faq/growth.htm">The IDRE at UCLA</a>
 
@@ -67,9 +67,9 @@ p <- ggplot(mpg, aes(displ, hwy))+
   stat_smooth()+
   facet_wrap(~year)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://www.ling.upenn.edu/~joseff/rstudy/summer2010_ggplot2_intro.html">R Study Group</a>
 
@@ -89,9 +89,9 @@ p <- ggplot(df, aes(carat, price)) +
   geom_point() + 
   facet_wrap(~ clarity)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/3472980/ggplot-how-to-change-facet-labels">Stack Overflow</a>
 
@@ -112,9 +112,9 @@ p <- ggplot(df, aes(carat, price)) +
   facet_wrap(~ clarity) + 
   ggtitle("Diamonds dataset facetted by clarity")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://docs.ggplot2.org/current/">ggplot2 Documentation</a>
 
@@ -135,8 +135,8 @@ p <- ggplot(df, aes(carat, price)) +
   facet_wrap(~ clarity) + 
   ggtitle("Diamonds dataset facetted by clarity")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/3311901/how-do-i-get-ggplot-to-order-facets-correctly">Stack Overflow</a>

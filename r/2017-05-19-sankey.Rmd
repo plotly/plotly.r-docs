@@ -20,7 +20,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     type = "sankey",
     orientation = "h",
     
@@ -40,15 +40,15 @@ p <- plot_ly(
       target = c(2,3,3,4,4,5),
       value =  c(8,4,2,8,4,2)
     )
-  ) %>% 
-  layout(
+  )
+fig <- fig %>% layout(
     title = "Basic Sankey Diagram",
     font = list(
       size = 10
     )
 )
 
-p
+fig
 ```
 
 ### Create Canvas
@@ -56,7 +56,7 @@ p
 ```{r, results = 'hide'}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     type = "sankey",
     domain = list(
       x =  c(0,1),
@@ -65,8 +65,8 @@ p <- plot_ly(
     orientation = "h",
     valueformat = ".0f",
     valuesuffix = "TWh"
-) %>%
-  layout(
+)
+fig <- fig %>% layout(
     title = "Energy forecast for 2050, UK - Department of Energy & Climate Change",
     font = list(
       size = 10
@@ -86,7 +86,7 @@ library(rjson)
 json_file <- "https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/sankey_energy.json"
 json_data <- fromJSON(paste(readLines(json_file), collapse=""))
 
-p <- plot_ly(
+fig <- plot_ly(
     type = "sankey",
     domain = list(
       x =  c(0,1),
@@ -106,8 +106,8 @@ p <- plot_ly(
         width = 0.5
       )
     )
-  ) %>% 
-  layout(
+  ) 
+fig <- fig %>% layout(
     title = "Energy forecast for 2050, UK - Department of Energy & Climate Change",
     font = list(
       size = 10
@@ -126,7 +126,7 @@ library(rjson)
 json_file <- "https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/sankey_energy.json"
 json_data <- fromJSON(paste(readLines(json_file), collapse=""))
 
-p <- plot_ly(
+fig <- plot_ly(
     type = "sankey",
     domain = list(
       x =  c(0,1),
@@ -153,8 +153,8 @@ p <- plot_ly(
       value =  json_data$data[[1]]$link$value,
       label =  json_data$data[[1]]$link$label
     )
-  ) %>% 
-  layout(
+  ) 
+fig <- fig %>% layout(
     title = "Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via <a href='https://bost.ocks.org/mike/sankey/'>Mike Bostock</a>",
     font = list(
       size = 10
@@ -163,7 +163,7 @@ p <- plot_ly(
     yaxis = list(showgrid = F, zeroline = F)
 )
 
-p
+fig
 ```
 
 ### Style Sankey Diagram 
@@ -175,7 +175,7 @@ library(rjson)
 json_file <- "https://raw.githubusercontent.com/plotly/plotly.js/master/test/image/mocks/sankey_energy_dark.json"
 json_data <- fromJSON(paste(readLines(json_file), collapse=""))
 
-p <- plot_ly(
+fig <- plot_ly(
     type = "sankey",
     domain = list(
       x =  c(0,1),
@@ -202,8 +202,8 @@ p <- plot_ly(
       value =  json_data$data[[1]]$link$value,
       label =  json_data$data[[1]]$link$label
     )
-  ) %>% 
-  layout(
+  )
+fig <- fig %>% layout(
     title = "Energy forecast for 2050<br>Source: Department of Energy & Climate Change, Tom Counsell via <a href='https://bost.ocks.org/mike/sankey/'>Mike Bostock</a>",
     font = list(
       size = 10,
@@ -215,7 +215,7 @@ p <- plot_ly(
     paper_bgcolor = 'black'
 )
 
-p
+fig
 ```
 
 ### Define Node Position
@@ -223,7 +223,7 @@ The following example sets [node.x](https://plot.ly/r/reference/#sankey-node-x) 
 
 ```{r}
 library(plotly)
-p <- plot_ly(
+fig <- plot_ly(
   type = "sankey",
   arrangement = "snap",
   node = list(
@@ -234,10 +234,10 @@ p <- plot_ly(
   link = list(
     source = c(0, 0, 1, 2, 5, 4, 3, 5),
     target = c(5, 3, 4, 3, 0, 2, 2, 3),
-    value = c(1, 2, 1, 1, 1, 1, 1, 2))) %>%
-  layout(title = "Sankey with manually positioned node")
+    value = c(1, 2, 1, 1, 1, 1, 1, 2)))
+fig <- fig %>% layout(title = "Sankey with manually positioned node")
 
-p
+fig
 ```
 
 ### Reference

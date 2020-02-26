@@ -40,9 +40,9 @@ p <- ggplot(MySample, aes(date, y, fill = year)) +
     scale_x_date(labels = date_format("%b/%y")) +
     scale_fill_gradient(breaks=unique(MySample$year))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/11472856/month-year-bar-graph-plot-faceted-and-filled-on-year-with-data-input-as-date-in?rq=1">Stack Overflow</a>.
 
@@ -72,8 +72,8 @@ p <- ggplot(data = df,
      facet_grid(facets = Year ~ .) +
      scale_x_date(labels = function(x) format(x, "%d-%b"))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/11472856/month-year-bar-graph-plot-faceted-and-filled-on-year-with-data-input-as-date-in?rq=1">Stack Overflow</a>.

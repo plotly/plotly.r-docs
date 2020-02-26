@@ -31,9 +31,9 @@ dat <- data.frame(cond = rep(c("A", "B"), each=10),
 p <- ggplot(dat, aes(x=xvar, y=yvar)) +
     geom_point(shape=1)      # Use hollow circles
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Liner Regression w/ smooth
@@ -52,9 +52,9 @@ p <- ggplot(dat, aes(x=xvar, y=yvar)) +
     geom_smooth(method=lm)   # Add linear regression line
 
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Without Shading
@@ -73,9 +73,9 @@ p <- ggplot(dat, aes(x=xvar, y=yvar)) +
     geom_smooth(method=lm,   # Add linear regression line
                 se=FALSE)    # Don't add shaded confidence region
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Loess Smoothed Fit
@@ -95,9 +95,9 @@ p <- ggplot(dat, aes(x=xvar, y=yvar)) +
 # > geom_smooth: method="auto" and size of largest group is less than 1000, so using loess.
 # Use 'method = x' to change the smoothing method.
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Constrained Slope
@@ -119,9 +119,9 @@ fm <- lm(y ~ x + A, data = df)
 p <- ggplot(data = cbind(df, pred = predict(fm)), aes(x = x, y = y, color = A))
 p <- p + geom_point() + geom_line(aes(y = pred))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspire by <a #href="http://stackoverflow.com/questions/4251294/constraining-slope-in-stat-smooth-with-ggplot-plotting-ancova">Stack Overflow</a>
 
@@ -137,9 +137,9 @@ p <- ggplot(hist, aes(x=weekday, y=counts, group=1)) +
     geom_point(stat='summary', fun.y=sum) +
     stat_summary(fun.y=sum, geom="line")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspire by <a #href="http://stackoverflow.com/questions/16350720/using-geom-line-with-x-axis-being-factors">Stack Overflow</a> 
 
@@ -152,9 +152,9 @@ dat <- data.frame(x = sample(1:10), y = sample(1:10), order = sample(1:10))
 p <- ggplot(dat[order(dat$order),], aes(x, y)) + geom_point() + geom_text(aes(y = y + 0.25,label =      order)) +
      geom_path()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Horizontal Line w/ Segment
@@ -165,9 +165,9 @@ library(plotly)
 p <- ggplot(mtcars,aes(mpg,qsec))+geom_point() +
   geom_segment(aes(x=15,xend=20,y=18,yend=18))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a #href="http://stackoverflow.com/questions/20311718/add-horizontal-line-to-ggplot-for-specified-interval-of-x-axis">Stack Overflow</a>
 
@@ -185,9 +185,9 @@ p <- ggplot(df, aes(time, value, group=side, colour=side)) +
      geom_line(size=1)
 p <- p + geom_point()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Add Regression w/ Abline
@@ -204,8 +204,8 @@ p <- qplot(data=dd, x=x, y=y, color=fac)+
     geom_abline(slope=coef["x:faca"], intercept=coef["(Intercept)"])+
     geom_abline(slope=coef["x:facb"], intercept=coef["(Intercept)"])
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a #href="http://stats.stackexchange.com/questions/39233/regression-lines-with-same-intercept">Stats Exchange</a>

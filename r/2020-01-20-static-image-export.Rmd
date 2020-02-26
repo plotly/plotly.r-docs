@@ -36,12 +36,12 @@ You need to have the [`processx`](https://github.com/r-lib/processx) R package i
 
 The `orca()` function accepts two parameters. The first is the plot to be exported and second is the filename. 
 
-For example, running the following commands in an R session would export the graph stored in `p` in a file called `surface-plot.svg`:
+For example, running the following commands in an R session would export the graph stored in `fig` in a file called `surface-plot.svg`:
 
 ```{r, eval = FALSE}
 library(plotly)
 
 if (!require("processx")) install.packages("processx")
-p <- plot_ly(z = ~volcano) %>% add_surface()
-orca(p, "surface-plot.svg")
+fig <- plot_ly(z = ~volcano) %>% add_surface()
+orca(fig, "surface-plot.svg")
 ```

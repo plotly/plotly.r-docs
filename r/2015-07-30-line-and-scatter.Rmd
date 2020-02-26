@@ -21,9 +21,9 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```{r}
 library(plotly)
 
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
 
-p
+fig
 ```
 
 ### Styled Scatter Plot
@@ -31,16 +31,16 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length,
-        marker = list(size = 10,
-                       color = 'rgba(255, 182, 193, .9)',
-                       line = list(color = 'rgba(152, 0, 0, .8)',
-                                   width = 2))) %>%
-  layout(title = 'Styled Scatter',
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length,
+               marker = list(size = 10,
+                             color = 'rgba(255, 182, 193, .9)',
+                             line = list(color = 'rgba(152, 0, 0, .8)',
+                                         width = 2)))
+fig <- fig %>% layout(title = 'Styled Scatter',
          yaxis = list(zeroline = FALSE),
          xaxis = list(zeroline = FALSE))
 
-p
+fig
 ```
 
 ### Plotting Markers and Lines
@@ -55,12 +55,12 @@ x <- c(1:100)
 
 data <- data.frame(x, trace_0, trace_1, trace_2)
 
-p <- plot_ly(data, x = ~x) %>%
-  add_trace(y = ~trace_0, name = 'trace 0',mode = 'lines') %>%
-  add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers') %>%
-  add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
+fig <- plot_ly(data, x = ~x)
+fig <- fig %>% add_trace(y = ~trace_0, name = 'trace 0',mode = 'lines')
+fig <- fig %>% add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers')
+fig <- fig %>% add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
 
-p
+fig
 ```
 
 It is also possible to pass the first trace in the plot_ly function. In such cases, the type of graph has to be specified, as shown below:
@@ -75,11 +75,11 @@ x <- c(1:100)
 
 data <- data.frame(x, trace_0, trace_1, trace_2)
 
-p <- plot_ly(data, x = ~x, y = ~trace_0, name = 'trace 0', type = 'scatter', mode = 'lines') %>%
-  add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers') %>%
-  add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
+fig <- plot_ly(data, x = ~x, y = ~trace_0, name = 'trace 0', type = 'scatter', mode = 'lines')
+fig <- fig %>% add_trace(y = ~trace_1, name = 'trace 1', mode = 'lines+markers')
+fig <- fig %>% add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
 
-p
+fig
 ```
 
 See more examples of line charts [here](https://plot.ly/r/line-charts/).
@@ -89,9 +89,9 @@ See more examples of line charts [here](https://plot.ly/r/line-charts/).
 ```{r}
 library(plotly)
 
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species)
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species)
 
-p
+fig
 ```
 
 ### ColorBrewer Palette Names
@@ -99,9 +99,9 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species, colors = "Set1")
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species, colors = "Set1")
 
-p
+fig
 ```
 
 ### Custom Color Scales
@@ -113,9 +113,9 @@ library(plotly)
 
 pal <- c("red", "blue", "green")
 
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species, colors = pal)
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species, colors = pal)
 
-p
+fig
 ```
 
 To ensure a particular data value gets mapped to particular color, provide a character vector of color codes, and match the names attribute accordingly.
@@ -126,9 +126,9 @@ library(plotly)
 pal <- c("red", "blue", "green")
 pal <- setNames(pal, c("virginica", "setosa", "versicolor"))
 
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species, colors = pal)
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species, colors = pal)
 
-p
+fig
 ```
 
 ### Mapping Data to Symbols
@@ -136,11 +136,11 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, type = 'scatter',
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length, type = 'scatter',
   mode = 'markers', symbol = ~Species, symbols = c('circle','x','o'),
   color = I('black'), marker = list(size = 10))
 
-p
+fig
 ```
 
 ### Adding Color and Size Mapping
@@ -150,12 +150,12 @@ library(plotly)
 
 d <- diamonds[sample(nrow(diamonds), 1000), ]
 
-p <- plot_ly(
+fig <- plot_ly(
   d, x = ~carat, y = ~price,
   color = ~carat, size = ~carat
 )
 
-p
+fig
 ```
 
 ### Data Labels on Hover
@@ -165,14 +165,14 @@ library(plotly)
 
 d <- diamonds[sample(nrow(diamonds), 1000), ]
 
-p <- plot_ly(
+fig <- plot_ly(
   d, x = ~carat, y = ~price,
   # Hover text:
   text = ~paste("Price: ", price, '$<br>Cut:', cut),
   color = ~carat, size = ~carat
 )
 
-p
+fig
 ```
 
 #Reference

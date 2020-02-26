@@ -29,9 +29,9 @@ p <- ggplot(df, aes(x, y)) +
   geom_point() +
   geom_spoke(aes(angle = angle, radius = speed))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Reference: [ggplot2 docs](http://ggplot2.tidyverse.org/reference/geom_spoke.html#examples)
 

@@ -27,9 +27,9 @@ p <- ggplot(canada.cities, aes(long, lat)) +
         coord_equal() +
         geom_point(aes(text=name, size=pop), colour="red", alpha=1/2, name="cities")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 
@@ -43,9 +43,9 @@ library(gapminder)
 p <- ggplot(gapminder, aes(x = gdpPercap, y = lifeExp, color = continent, text =      paste("country:", country))) +
      geom_point(alpha = (1/3)) + scale_x_log10()  
   
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="https://github.com/jennybc/ggplot2-tutorial/blob/master/gapminder-ggplot2-scatterplot.md">Gapminder Tutorial</a>
 
@@ -60,8 +60,8 @@ p <- ggplot(gapminder, aes(x = year, y = lifeExp, text = paste("country:",countr
      geom_point() +
      facet_wrap(~ continent) 
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="https://github.com/jennybc/ggplot2-tutorial/blob/master/gapminder-ggplot2-scatterplot.md">Gapminder Tutorial</a>

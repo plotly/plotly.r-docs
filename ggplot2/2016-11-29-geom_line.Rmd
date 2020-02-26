@@ -32,9 +32,9 @@ p <- ggplot(data=dat1, aes(x=time, y=total_bill, group=sex)) +
     geom_line() +
     geom_point()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Add Points
@@ -53,9 +53,9 @@ p <- ggplot(data=dat1, aes(x=time, y=total_bill, group=sex, shape=sex)) +
     geom_line() +
     geom_point()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Styles & Themes
@@ -81,9 +81,9 @@ p <- ggplot(data=dat1, aes(x=time, y=total_bill, group=sex, shape=sex, colour=se
     ggtitle("Average bill for 2 people") +     # Set title
     theme_bw()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Continuous
@@ -105,9 +105,9 @@ p <- ggplot(data=datn, aes(x=dose, y=length, group=supp, colour=supp)) +
     geom_line() +
     geom_point()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Categorical
@@ -131,9 +131,9 @@ p <- ggplot(data=datn2, aes(x=dose, y=length, group=supp, colour=supp)) +
     geom_line() +
     geom_point()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Multiple Variables
@@ -155,9 +155,9 @@ p <- ggplot(data=test_data_long,
        aes(x=date, y=value, colour=variable)) +
     geom_line()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Mulitple Points
@@ -172,9 +172,9 @@ p <- ggplot(d, aes(x=x, y=y))+geom_line()
 thinned <- floor(seq(from=1,to=dim(d)[1],length=70))
 p <- ggplot(d, aes(x=x, y=y))+geom_line()+geom_point(data=d[thinned,],aes(x=x,y=y))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Styled Lines
@@ -197,9 +197,9 @@ p <- ggplot(data, aes(x = x, y= mean, group = as.factor(data$group),
   scale_color_manual(name="Groups",values=c("red", "blue"))+
   guides(colour = guide_legend(override.aes = list(linetype = 1)))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Mapping to Groups
@@ -218,9 +218,9 @@ d <- data.frame(x=x, y=y, treatment=treatment, replicate=replicate)
 p <- ggplot(d, aes(x=x, y=y, colour=treatment, group=interaction(treatment, replicate))) +
     geom_point() + geom_line()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Add Segment
@@ -238,9 +238,9 @@ p <- ggplot(df, aes(x=x, y=y, linetype=fac)) +
     geom_segment(aes(x=2, y=7, xend=7, yend=7), colour="red") +
     scale_linetype_discrete(guide=guide_legend(override.aes=aes(colour="blue")))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Add Error Bar
@@ -273,7 +273,7 @@ p <- ggplot(data = df, aes(x = E,
   geom_errorbar(aes(x = E, ymin = avg-se, ymax = avg+se, color = NULL, linetype = NULL),
                 width=.1, position=position_dodge(width = .1))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```

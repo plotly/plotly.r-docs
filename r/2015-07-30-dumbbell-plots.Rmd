@@ -23,17 +23,17 @@ s <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_e
 s$School <- factor(s$School, levels = s$School[order(s$Men)])
 
 library(plotly)
-p <- plot_ly(s, color = I("gray80")) %>%
-  add_segments(x = ~Women, xend = ~Men, y = ~School, yend = ~School, showlegend = FALSE) %>%
-  add_markers(x = ~Women, y = ~School, name = "Women", color = I("pink")) %>%
-  add_markers(x = ~Men, y = ~School, name = "Men", color = I("blue")) %>%
-  layout(
+fig <- plot_ly(s, color = I("gray80"))
+fig <- fig %>% add_segments(x = ~Women, xend = ~Men, y = ~School, yend = ~School, showlegend = FALSE)
+fig <- fig %>% add_markers(x = ~Women, y = ~School, name = "Women", color = I("pink"))
+fig <- fig %>% add_markers(x = ~Men, y = ~School, name = "Men", color = I("blue"))
+fig <- fig %>% layout(
     title = "Gender earnings disparity",
     xaxis = list(title = "Annual Salary (in thousands)"),
     margin = list(l = 65)
   )
 
-p
+fig
 ```
 
 #Reference

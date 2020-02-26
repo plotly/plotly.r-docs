@@ -27,9 +27,9 @@ df <- melt(volcano)
 p <- ggplot(df, aes(Var1, Var2, z= value)) +
   geom_contour() +
   scale_fill_distiller(palette = "Spectral", direction = -1)
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Coloured Plot

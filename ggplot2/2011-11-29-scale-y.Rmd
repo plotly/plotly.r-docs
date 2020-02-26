@@ -25,8 +25,8 @@ p <- ggplot(diamonds, aes(color, log10(price))) +
     geom_boxplot() +
     scale_y_continuous("Price, log10-scaling")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://stackoverflow.com/questions/4699493/transform-only-one-axis-to-log10-scale-with-ggplot2">Stack Overflow</a>.

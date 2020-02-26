@@ -48,8 +48,8 @@ By default, the `plotly` R package runs locally in your web browser or in the `R
 
 ```{r}
 library(plotly)
-p <- plot_ly(midwest, x = ~percollege, color = ~state, type = "box")
-p
+fig <- plot_ly(midwest, x = ~percollege, color = ~state, type = "box")
+fig
 ```
 
 Simply printing the plot object will render the chart locally in your web browser or in the `RStudio` viewer.

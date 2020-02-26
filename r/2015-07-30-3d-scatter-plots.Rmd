@@ -25,13 +25,13 @@ mtcars$am[which(mtcars$am == 0)] <- 'Automatic'
 mtcars$am[which(mtcars$am == 1)] <- 'Manual'
 mtcars$am <- as.factor(mtcars$am)
 
-p <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec, color = ~am, colors = c('#BF382A', '#0C4B8E')) %>%
-  add_markers() %>%
-  layout(scene = list(xaxis = list(title = 'Weight'),
+fig <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec, color = ~am, colors = c('#BF382A', '#0C4B8E'))
+fig <- fig %>% add_markers()
+fig <- fig %>% layout(scene = list(xaxis = list(title = 'Weight'),
 			         yaxis = list(title = 'Gross horsepower'),
 			         zaxis = list(title = '1/4 mile time')))
 
-p
+fig
 ```
 
 #### 3D Scatter Plot with Color Scaling
@@ -39,22 +39,21 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec,
-        marker = list(color = ~mpg, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE)) %>%
-  add_markers() %>%
-  layout(scene = list(xaxis = list(title = 'Weight'),
-			         yaxis = list(title = 'Gross horsepower'),
-			         zaxis = list(title = '1/4 mile time')),
-         annotations = list(
-           x = 1.13,
-           y = 1.05,
-           text = 'Miles/(US) gallon',
-           xref = 'paper',
-           yref = 'paper',
-           showarrow = FALSE
-         ))
-
-p
+fig <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec,
+               marker = list(color = ~mpg, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+fig <- fig %>% add_markers()
+fig <- fig %>% layout(scene = list(xaxis = list(title = 'Weight'),
+                                   yaxis = list(title = 'Gross horsepower'),
+                                   zaxis = list(title = '1/4 mile time')),
+                      annotations = list(
+                        x = 1.13,
+                        y = 1.05,
+                        text = 'Miles/(US) gallon',
+                        xref = 'paper',
+                        yref = 'paper',
+                        showarrow = FALSE
+                        ))
+fig
 ```
 
 #### 3D Bubble Plot
@@ -69,11 +68,11 @@ data_2007 <- data_2007[order(data_2007$continent, data_2007$country),]
 data_2007$size <- data_2007$pop
 colors <- c('#4AC6B7', '#1972A4', '#965F8A', '#FF7070', '#C61951')
 
-p <- plot_ly(data_2007, x = ~gdpPercap, y = ~lifeExp, z = ~pop, color = ~continent, size = ~size, colors = colors,
+fig <- plot_ly(data_2007, x = ~gdpPercap, y = ~lifeExp, z = ~pop, color = ~continent, size = ~size, colors = colors,
              marker = list(symbol = 'circle', sizemode = 'diameter'), sizes = c(5, 150),
              text = ~paste('Country:', country, '<br>Life Expectancy:', lifeExp, '<br>GDP:', gdpPercap,
-                           '<br>Pop.:', pop)) %>%
-  layout(title = 'Life Expectancy v. Per Capita GDP, 2007',
+                           '<br>Pop.:', pop))
+fig <- fig %>% layout(title = 'Life Expectancy v. Per Capita GDP, 2007',
          scene = list(xaxis = list(title = 'GDP per capita (2000 dollars)',
                       gridcolor = 'rgb(255, 255, 255)',
                       range = c(2.003297660701705, 5.191505530708712),
@@ -96,7 +95,7 @@ p <- plot_ly(data_2007, x = ~gdpPercap, y = ~lifeExp, z = ~pop, color = ~contine
          paper_bgcolor = 'rgb(243, 243, 243)',
          plot_bgcolor = 'rgb(243, 243, 243)')
 
-p
+fig
 ```
 
 #Reference

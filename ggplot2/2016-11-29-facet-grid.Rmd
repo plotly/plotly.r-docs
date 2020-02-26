@@ -27,9 +27,9 @@ p <- ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 # Divide by levels of "sex", in the vertical direction
 p <- p + facet_grid(sex ~ .)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Horizontal Grid
@@ -43,9 +43,9 @@ p <- ggplot(tips, aes(x=total_bill, y=tip/total_bill)) + geom_point(shape=1)
 # Divide by levels of "sex", in the horizontal direction
 p <- p + facet_grid(. ~ sex)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Free Scale
@@ -59,9 +59,9 @@ p <- ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 # Histogram of total_bill, divided by sex and smoker
 p <- p + facet_grid(sex ~ smoker)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Free Y Axis
@@ -75,9 +75,9 @@ p <- ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 # Same as above, with scales="free_y"
 p <- p + facet_grid(sex ~ smoker, scales="free_y")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Varied Range
@@ -91,9 +91,9 @@ p <- ggplot(tips, aes(x=total_bill)) + geom_histogram(binwidth=2,colour="white")
 # With panels that have the same scaling, but different range (and therefore different physical sizes)
 p <- p + facet_grid(sex ~ smoker, scales="free", space="free")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Time Series Data
@@ -117,9 +117,9 @@ p <- ggplot(mymelt, aes(x = mydate, y = value)) +
           axis.ticks = element_blank(),
           panel.grid.minor = element_blank())
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Geom Line
@@ -141,7 +141,7 @@ p <- ggplot(dat, aes(x=date, y=value, color=location, group=location)) +
     geom_line()+
     facet_grid(product ~ ., scale = "free_y")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```

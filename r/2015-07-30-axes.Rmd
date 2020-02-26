@@ -31,10 +31,10 @@ a <- list(
   tickcolor = toRGB("blue")
 )
 s <- seq(1, 4, by = 0.25)
-p <- plot_ly(x = ~s, y = ~s) %>%
-  layout(xaxis = a, yaxis = a)
+fig <- plot_ly(x = ~s, y = ~s)
+fig <- fig %>% layout(xaxis = a, yaxis = a)
 
-p
+fig
 ```
 
 ### Style Axes Titles and Ticks Labels
@@ -61,12 +61,12 @@ a <- list(
 )
 
 s <- seq(1e6, 1e7, length.out = 10)
-p <- plot_ly(x = ~s, y = ~s) %>%
-  add_markers() %>%
-  add_markers(y = ~rev(s)) %>%
-  layout(xaxis = a, yaxis = a, showlegend = FALSE)
+fig <- plot_ly(x = ~s, y = ~s)
+fig <- fig %>% add_markers()
+fig <- fig %>% add_markers(y = ~rev(s))
+fig <- fig %>% layout(xaxis = a, yaxis = a, showlegend = FALSE)
 
-p
+fig
 ```
 
 ### Style Axes and Zero-Lines
@@ -84,10 +84,10 @@ ax <- list(
   linewidth = 6
 )
 s <- seq(-1, 4)
-p <- plot_ly(x = ~s, y = ~s) %>%
-  layout(xaxis = ax, yaxis = ax)
+fig <- plot_ly(x = ~s, y = ~s)
+fig <- fig %>% layout(xaxis = ax, yaxis = ax)
 
-p
+fig
 ```
 
 ### Hide Axes Title, Lines, Ticks, and Labels
@@ -101,19 +101,19 @@ ax <- list(
   showgrid = FALSE
 )
 
-p <- plot_ly(x = c(1, 2), y = c(1, 2)) %>%
-  layout(xaxis = ax, yaxis = ax)
+fig <- plot_ly(x = c(1, 2), y = c(1, 2))
+fig <- fig %>% layout(xaxis = ax, yaxis = ax)
 
-p
+fig
 ```
 
 ### Reversed Axes
 ```{r}
 library(plotly)
-p <- plot_ly(x = c(1, 2), y = c(1, 2)) %>%
-  layout(xaxis = list(autorange = "reversed"))
+fig <- plot_ly(x = c(1, 2), y = c(1, 2))
+fig <- fig %>% layout(xaxis = list(autorange = "reversed"))
 
-p
+fig
 ```
 
 ### Reversed Axes with Range ( Min/Max ) Specified
@@ -122,10 +122,10 @@ library(plotly)
 x <- seq(0, 10, length=50)
 y <- runif(n = 50, min = 0, max = 10)
 
-p <- plot_ly(x = x, y = y) %>%
-  layout(xaxis = list(range = c(10, 0)))
+fig <- plot_ly(x = x, y = y)
+fig <- fig %>% layout(xaxis = list(range = c(10, 0)))
 
-p
+fig
 ```
 
 ### Logarithmic Axes
@@ -133,12 +133,12 @@ p
 ```{r}
 library(plotly)
 s <- seq(1, 8)
-p <- plot_ly(x = ~s) %>%
-  add_trace(y = ~exp(s), name = "exponential") %>%
-  add_trace(y =  ~s, name = "linear") %>%
-  layout(yaxis = list(type = "log"))
+fig <- plot_ly(x = ~s)
+fig <- fig %>% add_trace(y = ~exp(s), name = "exponential")
+fig <- fig %>% add_trace(y =  ~s, name = "linear")
+fig <- fig %>% layout(yaxis = list(type = "log"))
 
-p
+fig
 ```
 
 ### Categorical Axes
@@ -146,14 +146,14 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     x = c('A12', 'BC2', 109, '12F', 215, 304),
     y = c(1,6,3,5,1,4),
     type = 'bar',
     name = 'Team A',
     text = c('Apples', 'Pears', 'Peaches', 'Bananas', 'Pineapples', 'Cherries')
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     title = 'Inventory',
     xaxis = list(
       type = 'category',
@@ -165,7 +165,7 @@ p <- plot_ly(
     )
   )
 
-p
+fig
 ```
 
 ### Subcategory Axes
@@ -173,12 +173,12 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(orientation='h', line=list(color='gray'), height=400, width=600) %>%
-  add_boxplot(x=c(2,3,1,5), y=c('A','A','A','A'), name='A') %>%
-  add_boxplot(x=c(8,3,6,5), y=c('B','B','B','B'), name='B') %>%
-  add_boxplot(x=c(2,3,2,5), y=c('C','C','C','C'), name='C') %>%
-  add_boxplot(x=c(7.5,3,6,4), y=c('D','D','D','D'), name='D') %>%
-  layout(
+fig <- plot_ly(orientation='h', line=list(color='gray'), height=400, width=600)
+fig <- fig %>% add_boxplot(x=c(2,3,1,5), y=c('A','A','A','A'), name='A')
+fig <- fig %>% add_boxplot(x=c(8,3,6,5), y=c('B','B','B','B'), name='B')
+fig <- fig %>% add_boxplot(x=c(2,3,2,5), y=c('C','C','C','C'), name='C')
+fig <- fig %>% add_boxplot(x=c(7.5,3,6,4), y=c('D','D','D','D'), name='D')
+fig <- fig %>% layout(
     title = '',
     yaxis = list(
       autorange = TRUE, 
@@ -263,7 +263,7 @@ p <- plot_ly(orientation='h', line=list(color='gray'), height=400, width=600) %>
       )
     )
 
-p
+fig
 ```
 
 ### Fixed-Ratio Axes
@@ -271,36 +271,36 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     width = 800,
     height = 500
-  ) %>% 
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3),
     y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0),
     mode = 'lines'
-  ) %>%
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     x = c(0,1,2,3),
     y = c(1,2,4,8),
     yaxis = "y2",
     mode = 'lines'
-  ) %>% 
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     x = c(1,10,100,10,1),
     y = c(0,1,2,3,4),
     xaxis = "x2",
     yaxis ="y3",
     mode = 'lines'
-  ) %>% 
-  add_trace(
+  )
+fig <- fig %>% add_trace(
     x = c(1,100,30,80,1),
     y = c(1,1.5,2,2.5,3),
     xaxis = "x2",
     yaxis = "y4",
     mode = 'lines'
-  ) %>% 
-  layout(
+  )
+fig <- fig %>% layout(
     title = "fixed-ratio axes",
     xaxis = list(
       nticks = 10,
@@ -338,31 +338,31 @@ p <- plot_ly(
     showlegend= FALSE
 )
 
-p
+fig
 ```
 
 ### Rangemode
 ```{r}
 library(plotly)
-p <- plot_ly(x = seq(2, 6, by = 2), y = seq(-3, 3, by = 3)) %>%
-  layout(
+fig <- plot_ly(x = seq(2, 6, by = 2), y = seq(-3, 3, by = 3))
+fig <- fig %>% layout(
     xaxis = list(rangemode = "tozero"),
     yaxis = list(rangemode = "nonnegative"))
 
-p
+fig
 ```
 
 ### Manual Ranges
 ```{r}
 library(plotly)
 s <- seq(1, 8)
-p <- plot_ly(x = s, y = s) %>%
-  add_trace(y = rev(s)) %>%
-  layout(
+fig <- plot_ly(x = s, y = s)
+fig <- fig %>% add_trace(y = rev(s))
+fig <- fig %>% layout(
     xaxis = list(range = c(2, 5)),
     yaxis = list(range = c(2, 5)))
 
-p
+fig
 ```
 
 ### Modifying Axes for 3D Plots
@@ -396,8 +396,8 @@ scene = list(
   camera = list(eye = list(x = -1.25, y = 1.25, z = 1.25)))
 
 
-p <- plot_ly(ds, x = ~carat, y = ~cut, z = ~price, type = 'scatter3d', mode = 'markers', marker = list(size = 3)) %>%
-  layout(title = "3D Scatter plot", scene = scene)
+fig <- plot_ly(ds, x = ~carat, y = ~cut, z = ~price, type = 'scatter3d', mode = 'markers', marker = list(size = 3))
+fig <- fig %>% layout(title = "3D Scatter plot", scene = scene)
 
-p
+fig
 ```

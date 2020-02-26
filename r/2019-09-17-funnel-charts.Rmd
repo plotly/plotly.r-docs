@@ -27,14 +27,16 @@ Funnel charts are often used to represent data in different stages of a business
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-p <- plot_ly() %>%
+fig <- plot_ly() 
+fig <- fig %>%
   add_trace(
   type = "funnel",
   y = c("Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"),
-  x = c(39, 27.4, 20.6, 11, 2)) %>%
+  x = c(39, 27.4, 20.6, 11, 2)) 
+fig <- fig %>%
   layout(yaxis = list(categoryarray = c("Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent")))
 
-p
+fig
 ```
 
 
@@ -46,7 +48,8 @@ This example uses [textposition](https://plot.ly/python/reference/#scatter-textp
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-p <- plot_ly() %>%
+fig <- plot_ly() 
+fig <- fig %>%
   add_trace(type = "funnel",
             y = c("Website visit", "Downloads", "Potential customers", "Requested price", "Finalized"),
             x = c(39, 27.4, 20.6, 11, 2),
@@ -55,10 +58,11 @@ p <- plot_ly() %>%
             opacity = 0.65,
             marker = list(color = c("deepskyblue", "lightsalmon", "tan", "teal", "silver"),
                           line = list(width = c(4, 2, 2, 3, 1, 1), color = c("wheat", "wheat", "blue", "wheat", "wheat"))),
-            connector = list(line = list(color = "royalblue", dash = "dot", width = 3))) %>%
+            connector = list(line = list(color = "royalblue", dash = "dot", width = 3))) 
+fig <- fig %>%
   layout(yaxis = list(categoryarray = c("Website visit", "Downloads", "Potential customers", "Requested price", "Finalized")))
 
-p
+fig
 ```
 
 ### Stacked Funnel Plot
@@ -68,12 +72,13 @@ p
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     type = "funnel",
     name = 'Montreal',
     y = c("Website visit", "Downloads", "Potential customers", "Requested price"),
     x = c(120, 60, 30, 20),
-    textinfo = "value+percent initial") %>%
+    textinfo = "value+percent initial") 
+fig <- fig %>%
   add_trace(
     type = "funnel",
     name = 'Toronto',
@@ -81,7 +86,8 @@ p <- plot_ly(
     y = c("Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent"),
     x = c(100, 60, 40, 30, 20),
     textposition = "inside",
-    textinfo = "value+percent previous") %>%
+    textinfo = "value+percent previous") 
+fig <- fig %>%
   add_trace(
     type = "funnel",
     name = 'Vancouver',
@@ -89,10 +95,11 @@ p <- plot_ly(
     y = c("Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent", "Finalized"),
   x = c(90, 70, 50, 30, 10, 5),
   textposition = "outside",
-  textinfo = "value+percent total") %>%
+  textinfo = "value+percent total") 
+fig <- fig %>%
   layout(yaxis = list(categoryarray = c("Website visit", "Downloads", "Potential customers", "Requested price", "invoice sent", "Finalized")))
 
-p
+fig
 ```
 
 ### Basic Area Funnel Plot
@@ -102,12 +109,12 @@ p
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   type = "funnelarea",
   text = c("The 1st","The 2nd", "The 3rd", "The 4th", "The 5th"),
   values = c(5, 4, 3, 2, 1))
 
-p
+fig
 ```
 ### Set Marker Size and Color in Area Funnel Plots
 ```{r}
@@ -115,7 +122,7 @@ p
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   type = "funnelarea",
   values = c(5, 4, 3, 2, 1),
   text = c("The 1st","The 2nd", "The 3rd", "The 4th", "The 5th"),
@@ -124,7 +131,7 @@ p <- plot_ly(
   textfont = list(family = "Old Standard TT, serif", size = 13, color = "black"),
   opacity = 0.65)
 
-p
+fig
 ```
 
 ### Multiple Area Funnels
@@ -133,34 +140,38 @@ p
 # devtools::install_github("ropensci/plotly")
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
     type = "funnelarea",
     scalegroup = "first",
     values = c(500, 450, 340, 230, 220, 110),
     textinfo = "value",
     title = list(position = "top center", text = "Sales for Sale Person A in U.S."),
-    domain = list(x = c(0.01, 0.48), y =c(0, 0.5))) %>%
+    domain = list(x = c(0.01, 0.48), y =c(0, 0.5))) 
+fig <- fig %>%
   add_trace(
     type = "funnelarea",
     scalegroup = "first",
     values = c(600, 500, 400, 300, 200, 100),
     textinfo = "value",
     title = list(position = "top center", text = "Sales of Sale Person B in Canada"),
-    domain = list(x = c(0.01, 0.48), y = c(0.56, 1))) %>%
+    domain = list(x = c(0.01, 0.48), y = c(0.56, 1))) 
+fig <- fig %>%
   add_trace(
     type = "funnelarea",
     scalegroup = "second",
     values = c(510, 480, 440, 330, 220, 100),
     textinfo = "value",
     title = list(position = "top left", text = "Sales of Sale Person A in Canada"),
-    domain = list(x = c(0.56, 0.98), y = c(0, 0.5))) %>%
+    domain = list(x = c(0.56, 0.98), y = c(0, 0.5))) 
+fig <- fig %>%
   add_trace(
     type = "funnelarea",
     scalegroup = "second",
     values = c(360, 250, 240, 130, 120, 60),
     textinfo = "value",
     title = list(position = "top left", text = "Sales of Sale Person B in U.S."),
-    domain = list(x = c(0.56, 0.98), y = c(0.56, 1))) %>%
+    domain = list(x = c(0.56, 0.98), y = c(0.56, 1))) 
+fig <- fig %>%
   layout(
     margin = list(l= 200, r= 200), shapes = list(
       list(x0 = 0, x1 = 0.5, y0 = 0, y1 = 0.5),
@@ -168,7 +179,7 @@ p <- plot_ly(
       list(x0 = 0.55, x1 = 1, y0 = 0, y1 = 0.5),
       list(x0 = 0.55, x1 = 1, y0 = 0.55, y1 = 1)))
 
-p
+fig
 ```
 
 #Reference

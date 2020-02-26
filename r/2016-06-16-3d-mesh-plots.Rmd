@@ -25,9 +25,9 @@ x <- runif(50, 0, 1)
 y <- runif(50, 0, 1)
 z <- runif(50, 0, 1)
 
-p <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d')
+fig <- plot_ly(x = ~x, y = ~y, z = ~z, type = 'mesh3d')
 
-p
+fig
 ```
 
 ### Tetrahedron Mesh Plot
@@ -35,7 +35,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(type = 'mesh3d',
+fig <- plot_ly(type = 'mesh3d',
   x = c(0, 1, 2, 0),
   y = c(0, 0, 1, 2),
   z = c(0, 2, 0, 1),
@@ -47,7 +47,7 @@ p <- plot_ly(type = 'mesh3d',
   colors = colorRamp(c("red", "green", "blue"))
 )
 
-p
+fig
 ```
 
 ### Cube Mesh Plot
@@ -55,7 +55,7 @@ p
 ```{r}
 library(plotly)
 
-p <- plot_ly(type = 'mesh3d',
+fig <- plot_ly(type = 'mesh3d',
   x = c(0, 0, 1, 1, 0, 0, 1, 1),
   y = c(0, 1, 1, 0, 0, 1, 1, 0),
   z = c(0, 0, 0, 0, 1, 1, 1, 1),
@@ -67,7 +67,7 @@ p <- plot_ly(type = 'mesh3d',
   colors = colorRamp(rainbow(8))
 )
 
-p
+fig
 ```
 
 #Reference

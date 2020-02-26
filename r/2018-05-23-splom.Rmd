@@ -23,7 +23,8 @@ The Plotly splom trace implementation for the scaterplot matrix does not require
 A trace of type splom is defined as follows:
 
 ```{r, results = 'hide', eval=FALSE}
-p <- plot_ly() %>%
+fig <- plot_ly() 
+fig <- fig %>%
   add_trace(
     dimensions = list(
       list(label='string-1', values=X1),
@@ -72,8 +73,9 @@ axis = list(showline=FALSE,
             gridcolor='#ffff',
             ticklen=4)
 
-p <- df %>% 
-  plot_ly() %>%
+fig <- df %>%
+  plot_ly() 
+fig <- fig %>%
   add_trace(
     type = 'splom',
     dimensions = list(
@@ -92,7 +94,8 @@ p <- df %>%
         color = 'rgb(230,230,230)'
       )
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     title= 'Iris Data set',
     hovermode='closest',
@@ -108,7 +111,7 @@ p <- df %>%
     yaxis4=axis
   )
 
-p
+fig
 ```
 
 The scatter plots on the principal diagonal can be removed by setting `diagonal=list(visible=FALSE)`:
@@ -116,9 +119,9 @@ The scatter plots on the principal diagonal can be removed by setting `diagonal=
 ```{r}
 library(plotly)
 
-pp <- p %>% style(diagonal = list(visible = F))
+fig2 <-  fig %>% style(diagonal = list(visible = F))
 
-pp
+fig2
 ```
 
 To plot only the lower/upper half of the splom we switch the default `showlowerhalf=True` / `showupperhalf=False`:
@@ -126,9 +129,9 @@ To plot only the lower/upper half of the splom we switch the default `showlowerh
 ```{r}
 library(plotly)
 
-pp <- p %>% style(showupperhalf = F)
+fig2 <-  fig %>% style(showupperhalf = F)
 
-pp
+fig2
 ```
 
 Each list in the dimensions has a key, visible, set by default on True. We can choose to remove a variable from splom, by setting `visible=FALSE` in its corresponding dimension. In this case the default grid associated to the scatterplot matrix keeps its number of cells, but the cells in the row and column corresponding to the visible false dimension are empty:
@@ -136,10 +139,10 @@ Each list in the dimensions has a key, visible, set by default on True. We can c
 ```{r}
 library(plotly)
 
-pp <- plotly_build(p)
-pp$x$data[[1]]$dimensions[[3]] <- list(visible = F)
+fig2 <-  plotly_build(fig)
+fig2$x$data[[1]]$dimensions[[3]] <- list(visible = F)
 
-pp
+fig2
 ```
 
 #### Splom for the diabetes dataset
@@ -170,8 +173,9 @@ axis = list(showline=FALSE,
             ticklen=4,
             titlefont=list(size=13))
 
-p <- df %>% 
-  plot_ly() %>%
+fig <- df %>%
+  plot_ly() 
+fig <- fig %>%
   add_trace(
     type = 'splom',
     dimensions = list(
@@ -195,7 +199,8 @@ p <- df %>%
         color = 'rgb(230,230,230)'
       )
     )
-  ) %>%
+  ) 
+fig <- fig %>%
   layout(
     title = "Scatterplot Matrix (SPLOM) for Diabetes Dataset<br>Data source: <a href='https://www.kaggle.com/uciml/pima-indians-diabetes-database/data'>[1]</a>",
     hovermode='closest',
@@ -219,7 +224,7 @@ p <- df %>%
     yaxis8=axis
   )
 
-p
+fig
 ```
 
 ### Reference

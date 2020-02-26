@@ -33,9 +33,9 @@ p <- ggplot(data = df,aes(x = x,y = y)) +
     geom_errorbar(aes(ymin = ymin,ymax = ymax)) + 
     geom_errorbarh(aes(xmin = xmin,xmax = xmax))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Margin Error Bar
@@ -54,7 +54,7 @@ p <- ggplot(population, aes(x=Year, y=Population,
   geom_point(pch=2)+
   geom_errorbar(width=0.9)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```

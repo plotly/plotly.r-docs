@@ -26,9 +26,9 @@ dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200
 
 p <- ggplot(dat, aes(x=cond, y=rating)) + geom_boxplot()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Colored Boxplot
@@ -41,9 +41,9 @@ dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200
 
 p <- ggplot(dat, aes(x=cond, y=rating, fill=cond)) + geom_boxplot()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Flipped Boxplot
@@ -57,9 +57,9 @@ dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200
 p <- ggplot(dat, aes(x=cond, y=rating, fill=cond)) + geom_boxplot() +
     guides(fill=FALSE) + coord_flip()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Boxplot w/ Stats
@@ -73,9 +73,9 @@ dat <- data.frame(cond = factor(rep(c("A","B"), each=200)), rating = c(rnorm(200
 p <- ggplot(dat, aes(x=cond, y=rating)) + geom_boxplot() +
     stat_summary(fun.y=mean, geom="point", shape=5, size=4)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Boxplot Facets
@@ -102,9 +102,9 @@ p <- ggplot(dfmelt, aes(x=factor(round_any(x,0.5)), y=value,fill=variable))+
     labs(x="X (binned)")+
     theme(axis.text.x=element_text(angle=-90, vjust=0.4,hjust=1))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Time Series Facets
@@ -124,9 +124,9 @@ p <- ggplot(dat, aes(x = apply, y = gpa)) +
     geom_boxplot(size = .75) +
     facet_grid(pared ~ public, margins = TRUE)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Outliers
@@ -142,14 +142,14 @@ p <- ggplot(df, aes(cut, price, fill = cut)) +
   ggtitle("Ignore outliers in ggplot2")
 
 # Need to modify the plotly object and make outlier points have opacity equal to 0
-p <- plotly_build(p)
+fig <- plotly_build(p)
 
-p$data <- lapply(p$data, FUN = function(x){
+fig$data <- lapply(fig$data, FUN = function(x){
   x$marker = list(opacity = 0)
   return(x)
 })
 
-p
+fig
 ```
 
 ### Linewidth
@@ -165,14 +165,14 @@ p <- ggplot(df, aes(cut, price, fill = cut)) +
   ggtitle("Adjust line width of boxplot in ggplot2")
 
 # Need to modify the plotly object to make sure line width is larger than default
-p <- plotly_build(p)
+fig <- plotly_build(p)
 
-p$data <- lapply(p$data, FUN = function(x){
+fig$data <- lapply(fig$data, FUN = function(x){
   x$line = list(width = 10)
   return(x)
 })
 
-p
+fig
 ```
 
 ### Whiskers
@@ -194,9 +194,9 @@ p <- ggplot(df, aes(cut, price, fill = cut)) +
   geom_boxplot()+
   ggtitle("Add horizontal lines to whiskers using ggplot2")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 These example were inspired by <a href="http://www.cookbook-r.com/Graphs/Plotting_distributions_(ggplot2)/">Cookbook for R</a>.

@@ -32,10 +32,10 @@ p <- ggplot(dat, aes(x=rating)) +
     geom_vline(aes(xintercept=mean(rating, na.rm=T)),   # Ignore NA values for mean
                color="red", linetype="dashed", size=1)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Histogram
@@ -52,10 +52,10 @@ p <- ggplot(dat, aes(x=rating, fill=cond)) +
     geom_vline(data=cdat, aes(xintercept=rating.mean),
                linetype="dashed", size=1)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Histogram Means
@@ -72,10 +72,9 @@ p <- ggplot(dat, aes(x=rating)) + geom_histogram(binwidth=.5, colour="black", fi
     geom_vline(data=cdat, aes(xintercept=rating.mean),
                linetype="dashed", size=1, colour="red")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-
-p
+fig
 ```
 
 ### Density Plots
@@ -93,10 +92,9 @@ p <- ggplot(dat, aes(x=rating, colour=cond)) +
                linetype="dashed", size=1)
 
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-
-p
+fig
 ```
 
 ### Horizontal Line
@@ -136,10 +134,10 @@ p <- ggplot(dat, aes(x=xval, y=yval, colour=cond)) +
 # Add a horizontal line
 p <- p + geom_hline(aes(yintercept=10))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Mean Line
@@ -180,14 +178,14 @@ mean1 <- mean(dat[dat$cond == "control", "xval"])
 mean2 <- mean(dat[dat$cond == "treatment", "xval"])
 
 # Add colored lines for the mean xval of each group
-p <- p + 
+p <- p +
   geom_vline(aes(xintercept=mean1), colour="green") + 
   geom_vline(aes(xintercept=mean2), colour="lightblue")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Geom_vline & Geom_hline
@@ -227,9 +225,9 @@ p <- ggplot(dat, aes(x=xval, y=yval, colour=cond)) + geom_point()
 p <- p + geom_hline(aes(yintercept=10)) +
     geom_vline(aes(xintercept=11.5), colour="#BB0000", linetype="dashed")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 These ggplot2 examples were inspired by <a href="http://www.cookbook-r.com/Graphs/Lines_(ggplot2)/">the Cookbook for R</a>.

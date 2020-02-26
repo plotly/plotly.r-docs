@@ -39,7 +39,7 @@ Function | Description
 ```{r}
 library(plotly)
 
-p <- plot_ly(
+fig <- plot_ly(
   type = 'scatter',
   x = diamonds$cut,
   y = diamonds$price,
@@ -57,13 +57,14 @@ p <- plot_ly(
   )
 )
 
-p
+fig
 ```
 
 #### Aggregate Functions
 
 ``` {r}
 library(plotly)
+library(listviewer)
 
 s <- schema()
 agg <- s$transforms$aggregate$attributes$aggregations$items$aggregation$func$values
@@ -77,7 +78,7 @@ for (i in 1:length(agg)) {
   l[[i]] = ll
 }
 
-p <- plot_ly(
+fig <- plot_ly(
   type = 'scatter',
   x = diamonds$cut,
   y = diamonds$price,
@@ -98,8 +99,8 @@ p <- plot_ly(
       )
     )
   )
-) %>%
-  layout(
+)
+fig <- fig %>% layout(
     title = '<b>Plotly Aggregations</b><br>use dropdown to change aggregation',
     xaxis = list(title = 'Cut'),
     yaxis = list(title = 'Price ($)'),
@@ -115,10 +116,8 @@ p <- plot_ly(
     )
   )
 
-p
+fig
 ```
-
-
 #### Histogram Binning
 
 ``` {r}
@@ -134,7 +133,7 @@ labels <- function(size, label) {
   )
 }
 
-p <- df %>%
+fig <- df %>%
   plot_ly(
     x = ~date,
     autobinx = FALSE, 
@@ -147,34 +146,34 @@ p <- df %>%
       size = "M1", 
       start = "1983-12-31 12:00"
     )
-  ) %>%
-    layout(
-    paper_bgcolor = "rgb(240, 240, 240)", 
-    plot_bgcolor = "rgb(240, 240, 240)", 
-    title = "<b>Shooting Incidents</b><br>use dropdown to change bin size",
-    xaxis = list(
-      type = 'date'
-    ),
-    yaxis = list(
-      title = "Incidents"
-    ),
-    updatemenus = list(
-      list(
-        x = 0.1, 
-        y = 1.15,
-        active = 1, 
-        showactive = TRUE,
-        buttons = list(
-          labels("D1", "Day"),
-          labels("M1", "Month"),
-          labels("M6", "Half Year"),
-          labels("M12", "Year")
-        )
+  )
+fig <- fig %>% layout(
+  paper_bgcolor = "rgb(240, 240, 240)", 
+  plot_bgcolor = "rgb(240, 240, 240)", 
+  title = "<b>Shooting Incidents</b><br>use dropdown to change bin size",
+  xaxis = list(
+    type = 'date'
+  ),
+  yaxis = list(
+    title = "Incidents"
+  ),
+  updatemenus = list(
+    list(
+      x = 0.1, 
+      y = 1.15,
+      active = 1, 
+      showactive = TRUE,
+      buttons = list(
+        labels("D1", "Day"),
+        labels("M1", "Month"),
+        labels("M6", "Half Year"),
+        labels("M12", "Year")
       )
     )
   )
+)
 
-p
+fig
 ```
 
 #### Mapping with Aggregations
@@ -196,7 +195,7 @@ for (i in 1:length(agg)) {
   l[[i]] = ll
 }
 
-p <- df %>%
+fig <- df %>%
   plot_ly(
     type = 'choropleth',
     locationmode = 'country names',
@@ -212,8 +211,8 @@ p <- df %>%
         list(target = 'z', func = 'sum', enabled = T)
       )
     ))
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     title = "<b>World Happiness</b>",
     geo = list(
       showframe = F,
@@ -231,7 +230,7 @@ p <- df %>%
     )
   )
 
-p
+fig
 ```
 
 #### Reference

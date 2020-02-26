@@ -27,11 +27,11 @@ df <- readr::read_csv(
 # Convert to dates
 df$Date <- as.Date(df$Date, format =  "%m/%d/%Y")
 
-p <- plot_ly(df, x = ~Date, y = ~Mean_TemperatureC) %>% 
-  add_lines(color = I("purple")) %>%
-  toWebGL() %>%
-  layout(title = "Mean Temparature in Seattle (1948 - 2015)",
+fig <- plot_ly(df, x = ~Date, y = ~Mean_TemperatureC)
+fig <- fig %>% add_lines(color = I("purple"))
+fig <- fig %>% toWebGL()
+fig <- fig %>% layout(title = "Mean Temparature in Seattle (1948 - 2015)",
          yaxis = list(title = "Temperature (<sup>o</sup>C)"))
 
-p
+fig
 ```

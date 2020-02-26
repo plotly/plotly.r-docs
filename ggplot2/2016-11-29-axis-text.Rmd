@@ -28,9 +28,9 @@ p <- ggplot(df, aes(carat, price, color = color, alpha = cut)) +
   theme(axis.text.x = element_text(colour = "#ff6666", size = 20), 
         axis.text.y = element_text(colour = "#668cff", size = 20))
   
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Axis Text Blank
@@ -45,9 +45,9 @@ p <- ggplot(df, aes(carat, price, color = cut)) +
   geom_point() + 
   theme(axis.text = element_blank())
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Vertical Text
@@ -65,9 +65,9 @@ p <- ggplot(ds, aes(x = x, fill = y)) +
   theme(axis.text.x = element_text(angle = 90)) + 
   ggtitle("Vertical Axis Labels")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Angled Text
@@ -85,8 +85,8 @@ p <- ggplot(ds, aes(x = x, fill = y)) +
   theme(axis.text.x = element_text(angle = 45)) + 
   ggtitle("Angle Axis Labels")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 Inspired by <a href="http://docs.ggplot2.org/current/">ggplot2 documentation</a>

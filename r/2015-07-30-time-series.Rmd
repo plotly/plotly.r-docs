@@ -24,9 +24,9 @@ today <- Sys.Date()
 tm <- seq(0, 600, by = 10)
 x <- today - tm
 y <- rnorm(length(x))
-p <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "days from today"))
+fig <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "days from today"))
 
-p
+fig
 ```
 
 ### POSIXlt date time class with timezone
@@ -37,9 +37,9 @@ now_lt <- as.POSIXlt(Sys.time(), tz = "GMT")
 tm <- seq(0, 600, by = 10)
 x <- now_lt - tm
 y <- rnorm(length(x))
-p <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "seconds from now in GMT"))
+fig <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "seconds from now in GMT"))
 
-p
+fig
 ```
 
 ### POSIXct date time class without timezone
@@ -50,7 +50,7 @@ now_ct <- as.POSIXct(Sys.time())
 tm <- seq(0, 600, by = 10)
 x <- now_ct - tm
 y <- rnorm(length(x))
-p <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "seconds from now in", Sys.timezone()))
+fig <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "seconds from now in", Sys.timezone()))
 
-p
+fig
 ```

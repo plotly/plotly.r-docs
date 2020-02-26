@@ -29,9 +29,9 @@ dat <- data.frame(
 p <- ggplot(data=dat, aes(x=time, y=total_bill)) +
     geom_bar(stat="identity")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Colored Bar Chart
@@ -48,9 +48,9 @@ dat <- data.frame(
 p <- ggplot(data=dat, aes(x=time, y=total_bill, fill=time)) +
     geom_bar(stat="identity")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### No Legend
@@ -69,10 +69,10 @@ p <- ggplot(data=dat, aes(x=time, y=total_bill, fill=time)) +
     geom_bar(colour="black", stat="identity") +
     guides(fill=FALSE)
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Position Dodge
@@ -91,9 +91,9 @@ dat1 <- data.frame(
 p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
     geom_bar(stat="identity", position=position_dodge())
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Custom Colors
@@ -112,9 +112,9 @@ p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
     geom_bar(stat="identity", position=position_dodge(), colour="black") +
     scale_fill_manual(values=c("#999999", "#E69F00"))
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Styles & Themes
@@ -138,10 +138,10 @@ p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
     ggtitle("Average bill for 2 people") +     # Set title
     theme_bw()
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
 
-p
+fig
 ```
 
 ### Variable Comparison
@@ -162,9 +162,9 @@ DF1 <- melt(DF, id.var="Rank")
 p <- ggplot(DF1, aes(x = Rank, y = value, fill = variable)) +
   geom_bar(stat = "identity")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Error Bars
@@ -184,9 +184,9 @@ p <- ggplot(df.summ, aes(x = cut, y = Mean, ymin = Min, ymax = Max, fill = cut))
   geom_errorbar() + 
   ggtitle("Bar chart with Error Bars")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Stacked Bar Chart
@@ -203,9 +203,9 @@ df.m <- rename(df.m, Period = Var1, Region = Var2)
 p <- ggplot(df.m, aes(x = Period, y = value/1e+06,fill = Region)) + ggtitle("Migration to the United States by Source Region (1820-2006), In Millions")
 p <- p + geom_bar(stat = "identity", position = "stack")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Ordered Bar Chart
@@ -221,9 +221,9 @@ dane$x<-as.factor(dane$x)
 p <- ggplot(data=dane,aes(x=x,y=y,fill=g)) +
     geom_bar(stat="identity")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Precentages
@@ -241,9 +241,9 @@ p <- ggplot(df, aes(x = color)) +
   ylab("Percent") + 
   ggtitle("Show precentages in bar chart")
   
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Manuel Colors
@@ -262,9 +262,9 @@ p <- ggplot(df, aes(x = color)) +
   ylab("Count") + 
   ggtitle("Specify manual colors in a bar chart")
   
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Reordered Bar Chart
@@ -284,7 +284,7 @@ p <- ggplot(df, aes(x, y, fill = x)) +
   geom_bar(stat = "identity") +
   ggtitle("Bar Chart with changed factor levels")
 
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```

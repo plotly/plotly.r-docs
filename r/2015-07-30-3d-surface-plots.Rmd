@@ -21,9 +21,10 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```{r}
 library(plotly)
 # volcano is a numeric matrix that ships with R
-p <- plot_ly(z = ~volcano) %>% add_surface()
+fig <- plot_ly(z = ~volcano)
+fig <- fig %>% add_surface()
 
-p
+fig
 ```
 
 # Surface Plot With Contours
@@ -31,7 +32,7 @@ p
 ```{r}
 library(plotly)
 # volcano is a numeric matrix that ships with R
-p <- plot_ly(z = ~volcano) %>% add_surface(
+fig <- plot_ly(z = ~volcano) %>% add_surface(
   contours = list(
     z = list(
       show=TRUE,
@@ -40,8 +41,8 @@ p <- plot_ly(z = ~volcano) %>% add_surface(
       project=list(z=TRUE)
       )
     )
-  ) %>%
-  layout(
+  )
+fig <- fig %>% layout(
     scene = list(
       camera=list(
         eye = list(x=1.87, y=0.88, z=-0.64)
@@ -49,16 +50,16 @@ p <- plot_ly(z = ~volcano) %>% add_surface(
       )
   )
 
-p
+fig
 ```
 
 ### 2D Kernel Density Estimation
 
 ```{r}
 kd <- with(MASS::geyser, MASS::kde2d(duration, waiting, n = 50))
-p <- plot_ly(x = kd$x, y = kd$y, z = kd$z) %>% add_surface()
+fig <- plot_ly(x = kd$x, y = kd$y, z = kd$z) %>% add_surface()
 
-p
+fig
 ```
 
 #### Configure Surface Contour Levels
@@ -77,22 +78,22 @@ z = rbind(
 
 
 library(plotly)
-p <- plot_ly(
+fig <- plot_ly(
   type = 'surface',
   contours = list(
     x = list(show = TRUE, start = 1.5, end = 2, size = 0.04, color = 'white'),
     z = list(show = TRUE, start = 0.5, end = 0.8, size = 0.05)),
   x = ~x,
   y = ~y,
-  z = ~z) %>%
-  layout(
+  z = ~z)
+fig <- fig %>% layout(
     scene = list(
       xaxis = list(nticks = 20),
       zaxis = list(nticks = 4),
       camera = list(eye = list(x = 0, y = -1, z = 0.5)),
       aspectratio = list(x = .9, y = .8, z = 0.2)))
 
-p
+fig
 ```
 
 ### Multiple Surfaces
@@ -119,10 +120,10 @@ dim(z) <- c(15,6)
 z2 <- z + 1
 z3 <- z - 1
 
-p <- plot_ly(showscale = FALSE) %>%
-  add_surface(z = ~z) %>%
-  add_surface(z = ~z2, opacity = 0.98) %>%
-  add_surface(z = ~z3, opacity = 0.98)
+fig <- plot_ly(showscale = FALSE)
+fig <- fig %>% add_surface(z = ~z)
+fig <- fig %>% add_surface(z = ~z2, opacity = 0.98)
+fig <- fig %>% add_surface(z = ~z3, opacity = 0.98)
 
-p
+fig
 ```

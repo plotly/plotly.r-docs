@@ -46,9 +46,8 @@ axis <- function(title) {
 }
 
 
-p <- df %>% 
-  plot_ly() %>%
-  add_trace(
+fig <- df %>% plot_ly()
+fig <- fig %>% add_trace(
     type = 'scatterternary',
     mode = 'markers',
     a = ~journalist,
@@ -61,8 +60,8 @@ p <- df %>%
       size = 14,
       line = list('width' = 2)
     )
-  ) %>% 
-  layout(
+  )
+fig <- fig %>% layout(
     title = "Simple Ternary Plot with Markers",
     ternary = list(
       sum = 100,
@@ -72,7 +71,7 @@ p <- df %>%
     )
   )
 
-p
+fig
 ```
 
 #Reference

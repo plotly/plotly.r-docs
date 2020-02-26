@@ -32,9 +32,9 @@ p <- ggplot(english_french, aes(x=engperc,y=frenperc)) +
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "# of census \nsubdivisions")
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Customized Colours
@@ -52,9 +52,9 @@ p <- ggplot(english_french, aes(x=engperc,y=frenperc)) +
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "# of census \nsubdivisions")
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Weighted Data
@@ -72,9 +72,9 @@ p <- ggplot(english_french, aes(x=engperc, y=frenperc, weight=total)) +
        x = "% fluent in English",
        y = "% fluent in French",
        fill = "population")
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
 ### Customized Appearance
@@ -94,8 +94,8 @@ p <- ggplot(english_french, aes(x=engperc,y=frenperc, weight=total)) +
        fill = "population") +
   theme_bw() +
   theme(text = element_text(family = 'Fira Sans'))
-p <- ggplotly(p)
+fig <- ggplotly(p)
 
-p
+fig
 ```
 
