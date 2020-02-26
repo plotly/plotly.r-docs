@@ -15,7 +15,9 @@ output:
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
-[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. Same as [Sunburst](https://plot.ly/r/sunburst-charts/) the hierarchy is defined by [labels](https://plot.ly/r/reference/#treemap-labels), and [parents](https://plot.ly/r/reference/#treemap-parents) attributes. Click on one sector to zoom in/out, which also displays a pathbar in the upper-left corner of your treemap. To zoom out you can use the path bar as well.
+[Treemap charts](https://en.wikipedia.org/wiki/Treemapping) visualize hierarchical data using nested rectangles. Just like with a [sunburst chart](https://plot.ly/r/sunburst-charts/), the hierarchy of a treemap is defined by using the [labels](https://plot.ly/r/reference/#treemap-labels), and [parents](https://plot.ly/r/reference/#treemap-parents) attributes. 
+
+Treemaps created with Plotly's R graphing library are interactive by default! Click on individual sectors of the treemap chart to zoom in/out of that sector and to display a hierarchical pathbar at the top of the chart. You can use this pathbar to zoom in/out of chart sectors instead of clicking on the sectors directly. 
 
 ### Basic Treemap
 
@@ -29,16 +31,17 @@ fig <- plot_ly(
 )
 fig
 ```
-### Set Different Attributes in Treemap
+### Customize Treemap Attributes
 
-This example uses the following attributes:
+You can customize several attributes of the treemaps you create with Plotly for R, including:  
 
-1. [values](https://plot.ly/r/reference/#treemap-values): sets the values associated with each of the sectors.
-2. [textinfo](https://plot.ly/r/reference/#treemap-textinfo): determines which trace information appear on the graph that can be 'text', 'value', 'current path', 'percent root', 'percent entry', and 'percent parent', or any combination of them.
-3. [pathbar](https://plot.ly/r/reference/#treemap-pathbar): a main extra feature of treemap to display the current path of the visible portion of the hierarchical map. It may also be useful for zooming out of the graph.
-4. [branchvalues](https://plot.ly/r/reference/#treemap-branchvalues): determines how the items in `values` are summed. When set to "total", items in `values` are taken to be value of all its descendants. In the example below Eva = 65, which is equal to 14 + 12 + 10 + 2 + 6 + 6 + 1 + 4.
+1. [values](https://plot.ly/r/reference/#treemap-values): a list of the values assigned to each chart sector.
+2. [textinfo](https://plot.ly/r/reference/#treemap-textinfo): determines the textual information that will appear in each chart sector. Valid values are 'text', 'value', 'current path', 'percent root', 'percent entry', 'percent parent', or any combination of the preceding.
+3. [pathbar](https://plot.ly/r/reference/#treemap-pathbar):  determines whether the pathbar is visible when users zoom into chart sectors.
+4. [branchvalues](https://plot.ly/r/reference/#treemap-branchvalues): the method that has been used to calculate the `values` of chart sectors that have desendants. Valid values for this attribute are `total` and `remainder`; the default value is `remainder`. 
+  - When set to `remainder`, items in the `values` attribute which correspond to the root of the chart and the branches sectors are taken to be the extra part not part of the sum of the values at their leaves.
+  - When set to `total`, a brach's value is taken to be equal to the sum of the `values` of each chart sector that is a descendant of that branch. This behavior is demonstrated in the second trace in the example figure below- the value of the `Eva` branch is 65, which is the sum of the values of each chart sector that is a descendant of that branch (14 + 12 + 10 + 2 + 6 + 6 + 1 + 4).
 
-When set to "remainder", items in `values` corresponding to the root and the branches sectors are taken to be the extra part not part of the sum of the values at their leaves.
 
 ```{r}
 library(plotly)
@@ -75,13 +78,13 @@ fig
 
 ### Set Color of Treemap Sectors
 
-There are three different ways to change the color of the sectors in Treemap:
+There are three different attributes you can use to change the color of the sectors of treemaps you have created with Plotly for R:
 
 1. [marker.colors](https://plot.ly/r/reference/#treemap-marker-colors), 
-2. [colorway](https://plot.ly/r/reference/#treemap-colorway), 
-3. [colorscale](https://plot.ly/r/reference/#treemap-colorscale). 
+2. [marker.colorscale](https://plot.ly/r/reference/#treemap-colorscale). 
+3. [colorway](https://plot.ly/r/reference/#treemap-colorway), 
 
-The following examples show how to use each of them.
+The following examples show how to use each attribute. To use `marker.colors`, pass a list of valid CSS colors or hexadecimal color codes.
 
 ```{r}
 library(plotly)
@@ -93,25 +96,13 @@ fig <- plot_ly(
   type="treemap",
   labels=labels,
   parents=parents,
-  marker=list(colors=c("pink", "royalblue", "lightgray", "purple", "cyan", "lightgray", "lightblue")))
+  marker=list(colors=c("#000", "royalblue", "lightgray", "purple", "#FFF", "lightgray", "lightblue")))
 fig
 ```
-This example uses `treemapcolorway` attribute, which should be set in layout.
-
-```{r}
-library(plotly)
-
-labels = c("A1", "A2", "A3", "A4", "A5", "B1", "B2")
-parents = c("", "A1", "A2", "A3", "A4", "", "B1")
-
-fig <- plot_ly(
-  type="treemap",
-  labels=labels,
-  parents=parents)
-
-fig <- fig %>% layout(treemapcolorway=c("pink","lightgray"))
-fig
-```
+The following example uses the `marker.colorsclae` attribute. Rather than using a list of colors, simply supply a colorscale. The built-in colorscales are:
+  - `Greys`, `YlGnBu`, `Greens`, `YlOrRd`, `Bluered`, `RdBu`, `Reds` 
+  - `Blues`, `Picnic`, `Rainbow`, `Portland`, `Jet`, `Hot`
+  - `Blackbody`, `Earth`, `Electric`, `Viridis`, `Cividis`
 
 ```{r}
 library(plotly)
@@ -130,10 +121,25 @@ fig <- plot_ly(
 fig
 ```
 
+The following example uses the `treemapcolorway` attribute, which should be set in the chart's layout.
+
+```{r}
+library(plotly)
+
+labels = c("A1", "A2", "A3", "A4", "A5", "B1", "B2")
+parents = c("", "A1", "A2", "A3", "A4", "", "B1")
+
+fig <- plot_ly(
+  type="treemap",
+  labels=labels,
+  parents=parents)
+
+fig <- fig %>% layout(treemapcolorway=c("pink","lightgray"))
+fig
+```
 ### Nested Layers in Treemap
 
-The following example uses hierarchical data that includes layers and grouping. Treemap and [Sunburst](https://plot.ly/r/sunburst-charts/) charts reveal insights into the data, and the format of your hierarchical data. [maxdepth](https://plot.ly/r/reference/#treemap-maxdepth) attribute sets the number of rendered sectors from the given level.
-
+The following example demonstrates how treemap charts can be used to reveal insights into the structure of hierarchical data that includes information about layers and grouping. The [maxdepth](https://plot.ly/r/reference/#treemap-maxdepth) attribute can be used to control how many levels of data are rendered; the default value of `-1` renders all the levels in the hierarchy.
 ```{r}
 library(plotly)
 
@@ -152,17 +158,16 @@ fig <- fig %>% add_trace(
   ids=df2$ids,
   labels=df2$labels,
   parents=df2$parents,
-  maxdepth=3,
+  maxdepth=1,
   domain=list(column=1))
 fig <- fig %>% layout(grid=list(columns=2, rows=1))
 fig
 
 
 ```
+### Controlling Text Font Size with `uniformtext`
 
-### Controlling text fontsize with uniformtext
-
-If you want all the text labels to have the same size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+By default, the font size of text labels in your treemap chart will vary to fit into the available space within a sector. However, if you want all the text labels in your treemap chart to have the same font size, you can use the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens to labels which cannot fit within a sector with the specified fontsize: either `hide` them or `show` them with overflow.
 
 ```{r}
 library(plotly)
