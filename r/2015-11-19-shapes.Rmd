@@ -72,8 +72,8 @@ Circles are centered around  ((`x0`+`x1`)/2, (`y0`+`y1`)/2))
 
 ```{r}
 library(plotly)
-fig <- diamonds[sample(nrow(diamonds), 1000), ]
-fig <- plot_ly(fig, x = ~carat, y = ~price, text = ~paste("Clarity: ", clarity),
+df <- diamonds[sample(nrow(diamonds), 1000), ]
+fig <- plot_ly(df, x = ~carat, y = ~price, text = ~paste("Clarity: ", clarity),
              mode = "markers", color = ~carat, size = ~carat)
 fig <- layout(fig, title = 'Highlighting Regions with Circles',
             shapes = list(

@@ -38,10 +38,9 @@ one_map <- function(dat) {
     add_text(x = -78, y = 47, text = ~unique(YEAR), color = I("black")) %>%
     layout(geo = g)}
 
-fig <- df
-fig <- fig %>% group_by(YEAR)
-fig <- fig %>% do(mafig = one_map(.))
-fig <- fig %>% subplot(nrows = 9)
+df <- df %>% group_by(YEAR)
+df <- df %>% do(mafig = one_map(.))
+fig <- df %>% subplot(nrows = 9)
 fig <- fig %>% layout(
   showlegend = FALSE,
   title = 'New Walmart Stores per year 1962-2006<br> Source: <a href="http://www.econ.umn.edu/~holmes/data/WalMart/index.html">University of Minnesota</a>',
@@ -51,5 +50,4 @@ fig <- fig %>% layout(
 )
 
 fig
-
 ```

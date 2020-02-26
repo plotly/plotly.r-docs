@@ -118,8 +118,7 @@ y2 <- c(16,12,27)
 text <- c('27% market share', '24% market share', '19% market share')
 data <- data.frame(x, y, y2, text)
 
-fig <- data
-fig <- fig %>% plot_ly()
+fig <- data %>% plot_ly()
 fig <- fig %>% add_trace(x = ~x, y = ~y, type = 'bar',
              text = y, textposition = 'auto',
              marker = list(color = 'rgb(158,202,225)',

@@ -73,9 +73,7 @@ axis = list(showline=FALSE,
             gridcolor='#ffff',
             ticklen=4)
 
-fig <- df 
-
-fig <- fig %>%
+fig <- df %>%
   plot_ly() 
 fig <- fig %>%
   add_trace(
@@ -175,9 +173,7 @@ axis = list(showline=FALSE,
             ticklen=4,
             titlefont=list(size=13))
 
-fig <- df 
-
-fig <- fig %>%
+fig <- df %>%
   plot_ly() 
 fig <- fig %>%
   add_trace(

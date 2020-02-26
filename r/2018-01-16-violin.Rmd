@@ -22,8 +22,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     y = ~total_bill,
     type = 'violin',
@@ -54,8 +53,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     x = ~day,
     y = ~total_bill,
@@ -90,8 +88,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(type = 'violin') 
 fig <- fig %>%
   add_trace(
@@ -142,8 +139,7 @@ library(plotly)
 
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/violin_data.csv")
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(type = 'violin') 
 fig <- fig %>%
   add_trace(

@@ -28,8 +28,7 @@ getSymbols("AAPL",src='yahoo')
 df <- data.frame(Date=index(AAPL),coredata(AAPL))
 df <- tail(df, 30)
 
-fig <- df 
-fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
+fig <- df %>% plot_ly(x = ~Date, type="candlestick",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low) 
 fig <- fig %>% layout(title = "Basic Candlestick Chart")
@@ -48,8 +47,7 @@ getSymbols("AAPL",src='yahoo')
 df <- data.frame(Date=index(AAPL),coredata(AAPL))
 df <- tail(df, 30)
 
-fig <- df 
-fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
+fig <- df %>% plot_ly(x = ~Date, type="candlestick",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low) 
 fig <- fig %>% layout(title = "Basic Candlestick Chart",
@@ -90,8 +88,7 @@ l <- list(type = line,
                       width = 0.5)
 )
 
-fig <- df 
-fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
+fig <- df %>% plot_ly(x = ~Date, type="candlestick",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low) 
 fig <- fig %>% layout(title = "Apple Stock",
@@ -117,8 +114,7 @@ df <- tail(df, 30)
 i <- list(line = list(color = '#FFD700'))
 d <- list(line = list(color = '#0000ff'))
 
-fig <- df
-fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
+fig <- df %>% plot_ly(x = ~Date, type="candlestick",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low,
           increasing = i, decreasing = d)
@@ -137,8 +133,7 @@ getSymbols("AAPL",src='yahoo')
 df <- data.frame(Date=index(AAPL),coredata(AAPL))
 df <- tail(df, 365)
 
-fig <- df 
-fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
+fig <- df %>% plot_ly(x = ~Date, type="candlestick",
                        open = ~AAPL.Open, close = ~AAPL.Close,
                        high = ~AAPL.High, low = ~AAPL.Low) 
 fig <- fig %>% add_lines(x = ~Date, y = ~AAPL.Open, line = list(color = 'black', width = 0.75), inherit = F)
@@ -199,8 +194,8 @@ i <- list(line = list(color = '#17BECF'))
 d <- list(line = list(color = '#7F7F7F'))
 
 # plot candlestick chart
-fig <- df 
-fig <- fig %>% plot_ly(x = ~Date, type="candlestick",
+
+fig <- df %>% plot_ly(x = ~Date, type="candlestick",
           open = ~AAPL.Open, close = ~AAPL.Close,
           high = ~AAPL.High, low = ~AAPL.Low, name = "AAPL",
           increasing = i, decreasing = d) 

@@ -115,10 +115,8 @@ g2 <- c(
   bgcolor = toRGB("white", alpha = 0),
   list(domain = list(x = c(0, .6), y = c(0, .6)))
 )
-
-fig <- df 
-fig <- fig %>%
-  plot_geo(
+ 
+fig <- df %>% plot_geo(
     locationmode = 'country names', sizes = c(1, 600), color = I("black")
   )
 fig <- fig %>% add_markers(

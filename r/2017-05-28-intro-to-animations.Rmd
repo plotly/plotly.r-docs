@@ -31,8 +31,7 @@ df <- data.frame(
   f = c(1,2,3)
 )
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     x = ~x,
     y = ~y,
@@ -51,8 +50,8 @@ fig
 library(plotly)
 library(gapminder)
 
-fig <- gapminder 
-fig <- fig %>%
+df <- gapminder 
+fig <- df %>%
   plot_ly(
     x = ~gdpPercap, 
     y = ~lifeExp, 
@@ -122,8 +121,8 @@ fig
 ```{r}
 library(plotly)
 
-fig <- gapminder 
-fig <- fig %>%
+df <- gapminder 
+fig <- df %>%
   plot_ly(
     x = ~gdpPercap, 
     y = ~lifeExp, 

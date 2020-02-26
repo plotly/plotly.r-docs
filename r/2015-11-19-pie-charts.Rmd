@@ -108,18 +108,19 @@ See more examples of subplots [here](https://plot.ly/r/subplots/).
 
 ```{r}
 library(plotly)
+library(dplyr)
 
 # Get Manufacturer
 mtcars$manuf <- sapply(strsplit(rownames(mtcars), " "), "[[", 1)
 
-fig <- mtcars
-fig <- fig %>% group_by(manuf)
-fig <- fig %>% summarize(count = n())
-fig <- fig %>% plot_ly(labels = ~manuf, values = ~count)
+df <- mtcars
+df <- df %>% group_by(manuf)
+df <- df %>% summarize(count = n())
+fig <- df %>% plot_ly(labels = ~manuf, values = ~count)
 fig <- fig %>% add_pie(hole = 0.6)
 fig <- fig %>% layout(title = "Donut charts using Plotly",  showlegend = F,
-       xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
-       yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+                      xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+                      yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
 fig
 ```

@@ -97,8 +97,8 @@ accumulate_by <- function(dat, var) {
   dplyr::bind_rows(dats)
 }
 
-fig <- df %>% accumulate_by(~ID)
-fig <- fig %>% plot_ly(
+df <- df %>% accumulate_by(~ID)
+fig <- df %>% plot_ly(
   x = ~ID, 
   y = ~AAPL.Close, 
   frame = ~frame,

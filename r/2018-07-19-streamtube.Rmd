@@ -26,8 +26,7 @@ library(plotly)
 
 df = read.csv('https://raw.githubusercontent.com/plotly/datasets/master/streamtube-basic.csv')
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     type = 'streamtube',
     x = ~x,
@@ -63,8 +62,7 @@ library(plotly)
 
 df = read.csv('https://raw.githubusercontent.com/plotly/datasets/master/streamtube-wind.csv')
 
-fig <- df 
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     type = 'streamtube',
     x = ~x,
@@ -98,7 +96,6 @@ fig <- fig %>%
 
 fig
 ```
-
 
 #### Reference
 

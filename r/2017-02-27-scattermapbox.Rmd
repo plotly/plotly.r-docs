@@ -54,8 +54,7 @@ Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 df = read.csv('https://raw.githubusercontent.com/bcdunbar/datasets/master/meteorites_subset.csv')
 
-fig <- df 
-fig <- fig %>% plot_mapbox(lat = ~reclat, lon = ~reclong,
+fig <- df %>% plot_mapbox(lat = ~reclat, lon = ~reclong,
               split = ~class, size=2,
               mode = 'scattermapbox', hoverinfo='name') 
 fig <- fig %>% layout(title = 'Meteorites by Class',

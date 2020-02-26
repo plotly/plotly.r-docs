@@ -287,8 +287,7 @@ updatemenus <- list(
   )
 )
 
-fig <- df 
-fig <- fig %>% plot_ly(type = 'scatter', mode = 'lines') 
+fig <- df %>% plot_ly(type = 'scatter', mode = 'lines') 
 fig <- fig %>% add_lines(x=~Date, y=~AAPL.High, name="High",
             line=list(color="#33CFA5")) 
 fig <- fig %>% add_lines(x=~Date, y=~AAPL.Low, name="Low",
