@@ -164,6 +164,30 @@ fig <- fig %>% layout(legend = l)
 
 fig
 ```
+### Legend Title
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  type='scatter',
+  mode='line',
+  x=c(1, 2, 3, 4, 5),
+  y=c(1, 2, 3, 4, 5),
+  name="Increasing"
+)
+
+fig <- fig %>% add_trace(
+  type='scatter',
+  mode='line',
+  x=c(1, 2, 3, 4, 5),
+  y=c(5, 4, 3, 2, 1),
+  name="Decreasing"
+) 
+
+fig <- fig %>% layout(legend=list(title=list(text='<b> Trend </b>')))
+fig
+```
 
 ### Grouped Legend
 
