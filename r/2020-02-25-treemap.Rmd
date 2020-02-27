@@ -36,7 +36,7 @@ fig
 You can customize several attributes of the treemaps you create with Plotly for R, including:  
 
 1. [values](https://plot.ly/r/reference/#treemap-values): a list of the values assigned to each chart sector.
-2. [textinfo](https://plot.ly/r/reference/#treemap-textinfo): determines the textual information that will appear in each chart sector. Valid values are 'text', 'value', 'current path', 'percent root', 'percent entry', 'percent parent', or any combination of the preceding.
+2. [textinfo](https://plot.ly/r/reference/#treemap-textinfo): determines the textual information that will appear in each chart sector. Valid values are `text`, `value`, `current path`, `percent root`, `percent entry`, `percent parent`, or any combination of the preceding.
 3. [pathbar](https://plot.ly/r/reference/#treemap-pathbar):  determines whether the pathbar is visible when users zoom into chart sectors.
 4. [branchvalues](https://plot.ly/r/reference/#treemap-branchvalues): the method that has been used to calculate the `values` of chart sectors that have desendants. Valid values for this attribute are `total` and `remainder`; the default value is `remainder`. 
   - When set to `remainder`, items in the `values` attribute which correspond to the root of the chart and the branches sectors are taken to be the extra part not part of the sum of the values at their leaves.
@@ -80,8 +80,8 @@ fig
 
 There are three different attributes you can use to change the color of the sectors of treemaps you have created with Plotly for R:
 
-1. [marker.colors](https://plot.ly/r/reference/#treemap-marker-colors), 
-2. [marker.colorscale](https://plot.ly/r/reference/#treemap-colorscale). 
+1. [marker.colors](https://plot.ly/r/reference/#treemap-marker-colors) 
+2. [marker.colorscale](https://plot.ly/r/reference/#treemap-colorscale) 
 3. [colorway](https://plot.ly/r/reference/#treemap-colorway), 
 
 The following examples show how to use each attribute. To use `marker.colors`, pass a list of valid CSS colors or hexadecimal color codes.
@@ -99,10 +99,9 @@ fig <- plot_ly(
   marker=list(colors=c("#000", "royalblue", "lightgray", "purple", "#FFF", "lightgray", "lightblue")))
 fig
 ```
-The following example uses the `marker.colorsclae` attribute. Rather than using a list of colors, simply supply a colorscale. The built-in colorscales are:
-  - `Greys`, `YlGnBu`, `Greens`, `YlOrRd`, `Bluered`, `RdBu`, `Reds` 
-  - `Blues`, `Picnic`, `Rainbow`, `Portland`, `Jet`, `Hot`
-  - `Blackbody`, `Earth`, `Electric`, `Viridis`, `Cividis`
+The following example uses the `marker.colorsclae` attribute. Rather than using a list of colors, simply supply a colorscale. 
+
+The built-in colorscales are: `Greys`, `YlGnBu`, `Greens`, `YlOrRd`, `Bluered`, `RdBu`, `Reds`, `Blues`, `Picnic`, `Rainbow`, `Portland`, `Jet`, `Hot`, `Blackbody`, `Earth`, `Electric`, `Viridis`, and `Cividis`
 
 ```{r}
 library(plotly)
