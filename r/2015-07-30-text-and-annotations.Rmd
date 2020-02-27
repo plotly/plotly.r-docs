@@ -62,6 +62,34 @@ fig <- fig %>% layout(xaxis = list(range = c(1.6, 3.2)),
 fig
 ```
 
+### Controlling text fontsize with uniformtext
+
+For the [pie](/r/pie-charts), [bar](/r/bar-charts), [sunburst](/r/sunburst-charts) and [treemap](/r/treemap-charts) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+
+```{r}
+library(plotly)
+
+df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv", stringsAsFactors = FALSE)
+df <- df[which(df$year==2007 & df$continent=='Europe' & df$pop > 2.e6),]
+
+fig <- plot_ly(df, type='bar', x = ~country, y = ~pop, text = ~lifeExp, name="",
+               hovertemplate = paste('%{x}', '<br>lifeExp: %{text:.2s}<br>'),
+               texttemplate = '%{y:.2s}', textposition = 'outside')
+
+fig <- fig %>% layout(uniformtext=list(minsize=8, mode='hide'))
+fig
+```
+
+```{r}
+library(plotly)
+
+df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv", stringsAsFactors = FALSE)
+df <- df[which(df$year==2007 & df$continent=='Asia'),]
+
+fig <- plot_ly(df, type='pie', labels = ~country, values = ~pop, textposition = 'inside')
+fig <- fig %>% layout(uniformtext=list(minsize=12, mode='hide'))
+fig
+````
 ### Adding Informations to Default Hover Text
 
 ```{r}
