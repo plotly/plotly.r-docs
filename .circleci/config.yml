@@ -16,7 +16,7 @@ jobs:
           name: Install container-level dependencies
           command: |
             sudo apt-get update -y
-            sudo apt-get install -y curl python3-pip python3-venv ssh-client ssh git
+            sudo apt-get install -y curl python3-pip  python3-venv ssh-client ssh git
             pip3 install virtualenv
       - run:
           name: Keyscan Github (HACK)
@@ -24,8 +24,8 @@ jobs:
       - run:
           name: install application-level dependencies
           command: |
-            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev
-            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_github("ropensci/plotly"); install.packages("fftwtools"); install.packages("BiocManager"); BiocManager::install("EBImage"); devtools::install_deps(dependencies = TRUE) '
+            sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev libfftw3-dev
+            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_github("ropensci/plotly"); install.packages("BiocManager"); BiocManager::install("EBImage"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
           key: cache3
           paths:
