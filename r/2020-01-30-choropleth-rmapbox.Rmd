@@ -45,7 +45,7 @@ library(rjson)
 url = 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
 json_file <- rjson::fromJSON(file=url)
 json_file$features[1]
-counties$features[[1]]$id
+json_file$features[[1]]$id
 ```
 
 ### Data indexed by `id`
