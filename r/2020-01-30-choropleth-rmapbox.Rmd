@@ -41,11 +41,11 @@ The GeoJSON data is passed to the `geojson` argument, and the data is passed int
 Here we load a GeoJSON file containing the geometry information for US counties, where `feature.id` is a [FIPS code](https://en.wikipedia.org/wiki/FIPS_county_code).
 
 ```{r}
-library(jsonlite)
-json_file <- fromJSON('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json')
-counties <- as.data.frame(json_file)
-counties <- counties[,-1]
-a <- counties[1,]
+library(rjson)
+url = 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
+json_file <- rjson::fromJSON(file=url)
+json_file$features[1]
+counties$features[[1]]$id
 ```
 
 ### Data indexed by `id`
@@ -67,40 +67,30 @@ library(plotly)
 library(data.table)
 
 url <- 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
-counties <- rjson::fromJSON(file = url)
+counties <- rjson::fromJSON(file=url)
 url2<- "https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv"
-mydat <- fread(url2,colClasses = c(fips = "character"))
-fig <- plot_ly() %>%
-  add_trace(
-    type = "choroplethmapbox",
-    mydat,
-    geojson = counties,
-    locations = mydat$fips,
-    z=mydat$unemp,
+df <- read.csv(url2, colClasses=c(fips="character"))
+fig <- plot_ly() 
+fig <- fig %>% add_trace(
+    type="choroplethmapbox",
+    geojson=counties,
+    locations=df$fips,
+    z=df$unemp,
     colorscale="Viridis",
     zmin=0,
     zmax=12,
-    marker=list(line = list(
-      width = 0),
+    marker=list(line=list(
+      width=0),
       opacity=0.5
     )
-  ) %>%
-  layout(
-    mapbox = list(
-      style = "carto-positron",
-      zoom =3,
-      center = list(lon = -95.7129, lat = 37.0902))
+  )
+fig <- fig %>% layout(
+    mapbox=list(
+      style="carto-positron",
+      zoom =2,
+      center=list(lon= -95.71, lat=37.09))
   )
 fig
-```
-### Indexing by GeoJSON Properties
-
-If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of `id`.
-In the following GeoJSON object/data-file pairing, the values of `properties.feature.id` match the values of the `feature.id` column:
-
-```{r}
-json_file$features$id[1]
-counties$features.id[1]
 ```
 #### Mapbox Light base map: free token needed
 
@@ -109,35 +99,34 @@ library(rjson)
 library(plotly)
 library(data.table)
 
-mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
+mapboxToken <- paste(readLines(".mapbox_token"), collapse="")    # You need your own token
 Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 url <- 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
 counties <- rjson::fromJSON(file = url)
 url2<- "https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv"
-mydat <- fread(url2,colClasses = c(fips = "character"))
+df <- read.csv(url2,colClasses = c(fips = "character"))
 
 fig <- plot_ly()
 fig <- fig %>% add_trace(
-    type = "choroplethmapbox",
-    mydat,
-    geojson = counties,
-    locations = mydat$fips,
-    z=mydat$unemp,
-    colorscale="Viridis",
-    zmin=0,
-    zmax=12,
-    marker=list(line = list(
-      width = 0),
-      opacity=0.5
-    )
+  type = "choroplethmapbox",
+  geojson = counties,
+  locations = df$fips,
+  z=df$unemp,
+  colorscale="Viridis",
+  zmin=0,
+  zmax=12,
+  marker=list(line = list(
+    width = 0),
+    opacity=0.5
   )
+)
 fig <- fig %>% layout(
-    mapbox = list(
-      style = "light",
-      zoom =3,
-      center = list(lon = -95.7129, lat = 37.0902))
-  ) 
+  mapbox = list(
+    style = "light",
+    zoom =3,
+    center = list(lon = -95.7129, lat = 37.0902))
+) 
 fig <- fig %>% config(mapboxAccessToken = Sys.getenv("MAPBOX_TOKEN"))
 fig
 ```
