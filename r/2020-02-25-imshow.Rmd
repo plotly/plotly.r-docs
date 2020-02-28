@@ -4,7 +4,7 @@ description: How to display image data in Python with R.
 display_as: scientific
 layout: base
 language: r
-order: 14
+order: 15
 output:
   html_document:
     keep_md: true
