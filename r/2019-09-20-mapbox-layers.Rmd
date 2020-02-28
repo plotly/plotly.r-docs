@@ -22,11 +22,10 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 If your figure contains one or more traces of type `scattermapbox`, `choroplethmapbox` or `densitymapbox`, the `layout` of your figure contains configuration information for the map itself. 
 
 The map is composed of layers of three different types.
-<ol>
-  <li> `layout.mapbox.style` defines the lowest layers, also known as your "base map"</li>
-  <li> the various traces in the `plot_ly` call signature are by default rendered above the base map (this can be controlled via the use of `below` attribute).</li>
-  <li> the `layout.mapbox.layers` attribute accepts an array that defines layers that are by default rendered above the traces in the `plot_ly` call signature (this can be controlled via the `below` attribute).</li>
-</ol>
+
+1. `layout.mapbox.style` defines the lowest layers, also known as your "base map"
+2. the various traces in the `plot_ly` call signature are by default rendered above the base map (this can be controlled via the use of `below` attribute).
+3. the `layout.mapbox.layers` attribute accepts an array that defines layers that are by default rendered above the traces in the `plot_ly` call signature (this can be controlled via the `below` attribute).
 
 ### Mapbox Access Tokens and When You Need Them
 
@@ -34,20 +33,18 @@ The word "mapbox" in trace names and the `layout.mapbox` attribute refers to the
 
 If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
-#### - The following values of `layout.mapbox.style` **DO** require an Access Token:
-<ol>
-  <li> `"basic"`, `"streets"`, `"outdoors"`, `"light"`, `"dark"`, `"satellite"`, or `"satellite-streets"` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation. </li>
-  <li> A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. </li>
-  <li> A Mapbox Style object as defined at https://docs.mapbox.com/mapbox-gl-js/style-spec/ </li>
-</ol>
+#### The following values of `layout.mapbox.style` **DO** require an Access Token:
 
-- We recommend setting your MapBox Access Token as an environment variable in your R environment. That way, your token will not be committed to version control. See [Basemap Requiring MapBox Access Token](#basemap-requiring-mapbox-access-token)
+1. `basic`, `streets`, `outdoors`, `light`, `dark`, `satellite`, or `satellite-streets` yeild maps composed of *vector* tiles from the Mapbox service, and *do* require a Mapbox Access Token or an on-premise Mapbox installation.
+2. A Mapbox service style URL, which requires a Mapbox Access Token or an on-premise Mapbox installation. 
+3. A Mapbox Style object as defined at [mapbox docs](https://docs.mapbox.com/mapbox-gl-js/style-spec/)
 
-#### - The following values of `layout.mapbox.style` **DO NOT** require an Access Token:
-<ol>
-  <li> `"white-bg"` yields an empty white canvas which results in no external HTTP requests </li>
-  <li> `"open-street-map"`, `"carto-positron"`, `"carto-darkmatter"`, `"stamen-terrain"`, `"stamen-toner"` or `"stamen-watercolor"` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens </li>
-</ol>
+We recommend setting your MapBox Access Token as an environment variable in your R environment. That way, your token will not be committed to version control. See [Basemap Requiring MapBox Access Token](#basemap-requiring-mapbox-access-token)
+
+#### The following values of `layout.mapbox.style` **DO NOT** require an Access Token:
+
+1. `white-bg` yields an empty white canvas which results in no external HTTP requests
+2. `open-street-map`, `carto-positron`, `carto-darkmatter`, `stamen-terrain`, `stamen-toner` or `stamen-watercolor` yeild maps composed of *raster* tiles from various public tile servers which do not require signups or access tokens
 
 #### Using `layout.mapbox.layers` to Specify a Base Map
 
