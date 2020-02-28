@@ -1,5 +1,6 @@
 Package: Plotly's R graphing library. 
 Imports:
+    bioimagetools,
     geomorph,
     maptools,
     rjson,
