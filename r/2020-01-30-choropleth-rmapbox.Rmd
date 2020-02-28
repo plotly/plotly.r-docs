@@ -99,7 +99,7 @@ library(rjson)
 library(plotly)
 library(data.table)
 
-mapboxToken <- paste(readLines(".mapbox_token"), collapse="")    # You need your own token
+mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
 Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
 
 url <- 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
