@@ -1,6 +1,7 @@
 ---
 name: Getting Started with Plotly
 permalink: r/getting-started/
+redirect_from: r/user-guide/
 description: How to get started making charts with Plotly's R graphing library.
 page_type: example_index
 layout: base
@@ -54,7 +55,7 @@ fig
 
 Simply printing the plot object will render the chart locally in your web browser or in the `RStudio` viewer.
 
-Graphs created with the `plotly` R package are interactive! 
+Graphs created with the `plotly` R package are interactive!
 
 Click on legend entries to hide/show traces, click-and-drag on the chart to zoom, double-click to autoscale, shift-and-drag to pan.
 
