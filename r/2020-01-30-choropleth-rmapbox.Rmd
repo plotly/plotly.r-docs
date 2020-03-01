@@ -11,6 +11,7 @@ output:
 page_type: u-guide
 permalink: r/mapbox-county-choropleth/
 thumbnail: thumbnail/mapbox-choropleth.png
+redirect_from: r/county-level-choropleth/
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -56,7 +57,6 @@ Here we load unemployment data by county, also indexed by [FIPS code](https://en
 df = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv", header = T, colClasses = c("fips"="character"))
 head(df)
 ```
-
 ### Choropleth map using carto base map (no token needed)
 
 With `choroplethmapbox`, each row of the DataFrame is represented as a region of the choropleth.
@@ -64,7 +64,6 @@ With `choroplethmapbox`, each row of the DataFrame is represented as a region of
 ```{r}
 library(rjson)
 library(plotly)
-library(data.table)
 
 url <- 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
 counties <- rjson::fromJSON(file=url)
@@ -97,7 +96,6 @@ fig
 ```{r}
 library(rjson)
 library(plotly)
-library(data.table)
 
 mapboxToken <- paste(readLines("../.mapbox_token"), collapse="")    # You need your own token
 Sys.setenv("MAPBOX_TOKEN" = mapboxToken) # for Orca
@@ -132,4 +130,4 @@ fig
 ```
 #Reference
 
-See [https://plot.ly/r/reference/#scattermapbox](https://plot.ly/r/reference/#scattermapbox) for more information and options!
+See [https://plot.ly/r/reference/#scattermapbox](https://plot.ly/r/reference/#choroplethmapbox) for more information and options!
