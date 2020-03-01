@@ -116,11 +116,9 @@ fig
 ```{r}
 library(plotly)
 
-d <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/job-automation-probability.csv')
+df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/job-automation-probability.csv')
 
-fig <- d 
-
-fig <- fig %>%
+fig <- df %>%
   plot_ly(
     type = 'scatter',
     mode = 'markers',

@@ -34,8 +34,8 @@ accumulate_by <- function(dat, var) {
   dplyr::bind_rows(dats)
 }
 
-d <- txhousing 
-fig <- d %>%
+df <- txhousing 
+fig <- df %>%
   filter(year > 2005, city %in% c("Abilene", "Bay Area"))
 fig <- fig %>% accumulate_by(~date)
 
