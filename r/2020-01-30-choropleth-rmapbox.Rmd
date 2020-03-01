@@ -4,7 +4,7 @@ display_as: maps
 language: r
 layout: base
 name: Choropleth mapbox
-order: 13
+order: 8
 output:
   html_document:
     keep_md: true
@@ -45,7 +45,6 @@ Here we load a GeoJSON file containing the geometry information for US counties,
 library(rjson)
 url = 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
 json_file <- rjson::fromJSON(file=url)
-json_file$features[1]
 json_file$features[[1]]$id
 ```
 
