@@ -91,7 +91,47 @@ fig <- plot_ly(x = ~rnorm(50),
 
 fig
 ```
+### Share bins between histograms
 
+In this example both histograms have a compatible bin settings using [bingroup](https://plot.ly/r/reference/#histogram-bingroup) attribute. 
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  type='histogram',
+  x=~rnorm(100, 5),
+  bingroup=1)
+
+fig <- fig %>% add_trace(
+  type='histogram',
+  x=~rnorm(20, 5),
+  bingroup=1)
+
+fig <- fig %>% layout(
+  barmode="overlay",
+  bargap=0.1)
+
+fig
+```
+Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plot.ly/r/2D-Histogram/) trace can share the same `bingroup`.
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  type='histogram',
+  x=~rnorm(100, 5))
+
+fig <- fig %>% add_trace(
+  type='histogram',
+  x=~rnorm(20, 5))
+
+fig <- fig %>% layout(
+  barmode="stack",
+  bargap=0.1)
+
+fig
+```
 ### Reference
 
 See [https://plot.ly/r/reference/#histogram](https://plot.ly/r/reference/#histogram) for more information and chart attribute options!
