@@ -123,7 +123,7 @@ fig
 ``` {r}
 library(plotly)
 
-df <- read.csv("https://plot.ly/~public.health/17.csv", skipNul = TRUE)
+df <- read.csv("https://plot.ly/~public.health/17.csv", skipNul = TRUE, encoding = "UTF-8")
 
 labels <- function(size, label) {
   list(
