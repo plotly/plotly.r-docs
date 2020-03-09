@@ -33,7 +33,7 @@ fig
 
 ### Scaled Subplots
 
-Although subplot() accepts an arbitrary number of plot objects, passing a list of plots can save typing and redundant code when dealing with a large number of plots. For example, you can share the x-axis by utlising shareX, set axis ID, and and specify the number of of rows with nrows.
+Although subplot() accepts an arbitrary number of plot objects, passing a list of plots can save typing and redundant code when dealing with a large number of plots. For example, you can share the x-axis by utilising shareX, set axis ID, and specify the number of rows with nrows.
 
 ```{r}
 
