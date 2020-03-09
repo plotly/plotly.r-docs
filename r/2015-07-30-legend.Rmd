@@ -164,6 +164,31 @@ fig <- fig %>% layout(legend = l)
 
 fig
 ```
+
+### Size of Legend Items
+
+In this example, since the [itemsizing](https://plot.ly/r/reference/#layout-legend-itemsizing) attribute is set to `constant`, the size of legend items symbols remains the same, regardless of how tiny/huge the bubbles are in the graph.
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  type='scatter',
+  x=c(1, 2, 3, 4, 5),
+  y=c(1, 2, 3, 4, 5),
+  mode='markers',
+  marker=list(size=10))
+
+fig <- fig %>% add_trace(
+  type='scatter',
+  x=c(1, 2, 3, 4, 5),
+  y=c(5, 4, 3, 2, 1),
+  mode='markers',
+  marker=list(size=100))
+
+fig <- fig %>% layout(legend= list(itemsizing='constant'))
+fig
+```
 ### Legend Title
 
 ```{r}
