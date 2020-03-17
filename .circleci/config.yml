@@ -41,8 +41,8 @@ jobs:
             mkdir build
             mkdir build/ggplot2
             mkdir build/r
-            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build/r')"; done
-            for i in ggplot2/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build/ggplot2')"; done
+            for i in r/*.Rmd; echo what-about-dash.md >> $i; do Rscript -e "rmarkdown::render('$i', output_dir='build/r')"; done
+            for i in ggplot2/*.Rmd; echo what-about-dash.md >> $i; do Rscript -e "rmarkdown::render('$i', output_dir='build/ggplot2')"; done
             python3 -m venv venv
             . venv/bin/activate
             pip3 install python-frontmatter
