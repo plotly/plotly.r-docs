@@ -51,7 +51,7 @@ jobs:
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py
             python check-or-enforce-order.py build/r
       - run:
-          name: deploy to plotly/r.docs:built`
+          name: deploy to plotly/r.docs:built
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               cd build
