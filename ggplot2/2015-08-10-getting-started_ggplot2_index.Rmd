@@ -11,7 +11,7 @@ language: ggplot2
 
 Plotly is an R package for creating interactive web-based graphs via [plotly](https://plot.ly/)'s JavaScript graphing library, `plotly.js`.
 
-The [plotly R package](https://github.com/ropensci/plotly) serializes ggplot2 figures into Plotly's <a target="_blank" href="http://help.plot.ly/json-chart-schema/">universal graph JSON</a>. `plotly::ggplotly` will crawl the ggplot2 figure, extract and translate all of the attributes of the ggplot2 figure into JSON (the colors, the axes, the chart type, etc), and draw the graph with plotly.js. 
+The [plotly R package](https://github.com/ropensci/plotly) serializes ggplot2 figures into Plotly's <a target="_blank" href="http://plot.ly/r/reference/">universal graph JSON</a>. `plotly::ggplotly` will crawl the ggplot2 figure, extract and translate all of the attributes of the ggplot2 figure into JSON (the colors, the axes, the chart type, etc), and draw the graph with plotly.js. 
 
 Furthermore, you have the option of manipulating the Plotly object with the `style` function.
 
@@ -217,6 +217,4 @@ fig
 - [ggplot2 examples](https://plot.ly/ggplot2)
 - [Plotly's native R DSL](https://plot.ly/r)
 - [Plotly's declarative graph description reference](https://plot.ly/r/reference)
-- [Plotly with Shiny](https://plot.ly/r/shiny-tutorial)
 - [`plotly` R package on GitHub](https://github.com/ropensci/plotly)
-- [Plotly graphs in other languages](https://plot.ly/api)
