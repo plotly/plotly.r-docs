@@ -1,0 +1,220 @@
+---
+name: Getting Started with Plotly
+permalink: ggplot2/getting-started/
+description: Get started with Plotly's R graphing library with ggplot2 to make interactive, publication-quality graphs online.
+page_type: example_index
+redirect_from: ggplot2/user-guide/
+layout: base
+language: ggplot2
+---
+# Plotly for R
+
+Plotly is an R package for creating interactive web-based graphs via [plotly](https://plot.ly/)'s JavaScript graphing library, `plotly.js`.
+
+The [plotly R package](https://github.com/ropensci/plotly) serializes ggplot2 figures into Plotly's <a target="_blank" href="http://plot.ly/r/reference/">universal graph JSON</a>. `plotly::ggplotly` will crawl the ggplot2 figure, extract and translate all of the attributes of the ggplot2 figure into JSON (the colors, the axes, the chart type, etc), and draw the graph with plotly.js. 
+
+Furthermore, you have the option of manipulating the Plotly object with the `style` function.
+
+<a href="https://travis-ci.org/ropensci/plotly">
+    <img alt="Build Status" style="margin: 0;" src="https://travis-ci.org/ropensci/plotly.png?branch=master">
+</a>
+
+#### Installation
+
+Plotly is now on CRAN!
+
+
+```r
+install.packages("plotly")
+```
+
+Or install the latest development version (on GitHub) via devtools:
+
+
+```r
+devtools::install_github("ropensci/plotly")
+```
+
+RStudio users should download the latest RStudio release for compatibility with htmlwidgets.
+
+#### Initialization
+
+By default, Plotly for R runs locally in your web browser or in the R Studio viewer.
+
+
+```r
+library(plotly)
+
+set.seed(100)
+d <- diamonds[sample(nrow(diamonds), 1000), ]
+
+p <- ggplot(data = d, aes(x = carat, y = price)) +
+  geom_point(aes(text = paste("Clarity:", clarity)), size = 4) +
+  geom_smooth(aes(colour = cut, fill = cut)) + facet_wrap(~ cut)
+
+fig <- ggplotly(p)
+
+fig
+```
+
+Simply printing the Plotly object will render the chart locally in your web browser or in the R Studio viewer.
+
+Plotly graphs are interactive. Click on legend entries to toggle traces, click-and-drag on the chart to zoom, double-click to autoscale, shift-and-drag to pan.
+
+#### Cutomizing the Layout
+
+Since the `ggplotly()` function returns a plotly object, we can manipulate that object in the same way that we would manipulate any other plotly object. A simple and useful application of this is to specify interaction modes, like plotly.js' `layout.dragmode` for specifying the mode of click+drag events.
+
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
+
+fig <- ggplotly(p)
+
+fig <- fig %>% layout(dragmode = "pan")
+
+fig
+```
+
+#### Modifying Layers
+
+As mentioned previously, `ggplotly()` translates each ggplot2 layer into one or more plotly.js traces. In this translation, it is forced to make a number of assumptions about trace attribute values that may or may not be appropriate for the use case. The `style()` function is useful in this scenario, as it provides a way to modify trace attribute values in a plotly object. Furthermore, you can use the `plotly_build()` function.
+
+#### Interactively View the JSON Object
+
+Before using the `style()` or `plotly_build` functions, you may want to inspect the actual traces in a given plotly object using the plotly_json() function
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
+
+plotly_json(p)
+```
+
+
+#### Modify with Style
+
+Generally speaking, the `style()` function is designed modify attribute values of trace(s) within a plotly object, which is primarily useful for customizing defaults produced via `ggplotly()`
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
+
+fig <- ggplotly(p)
+
+fig <- fig %>% style(line = list(color = 'gold'), hoverinfo = "y", traces = 1)
+
+fig
+```
+
+#### Modify with Build
+
+
+```{r}
+library(plotly)
+
+df <- data.frame(x=c(1, 2, 3, 4), y=c(1, 5, 3, 5), group=c('A', 'A', 'B', 'B'))
+
+p <- ggplot(data=df, aes(x=x, y=y, colour=group)) + geom_point()
+
+fig <- ggplotly(p)
+
+fig
+```
+
+Here is the ggplot2 figure described as a plotly object
+
+
+```{r}
+fig <- plotly_build(fig)
+str(fig)
+```
+
+This declarative description of the graph is very human readable. Every attribute of the chart, the colors, the data, the text, is described in a key-value pair in this object. [View all of the possible graph attributes.](https://plot.ly/r/reference)
+
+Attributes of plotly figures are grouped into two categories: `data` and `layout`. `data` describes attributes that pertain to the plot's series, or "traces". These properties include things like the `x` and `y` data, the `color` and `name` of the trace, which axis the trace is bound to. `data` is an unnamed list.
+
+Take a look:
+
+
+```{r}
+library(plotly)
+names(fig$x$data[[1]])
+```
+
+```{r}
+
+# this trace is a "scatter" type
+fig$x$data[[1]]$type
+```
+
+its name, as it appears in the legend, is "A"
+
+
+```{r}
+fig$x$data[[1]]$name
+```
+
+```{r}
+str(fig$x$data[[1]])
+```
+
+`layout` describes attributes that pertain to the rest of the plot, like axis properties, annotations, legends, and titles.
+
+
+```{r}
+
+names(fig$x$layout)
+```
+
+```r
+str(fig$x$layout)
+```
+
+```r
+str(fig$x$layout$plot_bgcolor) # the background color of the plot is "rgb(229,229,229)"
+```
+
+```r
+str(fig$x$layout$legend)
+```
+
+Each of these properties was extracted and translated from the original ggplot2 figure. [View all of the possible attributes](https://plot.ly/r/reference).
+
+You can edit or add these attributes and then send the figure to Plotly. Let's add custom hover text (`text`), change the legend names (`name`) add a title (`layout$title`)
+
+
+```{r}
+fig$x$data[[1]]$name <- 'Group A'
+fig$x$data[[1]]$text <- c('St Urbain', 'Gaspe')
+fig$x$data[[1]]$type <- 'scatter'
+fig$x$data[[1]]$mode <- 'lines'
+
+fig$x$data[[2]]$name <- 'Group B'
+fig$x$data[[2]]$text <- c('Laurier', 'Fairmount')
+fig$x$data[[2]]$type <- 'scatter'
+fig$x$data[[2]]$mode <- 'lines'
+
+fig$x$layout$title <- 'Updated title'
+```
+
+Now, display this figure: 
+
+
+```{r}
+fig
+```
+
+#### Resources
+
+- [ggplot2 examples](https://plot.ly/ggplot2)
+- [Plotly's native R DSL](https://plot.ly/r)
+- [Plotly's declarative graph description reference](https://plot.ly/r/reference)
+- [`plotly` R package on GitHub](https://github.com/ropensci/plotly)
