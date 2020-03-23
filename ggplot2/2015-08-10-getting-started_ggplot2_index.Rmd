@@ -91,6 +91,8 @@ Before using the `style()` or `plotly_build` functions, you may want to inspect 
 ```{r}
 library(plotly)
 
+p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
+
 plotly_json(p)
 ```
 
