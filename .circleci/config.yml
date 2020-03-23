@@ -27,7 +27,7 @@ jobs:
             sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev libfftw3-dev
             sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_github("ropensci/plotly"); install.packages("BiocManager"); BiocManager::install("EBImage"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
-          key: cache3
+          key: cache4
           paths:
             - "/usr/local/lib/R/site-library"
       - store_artifacts:
@@ -41,8 +41,8 @@ jobs:
             mkdir build
             mkdir build/ggplot2
             mkdir build/r
-            for i in r/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build/r')"; done
-            for i in ggplot2/*.Rmd; do Rscript -e "rmarkdown::render('$i', output_dir='build/ggplot2')"; done
+            for i in r/*.Rmd; do cat what-about-dash.md >> $i; Rscript -e "rmarkdown::render('$i', output_dir='build/r')"; done
+            for i in ggplot2/*.Rmd; do cat what-about-dash.md >> $i; Rscript -e "rmarkdown::render('$i', output_dir='build/ggplot2')"; done
             python3 -m venv venv
             . venv/bin/activate
             pip3 install python-frontmatter
