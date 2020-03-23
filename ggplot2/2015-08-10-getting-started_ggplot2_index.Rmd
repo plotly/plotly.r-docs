@@ -107,7 +107,7 @@ p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
 fig <- ggplotly(p)
 
-fig <- style(gg, line = list(color = 'gold'), hoverinfo = "y", traces = 1)
+fig <- style(line = list(color = 'gold'), hoverinfo = "y", traces = 1)
 
 fig
 ```
