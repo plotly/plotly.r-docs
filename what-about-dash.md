@@ -20,7 +20,11 @@ library(dashHtmlComponents)
 
 app <- Dash$new()
 app$layout(
-    dccGraph(figure=fig)
+    htmlDiv(
+        list(
+                dccGraph(figure=fig) 
+        )
+     )
 )
 
 app$run_server(debug=TRUE, dev_tools_hot_reload=FALSE)
