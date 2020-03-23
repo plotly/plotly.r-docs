@@ -22,7 +22,7 @@ app <- Dash$new()
 app$layout(
     htmlDiv(
         list(
-                dccGraph(figure=fig) 
+            dccGraph(figure=fig) 
         )
      )
 )
