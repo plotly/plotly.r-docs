@@ -23,5 +23,5 @@ app$layout(
     dccGraph(figure=fig)
 )
 
-app$run_server()
+app$run_server(debug=TRUE, dev_tools_hot_reload=FALSE)
 ```
