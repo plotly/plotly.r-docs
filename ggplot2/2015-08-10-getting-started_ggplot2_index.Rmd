@@ -74,7 +74,7 @@ p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
 fig <- ggplotly(p)
 
-fig <- layout(fig, dragmode = "pan")
+fig %>% layout(dragmode = "pan")
 
 fig
 ```
@@ -109,7 +109,7 @@ p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
 fig <- ggplotly(p)
 
-fig <- style(line = list(color = 'gold'), hoverinfo = "y", traces = 1)
+fig %>% style(line = list(color = 'gold'), hoverinfo = "y", traces = 1)
 
 fig
 ```
