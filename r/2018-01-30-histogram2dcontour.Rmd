@@ -85,4 +85,4 @@ fig
 
 #### Reference
 
-See [https://plot.ly/r/reference/#histogram2dcontour](https://plot.ly/r/reference/#histogram2dcontour) for more information and options!
+See [https://plotly.com/r/reference/#histogram2dcontour](https://plotly.com/r/reference/#histogram2dcontour) for more information and options!

@@ -24,7 +24,7 @@ The examples below use the library [simple features](https://r-spatial.github.io
 
 ### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plotly.com/mapbox-atlas).
 
 ### Basic sf
 
@@ -78,8 +78,8 @@ fig
 
 ### Using ggplot2
 
-Alternatively, if working in ggplot2 you can use [`ggplotly`](https://plot.ly/ggplot2/maps-sf/).
+Alternatively, if working in ggplot2 you can use [`ggplotly`](https://plotly.com/ggplot2/maps-sf/).
 
 ### Reference
 
-See [https://plot.ly/r/reference/](https://plot.ly/r/reference/) for more information and chart attribute options! If you would like to read more on visualizing geo-spatial data with sf and plotly click [here](https://blog.cpsievert.me/2018/03/30/visualizing-geo-spatial-data-with-sf-and-plotly/).
+See [https://plotly.com/r/reference/](https://plotly.com/r/reference/) for more information and chart attribute options! If you would like to read more on visualizing geo-spatial data with sf and plotly click [here](https://blog.cpsievert.me/2018/03/30/visualizing-geo-spatial-data-with-sf-and-plotly/).

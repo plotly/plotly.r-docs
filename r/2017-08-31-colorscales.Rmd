@@ -67,7 +67,7 @@ fig
 
 ### Share Color Axis
 
-This example shows how to specify the color scale and color bar per trace. To share colorscale information in multiple subplots, you can use [coloraxis](https://plot.ly/r/reference/#scatter-marker-line-coloraxis).
+This example shows how to specify the color scale and color bar per trace. To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/r/reference/#scatter-marker-line-coloraxis).
 Below we show how to set a reference coloraxis1 to a shared coloraxis, which are set in the layout. Note that multiple color scales can be linked to the same color.
 
 ```{r}
@@ -92,4 +92,4 @@ fig
 
 #Reference
 
-See [https://plot.ly/r/reference/#heatmap-colorscale](https://plot.ly/r/reference/#heatmap-colorscale) for more information and options!
+See [https://plotly.com/r/reference/#heatmap-colorscale](https://plotly.com/r/reference/#heatmap-colorscale) for more information and options!

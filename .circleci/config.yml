@@ -57,7 +57,7 @@ jobs:
               cd build
               git init
               git config user.name plotlydocbot
-              git config user.email accounts@plot.ly
+              git config user.email accounts@plotly.com
               rm -rf r/*.html
               sed -i.bkp 's/<!--.*-->//g' r/*md && rm r/*.bkp # remove html comments
               rm -rf ggplot2/*.html
@@ -75,7 +75,7 @@ jobs:
               git clone --depth=1 git@github.com:plotly/graphing-library-docs.git
               cd graphing-library-docs
               git config user.name plotlydocbot
-              git config user.email accounts@plot.ly
+              git config user.email accounts@plotly.com
               git commit --allow-empty -m "deploying https://github.com/plotly/plotly.r-docs/commit/${CIRCLE_SHA1}"
               git push
               cd ..

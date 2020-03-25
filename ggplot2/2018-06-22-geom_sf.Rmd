@@ -42,8 +42,8 @@ fig
 
 ### Using Native Plotly
 
-Alternatively, you can use [`plot_ly`, `plot_geo`, or `plot_mapbox`](https://plot.ly/r/maps-sf/).
+Alternatively, you can use [`plot_ly`, `plot_geo`, or `plot_mapbox`](https://plotly.com/r/maps-sf/).
 
 ### Reference
 
-See [https://plot.ly/r/reference/](https://plot.ly/r/reference/) for more information and chart attribute options! If you would like to read more on visualizing geo-spatial data with sf and ggplotly click [here](https://blog.cpsievert.me/2018/01/30/learning-improving-ggplotly-geom-sf/).
+See [https://plotly.com/r/reference/](https://plotly.com/r/reference/) for more information and chart attribute options! If you would like to read more on visualizing geo-spatial data with sf and ggplotly click [here](https://blog.cpsievert.me/2018/01/30/learning-improving-ggplotly-geom-sf/).

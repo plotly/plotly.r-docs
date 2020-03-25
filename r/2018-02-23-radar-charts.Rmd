@@ -76,4 +76,4 @@ fig
 
 #### Reference
 
-See [https://plot.ly/r/reference/#scatterpolar](https://plot.ly/r/reference/#scatterpolar) for more information and options!
+See [https://plotly.com/r/reference/#scatterpolar](https://plotly.com/r/reference/#scatterpolar) for more information and options!

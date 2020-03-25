@@ -31,7 +31,7 @@ The map is composed of layers of three different types.
 
 The word "mapbox" in trace names and the `layout.mapbox` attribute refers to the Mapbox.js open-source library. If the basemap you define using `layout.mapbox.style` uses data from the Mapbox *service* that requires API authentication, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token.
 
-If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plotly.com/mapbox-atlas).
 
 #### The following values of `layout.mapbox.style` **DO** require an Access Token:
 
@@ -179,4 +179,4 @@ fig
 
 #Reference
 
-See [https://plot.ly/r/reference/#scattermapbox](https://plot.ly/r/reference/#scattermapbox) for more information and options!
+See [https://plotly.com/r/reference/#scattermapbox](https://plotly.com/r/reference/#scattermapbox) for more information and options!

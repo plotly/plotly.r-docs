@@ -301,7 +301,7 @@ fig <- fig %>% layout(title = "Average, High and Low Temperatures in New York",
 fig
 ```
 
-See more examples of filled line charts [here](https://plot.ly/r/filled-area-plots/).
+See more examples of filled line charts [here](https://plotly.com/r/filled-area-plots/).
 
 ### Density Plot
 
@@ -323,6 +323,6 @@ fig
 
 #Reference
 
-See [https://plot.ly/r/reference/#scatter](https://plot.ly/r/reference/#scatter) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#scatter](https://plotly.com/r/reference/#scatter) for more information and chart attribute options!
 
 

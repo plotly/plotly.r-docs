@@ -72,4 +72,4 @@ fig
 
 #Reference
 
-See [https://plot.ly/r/reference/#mesh3d](https://plot.ly/r/reference/#mesh3d) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#mesh3d](https://plotly.com/r/reference/#mesh3d) for more information and chart attribute options!

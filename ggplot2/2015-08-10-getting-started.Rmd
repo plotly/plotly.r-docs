@@ -12,9 +12,9 @@ output:
 ---
 # Plotly for R
 
-Plotly is an R package for creating interactive web-based graphs via [plotly](https://plot.ly/)'s JavaScript graphing library, `plotly.js`.
+Plotly is an R package for creating interactive web-based graphs via [plotly](https://plotly.com/)'s JavaScript graphing library, `plotly.js`.
 
-The [plotly R package](https://github.com/ropensci/plotly) serializes ggplot2 figures into Plotly's <a target="_blank" href="http://plot.ly/r/reference/">universal graph JSON</a>. `plotly::ggplotly` will crawl the ggplot2 figure, extract and translate all of the attributes of the ggplot2 figure into JSON (the colors, the axes, the chart type, etc), and draw the graph with plotly.js. 
+The [plotly R package](https://github.com/ropensci/plotly) serializes ggplot2 figures into Plotly's <a target="_blank" href="http://plotly.com/r/reference/">universal graph JSON</a>. `plotly::ggplotly` will crawl the ggplot2 figure, extract and translate all of the attributes of the ggplot2 figure into JSON (the colors, the axes, the chart type, etc), and draw the graph with plotly.js. 
 
 Furthermore, you have the option of manipulating the Plotly object with the `style` function.
 
@@ -140,7 +140,7 @@ fig <- plotly_build(fig)
 str(fig)
 ```
 
-This declarative description of the graph is very human readable. Every attribute of the chart, the colors, the data, the text, is described in a key-value pair in this object. [View all of the possible graph attributes.](https://plot.ly/r/reference)
+This declarative description of the graph is very human readable. Every attribute of the chart, the colors, the data, the text, is described in a key-value pair in this object. [View all of the possible graph attributes.](https://plotly.com/r/reference)
 
 Attributes of plotly figures are grouped into two categories: `data` and `layout`. `data` describes attributes that pertain to the plot's series, or "traces". These properties include things like the `x` and `y` data, the `color` and `name` of the trace, which axis the trace is bound to. `data` is an unnamed list.
 
@@ -189,7 +189,7 @@ str(fig$x$layout$plot_bgcolor) # the background color of the plot is "rgb(229,22
 str(fig$x$layout$legend)
 ```
 
-Each of these properties was extracted and translated from the original ggplot2 figure. [View all of the possible attributes](https://plot.ly/r/reference).
+Each of these properties was extracted and translated from the original ggplot2 figure. [View all of the possible attributes](https://plotly.com/r/reference).
 
 You can edit or add these attributes and then send the figure to Plotly. Let's add custom hover text (`text`), change the legend names (`name`) add a title (`layout$title`)
 
@@ -217,7 +217,7 @@ fig
 
 #### Resources
 
-- [ggplot2 examples](https://plot.ly/ggplot2)
-- [Plotly's native R DSL](https://plot.ly/r)
-- [Plotly's declarative graph description reference](https://plot.ly/r/reference)
+- [ggplot2 examples](https://plotly.com/ggplot2)
+- [Plotly's native R DSL](https://plotly.com/r)
+- [Plotly's declarative graph description reference](https://plotly.com/r/reference)
 - [`plotly` R package on GitHub](https://github.com/ropensci/plotly)

@@ -22,7 +22,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
   The bar shows the target value, and the shading represents the progress toward that goal. Gauge charts, known as
   speedometer charts as well. This chart type is usually used to illustrate key business indicators.
 
-  The example below displays a basic gauge chart with default attributes. For more information about different added attributes check [indicator](https://plot.ly/r/indicator/) tutorial.
+  The example below displays a basic gauge chart with default attributes. For more information about different added attributes check [indicator](https://plotly.com/r/indicator/) tutorial.
 
 ```{r}
 library(plotly)
@@ -69,7 +69,7 @@ fig
 ```
 
 ### Custom Gauge Chart
-The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](https://plot.ly/r/reference/#indicator).
+The following example shows how to style your gauge charts. For more information about all possible options check our [reference page](https://plotly.com/r/reference/#indicator).
 
 ```{r}
 library(plotly)
@@ -104,4 +104,4 @@ fig
 
 #Reference
 
-See [https://plot.ly/r/reference/#indicator](https://plot.ly/r/reference/#indicator) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#indicator](https://plotly.com/r/reference/#indicator) for more information and chart attribute options!

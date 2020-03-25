@@ -124,4 +124,4 @@ fig <- fig %>% layout(annotations = b)
 fig
 ```
 
-for more information please refer to http://moderndata.plot.ly/gantt-charts-in-r-using-plotly/
+for more information please refer to http://moderndata.plotly.com/gantt-charts-in-r-using-plotly/

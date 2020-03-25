@@ -18,11 +18,11 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 ### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plotly.com/mapbox-atlas).
 
 ### Lines on Mapbox maps using "Scattermapbox" traces
 
-To draw a line on your map, you either can use [Scattermapbox](https://plot.ly/r/reference/#scattermapbox) or [scattergeo](https://plot.ly/r/reference/#scattergeo) trace type in plotly. This example uses scattermapbox and defines the drawing [mode](https://plot.ly/python/reference/#scattermapbox-mode) to the combination of markers and line.
+To draw a line on your map, you either can use [Scattermapbox](https://plotly.com/r/reference/#scattermapbox) or [scattergeo](https://plotly.com/r/reference/#scattergeo) trace type in plotly. This example uses scattermapbox and defines the drawing [mode](https://plotly.com/python/reference/#scattermapbox-mode) to the combination of markers and line.
 
 ```{r}
 library(plotly)
@@ -52,4 +52,4 @@ fig
 ```
 #Reference
 
-See [https://plot.ly/r/reference/#scattermapbox](https://plot.ly/r/reference/#scattermapbox) for more information and options!
+See [https://plotly.com/r/reference/#scattermapbox](https://plotly.com/r/reference/#scattermapbox) for more information and options!

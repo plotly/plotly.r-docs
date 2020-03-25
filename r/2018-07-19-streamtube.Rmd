@@ -99,4 +99,4 @@ fig
 
 #### Reference
 
-See our [reference page](https://plot.ly/r/reference/) for more information and chart attribute options!.
+See our [reference page](https://plotly.com/r/reference/) for more information and chart attribute options!.
