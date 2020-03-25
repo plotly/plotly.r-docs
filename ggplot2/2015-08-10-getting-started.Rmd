@@ -6,6 +6,9 @@ page_type: example_index
 redirect_from: ggplot2/user-guide/
 layout: base
 language: ggplot2
+output:
+  html_document:
+    keep_md: true
 ---
 # Plotly for R
 
