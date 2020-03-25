@@ -19,7 +19,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 
 ### Legacy Plots
 
-These polar charts are legacy and will likely be deprecated in [Plotly 2.0](https://github.com/plotly/plotly.js/issues/420). Please see the new `scatterpolar` and `scatterpolargl` [trace types](https://plotly.com/r/polar-chart/) for latest and greatest in Plotly polar coordinates.
+These polar charts are legacy and will likely be deprecated in [Plotly 2.0](https://github.com/plotly/plotly.js/issues/420). Please see the new `scatterpolar` and `scatterpolargl` [trace types](https://plot.ly/r/polar-chart/) for latest and greatest in Plotly polar coordinates.
 
 ### Polar Scatter Chart
 
@@ -54,4 +54,4 @@ fig
 ```
 
 ### Reference
-See [https://plotly.com/python/reference/#area](https://plotly.com/python/reference/#area) for more information and chart attribute options!
+See [https://plot.ly/python/reference/#area](https://plot.ly/python/reference/#area) for more information and chart attribute options!

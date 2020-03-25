@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 ### Supported File Formats
 
-With the `plotly` R package, you can export graphs you create as static images in the `.png`, `.jpg`/`.jpeg`, `.eps`, `.svg`, and/or `.pdf` formats using[Orca](https://github.com/plotly/orca), an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plotly.com/graphing-libraries).  
+With the `plotly` R package, you can export graphs you create as static images in the `.png`, `.jpg`/`.jpeg`, `.eps`, `.svg`, and/or `.pdf` formats using[Orca](https://github.com/plotly/orca), an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plot.ly/graphing-libraries).  
 
 **Note:** It is important to be aware that R graphs containing WebGL-based traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, and/or `parcoords`) will include encapsulated rasters instead of vectors for some parts of the image if they are exported as static images in a vector format like `.eps`, `.svg`, and/or `.pdf`.
 

@@ -60,7 +60,7 @@ fig
 ```
 
 ### Subplots
-In order to create pie chart subplots, you need to use the [domain](https://plotly.com/javascript/reference/#pie-domain) attribute. It is important to note that the `X` array set the horizontal position whilst the `Y` array sets the vertical. For example, `x=[0,0.5], y=[0, 0.5]` would mean the bottom left position of the plot.
+In order to create pie chart subplots, you need to use the [domain](https://plot.ly/javascript/reference/#pie-domain) attribute. It is important to note that the `X` array set the horizontal position whilst the `Y` array sets the vertical. For example, `x=[0,0.5], y=[0, 0.5]` would mean the bottom left position of the plot.
 ```{r}
 library(plotly)
 library(dplyr)
@@ -80,7 +80,7 @@ fig
 ```
 
 ### Subplots Using Grid
-This example uses a plotly [grid](https://plotly.com/javascript/reference/#layout-grid) attribute for the suplots. Reference the row and column destination using the [domain](https://plotly.com/javascript/reference/#pie-domain) attribute.
+This example uses a plotly [grid](https://plot.ly/javascript/reference/#layout-grid) attribute for the suplots. Reference the row and column destination using the [domain](https://plot.ly/javascript/reference/#pie-domain) attribute.
 ```{r}
 library(plotly)
 library(dplyr)
@@ -102,7 +102,7 @@ fig <- fig %>% layout(title = "Pie Charts with Subplots", showlegend = F,
 fig
 ```
 
-See more examples of subplots [here](https://plotly.com/r/subplots/).
+See more examples of subplots [here](https://plot.ly/r/subplots/).
 
 #### Controlling text orientation inside sunburst sectors
 
@@ -142,4 +142,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#pie](https://plotly.com/r/reference/#pie) for more information and chart attribute options!
+See [https://plot.ly/r/reference/#pie](https://plot.ly/r/reference/#pie) for more information and chart attribute options!

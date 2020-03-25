@@ -36,6 +36,6 @@ fig
 
 ## More examples
 
-* [Compare SVG performance to WebGL](https://plotly.com/r/webgl-vs-svg/)
-* [WebGL with 1 million points](https://plotly.com/r/webgl-vs-svg-million-points/)
-* [WebGL for time series](https://plotly.com/r/webgl-vs-svg-time-series/)
+* [Compare SVG performance to WebGL](https://plot.ly/r/webgl-vs-svg/)
+* [WebGL with 1 million points](https://plot.ly/r/webgl-vs-svg-million-points/)
+* [WebGL for time series](https://plot.ly/r/webgl-vs-svg-time-series/)

@@ -33,4 +33,4 @@ fig <- fig %>%
 
 ### Reference
 
-See `?plotly::config` for more information about config options or [click here](https://plotly.com/r/configuration-options/). For more information regarding localization, [click here](https://github.com/plotly/plotly.js/tree/master/dist#to-include-localization).
+See `?plotly::config` for more information about config options or [click here](https://plot.ly/r/configuration-options/). For more information regarding localization, [click here](https://github.com/plotly/plotly.js/tree/master/dist#to-include-localization).

@@ -49,4 +49,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#layout-colorway](https://plotly.com/r/reference/#layout-colorway) for more information about the colorway attribute.
+See [https://plot.ly/r/reference/#layout-colorway](https://plot.ly/r/reference/#layout-colorway) for more information about the colorway attribute.

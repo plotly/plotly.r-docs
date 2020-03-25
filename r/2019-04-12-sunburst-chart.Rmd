@@ -109,7 +109,7 @@ fig
 ```
 
 ### Subplots
-In order to create sunburst chart subplots, we use the [domain](https://plotly.com/r/reference/#sunburst-domain) attribute and the layout [grid](https://plotly.com/r/reference/#layout-grid) attribute.
+In order to create sunburst chart subplots, we use the [domain](https://plot.ly/r/reference/#sunburst-domain) attribute and the layout [grid](https://plot.ly/r/reference/#layout-grid) attribute.
 ```{r}
 library(plotly)
 
@@ -149,4 +149,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#sunburst](https://plotly.com/r/reference/#sunburst) for more information and chart attribute options!
+See [https://plot.ly/r/reference/#sunburst](https://plot.ly/r/reference/#sunburst) for more information and chart attribute options!

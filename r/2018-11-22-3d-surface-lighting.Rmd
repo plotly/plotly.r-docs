@@ -148,4 +148,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#surface-lighting](https://plotly.com/r/reference/#surface-lighting) for more information and options!
+See [https://plot.ly/r/reference/#surface-lighting](https://plot.ly/r/reference/#surface-lighting) for more information and options!

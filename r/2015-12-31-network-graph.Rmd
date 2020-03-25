@@ -84,4 +84,4 @@ fig
 ```
 
 ### Reference
-See [https://plotly.com/python/reference/#scatter](https://plotly.com/python/reference/#scatter) for more information and chart attribute options!
+See [https://plot.ly/python/reference/#scatter](https://plot.ly/python/reference/#scatter) for more information and chart attribute options!

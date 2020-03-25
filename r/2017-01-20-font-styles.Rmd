@@ -36,4 +36,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#layout-font](https://plotly.com/r/reference/#layout-font) for more information and options!
+See [https://plot.ly/r/reference/#layout-font](https://plot.ly/r/reference/#layout-font) for more information and options!

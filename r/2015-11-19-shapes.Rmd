@@ -97,4 +97,4 @@ fig
 ```
 
 ### Reference
-Check out our <b>[reference page](https://plotly.com/r/reference/#layout-shapes)</b> for more information on using shapes!
+Check out our <b>[reference page](https://plot.ly/r/reference/#layout-shapes)</b> for more information on using shapes!

@@ -85,4 +85,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#scattergl](https://plotly.com/r/reference/#scattergl) for more information and chart attribute options!
+See [https://plot.ly/r/reference/#scattergl](https://plot.ly/r/reference/#scattergl) for more information and chart attribute options!

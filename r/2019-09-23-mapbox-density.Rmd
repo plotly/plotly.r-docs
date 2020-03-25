@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 ### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plotly.com/mapbox-atlas).
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
 
 #### Stamen Terrain Tile, no Token Needed
@@ -47,4 +47,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#densitymapbox](https://plotly.com/r/reference/#densitymapbox) for more information and options!
+See [https://plot.ly/r/reference/#densitymapbox](https://plot.ly/r/reference/#densitymapbox) for more information and options!

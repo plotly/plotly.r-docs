@@ -18,15 +18,15 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 ### Mapbox Access Token
 
-To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plotly.com/mapbox-atlas).
+To plot on Mapbox maps with Plotly you *may* need a Mapbox account and a public [Mapbox Access Token](https://www.mapbox.com/studio). See our [Mapbox Map Layers](/r/mapbox-layers/) documentation for more information. If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
 ### How to Show an Area on a Map
 
 There are three different ways to show an area in a mapbox:
 <ol>
-    <li> Use [Scattermapbox](https://plotly.com/r/reference/#scattermapbox) trace and set [fill](https://plotly.com/r/reference/#scattermapbox-fill) attribute to 'toself'</li>
-    <li> Use [Scattermapbox](https://plotly.com/r/reference/#scattermapbox) trace and define the corresponding geojson</li>
-    <li> Use the new trace type: [Choroplethmapbox](https://plotly.com/r/mapbox-county-choropleth/) for mapbox cases, or [Choropleth](https://plotly.com/r/choropleth-maps/) trace for non-mapbox ones.</li>
+    <li> Use [Scattermapbox](https://plot.ly/r/reference/#scattermapbox) trace and set [fill](https://plot.ly/r/reference/#scattermapbox-fill) attribute to 'toself'</li>
+    <li> Use [Scattermapbox](https://plot.ly/r/reference/#scattermapbox) trace and define the corresponding geojson</li>
+    <li> Use the new trace type: [Choroplethmapbox](https://plot.ly/r/mapbox-county-choropleth/) for mapbox cases, or [Choropleth](https://plot.ly/r/choropleth-maps/) trace for non-mapbox ones.</li>
 </ol>
 
 The following example uses the `Scattermapbox` trace and sets `fill = 'toself'`
@@ -54,7 +54,7 @@ fig
 
 ### Provide Gaps on Map
 
-The following example shows how to use missing values in your data to provide gap in your graph. To ignore the gap on your plot, take benefit of [connectorgaps](https://plotly.com/r/reference/#scattermapbox-connectgaps) attribute.
+The following example shows how to use missing values in your data to provide gap in your graph. To ignore the gap on your plot, take benefit of [connectorgaps](https://plot.ly/r/reference/#scattermapbox-connectgaps) attribute.
 
 ```{r}
 library(plotly)
@@ -131,4 +131,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#scattermapbox](https://plotly.com/r/reference/#scattermapbox) for more information and options!
+See [https://plot.ly/r/reference/#scattermapbox](https://plot.ly/r/reference/#scattermapbox) for more information and options!

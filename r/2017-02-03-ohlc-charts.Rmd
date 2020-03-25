@@ -123,4 +123,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#ohlc](https://plotly.com/r/reference/#ohlc) for more information and chart attribute options!
+See [https://plot.ly/r/reference/#ohlc](https://plot.ly/r/reference/#ohlc) for more information and chart attribute options!

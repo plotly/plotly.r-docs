@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 
 ### Basic Carpet Plot
 
-Set the `x` and `y` coorindates, using `x` and `y` attributes. If `x` coorindate values are ommitted a cheater plot will be created. To save parameter values use `a` and `b` attributes. To make changes to the axes, use `aaxis` or `baxis` attributes. For a more detailed list of axes attributes refer to [R reference](https://plotly.com/r/reference/#contourcarpet-aaxis).
+Set the `x` and `y` coorindates, using `x` and `y` attributes. If `x` coorindate values are ommitted a cheater plot will be created. To save parameter values use `a` and `b` attributes. To make changes to the axes, use `aaxis` or `baxis` attributes. For a more detailed list of axes attributes refer to [R reference](https://plot.ly/r/reference/#contourcarpet-aaxis).
 
 ```{r}
 library(plotly)
@@ -298,4 +298,4 @@ fig
 
 ### Reference
 
-See [https://plotly.com/r/reference/#contourcarpet](https://plotly.com/r/reference/#contourcarpet) for more information and options!
+See [https://plot.ly/r/reference/#contourcarpet](https://plot.ly/r/reference/#contourcarpet) for more information and options!

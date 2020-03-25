@@ -22,7 +22,7 @@ library("jpeg")
 library("plotly")
 
 # Image processing
-url <- "https://images.plotly.com/plotly-documentation/images/heatmap-galaxy.jpg"
+url <- "https://images.plot.ly/plotly-documentation/images/heatmap-galaxy.jpg"
 tmpf <- tempfile()
 download.file(url,tmpf,mode="wb")
 data <- readJPEG(tmpf)
@@ -41,4 +41,4 @@ fig
 
 #### Reference
 
-See [https://plotly.com/r/reference/#heatmapgl](https://plotly.com/r/reference/#heatmapgl) for more information and options!
+See [https://plot.ly/r/reference/#heatmapgl](https://plot.ly/r/reference/#heatmapgl) for more information and options!

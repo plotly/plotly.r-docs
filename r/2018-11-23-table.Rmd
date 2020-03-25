@@ -134,5 +134,5 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#table](https://plotly.com/r/reference/#table) for more information and chart attribute options!
+See [https://plot.ly/r/reference/#table](https://plot.ly/r/reference/#table) for more information and chart attribute options!
 

@@ -30,4 +30,4 @@ fig
 
 # Reference
 
-See [scattergl](https://plotly.com/r/reference/#scattergl) for more information. 
+See [scattergl](https://plot.ly/r/reference/#scattergl) for more information. 

@@ -82,7 +82,7 @@ fig <- fig %>% add_trace(y = ~trace_2, name = 'trace 2', mode = 'markers')
 fig
 ```
 
-See more examples of line charts [here](https://plotly.com/r/line-charts/).
+See more examples of line charts [here](https://plot.ly/r/line-charts/).
 
 ### Qualitative Colorscales
 
@@ -177,4 +177,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#scatter](https://plotly.com/r/reference/#scatter) for more information and chart attribute options!
+See [https://plot.ly/r/reference/#scatter](https://plot.ly/r/reference/#scatter) for more information and chart attribute options!

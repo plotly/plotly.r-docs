@@ -26,7 +26,7 @@ fig <- fig %>% add_lines()
 fig <- fig %>%
   layout(
     images = list(
-      list(source = "https://images.plotly.com/language-icons/api-home/python-logo.png",
+      list(source = "https://images.plot.ly/language-icons/api-home/python-logo.png",
            xref = "paper",
            yref = "paper",
            x= 0,
@@ -36,7 +36,7 @@ fig <- fig %>%
            opacity = 0.8
       ),
 
-      list(source = "https://images.plotly.com/language-icons/api-home/matlab-logo.png",
+      list(source = "https://images.plot.ly/language-icons/api-home/matlab-logo.png",
            xref = "x",
            yref = "paper",
            x = 2.7,
@@ -46,7 +46,7 @@ fig <- fig %>%
            opacity = 0.8
       ),
 
-      list(source =  "https://images.plotly.com/language-icons/api-home/r-logo.png",
+      list(source =  "https://images.plot.ly/language-icons/api-home/r-logo.png",
            xref = "x",
            yref = "y",
            x = 0.9,

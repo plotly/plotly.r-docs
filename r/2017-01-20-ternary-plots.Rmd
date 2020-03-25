@@ -76,4 +76,4 @@ fig
 
 #Reference
 
-See [https://plotly.com/r/reference/#scatterternary](https://plotly.com/r/reference#scatterternary) for more information and options!
+See [https://plot.ly/r/reference/#scatterternary](https://plot.ly/r/reference#scatterternary) for more information and options!

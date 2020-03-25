@@ -37,4 +37,4 @@ Reference: [ggplot2 docs](http://ggplot2.tidyverse.org/reference/geom_spoke.html
 
 ### Reference
 
-See [https://plotly.com/r/reference](https://plotly.com/r/reference) for more information and options!
+See [https://plot.ly/r/reference](https://plot.ly/r/reference) for more information and options!

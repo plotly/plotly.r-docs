@@ -338,9 +338,9 @@ fig
 
 ### Horizontal Bar Chart
 
-See examples of horizontal bar charts [here](https://plotly.com/r/horizontal-bar-charts/).
+See examples of horizontal bar charts [here](https://plot.ly/r/horizontal-bar-charts/).
 
 #Reference
 
-See [https://plotly.com/r/reference/#bar](https://plotly.com/r/reference/#bar) for more information and chart attribute options!
+See [https://plot.ly/r/reference/#bar](https://plot.ly/r/reference/#bar) for more information and chart attribute options!
 

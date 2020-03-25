@@ -58,7 +58,7 @@ fig
 ### Customize Hover for Surface Contours
 
 In addition to spikelines, Plotly 3D Surface plots also display surface contours on hover by default.
-These are customized by styling the [`contours`](https://plotly.com/r/reference/#surface-contours)
+These are customized by styling the [`contours`](https://plot.ly/r/reference/#surface-contours)
 attribute in the surface trace.
 
 ```{r}
@@ -89,4 +89,4 @@ fig
 
 # Reference
 
-See [https://plotly.com/r/reference/#layout-scene-xaxis](https://plotly.com/r/reference/#layout-scene-xaxis) and [https://plotly.com/r/reference/#surface-contours](https://plotly.com/r/reference/#surface-contours) for more information and options!
+See [https://plot.ly/r/reference/#layout-scene-xaxis](https://plot.ly/r/reference/#layout-scene-xaxis) and [https://plot.ly/r/reference/#surface-contours](https://plot.ly/r/reference/#surface-contours) for more information and options!
