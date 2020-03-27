@@ -29,7 +29,7 @@ The map is composed of layers of three different types.
 
 ### Mapbox Access Tokens and When You Need Them
 
-The word "mapbox" in trace names and the `layout.mapbox` attribute refers to the Mapbox.js open-source library. If the basemap you define using `layout.mapbox.style` uses data from the Mapbox *service* that requires API authentication, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token.
+The word "mapbox" in trace names and the `layout.mapbox` attribute refers to the Mapbox GL JS open-source library. If the basemap you define using `layout.mapbox.style` uses data from the Mapbox *service* that requires API authentication, then you will need to register for a free account at https://mapbox.com/ and obtain a Mapbox Access token.
 
 If you're using a Chart Studio Enterprise server, please see additional instructions [here](https://help.plot.ly/mapbox-atlas).
 
