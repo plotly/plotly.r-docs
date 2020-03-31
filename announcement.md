@@ -64,14 +64,11 @@ In addition to these enhancements, it is now possible to explicitly specify all 
 These were two sponsored features and we heartily thank our sponsors for supporting open-source software development and allowing us to make these features available to everyone else in the world for free :heart:. If your organization has a software budget, reach out to us to fund your favorite feature requests.
 
 #### Image Traces
+You can now explore multichannel image data in interactive charts, for applications such as satellite imaging, medical imaging, quality inspection, building training sets for machine learning models, etc.
 
-https://plotly.com/r/imshow/
-
-
+https://plotly.com/r/displaying-images/
 
 
 ### Get it now!
 
 To sum up: Plotly.R is out and if you’re excited about any of the above features, head on over to our Getting Started documentation page for full installation instructions.
-
-

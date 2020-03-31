@@ -1,6 +1,6 @@
 ---
-name: Imshow
-description: How to display image data in Python with R.
+name: Displaying Images
+description: How to display image data in with Plotly For R.
 display_as: scientific
 layout: base
 language: r
@@ -8,7 +8,7 @@ order: 15
 output:
   html_document:
     keep_md: true
-permalink: r/imshow/
+permalink: r/displaying-images/
 thumbnail: thumbnail/imshow.jpg
 ---
 
