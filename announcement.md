@@ -3,6 +3,7 @@
 I’m excited to announce that Plotly.R 4.9.2 is now available for download via `devtools` and `CRAN`. For up-to-date installation instructions, please see our [Getting Started](https://plotly.com/r/getting-started/) documentation page. 
 
 ## What’s New in Plotly.R 4.9.2
+
 Our changelog has lots of play-by-play, but here are the highlights:
 
 ### Powered by Plotly.js 1.52, perfect for Dash For R 0.3.1
@@ -19,11 +20,11 @@ This means that instead of seeing wide legend entries with e.g. `continent=Asia`
 
 
 #### GeoJson Choropleth Maps and Mapping Improvements
-https://plotly.com/r/mapbox-county-choropleth/#geojson-with-featureid
 
-px.choropleth() and go.Choropleth now accept a geojson argument just like the new px.choropleth_mapbox() and go.Choroplethmapbox we introduced last summer. This means that you can now supply your own geometry information to non-tile-map choropleth maps 5, instead of relying on Plotly’s built-in country and state maps. Some other new mapping features include:
 
-- A new `featureidkey` attribute  to let you use GeoJSON objects whose identifiers are in the properties object of a feature, rather than always and only using the `id` field. (This was added to the Mapbox choropleth as well.)
+Choropleth maps now accept a geojson argument. This means that you can now supply your own geometry information to non-tile-map choropleth maps 5, instead of relying on Plotly’s built-in country and state maps. Some other new mapping features include:
+
+- A new [`featureidkey`](https://plotly.com/r/mapbox-county-choropleth/#geojson-with-featureid) attribute  to let you use GeoJSON objects whose identifiers are in the properties object of a feature, rather than always and only using the `id` field. (This was added to the Mapbox choropleth as well.)
 
 - New `fitbounds` attribute in `layout.geo` to make it easier to position these new choropleth maps.
 
@@ -31,19 +32,19 @@ px.choropleth() and go.Choropleth now accept a geojson argument just like the ne
 
 - New `showlegend` attributes on go.Choropleth traces, which enable the use of discrete color on choropleth maps 1. This was added to the Mapbox choropleth  as well.
 
-What does this all mean? It means you can now make any of these maps with a single chained Python statement!
+What does this all mean? It means you can now make any of these maps with a single chained R statement!
 
 #### New Treemap chart and sunburst charts API
-https://plotly.com/r/sunburst-charts/
-https://plotly.com/r/treemaps/
-The px.sunburst() and px.treemap() functions in Plotly Express now support a new argument called path  which behaves a bit like dimensions in our other multi-dimensional data-exploration functions like px.parallel_coordinates(), px.parallel_categories() and px.scatter_matrix(). It’s an easier way to create sunbursts 1 and treemaps from “rectangular” data in data frames which have one column per level in a hierarchy. This makes sunbursts and treemaps much easier to use for exploring multi-dimensional datasets.
 
 
- A common scenario for which this API is a great fit is when you want to visualize a ratio across a hierarchy or a set of variables. For example, on a restaurant bill, the ratio between the tip and the total bill is the tip percentage: tip_pct = tip/total_bill. With the new API, we can easily (one function call!) visualize the built-in px.data.tips() dataset, scaling each sector by the total_bill and coloring each sector by the total_bill-weighted average of the tip_pct to highlight certain patterns:
+[Sunburst](https://plotly.com/r/sunburst-charts/) and [treemap]https://plotly.com/r/treemaps/
+ traces now support a new argument called path which behaves a bit like dimensions in our other multi-dimensional data-exploration functions. It’s an easier way to create sunbursts and treemaps from “rectangular” data in data frames which have one column per level in a hierarchy. This makes sunbursts and treemaps much easier to use for exploring multi-dimensional datasets.
+
+
+ A common scenario for which this API is a great fit is when you want to visualize a ratio across a hierarchy or a set of variables. For example, on a restaurant bill, the ratio between the tip and the total bill is the tip percentage: tip_pct = tip/total_bill. 
 
 #### Uniform Text & Text Orientation
-By default, when displaying text with bar-like traces (bar, funnel and waterfall charts) or part-of-whole traces like pie and funnel-area charts as well as sunbursts and treemaps, Plotly.R will scale the text per bar or per sector so as to make each text label fit. This is helpful for seeing all text labels but can result in some odd or distracting variations in text sizes. With the new layout.uniformtext options, you can now force the text to be the same size across similar traces, so that all the bar labels or all the sunburst labels end up having the same font-size.
-
+By default, when displaying text with bar-like traces (bar, funnel and waterfall charts) or part-of-whole traces like pie and funnel-area charts as well as sunbursts and treemaps, Plotly.R will scale the text per bar or per sector so as to make each text label fit. This is helpful for seeing all text labels but can result in some odd or distracting variations in text sizes. With the new `layout.uniformtext` options, you can now force the text to be the same size across similar traces, so that all the bar labels or all the sunburst labels end up having the same font-size.
 
 
 In terms of text orientation, by default Plotly.R will try various text orientations within a pie or sunburst sector to see how it can make the text biggest/most-legible. Again this can be distracting or unappealing in certain cases, so the new insidetextorientation attribute lets you specify whether you want your text to be always horizontal, radial or tangential.
@@ -52,7 +53,7 @@ Together these two attributes can be used to create very attractive, regular-loo
 
 
 #### New Box Plot Options- need to write docs
-There are many ways to calculate the quartiles of a dataset, and now you can choose among three different quartile-calculation algorithms 1 when using Plotly.R box plots! To quote our Figure Reference documentation for the new quartilemethod attribute on go.Box:
+There are many ways to calculate the quartiles of a dataset, and now you can choose among three different quartile-calculation algorithms when using Plotly.R box plots! To quote our Figure Reference documentation for the new quartilemethod attribute:
 
 Sets the method used to compute the sample’s Q1 and Q3 quartiles. The “linear” method uses the 25th percentile for Q1 and 75th percentile for Q3 as computed using method #10 (listed on http://www.amstat.org/publications/jse/v14n3/langford.html). The “exclusive” method uses the median to divide the ordered dataset into two halves if the sample is odd, it does not include the median in either half - Q1 is then the median of the lower half and Q3 the median of the upper half. The “inclusive” method also uses the median to divide the ordered dataset into two halves but if the sample is odd, it includes the median in both halves - Q1 is then the median of the lower half and Q3 the median of the upper half.
 
@@ -68,6 +69,11 @@ You can now explore multichannel image data in interactive charts, for applicati
 
 https://plotly.com/r/displaying-images/
 
+#### Major Documentation Work
+
+Beyond shipping new features, our Graphing Library team has been hard at work improving the Plotly.R documentation:
+
+- new plotly.r-docs repository
 
 ### Get it now!
 
