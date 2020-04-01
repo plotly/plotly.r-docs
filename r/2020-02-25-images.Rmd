@@ -9,6 +9,7 @@ output:
   html_document:
     keep_md: true
 permalink: r/displaying-images/
+redirect_from: r/imshow/
 thumbnail: thumbnail/imshow.jpg
 ---
 
