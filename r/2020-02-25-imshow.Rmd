@@ -15,11 +15,11 @@ thumbnail: thumbnail/imshow.jpg
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
-This tutorial shows how to display and explore image data. If you would like instead a logo or static image, use `layout.Image` as explained [here](https://plot.ly/r/logos/).
+This tutorial shows how to display and explore image data. If you would like instead a logo or static image, use `layout.Image` as explained [here](https://plotly.com/r/logos/).
 
 ### Display RGB Image Data with Image Trace
 
-Note that `Image` trace only accepts multichannel images. For single images, use [`Heatmap`](https://plot.ly/r/heatmaps/). `Image` trace is different from the `layout.Image` class, which can be used for adding background images or logos to figures.
+Note that `Image` trace only accepts multichannel images. For single images, use [`Heatmap`](https://plotly.com/r/heatmaps/). `Image` trace is different from the `layout.Image` class, which can be used for adding background images or logos to figures.
 ```{r}
 library(plotly)
 
@@ -44,7 +44,7 @@ fig
 ### Define the data range covered by the color range with zmin and zmax
 
 The data range and color range are mapped together using the parameters `zmin` and `zmax`, which correspond respectively to the data values mapped to black `[0, 0, 0]` and white `[255, 255, 255]`.
-The default value of `zmin` and [zmax](https://plot.ly/r/reference/#image-zmax) depends on the `colormodal` value. In this example `colormodel is "rgb"`(by default), so the default value of `zmin is [0, 0, 0]` and `zmax is [250, 250, 250]`.
+The default value of `zmin` and [zmax](https://plotly.com/r/reference/#image-zmax) depends on the `colormodal` value. In this example `colormodel is "rgb"`(by default), so the default value of `zmin is [0, 0, 0]` and `zmax is [250, 250, 250]`.
 
 ```{r}
 library(plotly)
@@ -84,4 +84,4 @@ fig <- fig %>% add_trace(
 fig
 ```
 ### Reference
-See [https://plot.ly/r/reference/#image](https://plot.ly/r/reference/#area) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#image](https://plotly.com/r/reference/#area) for more information and chart attribute options!

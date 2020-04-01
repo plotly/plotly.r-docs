@@ -41,4 +41,4 @@ fig
 
 #### Reference
 
-See [https://plot.ly/r/reference/#heatmapgl](https://plot.ly/r/reference/#heatmapgl) for more information and options!
+See [https://plotly.com/r/reference/#heatmapgl](https://plotly.com/r/reference/#heatmapgl) for more information and options!

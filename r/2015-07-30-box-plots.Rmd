@@ -101,4 +101,4 @@ fig
 
 ### Reference
 
-See [https://plot.ly/r/reference/#box](https://plot.ly/r/reference/#box) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#box](https://plotly.com/r/reference/#box) for more information and chart attribute options!

@@ -167,7 +167,7 @@ fig
 
 ### Size of Legend Items
 
-In this example, since the [itemsizing](https://plot.ly/r/reference/#layout-legend-itemsizing) attribute is set to `constant`, the size of legend items symbols remains the same, regardless of how tiny/huge the bubbles are in the graph.
+In this example, since the [itemsizing](https://plotly.com/r/reference/#layout-legend-itemsizing) attribute is set to `constant`, the size of legend items symbols remains the same, regardless of how tiny/huge the bubbles are in the graph.
 
 ```{r}
 library(plotly)
@@ -285,4 +285,4 @@ fig
 
 Reference
 
-See [https://plot.ly/r/reference/#layout-legend](https://plot.ly/r/reference/#layout-legend) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#layout-legend](https://plotly.com/r/reference/#layout-legend) for more information and chart attribute options!

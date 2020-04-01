@@ -43,7 +43,7 @@ fig
 
 
 ### Setting Marker Size and Color
-This example uses [decreasing, increasing, and total attributes](https://plot.ly/r/reference/#waterfall-decreasing-marker-line-color) to customize the bars.
+This example uses [decreasing, increasing, and total attributes](https://plotly.com/r/reference/#waterfall-decreasing-marker-line-color) to customize the bars.
 
 ```{r}
 library(plotly)

@@ -78,8 +78,8 @@ fig
 
 ### Using ggplot2
 
-Alternatively, if working in ggplot2 you can use [`ggplotly`](https://plot.ly/ggplot2/maps-sf/).
+Alternatively, if working in ggplot2 you can use [`ggplotly`](https://plotly.com/ggplot2/maps-sf/).
 
 ### Reference
 
-See [https://plot.ly/r/reference/](https://plot.ly/r/reference/) for more information and chart attribute options! If you would like to read more on visualizing geo-spatial data with sf and plotly click [here](https://blog.cpsievert.me/2018/03/30/visualizing-geo-spatial-data-with-sf-and-plotly/).
+See [https://plotly.com/r/reference/](https://plotly.com/r/reference/) for more information and chart attribute options! If you would like to read more on visualizing geo-spatial data with sf and plotly click [here](https://blog.cpsievert.me/2018/03/30/visualizing-geo-spatial-data-with-sf-and-plotly/).

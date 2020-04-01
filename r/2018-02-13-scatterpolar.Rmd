@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 #### Polar Charts 1.0
 
-Looking for the old polar chart docs? See [legacy polar charts](https://plot.ly/r/legacy-polar-chart/)
+Looking for the old polar chart docs? See [legacy polar charts](https://plotly.com/r/legacy-polar-chart/)
 
 #### Basic Polar Charts
 
@@ -585,4 +585,4 @@ fig
 
 #### Reference
 
-See [https://plot.ly/r/reference/#polar](https://plot.ly/r/reference/#polar) for more information and options!
+See [https://plotly.com/r/reference/#polar](https://plotly.com/r/reference/#polar) for more information and options!

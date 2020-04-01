@@ -38,4 +38,4 @@ fig
 
 #Reference
 
-See [https://plot.ly/r/reference/#scatter](https://plot.ly/r/reference/#scatter) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#scatter](https://plotly.com/r/reference/#scatter) for more information and chart attribute options!

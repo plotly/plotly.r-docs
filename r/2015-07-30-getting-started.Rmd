@@ -61,4 +61,4 @@ Click on legend entries to hide/show traces, click-and-drag on the chart to zoom
 
 ## Next Steps
 
-Once you have installed the `plotly` R package, learn more about the [fundamentals of making charts](https://plot.ly/r/plotly-fundamentals/) and start making [basic charts](https://plot.ly/r/basic-charts/).
+Once you have installed the `plotly` R package, learn more about the [fundamentals of making charts](https://plotly.com/r/plotly-fundamentals/) and start making [basic charts](https://plotly.com/r/basic-charts/).

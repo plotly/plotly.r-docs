@@ -192,8 +192,8 @@ fig
 
 ### Contour Colorscales
 
-See [here](https://plot.ly/r/colorscales/) for more examples concerning colorscales!
+See [here](https://plotly.com/r/colorscales/) for more examples concerning colorscales!
 
 ### Reference
 
-See [https://plot.ly/r/reference/#contour](https://plot.ly/r/reference/#contour) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#contour](https://plotly.com/r/reference/#contour) for more information and chart attribute options!

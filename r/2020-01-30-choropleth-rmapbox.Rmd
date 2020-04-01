@@ -129,4 +129,4 @@ fig
 ```
 #Reference
 
-See [https://plot.ly/r/reference/#scattermapbox](https://plot.ly/r/reference/#choroplethmapbox) for more information and options!
+See [https://plotly.com/r/reference/#scattermapbox](https://plotly.com/r/reference/#choroplethmapbox) for more information and options!
