@@ -14,7 +14,9 @@ The version of Plotly.js that Plotly.R 4.9.2 is built on is the same one that’
 
 We’ve finally implemented a long-requested feature: [first-class legend titles](https://plotly.com/r/legend/#legend-title)! These are configurable under `layout.legend.title`, as one would expect.
 
-This means that instead of seeing wide legend entries with e.g. `continent=Asia` and `continent=Europe` etc you will now see a cleaner, smaller and less repetitive legend with a title of continent and legend entries for `Asia` and `Europe`. Check out the image below to see how much nicer this makes everything look.
+Check out the image below to see how much nicer this makes everything look.
+
+![alt text](https://user-images.githubusercontent.com/1557650/78181150-e3114200-7431-11ea-9075-83ee41c482a9.png "a chart with a legend title")
 
 #### GeoJson Choropleth Maps and Mapping Improvements
 
@@ -28,7 +30,9 @@ Choropleth maps now accept a `geojson` argument. This means that you can now sup
 
 - New `showlegend` attributes on go.Choropleth traces, which enable the use of discrete color on choropleth maps 1. This was added to the Mapbox choropleth  as well.
 
-What does this all mean? It means you can now make any of these maps with a single chained R statement!
+What does this all mean? It means you can now make any of this map with a single chained R statement!
+
+![alt text](https://user-images.githubusercontent.com/1557650/78181148-e278ab80-7431-11ea-9eb8-4411730f9cbf.png "a chart with a map")
 
 #### New treemap and sunburst charts API
 
@@ -44,15 +48,17 @@ In terms of text orientation, by default Plotly.R will try various text orientat
 
 Together these two attributes can be used to create very attractive, regular-looking bar, waterfall, funnel, pie, sunburst and treemap charts!
 
+[alt text](https://user-images.githubusercontent.com/1557650/78181140-e1e01500-7431-11ea-857c-a871e413f151.png "a chart with a map")
+
 #### New Box Plot Options
 
 There are many ways to calculate the quartiles of a dataset, and now you can choose among three different quartile-calculation algorithms when using Plotly.R [box plots](https://plotly.com/r/box-plots/#choosing-the-algorithm-for-computing-quartiles)! To quote our Figure Reference documentation for the new `quartilemethod` attribute:
 
 - Sets the method used to compute the sample’s Q1 and Q3 quartiles. The “linear” method uses the 25th percentile for Q1 and 75th percentile for Q3 as computed using method #10 (listed on http://www.amstat.org/publications/jse/v14n3/langford.html). The “exclusive” method uses the median to divide the ordered dataset into two halves if the sample is odd, it does not include the median in either half - Q1 is then the median of the lower half and Q3 the median of the upper half. The “inclusive” method also uses the median to divide the ordered dataset into two halves but if the sample is odd, it includes the median in both halves - Q1 is then the median of the lower half and Q3 the median of the upper half.
 
-Here is a visualization of the three methods on the same dataset of integers from 1 to 9:
+Here is a visualization of the three methods on the same dataset of integers from 1 to 5:
 
-[insert image here]
+[alt text](https://user-images.githubusercontent.com/1557650/78181139-e1477e80-7431-11ea-9da5-b72c4d3999b4.png "a boxplot chart")
 
 In addition to these enhancements, it is now possible to [explicitly specify all the parameters of a box plot](https://plotly.com/r/box-plots/#box-plot-with-precomputed- quartiles), for when you want to do the quartile and other calculations externally to the visualization.
 
@@ -61,7 +67,7 @@ These were two sponsored features and we heartily thank our sponsors for support
 #### Image Traces
 You can now explore [multichannel image data](https://plotly.com/r/displaying-images/) in interactive charts, for applications such as satellite imaging, medical imaging, quality inspection, building training sets for machine learning models, etc.
 
-[insert image here]
+![alt text](https://user-images.githubusercontent.com/1557650/78181132-df7dbb00-7431-11ea-8a57-9b0dbe1c4779.png "a chart with an image")
 
 #### Major Documentation Work
 
