@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ### Basic Filled Area Plot
 
 To make an area plot with interior filling set `fill` to `"tozeroy"` in the call for the second trace.
-For more informations and options about the `fill` option checkout [https://plot.ly/r/reference/#scatter-fill](https://plot.ly/r/reference/#scatter-fill)
+For more informations and options about the `fill` option checkout [https://plotly.com/r/reference/#scatter-fill](https://plotly.com/r/reference/#scatter-fill)
 
 ```{r}
 library(plotly)
@@ -152,7 +152,7 @@ fig
 ### Interior Filling for Area Chart
 
 To make an area plot with interior filling set `fill` to `"tonexty"` in the call for the second trace.
-For more informations and options about the `fill` option checkout [https://plot.ly/r/reference/#scatter-fill](https://plot.ly/r/reference/#scatter-fill)
+For more informations and options about the `fill` option checkout [https://plotly.com/r/reference/#scatter-fill](https://plotly.com/r/reference/#scatter-fill)
 
 ```{r}
 library(plotly)
@@ -242,4 +242,4 @@ fig
 
 #Reference
 
-See [https://plot.ly/r/reference/#area](https://plot.ly/r/reference/#area) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#area](https://plotly.com/r/reference/#area) for more information and chart attribute options!

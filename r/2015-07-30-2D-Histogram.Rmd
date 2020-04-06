@@ -18,7 +18,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 #### Basic 2D Histogram
 
-2D histograms require `x`/`y`, but in contrast to heatmaps, `z` is optional. If `z` is not provided, binning occurs in the browser (see [here](https://plot.ly/r/reference/#histogram2d-histnorm) for a list of binning options).
+2D histograms require `x`/`y`, but in contrast to heatmaps, `z` is optional. If `z` is not provided, binning occurs in the browser (see [here](https://plotly.com/r/reference/#histogram2d-histnorm) for a list of binning options).
 
 ```{r}
 # install.packages('mvtnorm')
@@ -36,7 +36,7 @@ fig2
 ```
 
 #### Colorscale
-If `z` is not provided, the only way to control coloring is through the [colorscale attribute](https://plot.ly/r/reference/#histogram2d-colorscale)
+If `z` is not provided, the only way to control coloring is through the [colorscale attribute](https://plotly.com/r/reference/#histogram2d-colorscale)
 
 ```{r}
 fig <- fig %>% add_histogram2d(colorscale = "Blues")

@@ -93,7 +93,7 @@ fig
 ```
 ### Share bins between histograms
 
-In this example both histograms have a compatible bin settings using [bingroup](https://plot.ly/r/reference/#histogram-bingroup) attribute. 
+In this example both histograms have a compatible bin settings using [bingroup](https://plotly.com/r/reference/#histogram-bingroup) attribute. 
 ```{r}
 library(plotly)
 
@@ -113,7 +113,7 @@ fig <- fig %>% layout(
 
 fig
 ```
-Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plot.ly/r/2D-Histogram/) trace can share the same `bingroup`.
+Note that traces on the same subplot, and with the same `barmode` ("stack", "relative", "group") are forced into the same `bingroup`, however traces with `barmode = "overlay"` and on different axes (of the same axis type) can have compatible bin settings. Histogram and [histogram2d](https://plotly.com/r/2D-Histogram/) trace can share the same `bingroup`.
 
 ```{r}
 library(plotly)
@@ -134,4 +134,4 @@ fig
 ```
 ### Reference
 
-See [https://plot.ly/r/reference/#histogram](https://plot.ly/r/reference/#histogram) for more information and chart attribute options!
+See [https://plotly.com/r/reference/#histogram](https://plotly.com/r/reference/#histogram) for more information and chart attribute options!
