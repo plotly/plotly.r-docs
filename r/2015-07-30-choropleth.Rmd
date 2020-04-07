@@ -89,7 +89,7 @@ fig <- fig %>% add_trace(
   )
 fig <- fig %>% colorbar(title = "Unemployment Rate (%)")
 fig <- fig %>% layout(
-    title = "2016 US Unemployment by State"
+    title = "2016 US Unemployment by County"
 )
 
 fig <- fig %>% layout(
@@ -102,6 +102,45 @@ fig <- fig %>% layout(
 fig
 ```
 **Note** In this example we set `layout.geo.scope` to usa to automatically configure the map to display USA-centric data in an appropriate projection.
+
+### Indexing by GeoJSON Properties
+
+If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of locations.
+
+In the following GeoJSON object/data-file pairing, the values of `properties.district` match the values of the `district` column:
+```{r}
+library(plotly)
+library(rjson)
+
+url <- 'https://raw.githubusercontent.com/plotly/datasets/master/election.geojson'
+geojson <- rjson::fromJSON(file=url)
+url2<- "https://raw.githubusercontent.com/plotly/datasets/master/election.csv"
+df <- read.csv(url2)
+head(df)
+g <- list(
+  projection = list(type = 'mercator'),
+  visible=FALSE
+)
+fig <- plot_geo(df)
+fig <- fig %>% add_trace(
+    type="choropleth",
+    geojson=geojson,
+    color="Bergeron",
+    locations="district", 
+    featureidkey="properties.district"
+  )
+fig <- fig %>% colorbar(title = "Bergeron")
+fig <- fig %>% layout(
+    title = "Montreal 2013 Election",
+    geo = g
+
+)
+
+fig
+
+
+```
+
 
 ### Customize choropleth chart
 ```{r}
