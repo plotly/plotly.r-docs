@@ -17,7 +17,93 @@ thumbnail: thumbnail/choropleth.jpg
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
-# Choropleth Maps in R
+
+A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map composed of colored polygons. It is used to represent spatial variations of a quantity. This page documents how to build **outline** choropleth maps, but you can also build [choropleth **tile maps** using our Mapbox trace types](/r/mapbox-county-choropleth).
+
+### Base Map Configuration
+
+Plotly figures made with `plot_geo` have a `layout.geo` object which can be used to control the appearance of the base map onto which data is plotted.
+
+### Introduction: main parameters for choropleth outline maps
+
+Making choropleth maps requires two main types of input:
+
+1. Geometry information:
+   1. This can either be a supplied GeoJSON file where each feature has either an `id` field or some identifying value in `properties`; or
+   2. one of the built-in geometries within `plot_geo`: US states and world countries (see below)
+2. A list of values indexed by feature identifier.
+
+The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `z` argument of `plot_geo`.
+
+**Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
+
+### GeoJSON with `feature.id`
+
+Here we load a GeoJSON file containing the geometry information for US counties, where `feature.id` is a [FIPS code](https://en.wikipedia.org/wiki/FIPS_county_code).
+
+```{r}
+library(plotly)
+library(rjson)
+
+data <- fromJSON(file="https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json")
+data$features[[1]]
+```
+
+#### Data indexed by `id`
+
+Here we load unemployment data by county, also indexed by [FIPS code](https://en.wikipedia.org/wiki/FIPS_county_code).
+
+```{r}
+df = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv", header = T, colClasses = c("fips"="character"))
+head(df)
+```
+
+### Choropleth Map Using GeoJSON
+```{r}
+library(plotly)
+library(rjson)
+
+url <- 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
+counties <- rjson::fromJSON(file=url)
+url2<- "https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv"
+df <- read.csv(url2, colClasses=c(fips="character"))
+g <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = toRGB('white')
+)
+fig <- plot_ly()
+fig <- fig %>% add_trace(
+    type="choropleth",
+    geojson=counties,
+    locations=df$fips,
+    z=df$unemp,
+    colorscale="Viridis",
+    zmin=0,
+    zmax=12,
+    marker=list(line=list(
+      width=0),
+      opacity=0.5
+    )
+  )
+fig <- fig %>% colorbar(title = "Unemployment Rate (%)")
+fig <- fig %>% layout(
+    title = "2016 US Unemployment by State"
+)
+
+fig <- fig %>% layout(
+    mapbox=list(
+    zoom =3,
+    center = list(lon = -95.7129, lat = 37.0902)),
+    geo = g
+  )
+
+fig
+```
+**Note** In this example we set `layout.geo.scope` to usa to automatically configure the map to display USA-centric data in an appropriate projection.
+
+### Customize choropleth chart
 ```{r}
 library(plotly)
 df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv")
@@ -48,6 +134,7 @@ fig <- fig %>% layout(
 fig
 ```
 
+**Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection.
 
 ### World Choropleth Map
 

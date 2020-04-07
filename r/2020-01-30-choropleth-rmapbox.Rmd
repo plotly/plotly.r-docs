@@ -3,7 +3,7 @@ description: How to make a Mapbox Choropleth Map of US Counties in R with Plotly
 display_as: maps
 language: r
 layout: base
-name: Choropleth mapbox
+name: Mapbox Choropleth Maps
 order: 8
 output:
   html_document:
@@ -33,7 +33,7 @@ Making choropleth Mapbox maps requires two main types of input:
 1. GeoJSON-formatted geometry information where each feature has either an `id` field or some identifying value in `properties`.
 2. A list of values indexed by feature identifier.
 
-The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `color` argument of `px.choropleth_mapbox` (`z` if using `graph_objects`), in the same order as the IDs are passed into the `location` argument.
+The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `z` argument of `plot_geo`.
 
 **Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
 

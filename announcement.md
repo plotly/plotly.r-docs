@@ -20,7 +20,7 @@ Check out the image below to see how much nicer this makes everything look.
 
 #### GeoJson Choropleth Maps and Mapping Improvements
 
-Choropleth maps now accept a `geojson` argument. This means that you can now supply your own geometry information to non-tile-map choropleth maps, instead of relying on Plotly’s built-in country and state maps. Some other new mapping features include:
+Choropleth maps now accept a [`geojson`](https://plotly.com/r/mapbox-county-choropleth/#choropleth-map-with-geojson) argument. This means that you can now supply your own geometry information to non-tile-map choropleth maps, instead of relying on Plotly’s built-in country and state maps. Some other new mapping features include:
 
 - New [`featureidkey`](https://plotly.com/r/mapbox-county-choropleth/#geojson-with-featureid) attribute  to let you use GeoJSON objects whose identifiers are in the properties object of a feature, rather than always and only using the `id` field. (This was added to the Mapbox choropleth trace as well.)
 
