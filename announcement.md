@@ -18,28 +18,31 @@ Check out the image below to see how much nicer this makes everything look.
 
 ![alt text](https://user-images.githubusercontent.com/1557650/78181150-e3114200-7431-11ea-9075-83ee41c482a9.png "a chart with a legend title")
 
-#### GeoJson Choropleth Maps and Mapping Improvements
+#### Improvements to Choropleth Maps 
 
-Choropleth maps now accept a [`geojson`](https://plotly.com/r/mapbox-county-choropleth/#choropleth-map-with-geojson) argument. This means that you can now supply your own geometry information to non-tile-map choropleth maps, instead of relying on Plotly’s built-in country and state maps. Some other new mapping features include:
+With the release of Plotly For R 4.9.2, a new [`geojson` argument](https://plotly.com/r/choropleth-maps/#choropleth-map-with-geojson) has been added to outline choropleth map traces. Previously, this argument was only available on choropleth maps made using our tile-based [Mapbox choropleth map](https://plotly.com/r/mapbox-county-choropleth/#mapbox-choropleth-map-with-geojson) trace type. 
 
-- New [`featureidkey`](https://plotly.com/r/mapbox-county-choropleth/#geojson-with-featureid) attribute  to let you use GeoJSON objects whose identifiers are in the properties object of a feature, rather than always and only using the `id` field. (This was added to the Mapbox choropleth trace as well.)
+This means that you can now supply your own geometry information to non-tile-map choropleth maps, instead of relying solely on Plotly’s built-in country and state maps or using the Mapbox API service. 
+
+Some other new mapping features include:
+
+- Both [outline](https://plotly.com/r/choropleth-maps/#geojson-with-featureid) and [tile-based](https://plotly.com/r/mapbox-county-choropleth/#geojson-with-featureid) maps have a new `featureidkey` attribute to let you use GeoJSON objects whose identifiers are in the properties object of a feature, rather than always and only using the `id` field. 
 
 - New `fitbounds` attribute in `layout.geo` to make it easier to position these new choropleth maps.
 
 - New `visible` attribute in `layout.geo` to make it easier to style these new choropleth maps.
 
-- New `showlegend` attributes on go.Choropleth traces, which enable the use of discrete color on choropleth maps 1. This was added to the Mapbox choropleth  as well.
+- New `showlegend` attributes on `choropleth` traces, which enable the use of discrete color on choropleth maps 1. This was added to the Mapbox choropleth  as well.
 
 What does this all mean? It means you can now make any of this map with a single chained R statement!
 
 ![alt text](https://user-images.githubusercontent.com/1557650/78181148-e278ab80-7431-11ea-9eb8-4411730f9cbf.png "a chart with a map")
 
-#### New treemap and sunburst charts API
+#### Treemap traces
 
-[Sunburst](https://plotly.com/r/sunburst-charts/) and [treemap]https://plotly.com/r/treemaps/
- traces now support a new argument called path which behaves a bit like dimensions in our other multi-dimensional data-exploration functions. It’s an easier way to create sunbursts and treemaps from “rectangular” data in data frames which have one column per level in a hierarchy. This makes sunbursts and treemaps much easier to use for exploring multi-dimensional datasets.
+Plotly For R 4.9.2 introduces a new [treemap](https://plotly.com/r/treemaps/) trace type, which is well suited for visualizing a ratio across a hierarchy or a set of variables.
 
- A common scenario for which this API is a great fit is when you want to visualize a ratio across a hierarchy or a set of variables. For example, on a restaurant bill, the ratio between the tip and the total bill is the tip percentage: tip_pct = tip/total_bill. 
+[insert image here]
 
 #### Uniform Text & Text Orientation
 By default, when displaying text with bar-like traces (bar, funnel and waterfall charts) or part-of-whole traces like pie and funnel-area charts as well as sunbursts and treemaps, Plotly.R will scale the text per bar or per sector so as to make each text label fit. This is helpful for seeing all text labels but can result in some odd or distracting variations in text sizes. With the new `layout.uniformtext` options, you can now [force the text to be the same size](https://plotly.com/r/text-and-annotations/#controlling-text-fontsize-with-uniformtext) across similar traces, so that all the bar labels or all the sunburst labels end up having the same font-size.
@@ -69,13 +72,21 @@ You can now explore [multichannel image data](https://plotly.com/r/displaying-im
 
 ![alt text](https://user-images.githubusercontent.com/1557650/78181132-df7dbb00-7431-11ea-8a57-9b0dbe1c4779.png "a chart with an image")
 
-#### Major Documentation Work
+#### Documentation Rebranding and New Search Functionality
 
 Beyond shipping new features, our Graphing Library team has been hard at work improving the Plotly.R documentation:
 
 - We created a separate GitHub repository at https://github.com/plotly/plotly.r-docs to version control Plotly's R and ggplot2 documentation examples, which are written in RMarkdown. Contributing to these docs is as simple as making a pull request in that repo!
 
 - Every R example figure now gets executed at build time, decreasing the chance that a user will come across a code example which doesn't work.
+
+- As you browse our [documentation](https://plotly.com/r) today, you might notice the fresh new colors and fonts, as well as the switch from the old plot.ly domain name to the new plotly.com domain name. We love our new branding and hope that you do too!
+
+![](https://aws1.discourse-cdn.com/business7/uploads/plot/original/2X/b/b5702b8ffd5bbb916063e0eb1b83de9e9d0a7555.png)
+
+- This refresh is not just skin-deep, though: we’ve also reworked our documentation search system. The search box is now available on every page, in the left-hand sidebar, and search queries are now run against both the tutorial examples and the Figure Reference page, to make sure you can quickly find what you’re looking for! We’ve also tuned the Figure Reference search result ordering, to ensure the most useful hits show up higher in the rankings.
+
+![](https://aws1.discourse-cdn.com/business7/uploads/plot/original/2X/e/e352c0580ee4de580be61173e7f785e415b895d6.png)
 
 ### Get it now!
 

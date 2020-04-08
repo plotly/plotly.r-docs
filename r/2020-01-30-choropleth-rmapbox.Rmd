@@ -56,7 +56,7 @@ Here we load unemployment data by county, also indexed by [FIPS code](https://en
 df = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv", header = T, colClasses = c("fips"="character"))
 head(df)
 ```
-### Choropleth map using carto base map (no token needed)
+### Mapbox Choropleth Map Using GeoJSON
 
 With `choroplethmapbox`, each row of the DataFrame is represented as a region of the choropleth.
 
