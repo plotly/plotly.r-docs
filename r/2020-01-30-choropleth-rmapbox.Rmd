@@ -91,7 +91,7 @@ fig <- fig %>% layout(
 fig
 ```
 
-### Mapbox Choropleth Map Using GeoJSON with featureidkey
+### Mapbox Choropleth Map Using GeoJSON with `featureidkey`
 ```{r}
 library(plotly)
 library(rjson)
