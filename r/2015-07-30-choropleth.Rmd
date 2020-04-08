@@ -22,7 +22,7 @@ A [Choropleth Map](https://en.wikipedia.org/wiki/Choropleth_map) is a map compos
 
 ### Base Map Configuration
 
-Plotly figures made with `plot_geo` have a `layout.geo` object which can be used to control the appearance of the base map onto which data is plotted.
+Plotly figures made with `plot_ly` have a `layout.geo` object which can be used to control the appearance of the base map onto which data is plotted.
 
 ### Introduction: main parameters for choropleth outline maps
 
@@ -30,7 +30,7 @@ Making choropleth maps requires two main types of input:
 
 1. Geometry information:
    1. This can either be a supplied GeoJSON file where each feature has either an `id` field or some identifying value in `properties`; or
-   2. one of the built-in geometries within `plot_geo`: US states and world countries (see below)
+   2. one of the built-in geometries within `plot_ly`: US states and world countries (see below)
 2. A list of values indexed by feature identifier.
 
 The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `z` argument of `plot_geo`.
@@ -142,6 +142,7 @@ fig
 
 
 ```
+### Using Built-in Country and State Geometries
 
 ### Customize choropleth chart
 ```{r}
@@ -175,6 +176,9 @@ fig
 ```
 
 **Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection.
+
+### United States Choropleth Map
+
 
 ### World Choropleth Map
 
