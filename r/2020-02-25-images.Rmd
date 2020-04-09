@@ -1,6 +1,6 @@
 ---
-name: Displaying Images
-description: How to display image data in with Plotly For R.
+name: Display Image Data 
+description: How to display image data in Python with R.
 display_as: scientific
 layout: base
 language: r
@@ -23,6 +23,7 @@ This tutorial shows how to display and explore image data. If you would like ins
 Note that `Image` trace only accepts multichannel images. For single images, use [`Heatmap`](https://plotly.com/r/heatmaps/). `Image` trace is different from the `layout.Image` class, which can be used for adding background images or logos to figures.
 ```{r}
 library(plotly)
+library(EBImage)
 
 img_rgb = list(list(c(255, 0, 0),c(0, 255, 0),c(0, 0, 255)),
                list(c(0,255, 0),c(0, 0, 255),c(255, 0, 0)))
@@ -71,5 +72,19 @@ fig <- fig %>% layout(margin=list(l=10, r=10, b=0, t=0),
 fig
 ```
 
+### Combine image charts and other traces
+
+```{r}
+library(plotly)
+library(EBImage)
+
+img = readImage('https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/240px-Crab_Nebula.jpg')
+
+fig <- plot_ly(type="image", z=img*250)
+fig <- fig %>% add_trace(
+  type='scatter', y=c(50, 60), x=c(40, 50), 
+  marker=list(color='pink', size=10))
+fig
+```
 ### Reference
 See [https://plotly.com/r/reference/#image](https://plotly.com/r/reference/#area) for more information and chart attribute options!
