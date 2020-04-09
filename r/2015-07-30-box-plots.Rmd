@@ -43,6 +43,36 @@ fig <- plot_ly(y = list(1,2,3,4,5), type = "box", quartilemethod="exclusive") # 
 fig
 ```
 
+### Modifying The Algorithm For Computing Quartiles
+
+For an explanation of how each algorithm works, see [Choosing The Algorithm For Computing Quartiles](https://plotly.com/r/box-plots/#choosing-the-algorithm-for-computing-quartiles)
+
+```{r}
+library(plotly)
+fig <- plot_ly(y = list(1,2,3,4,5), type = "box", quartilemethod="linear", name="Linear Quartile Mode")
+fig <- fig %>% add_trace(y = list(1,2,3,4,5), quartilemethod="inclusive", name="Inclusive Quartile Mode")
+fig <- fig %>% add_trace(y = list(1,2,3,4,5), quartilemethod="exclusive", name="Exclusive Quartile Mode")
+fig <- fig %>% layout(title = "Modifying The Algorithm For Computing Quartiles")
+
+fig
+```
+
+### Box Plot With Precomputed Quartiles
+
+You can specify precomputed quartile attributes rather than using a built-in quartile computation algorithm.
+
+This could be useful if you have already pre-computed those values or if you need to use a different algorithm than the ones provided.
+
+```{r}
+library(plotly)
+fig <- plot_ly(y = list(1,2,3,4,5,6,7,8,9), type = "box", q1=list(1, 2, 3), median=list(4, 5, 6),
+                  q3=list(7, 8, 9 ), lowerfence=list(-1, 0, 1),
+                  upperfence=list(5, 6, 7), mean=list(2.2, 2.8, 3.2 ),
+                  sd=list(0.2, 0.4, 0.6), notchspan=list(0.2, 0.4, 0.6))
+
+fig
+```
+
 ### Horizontal Boxplot
 
 ```{r}
@@ -112,36 +142,6 @@ fig <- fig %>% add_boxplot(y = y4, name = "Whiskers and Outliers", boxpoints = '
               marker = list(color = 'rgb(107,174,214)'),
               line = list(color = 'rgb(107,174,214)'))
 fig <- fig %>% layout(title = "Box Plot Styling Outliers")
-
-fig
-```
-
-### Modifying The Algorithm For Computing Quartiles
-
-For an explanation of how each algorithm works, see [Choosing The Algorithm For Computing Quartiles](https://plotly.com/r/box-plots/#choosing-the-algorithm-for-computing-quartiles)
-
-```{r}
-library(plotly)
-fig <- plot_ly(y = list(1,2,3,4,5), type = "box", quartilemethod="linear", name="Linear Quartile Mode")
-fig <- fig %>% add_trace(y = list(1,2,3,4,5), quartilemethod="inclusive", name="Inclusive Quartile Mode")
-fig <- fig %>% add_trace(y = list(1,2,3,4,5), quartilemethod="exclusive", name="Exclusive Quartile Mode")
-fig <- fig %>% layout(title = "Modifying The Algorithm For Computing Quartiles")
-
-fig
-```
-
-### Box Plot With Precomputed Quartiles
-
-You can specify precomputed quartile attributes rather than using a built-in quartile computation algorithm.
-
-This could be useful if you have already pre-computed those values or if you need to use a different algorithm than the ones provided.
-
-```{r}
-library(plotly)
-fig <- plot_ly(y = list(1,2,3,4,5,6,7,8,9), type = "box", q1=list(1, 2, 3), median=list(4, 5, 6),
-                  q3=list(7, 8, 9 ), lowerfence=list(-1, 0, 1),
-                  upperfence=list(5, 6, 7), mean=list(2.2, 2.8, 3.2 ),
-                  sd=list(0.2, 0.4, 0.6), notchspan=list(0.2, 0.4, 0.6))
 
 fig
 ```
