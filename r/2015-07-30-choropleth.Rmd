@@ -143,6 +143,46 @@ fig
 
 ```
 ### Using Built-in Country and State Geometries
+Plotly comes with two built-in geometries which do not require an external GeoJSON file:
+
+1. USA States
+2. Countries as defined in the Natural Earth dataset.
+
+**Note and disclaimer:** cultural (as opposed to physical) features are by definition subject to change, debate and dispute. Plotly includes data from Natural Earth "as-is" and defers to the [Natural Earth policy regarding disputed borders](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) which read:
+
+> Natural Earth Vector draws boundaries of countries according to defacto status. We show who actually controls the situation on the ground.
+
+To use the built-in countries geometry, provide `locations` as [three-letter ISO country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3).
+```{r}
+library(plotly)
+df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/2014_world_gdp_with_codes.csv")
+df
+
+fig <- plot_ly(df, type='choropleth', locations=df$CODE, z=df$GDP..BILLIONS., text=df$COUNTRY, colorscale="Blues")
+
+fig
+```
+
+To use the USA States geometry, set `locationmode='USA-states'` and provide `locations` as two-letter state abbreviations:
+```{r}
+library(plotly)
+df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/2011_us_ag_exports.csv")
+df$hover <- with(df, paste(state, '<br>', "Beef", beef, "Dairy", dairy, "<br>",
+                           "Fruits", total.fruits, "Veggies", total.veggies,
+                           "<br>", "Wheat", wheat, "Corn", corn))
+
+fig <- plot_geo(df, locationmode = 'USA-states')
+fig <- fig %>% add_trace(
+    z = ~total.exports, text = ~hover, locations = ~code,
+    color = ~total.exports, colors = 'Purples'
+  )
+fig <- fig %>% colorbar(title = "Millions USD")
+fig <- fig %>% layout(
+    title = '2011 US Agriculture Exports by State<br>(Hover for breakdown)'
+  )
+
+fig
+```
 
 ### Customize choropleth chart
 ```{r}
@@ -176,9 +216,6 @@ fig
 ```
 
 **Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection.
-
-### United States Choropleth Map
-
 
 ### World Choropleth Map
 
