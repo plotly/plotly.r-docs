@@ -83,8 +83,7 @@ fig <- fig %>% add_trace(
     zmin=0,
     zmax=12,
     marker=list(line=list(
-      width=0),
-      opacity=0.5
+      width=0)
     )
   )
 fig <- fig %>% colorbar(title = "Unemployment Rate (%)")
