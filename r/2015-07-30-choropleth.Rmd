@@ -33,7 +33,7 @@ Making choropleth maps requires two main types of input:
    2. one of the built-in geometries within `plot_ly`: US states and world countries (see below)
 2. A list of values indexed by feature identifier.
 
-The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `z` argument of `plot_geo`.
+The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `z` argument of choropleth traces.
 
 **Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
 
@@ -92,9 +92,6 @@ fig <- fig %>% layout(
 )
 
 fig <- fig %>% layout(
-    mapbox=list(
-    zoom =3,
-    center = list(lon = -95.7129, lat = 37.0902)),
     geo = g
   )
 
@@ -129,8 +126,6 @@ fig <- fig %>% add_trace(
     featureidkey="properties.district"
   )
 fig <- fig %>% layout(
-    mapbox=list(
-    zoom =3),
     geo = g
   )
 fig <- fig %>% colorbar(title = "Bergeron Votes")
@@ -183,40 +178,6 @@ fig <- fig %>% layout(
 fig
 ```
 
-In addition to continuous colors, we can discretely-color our choropleth maps by setting color to a non-numerical column, like the name of the winner of an election.
-
-Note In this example we set layout.geo.visible to False to hide the base map and frame, and we set layout.geo.fitbounds to 'locations' to automatically zoom the map to show just the area of interest. 
-```{r}
-library(plotly)
-library(rjson)
-
-url <- 'https://raw.githubusercontent.com/plotly/datasets/master/election.geojson'
-geojson <- rjson::fromJSON(file=url)
-url2<- "https://raw.githubusercontent.com/plotly/datasets/master/election.csv"
-df <- read.csv(url2)
-g <- list(
-  fitbounds = "locations",
-  visible = FALSE
-)
-fig <- plot_ly() 
-fig <- fig %>% add_trace(
-    type="choropleth",
-    geojson=geojson,
-    locations=df$district,
-    z=df$Bergeron,
-    color=df$winner,
-    featureidkey="properties.district"
-  )
-fig <- fig %>% layout(
-    mapbox=list(
-    zoom =3),
-    geo = g
-  )
-fig <- fig %>% layout(
-    title = "2013 Montreal Election"
-)
-fig
-```
 ### Customize choropleth chart
 ```{r}
 library(plotly)
