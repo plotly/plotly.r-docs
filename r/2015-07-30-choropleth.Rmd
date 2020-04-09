@@ -251,9 +251,6 @@ fig
 
 **Note** In this example we set `layout.geo.scope` to `usa` to automatically configure the map to display USA-centric data in an appropriate projection.
 
-### United States Choropleth Map
-
-
 ### World Choropleth Map
 
 ```{r}
