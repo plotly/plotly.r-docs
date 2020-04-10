@@ -16,7 +16,7 @@ We’ve finally implemented a long-requested feature: [first-class legend titles
 
 Check out the image below to see how much nicer this makes everything look.
 
-![alt text](https://user-images.githubusercontent.com/1557650/78181150-e3114200-7431-11ea-9075-83ee41c482a9.png "a chart with a legend title")
+![alt text](https://user-images.githubusercontent.com/1557650/78919491-f8a0f000-7a5f-11ea-8861-836ce6dc3b35.png "a chart with a legend title")
 
 #### Improvements to Choropleth Maps 
 
@@ -36,13 +36,15 @@ Some other new mapping features include:
 
 What does this all mean? It means you can now make any of this map with a single chained R statement!
 
-![alt text](https://user-images.githubusercontent.com/1557650/78181148-e278ab80-7431-11ea-9eb8-4411730f9cbf.png "a chart with a map")
+![alt text](https://user-images.githubusercontent.com/1557650/78919489-f8085980-7a5f-11ea-8413-192fd493671d.png "a chart with a map")
+
+![alt text](https://user-images.githubusercontent.com/1557650/78919490-f8085980-7a5f-11ea-890c-54cf35fff504.png "a chart with a map")
 
 #### Treemap traces
 
 Plotly For R 4.9.2 introduces a new [treemap](https://plotly.com/r/treemaps/) trace type, which is well suited for visualizing a ratio across a hierarchy or a set of variables.
 
-[insert image here]
+![alt text](https://user-images.githubusercontent.com/1557650/78919487-f76fc300-7a5f-11ea-9815-3ba208488ed9.png "a chart with a treemap")
 
 #### Uniform Text & Text Orientation
 By default, when displaying text with bar-like traces (bar, funnel and waterfall charts) or part-of-whole traces like pie and funnel-area charts as well as sunbursts and treemaps, Plotly.R will scale the text per bar or per sector so as to make each text label fit. This is helpful for seeing all text labels but can result in some odd or distracting variations in text sizes. With the new `layout.uniformtext` options, you can now [force the text to be the same size](https://plotly.com/r/text-and-annotations/#controlling-text-fontsize-with-uniformtext) across similar traces, so that all the bar labels or all the sunburst labels end up having the same font-size.
@@ -51,7 +53,7 @@ In terms of text orientation, by default Plotly.R will try various text orientat
 
 Together these two attributes can be used to create very attractive, regular-looking bar, waterfall, funnel, pie, sunburst and treemap charts!
 
-[alt text](https://user-images.githubusercontent.com/1557650/78181140-e1e01500-7431-11ea-857c-a871e413f151.png "a chart with a map")
+![alt text](https://user-images.githubusercontent.com/1557650/78919488-f8085980-7a5f-11ea-8991-e2e216ca727f.png "a sunburst chart")
 
 #### New Box Plot Options
 
@@ -61,7 +63,7 @@ There are many ways to calculate the quartiles of a dataset, and now you can cho
 
 Here is a visualization of the three methods on the same dataset of integers from 1 to 5:
 
-[alt text](https://user-images.githubusercontent.com/1557650/78181139-e1477e80-7431-11ea-9da5-b72c4d3999b4.png "a boxplot chart")
+![alt text](https://user-images.githubusercontent.com/1557650/78181139-e1477e80-7431-11ea-9da5-b72c4d3999b4.png "a boxplot chart")
 
 In addition to these enhancements, it is now possible to [explicitly specify all the parameters of a box plot](https://plotly.com/r/box-plots/#box-plot-with-precomputed- quartiles), for when you want to do the quartile and other calculations externally to the visualization.
 
@@ -82,11 +84,11 @@ Beyond shipping new features, our Graphing Library team has been hard at work im
 
 - As you browse our [documentation](https://plotly.com/r) today, you might notice the fresh new colors and fonts, as well as the switch from the old plot.ly domain name to the new plotly.com domain name. We love our new branding and hope that you do too!
 
-![](https://aws1.discourse-cdn.com/business7/uploads/plot/original/2X/b/b5702b8ffd5bbb916063e0eb1b83de9e9d0a7555.png)
+![alt text](https://user-images.githubusercontent.com/1557650/78953119-c31ef580-7aa5-11ea-9549-b3ee2d7edafb.png "the documentation homepage")
 
 - This refresh is not just skin-deep, though: we’ve also reworked our documentation search system. The search box is now available on every page, in the left-hand sidebar, and search queries are now run against both the tutorial examples and the Figure Reference page, to make sure you can quickly find what you’re looking for! We’ve also tuned the Figure Reference search result ordering, to ensure the most useful hits show up higher in the rankings.
 
-![](https://aws1.discourse-cdn.com/business7/uploads/plot/original/2X/e/e352c0580ee4de580be61173e7f785e415b895d6.png)
+![alt text](https://user-images.githubusercontent.com/1557650/78953165-f82b4800-7aa5-11ea-9d45-ff55e0ded6c3.png "the search results page")
 
 ### Get it now!
 
