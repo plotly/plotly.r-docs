@@ -1,6 +1,7 @@
 ---
 name: Range Sliders and Selectors
 permalink: r/range-slider/
+redirect_from: r/range-sliders-selectors/
 description: How to use range-sliders and range-selectors in R
 layout: base
 thumbnail: thumbnail/sliders.jpg

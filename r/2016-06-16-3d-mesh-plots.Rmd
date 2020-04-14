@@ -10,6 +10,7 @@ output:
     keep_md: true
 page_type: example_index
 permalink: r/3d-mesh/
+redirect_from: r/3d-mesh-plots/
 thumbnail: thumbnail/3d-mesh.jpg
 ---
 

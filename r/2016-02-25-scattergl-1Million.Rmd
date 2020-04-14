@@ -1,11 +1,12 @@
 ---
 name: WebGL in Plotly and R
 permalink: r/webgl-vs-svg-million-points/
+redirect_from: r/compare-webgl-svg/
 description: How to create plots using WebGL and Plotly
 layout: base
 language: r
 page_type: example_index
-output: 
+output:
   html_document:
     keep_md: true
 ---
@@ -13,7 +14,7 @@ output:
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
-# WebGL with 1 Million points 
+# WebGL with 1 Million points
 
 ```{r}
 library(plotly)
@@ -30,4 +31,4 @@ fig
 
 # Reference
 
-See [scattergl](https://plotly.com/r/reference/#scattergl) for more information. 
+See [scattergl](https://plotly.com/r/reference/#scattergl) for more information.

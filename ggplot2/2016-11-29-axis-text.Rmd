@@ -1,6 +1,7 @@
 ---
 name: Axis Text
 permalink: ggplot2/axis-text/
+redirect_from: ggplot2/axis_text/
 description: How to modify axis titles in R and ggplot2.
 layout: base
 thumbnail: thumbnail/theme_image.png
@@ -23,11 +24,11 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(carat, price, color = color, alpha = cut)) + 
-  geom_point() + 
-  theme(axis.text.x = element_text(colour = "#ff6666", size = 20), 
+p <- ggplot(df, aes(carat, price, color = color, alpha = cut)) +
+  geom_point() +
+  theme(axis.text.x = element_text(colour = "#ff6666", size = 20),
         axis.text.y = element_text(colour = "#668cff", size = 20))
-  
+
 fig <- ggplotly(p)
 
 fig
@@ -41,8 +42,8 @@ set.seed(123)
 
 df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
 
-p <- ggplot(df, aes(carat, price, color = cut)) + 
-  geom_point() + 
+p <- ggplot(df, aes(carat, price, color = cut)) +
+  geom_point() +
   theme(axis.text = element_blank())
 
 fig <- ggplotly(p)
@@ -60,9 +61,9 @@ lab <- paste("Vertical Label", c(1, 2, 3, 4, 5))
 ds <- data.frame(x = sample(lab, size = 1000, replace = T),
                  y = sample(LETTERS[1:5], size = 1000, replace = T))
 
-p <- ggplot(ds, aes(x = x, fill = y)) + 
-  geom_bar() + 
-  theme(axis.text.x = element_text(angle = 90)) + 
+p <- ggplot(ds, aes(x = x, fill = y)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90)) +
   ggtitle("Vertical Axis Labels")
 
 fig <- ggplotly(p)
@@ -80,9 +81,9 @@ lab <- paste("Angle Label", c(1, 2, 3, 4, 5))
 ds <- data.frame(x = sample(lab, size = 1000, replace = T),
                  y = sample(LETTERS[1:5], size = 1000, replace = T))
 
-p <- ggplot(ds, aes(x = x, fill = y)) + 
-  geom_bar() + 
-  theme(axis.text.x = element_text(angle = 45)) + 
+p <- ggplot(ds, aes(x = x, fill = y)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 45)) +
   ggtitle("Angle Axis Labels")
 
 fig <- ggplotly(p)

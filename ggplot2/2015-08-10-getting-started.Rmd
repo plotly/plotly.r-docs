@@ -3,7 +3,10 @@ name: Getting Started with Plotly
 permalink: ggplot2/getting-started/
 description: Get started with Plotly's R graphing library with ggplot2 to make interactive, publication-quality graphs online.
 page_type: example_index
-redirect_from: ggplot2/user-guide/
+redirect_from:
+  - ggplot2/user-guide/
+  - ggplot2/ggdendro-dendrograms/
+  - ggplot2/theme/
 layout: base
 language: ggplot2
 output:
@@ -14,7 +17,7 @@ output:
 
 Plotly is an R package for creating interactive web-based graphs via [plotly](https://plotly.com/)'s JavaScript graphing library, `plotly.js`.
 
-The [plotly R package](https://github.com/ropensci/plotly) serializes ggplot2 figures into Plotly's <a target="_blank" href="http://plot.ly/r/reference/">universal graph JSON</a>. `plotly::ggplotly` will crawl the ggplot2 figure, extract and translate all of the attributes of the ggplot2 figure into JSON (the colors, the axes, the chart type, etc), and draw the graph with plotly.js. 
+The [plotly R package](https://github.com/ropensci/plotly) serializes ggplot2 figures into Plotly's <a target="_blank" href="http://plot.ly/r/reference/">universal graph JSON</a>. `plotly::ggplotly` will crawl the ggplot2 figure, extract and translate all of the attributes of the ggplot2 figure into JSON (the colors, the axes, the chart type, etc), and draw the graph with plotly.js.
 
 Furthermore, you have the option of manipulating the Plotly object with the `style` function.
 
@@ -208,7 +211,7 @@ fig$x$data[[2]]$mode <- 'lines'
 fig$x$layout$title <- 'Updated title'
 ```
 
-Now, display this figure: 
+Now, display this figure:
 
 
 ```{r}

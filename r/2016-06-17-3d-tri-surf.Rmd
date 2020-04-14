@@ -9,6 +9,7 @@ output:
   html_document:
     keep_md: true
 permalink: r/trisurf/
+redirect_from: r/3d-trisurf/
 thumbnail: thumbnail/trisurf.jpg
 ---
 

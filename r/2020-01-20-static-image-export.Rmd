@@ -10,6 +10,7 @@ output:
     keep_md: true
 page_type: u-guide
 permalink: r/static-image-export/
+redirect_from: ggplot2/embedding-plotly-graphs-in-HTML/
 thumbnail: thumbnail/sizing.png
 ---
 
@@ -18,11 +19,11 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 ### Supported File Formats
 
-With the `plotly` R package, you can export graphs you create as static images in the `.png`, `.jpg`/`.jpeg`, `.eps`, `.svg`, and/or `.pdf` formats using[Orca](https://github.com/plotly/orca), an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plotly.com/graphing-libraries).  
+With the `plotly` R package, you can export graphs you create as static images in the `.png`, `.jpg`/`.jpeg`, `.eps`, `.svg`, and/or `.pdf` formats using[Orca](https://github.com/plotly/orca), an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plotly.com/graphing-libraries).
 
 **Note:** It is important to be aware that R graphs containing WebGL-based traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, and/or `parcoords`) will include encapsulated rasters instead of vectors for some parts of the image if they are exported as static images in a vector format like `.eps`, `.svg`, and/or `.pdf`.
 
-**Note** Orca runs entirely locally and does not require internet access. No network requests are made to the Chart Studio or any other web service when you invoke the `orca()` function to export static images in your R session. 
+**Note** Orca runs entirely locally and does not require internet access. No network requests are made to the Chart Studio or any other web service when you invoke the `orca()` function to export static images in your R session.
 
 ### Install Orca
 
@@ -30,11 +31,11 @@ Please follow the installation instructions which can be found on [Orca's GitHub
 
 ### Export R Graphs As Static Images Using `orca()`
 
-To use Orca to export static images of the graphs you create with the `plotly` R package, you can use the built-in `orca()` function in versions `4.7.900` and above. 
+To use Orca to export static images of the graphs you create with the `plotly` R package, you can use the built-in `orca()` function in versions `4.7.900` and above.
 
-You need to have the [`processx`](https://github.com/r-lib/processx) R package installed as well. 
+You need to have the [`processx`](https://github.com/r-lib/processx) R package installed as well.
 
-The `orca()` function accepts two parameters. The first is the plot to be exported and second is the filename. 
+The `orca()` function accepts two parameters. The first is the plot to be exported and second is the filename.
 
 For example, running the following commands in an R session would export the graph stored in `fig` in a file called `surface-plot.svg`:
 
