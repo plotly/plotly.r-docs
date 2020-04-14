@@ -3,7 +3,7 @@ description: How to make a Mapbox Choropleth Map of US Counties in R with Plotly
 display_as: maps
 language: r
 layout: base
-name: Choropleth mapbox
+name: Mapbox Choropleth Maps
 order: 8
 output:
   html_document:
@@ -33,7 +33,7 @@ Making choropleth Mapbox maps requires two main types of input:
 1. GeoJSON-formatted geometry information where each feature has either an `id` field or some identifying value in `properties`.
 2. A list of values indexed by feature identifier.
 
-The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `color` argument of `px.choropleth_mapbox` (`z` if using `graph_objects`), in the same order as the IDs are passed into the `location` argument.
+The GeoJSON data is passed to the `geojson` argument, and the data is passed into the `z` argument of `plot_geo`.
 
 **Note** the `geojson` attribute can also be the URL to a GeoJSON file, which can speed up map rendering in certain cases.
 
@@ -56,7 +56,7 @@ Here we load unemployment data by county, also indexed by [FIPS code](https://en
 df = read.csv("https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv", header = T, colClasses = c("fips"="character"))
 head(df)
 ```
-### Choropleth map using carto base map (no token needed)
+### Mapbox Choropleth Map Using GeoJSON
 
 With `choroplethmapbox`, each row of the DataFrame is represented as a region of the choropleth.
 
@@ -90,6 +90,42 @@ fig <- fig %>% layout(
   )
 fig
 ```
+
+### Mapbox Choropleth Map Using GeoJSON with `featureidkey`
+If the GeoJSON you are using either does not have an `id` field or you wish you use one of the keys in the `properties` field, you may use the `featureidkey` parameter to specify where to match the values of locations.
+
+In the following GeoJSON object/data-file pairing, the values of `properties.district` match the values of the `district` column:
+```{r}
+library(plotly)
+library(rjson)
+
+url <- 'https://raw.githubusercontent.com/plotly/datasets/master/election.geojson'
+geojson <- rjson::fromJSON(file=url)
+url2<- "https://raw.githubusercontent.com/plotly/datasets/master/election.csv"
+df <- read.csv(url2)
+g <- list(
+  fitbounds = "locations",
+  visible = FALSE
+)
+fig <- plot_ly() 
+fig <- fig %>% add_trace(
+    type="choroplethmapbox",
+    geojson=geojson,
+    locations=df$district,
+    z=df$Bergeron,
+    colorscale="Viridis",
+    featureidkey="properties.district"
+  )
+fig <- fig %>% colorbar(title = "Bergeron Votes")
+fig <- fig %>% layout(
+    mapbox=list(
+      style="carto-positron",
+      zoom =9,
+      center=list(lon=-73.7073, lat=45.5517))
+  )
+fig
+```
+
 #### Mapbox Light base map: free token needed
 
 ```{r}
