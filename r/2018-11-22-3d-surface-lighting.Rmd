@@ -3,7 +3,7 @@ description: How to add lighting effects in 3D R Plots.
 display_as: file_settings
 language: r
 layout: base
-name: 3D Surface Lighting in R
+name: 3D Surface Lighting
 order: 9
 output:
   html_document:
