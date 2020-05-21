@@ -1,0 +1,142 @@
+---
+name: Configuration
+permalink: r/treemaps/
+description: How to set the configuration options of figures using the Plotly R graphing library. 
+layout: base
+thumbnail: thumbnail/modebar-icons.png
+language: r
+display_as: file_settings
+order: 22
+output:
+  html_document:
+    keep_md: true
+---
+
+### Configuration Options
+
+Figures created with Plotly For R accept a `config` parameter that you can use to set the configuration options for your figure. Simply pass a list to this parameter which contains the options you want to set.
+
+If you don't set an option's value, it will be automatically be set to the default value for that option.
+
+For the complete list of configuration options and their defaults see: https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js
+
+#### Enable Scroll Zoom
+
+This option allows users to zoom in and out of figures using the scroll wheel on their mouse and/or a two-finger scroll.
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(scrollZoom=TRUE)
+
+
+fig
+```
+
+#### Hiding The Plotly Logo in the Modebar
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(displaylogo=FALSE)
+
+fig
+```
+
+#### Turn Off Responsiveness
+
+By default, figures you create with the` plotly.r` package are responsive. Responsive figures automatically change their height and width when the size of the window they are displayed in changes. This is true for figures which are displayed in web browsers on desktops and mobile, Jupyter Notebooks, and other rendering environments.
+
+Try resizing your browser window to see this behavior in effect on this page.
+
+If you would like to disable this default behavior and force your figures to always have the same height and width regardless of the window size, set the value of the responsive key to `FALSE` in your figure's configuration object.
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(responsive=FALSE)
+
+fig
+```
+
+#### Making A Static Chart
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(staticPlot=TRUE)
+
+fig
+```
+
+#### Customize Download Plot Options
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(toImageButtonOptions = list(
+      format = "svg", # one of png, svg, jpeg, webp
+      width = 200,
+      height = 100,
+      scale = 1
+    ))
+
+fig
+```
+
+#### Specifying Multiple Configuration Options Simultaneously
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(editable=TRUE, scrollZoom=TRUE)
+
+fig
+
+```
+
+#### Removing Modebar Buttons
+
+To delete buttons from the modebar, pass an array of strings containing the names of the buttons you want to remove to the `modeBarButtonsToRemove` attribute in the figure's configuration. Note that different chart types have different default modebars. The following is a list of all the modebar buttons and the chart types they are associated with:
+
+-'2D': zoom2d, pan2d, select2d, lasso2d, zoomIn2d, zoomOut2d, autoScale2d, resetScale2d 
+-'3D': zoom3d, pan3d, rbitRotation, tableRotation, handleDrag3d, resetCameraDefault3d, resetCameraLastSave3d, hoverClosest3d 
+-'Cartesian': hoverClosestCartesian, hoverCompareCartesian 
+-'Geo': zoomInGeo, zoomOutGeo, resetGeo, hoverClosestGeo 
+-'Other': hoverClosestGl2d, hoverClosestPie, toggleHover, resetViews, toImage: sendDataToCloud, toggleSpikelines, resetViewMapbox
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(modeBarButtonsToRemove = c("zoomIn2d", "zoomOut2d"))
+
+fig
+
+```
+
+#### Remove the Modebar
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Petal.Length)
+
+fig <- fig %>% config(displayModeBar = FALSE)
+
+fig
+
+```
