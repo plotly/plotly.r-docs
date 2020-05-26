@@ -25,7 +25,7 @@ jobs:
           name: install application-level dependencies
           command: |
             sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev libfftw3-dev
-            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); devtools::install_github("ropensci/plotly"); install.packages("BiocManager"); BiocManager::install("EBImage"); devtools::install_deps(dependencies = TRUE) '
+            sudo R -e 'install.packages(c("plotly", "curl", "devtools", "mvtnorm")); devtools::install_github("hypertidy/anglr"); devtools::install_github("johannesbjork/LaCroixColoR"); install.packages("BiocManager"); BiocManager::install("EBImage"); devtools::install_deps(dependencies = TRUE) '
       - save_cache:
           key: cache4
           paths:
