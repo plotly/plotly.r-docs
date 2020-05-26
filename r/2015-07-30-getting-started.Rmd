@@ -25,7 +25,7 @@ As of version 2.0 (November 17, 2015), graphs created with the `plotly` R packag
 
 ### Download from CRAN
 
-Use the `install.package()` function to install the [`plotly R package`](https://cran.r-project.org/web/packages/plotly/index.html) from [CRAN](https://cran.r-project.org/!
+Use the `install.package()` function to install the [`plotly R package`](https://cran.r-project.org/web/packages/plotly/index.html) from [CRAN](https://cran.r-project.org/). This version may not be the absolute latest version, so we recommend downloading from Github using the instructions below if you can.
 
 ```r
 install.packages("plotly")
