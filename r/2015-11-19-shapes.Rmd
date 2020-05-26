@@ -102,7 +102,7 @@ You can create layout shapes programatically, but you can also draw shapes manua
 
 If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
 
-This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](https://plotly.com/r/displaying-images/). 
+This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](https://plotly.com/r/displaying-images/#drawing-shapes-on-images). 
 
 Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can
 

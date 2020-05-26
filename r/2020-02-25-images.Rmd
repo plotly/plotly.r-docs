@@ -72,5 +72,42 @@ fig <- fig %>% layout(margin=list(l=10, r=10, b=0, t=0),
 fig
 ```
 
+### Drawing Shapes on Images
+
+You can create layout shapes programatically, but you can also draw shapes manually by setting the `dragmode` to one of the shape-drawing modes: `drawline`,`drawopenpath`, `drawclosedpath`, `drawcircle`, or `drawrect`. If you need to switch between different shape-drawing or other dragmodes (panning, selecting, etc.), modebar buttons can be added in the `config` of your figure to select the dragmode. 
+
+If you switch to a different dragmode such as pan or zoom, you will need to select the drawing tool in the modebar to go back to shape drawing.
+
+This shape-drawing feature is particularly interesting for annotating graphs, in particular [image traces](https://plotly.com/r/displaying-images/). 
+
+Once you have drawn shapes, you can select and modify an existing shape by clicking on its boundary (note the arrow pointer). Its fillcolor turns to pink to highlight the activated shape and then you can
+
+- drag and resize it for lines, rectangles and circles/ellipses
+- drag and move individual vertices for closed paths
+- move individual vertices for open paths.
+
+An activated shape is deleted by cliking on the `eraseshape` button.
+
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash For R application](https://dash.plotly.com/interactive-graphing).
+
+```{r}
+library(plotly)
+
+library(plotly)
+library(EBImage)
+
+img = readImage('https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/240px-Crab_Nebula.jpg')
+
+fig <- plot_ly(type="image", z=img*255) 
+
+fig <- layout(fig, dragmode="drawrect", xaxis = list(title = 'Click and drag inside the figure to draw a rectangle or select another shape in the modebar'))
+
+fig <- fig %>%
+  config(modeBarButtonsToAdd = list("drawine", "drawopenpath", "drawclosedpath", "drawcircle", "drawrect", "eraseshape" ) )
+
+fig
+
+```
+
 ### Reference
 See [https://plotly.com/r/reference/#image](https://plotly.com/r/reference/#area) for more information and chart attribute options!
