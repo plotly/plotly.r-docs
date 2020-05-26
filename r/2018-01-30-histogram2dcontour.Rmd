@@ -38,7 +38,7 @@ library(plotly)
 
 cnt <- with(diamonds, table(cut, clarity))
 
-fig <- plot_ly(diamonds, x = ~cut, y = ~clarity, z = ~cnt) 
+fig <- plot_ly(diamonds, x = ~cut, y = ~clarity) 
 fig <- fig %>%
   add_trace(
     type='histogram2dcontour',
