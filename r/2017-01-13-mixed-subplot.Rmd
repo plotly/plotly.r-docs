@@ -6,7 +6,7 @@ layout: base
 thumbnail: thumbnail/mixed_subplot.JPG
 language: r
 display_as: multiple_axes
-order: 7
+order: 6
 output:
   html_document:
     keep_md: true
