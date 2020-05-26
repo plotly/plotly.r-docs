@@ -43,14 +43,3 @@ fig <- fig %>% add_histogram2d(colorscale = "Blues")
 
 fig
 ```
-
-#### Z Matrix
-If you want more control for the binning algorithm, you can supply a 2D table or matrix to `z`. In this case, the R package will impose it's colorscale default (and the `colors` argument can be used to control the colorscale from R):
-
-```{r}
-cnt <- with(diamonds, table(cut, clarity))
-fig <- plot_ly(diamonds, x = ~cut, y = ~clarity, z = ~cnt)
-fig <- fig %>% add_histogram2d()
-
-fig
-```
