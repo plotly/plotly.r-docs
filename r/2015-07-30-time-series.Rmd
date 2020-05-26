@@ -29,6 +29,32 @@ fig <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "days from today
 fig
 ```
 
+### Hiding Weekends and Holidays
+
+```{r}
+library(plotly)
+
+df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+
+fig <- plot_ly(
+  type = "scatter",
+  x = df$Date, 
+  y = df$AAPL.High,
+  name = 'AAPL High',
+  mode = "lines",
+  x_axis= c('2015-12-01', '2016-01-15'),
+  line = list(
+        color = '#17BECF'
+  )) 
+
+fig <- fig %>%
+  layout(
+    title = "Time Series with Custom Date-Time Format",
+    xaxis = list(rangebreaks = list(list(bounds=c('sat', 'mon')), list(values=c('2015-12-25', '2016-01-15'))))
+    )
+
+fig
+```
 ### POSIXlt date time class with timezone
 
 ```{r}
