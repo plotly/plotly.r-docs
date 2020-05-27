@@ -5,7 +5,7 @@ display_as: maps
 language: r
 layout: base
 name: Mapbox Layers
-order: 6
+order: 5
 output:
   html_document:
     keep_md: true

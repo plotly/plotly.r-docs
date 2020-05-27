@@ -4,7 +4,7 @@ display_as: 3d_charts
 language: r
 layout: base
 name: 3D Isosurface Plots
-order: 8
+order: 7
 output:
   html_document:
     keep_md: true

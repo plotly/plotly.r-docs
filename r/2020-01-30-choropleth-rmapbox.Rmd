@@ -4,14 +4,14 @@ display_as: maps
 language: r
 layout: base
 name: Mapbox Choropleth Maps
-order: 8
+order: 7
 output:
   html_document:
     keep_md: true
 page_type: u-guide
 permalink: r/mapbox-county-choropleth/
-thumbnail: thumbnail/mapbox-choropleth.png
 redirect_from: r/county-level-choropleth/
+thumbnail: thumbnail/mapbox-choropleth.png
 ---
 
 ```{r, echo = FALSE, message=FALSE}

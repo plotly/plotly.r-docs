@@ -6,10 +6,10 @@ language: r
 layout: base
 name: Scatter Plots on Maps
 order: 2
-page_type: example_index
 output:
   html_document:
     keep_md: true
+page_type: example_index
 permalink: r/scatter-plots-on-maps/
 thumbnail: thumbnail/scatter-plot-on-maps.jpg
 ---

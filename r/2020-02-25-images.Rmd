@@ -1,10 +1,10 @@
 ---
-name: Display Image Data 
 description: How to display image data in Python with R.
 display_as: scientific
-layout: base
 language: r
-order: 15
+layout: base
+name: Display Image Data
+order: 14
 output:
   html_document:
     keep_md: true

@@ -1,16 +1,17 @@
 ---
-name: Bar Charts
-permalink: r/bar-charts/
-description: How to make a bar chart in R. Examples of grouped, stacked, overlaid, and colored bar charts.
-layout: base
-thumbnail: thumbnail/bar.jpg
-language: r
-page_type: example_index
+description: How to make a bar chart in R. Examples of grouped, stacked, overlaid,
+  and colored bar charts.
 display_as: basic
+language: r
+layout: base
+name: Bar Charts
 order: 3
 output:
   html_document:
     keep_md: true
+page_type: example_index
+permalink: r/bar-charts/
+thumbnail: thumbnail/bar.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -343,4 +344,3 @@ See examples of horizontal bar charts [here](https://plotly.com/r/horizontal-bar
 #Reference
 
 See [https://plotly.com/r/reference/#bar](https://plotly.com/r/reference/#bar) for more information and chart attribute options!
-

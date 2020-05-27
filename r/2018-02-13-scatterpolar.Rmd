@@ -4,7 +4,7 @@ display_as: scientific
 language: r
 layout: base
 name: Polar Charts
-order: 11
+order: 10
 output:
   html_document:
     keep_md: true

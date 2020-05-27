@@ -4,7 +4,7 @@ display_as: scientific
 language: r
 layout: base
 name: Carpet Scatter Plot
-order: 9
+order: 8
 output:
   html_document:
     keep_md: true
