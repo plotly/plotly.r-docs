@@ -57,27 +57,6 @@ fig <- fig %>% layout(xaxis = list(title = 'Displacement (cu.in.)'),
 fig
 ```
 
-### Plotting Forecast Objects
-
-```{r}
-library(plotly)
-library(forecast)
-
-fit <- ets(USAccDeaths)
-fore <- forecast(fit, h = 48, level = c(80, 95))
-
-fig <- plot_ly()
-fig <- fig %>% add_lines(x = time(USAccDeaths), y = USAccDeaths,
-            color = I("black"), name = "observed")
-fig <- fig %>% add_ribbons(x = time(fore$mean), ymin = fore$lower[, 2], ymax = fore$upper[, 2],
-              color = I("gray95"), name = "95% confidence")
-fig <- fig %>% add_ribbons(x = time(fore$mean), ymin = fore$lower[, 1], ymax = fore$upper[, 1],
-              color = I("gray80"), name = "80% confidence")
-fig <- fig %>% add_lines(x = time(fore$mean), y = fore$mean, color = I("blue"), name = "prediction")
-
-fig
-```
-
 ### Loess Smoother with Uncertainty Bounds
 
 ```{r}
