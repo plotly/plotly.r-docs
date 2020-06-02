@@ -49,7 +49,7 @@ jobs:
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/front-matter-ci.py > front-matter-ci.py
             python front-matter-ci.py build/r
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py
-            python check-or-enforce-order.py build/r
+            python check-or-enforce-order.py build/r enforce
       - run:
           name: deploy to plotly/r.docs:built
           command: |
