@@ -4,7 +4,7 @@ display_as: 3d_charts
 language: r
 layout: base
 name: 3D Tri-Surf Plots
-order: 9
+order: 8
 output:
   html_document:
     keep_md: true

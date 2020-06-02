@@ -4,7 +4,7 @@ display_as: maps
 language: r
 layout: base
 name: Bubble Maps
-order: 12
+order: 11
 output:
   html_document:
     keep_md: true

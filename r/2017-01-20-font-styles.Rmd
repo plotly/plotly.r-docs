@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Font Styles
-order: 11
+order: 10
 output:
   html_document:
     keep_md: true

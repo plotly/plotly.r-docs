@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Setting Graph Size
-order: 20
+order: 19
 output:
   html_document:
     keep_md: true

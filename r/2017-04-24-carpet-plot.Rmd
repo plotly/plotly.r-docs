@@ -4,7 +4,7 @@ display_as: scientific
 language: r
 layout: base
 name: Carpet Plot
-order: 8
+order: 7
 output:
   html_document:
     keep_md: true

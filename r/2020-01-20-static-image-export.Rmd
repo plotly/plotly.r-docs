@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Exporting Graphs as Static Images
-order: 21
+order: 20
 output:
   html_document:
     keep_md: true

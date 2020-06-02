@@ -5,7 +5,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Shapes
-order: 13
+order: 12
 output:
   html_document:
     keep_md: true

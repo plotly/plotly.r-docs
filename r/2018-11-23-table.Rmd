@@ -1,15 +1,15 @@
 ---
-name: Tables
-permalink: r/table/
 description: How to make tables in R with Plotly.
-layout: base
-thumbnail: thumbnail/table.gif
-language: r
 display_as: basic
-order: 13
+language: r
+layout: base
+name: Tables
+order: 12
 output:
   html_document:
     keep_md: true
+permalink: r/table/
+thumbnail: thumbnail/table.gif
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -135,4 +135,3 @@ fig
 #Reference
 
 See [https://plotly.com/r/reference/#table](https://plotly.com/r/reference/#table) for more information and chart attribute options!
-

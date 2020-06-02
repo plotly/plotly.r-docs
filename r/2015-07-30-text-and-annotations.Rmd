@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Text and Annotations
-order: 10
+order: 9
 output:
   html_document:
     keep_md: true

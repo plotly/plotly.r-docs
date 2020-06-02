@@ -4,7 +4,7 @@ display_as: basic
 language: r
 layout: base
 name: Sankey Diagram
-order: 16
+order: 15
 output:
   html_document:
     keep_md: true

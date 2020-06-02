@@ -5,10 +5,10 @@ language: r
 layout: base
 name: Mapbox Density
 order: 3
-page_type: example_index
 output:
   html_document:
     keep_md: true
+page_type: example_index
 permalink: r/mapbox-density-heatmaps/
 thumbnail: thumbnail/mapbox-density.png
 ---

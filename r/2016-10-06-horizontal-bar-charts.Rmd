@@ -1,15 +1,16 @@
 ---
-name: Horizontal Bar Charts
-permalink: r/horizontal-bar-charts/
-description: How to make a horizontal bar chart in R. Examples of grouped, stacked, overlaid, and colored horizontal bar charts.
-layout: base
-thumbnail: thumbnail/horizontal-bar.jpg
-language: r
+description: How to make a horizontal bar chart in R. Examples of grouped, stacked,
+  overlaid, and colored horizontal bar charts.
 display_as: basic
-order: 9
+language: r
+layout: base
+name: Horizontal Bar Charts
+order: 8
 output:
   html_document:
     keep_md: true
+permalink: r/horizontal-bar-charts/
+thumbnail: thumbnail/horizontal-bar.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
@@ -199,4 +200,3 @@ fig
 #Reference
 
 See [https://plotly.com/r/reference/#bar](https://plotly.com/r/reference/#bar) for more information and chart attribute options!
-
