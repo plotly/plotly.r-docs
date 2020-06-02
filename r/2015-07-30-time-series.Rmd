@@ -29,6 +29,55 @@ fig <- plot_ly(x = ~x, y = ~y, mode = 'lines', text = paste(tm, "days from today
 fig
 ```
 
+### Hiding Weekends and Holidays
+The `rangebreaks` attribute available on x- and y-axes of type date can be used to hide certain time-periods. In the example below, we show two plots: one in default mode to show gaps in the data, and one where we hide weekends and holidays to show an uninterrupted trading history. Note the smaller gaps between the grid lines for December 21 and January 4, where holidays were removed. Check out the reference for more options: https://plotly.com/r/reference/#layout-xaxis-rangebreaks
+
+
+```{r}
+library(plotly)
+df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+fig <- plot_ly(
+  type = "scatter",
+  x = as.Date(df$Date, format= "%Y-%m-%d"), 
+  y = df$AAPL.High,
+  name = 'AAPL High',
+  mode = "markers",
+)
+fig <- fig %>%
+  layout(
+    title = "Time Series with Custom Date-Time Format",
+    xaxis = list(
+      type = "date",
+      range=c('2015-12-01', '2016-01-15')
+    )
+  )
+fig
+```
+
+```{r}
+library(plotly)
+df <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+fig <- plot_ly(
+  type = "scatter",
+  x = as.Date(df$Date, format= "%Y-%m-%d"), 
+  y = df$AAPL.High,
+  name = 'AAPL High',
+  mode = "markers",
+)
+fig <- fig %>%
+  layout(
+    title = "Time Series with Custom Date-Time Format",
+    xaxis = list(
+      type = "date",
+      range=c('2015-12-01', '2016-01-15'),
+      rangebreaks = list( 
+        list(bounds=c("sat", "mon")),
+        list(values=c("2015-12-25", "2016-01-01"))
+      )
+    )
+  )
+fig
+```
 ### POSIXlt date time class with timezone
 
 ```{r}
