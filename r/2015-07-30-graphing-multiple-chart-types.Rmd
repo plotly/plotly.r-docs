@@ -58,32 +58,6 @@ fig <- fig %>% layout(xaxis = list(title = 'Displacement (cu.in.)'),
 fig
 ```
 
-### Loess Smoother with Uncertainty Bounds
-
-```{r}
-library(plotly)
-library(broom)
-
-m <- loess(mpg ~ disp, data = mtcars)
-
-fig <- plot_ly(mtcars, x = ~disp, color = I("black"))
-fig <- fig %>% add_markers(y = ~mpg, text = rownames(mtcars), showlegend = FALSE)
-fig <- fig %>% add_lines(y = ~fitted(loess(mpg ~ disp)),
-            line = list(color = 'rgba(7, 164, 181, 1)'),
-            name = "Loess Smoother")
-fig <- fig %>% add_ribbons(data = augment(m),
-              ymin = ~.fitted - 1.96 * .se.fit,
-              ymax = ~.fitted + 1.96 * .se.fit,
-              line = list(color = 'rgba(7, 164, 181, 0.05)'),
-              fillcolor = 'rgba(7, 164, 181, 0.2)',
-              name = "Standard Error")
-fig <- fig %>% layout(xaxis = list(title = 'Displacement (cu.in.)'),
-         yaxis = list(title = 'Miles/(US) gallon'),
-         legend = list(x = 0.80, y = 0.90))
-
-fig
-```
-
 
 
 #Reference
