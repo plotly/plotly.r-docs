@@ -46,7 +46,7 @@ set.seed(1987)
 pkgs <- c("ggplot2", "mgcv", "MASS")
 invisible(lapply(pkgs, require, character.only = TRUE))
 
-load(url('http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/titanic3.sav'))
+load(url('https://hbiostat.org/data/repo/titanic3.sav'))
 titanic3 <- na.omit(titanic3[, -c(3,8:14)])
 titanic3$class_sex <- apply(titanic3, 1,
                             function(x) paste(x[1], x[3], collapse = "_"))
