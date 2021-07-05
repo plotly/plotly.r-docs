@@ -19,7 +19,7 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```{r}
 library(plotly)
 
-n <- 1e6
+n <- 1e5
 x <- rnorm(n)
 y <- 2*x + rnorm(n, sd = 5)
 
