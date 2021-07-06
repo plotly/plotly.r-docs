@@ -46,12 +46,12 @@ fig
 
 ### Polar Area Chart
 
-```{r}
-fig <- plot_ly(plotly::wind, r = ~r, t = ~t) %>% add_area(color = ~nms)
-fig <- layout(fig, radialaxis = list(ticksuffix = "%"), orientation = 270)
+#```{r}
+#fig <- plot_ly(plotly::wind, r = ~r, t = ~t) %>% add_area(color = ~nms)
+#fig <- layout(fig, radialaxis = list(ticksuffix = "%"), orientation = 270)
 
-fig
-```
+#fig
+#```
 
 ### Reference
 See [https://plotly.com/python/reference/#area](https://plotly.com/python/reference/#area) for more information and chart attribute options!
