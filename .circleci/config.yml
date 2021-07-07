@@ -50,6 +50,9 @@ jobs:
             python front-matter-ci.py build/r
             curl https://raw.githubusercontent.com/plotly/graphing-library-docs/master/check-or-enforce-order.py > check-or-enforce-order.py
             python check-or-enforce-order.py build/r enforce
+            cd build
+            sed -z -i.bkp 's/<!--.*-->//g' r/*md && rm r/*.bkp # remove html comments
+
       - run:
           name: deploy to plotly/r.docs:built
           command: |
