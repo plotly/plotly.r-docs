@@ -64,6 +64,8 @@ jobs:
               sed -z -i.bkp 's/script>\n```/script>/g' r/*md && rm r/*.bkp # remove html backticks
               rm -rf ggplot2/*.html
               sed -i.bkp 's/<!--.*-->//g' ggplot2/*md && rm ggplot2/*.bkp
+              sed -z -i.bkp 's/```{=html}\n<div/<div/g' ggplot2/*md && rm ggplot2/*.bkp # remove html backticks
+              sed -z -i.bkp 's/script>\n```/script>/g' ggplot2/*md && rm ggplot2/*.bkp # remove html backticks
               git add *
               git commit -m "build of https://github.com/plotly/plotly.r-docs/commit/${CIRCLE_SHA1}"
               git push --force git@github.com:plotly/plotly.r-docs.git master:built
