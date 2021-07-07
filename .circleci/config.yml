@@ -60,6 +60,8 @@ jobs:
               git config user.email accounts@plot.ly
               rm -rf r/*.html
               sed -i.bkp 's/<!--.*-->//g' r/*md && rm r/*.bkp # remove html comments
+              sed -z -i.bkp 's/```{=html}\n<div/<div/g' r/*md && rm r/*.bkp # remove html backticks
+              sed -z -i.bkp 's/script>\n```/script>/g' r/*md && rm r/*.bkp # remove html backticks
               rm -rf ggplot2/*.html
               sed -i.bkp 's/<!--.*-->//g' ggplot2/*md && rm ggplot2/*.bkp
               git add *
