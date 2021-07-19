@@ -1,0 +1,184 @@
+<!-- #region -->
+This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like Linear Regression and progressively move towards models like Decision Tree and Polynomial Features. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, and [surface plots](https://plotly.com/r/3d-surface-plots/) for 3D data.
+
+We will use [tidymodels](https://tidymodels.tidymodels.org/) to split and preprocess our data and train various regression models. Tidymodels is a popular Machine Learning (ML) library in R that is compatible with the "tidyverse" concepts, and offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It is the next-gen version of the popular [caret](http://topepo.github.io/caret/index.html) library in R.
+
+<!-- #endregion -->
+
+## Basic linear regression plots
+
+In this section, we show you how to apply a simple regression model for predicting tips a server will receive based on various client attributes (such as sex, time of the week, and whether they are a smoker).
+
+We will be using the [Linear Regression][lr], which is a simple model that fit an intercept (the mean tip received by a server), and add a slope for each feature we use, such as the value of the total bill.
+
+[lr]: https://parsnip.tidymodels.org/reference/linear_reg.html
+
+### Linear Regression with R
+
+```{r}
+library(plotly)
+data(tips)
+
+y <- tips$tip
+X <- tips$total_bill
+
+lm_model <- linear_reg() %>% 
+  set_engine('lm') %>% 
+  set_mode('regression') %>%
+  fit(tip ~ total_bill, data = tips) 
+
+x_range <- seq(min(X), max(X), length.out = 100)
+x_range <- matrix(x_range, nrow=100, ncol=1)
+x_range <- data.frame(x_range)
+colnames(x_range) <- c('total_bill')
+
+y_range <- lm_model %>% predict(x_range) 
+
+colnames(y_range) <- c('tip')
+xy <- data.frame(x_range, y_range) 
+
+fig <- plot_ly(tips, x = ~total_bill, y = ~tip, type = 'scatter', alpha = 0.65, mode = 'markers', name = 'Tips')
+fig <- fig %>% add_trace(data = xy, x = ~total_bill, y = ~tip, name = 'Regression Fit', mode = 'lines', alpha = 1)
+fig
+```
+## Model generalization on unseen data
+
+With `add_trace()`, you can easily color your plot based on a predefined data split. By coloring the training and the testing data points with different colors, you can easily see if whether the model generalizes well to the test data or not.
+
+```{r}
+library(plotly)
+data(tips)
+
+y <- tips$tip
+X <- tips$total_bill
+
+set.seed(123)
+tips_split <- initial_split(tips)
+tips_training <- tips_split %>% 
+  training()
+tips_test <- tips_split %>% 
+  testing()
+
+lm_model <- linear_reg() %>% 
+  set_engine('lm') %>% 
+  set_mode('regression') %>%
+  fit(tip ~ total_bill, data = tips_training) 
+
+x_range <- seq(min(X), max(X), length.out = 100)
+x_range <- matrix(x_range, nrow=100, ncol=1)
+x_range <- data.frame(x_range)
+colnames(x_range) <- c('total_bill')
+
+y_range <- lm_model %>%
+  predict(x_range) 
+
+colnames(y_range) <- c('tip')
+xy <- data.frame(x_range, y_range) 
+
+fig <- plot_ly(data = tips_training, x = ~total_bill, y = ~tip, type = 'scatter', name = 'train', mode = 'markers', alpha = 0.65) %>% 
+  add_trace(data = tips_test, x = ~total_bill, y = ~tip, type = 'scatter', name = 'test', mode = 'markers', alpha = 0.65 ) %>% 
+  add_trace(data = xy, x = ~total_bill, y = ~tip, name = 'prediction', mode = 'lines', alpha = 1)
+fig
+```
+
+## Comparing different kNN models parameters
+
+In addition to linear regression, it's possible to fit the same data using [k-Nearest Neighbors][knn]. When you perform a prediction on a new sample, this model either takes the weighted or un-weighted average of the neighbors. In order to see the difference between those two averaging options, we train a kNN model with both of those parameters, and we plot them in the same way as the previous graph.
+
+Notice how we can combine scatter points with lines using Plotly. You can learn more about [multiple chart types](https://plotly.com/r/graphing-multiple-chart-types/).
+
+[knn]: https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
+
+```{r}
+library(plotly)
+library(kknn)
+data(tips)
+
+y <- tips$tip
+X <- tips$total_bill
+
+knn_dist <- nearest_neighbor(neighbors = 10, weight_func = 'inv') %>% 
+  set_engine('kknn') %>% 
+  set_mode('regression') %>%
+  fit(tip ~ total_bill, data = tips)
+knn_uni <- nearest_neighbor(neighbors = 10, weight_func = 'rectangular') %>% 
+  set_engine('kknn') %>% 
+  set_mode('regression') %>%
+  fit(tip ~ total_bill, data = tips) 
+
+x_range <- seq(min(X), max(X), length.out = 100)
+x_range <- matrix(x_range, nrow=100, ncol=1)
+x_range <- data.frame(x_range)
+colnames(x_range) <- c('total_bill')
+
+y_dist <- knn_dist %>%
+  predict(x_range) 
+y_uni <- knn_uni %>%
+  predict(x_range) 
+
+colnames(y_dist) <- c('dist')
+colnames(y_uni) <- c('uni')
+xy <- data.frame(x_range, y_dist, y_uni) 
+
+fig <- plot_ly(tips, type = 'scatter', mode = 'markers', colors = c("#FF7F50", "#6495ED")) %>% 
+  add_trace(data = tips, x = ~total_bill, y = ~tip, type = 'scatter', mode = 'markers', color = ~sex, alpha = 0.65) %>% 
+  add_trace(data = xy, x = ~total_bill, y = ~dist, name = 'Weights: Distance', mode = 'lines', alpha = 1) %>%
+  add_trace(data = xy, x = ~total_bill, y = ~uni, name = 'Weights: Uniform', mode = 'lines', alpha = 1) 
+fig
+```
+
+## 3D regression surface with `mesh3d` and `add_surface`
+
+Visualize the decision plane of your model whenever you have more than one variable in your input data. Here, we will use [`svm_rbf`](https://parsnip.tidymodels.org/reference/svm_rbf.html) with [`kernlab`](https://cran.r-project.org/web/packages/kernlab/index.html) engine in `regression` mode. For generating the 2D mesh on the surface, we use the package [`pracma`](https://cran.r-project.org/web/packages/pracma/index.html)
+
+```{r}
+library(plotly)
+library(kernlab)
+library(pracma) #For meshgrid()
+data(iris)
+
+mesh_size <- .02
+margin <- 0
+X <- iris %>% select(Sepal.Width, Sepal.Length)
+y <- iris %>% select(Petal.Width)
+
+model <- svm_rbf(cost = 1.0) %>% 
+  set_engine("kernlab") %>% 
+  set_mode("regression") %>% 
+  fit(Petal.Width ~ Sepal.Width + Sepal.Length, data = iris)
+
+x_min <- min(X$Sepal.Width) - margin
+x_max <- max(X$Sepal.Width) - margin
+y_min <- min(X$Sepal.Length) - margin
+y_max <- max(X$Sepal.Length) - margin
+xrange <- seq(x_min, x_max, mesh_size)
+yrange <- seq(y_min, y_max, mesh_size)
+xy <- meshgrid(x = xrange, y = yrange)
+xx <- xy$X
+yy <- xy$Y
+dim_val <- dim(xx)
+xx1 <- matrix(xx, length(xx), 1)
+yy1 <- matrix(yy, length(yy), 1)
+final <- cbind(xx1, yy1)
+pred <- model %>%
+  predict(final)
+
+pred <- pred$.pred
+pred <- matrix(pred, dim_val[1], dim_val[2])
+
+dim(pred)
+fig <- plot_ly(iris, x = ~Sepal.Width, y = ~Sepal.Length, z = ~Petal.Width ) %>% 
+  add_markers(size = 5) %>% 
+  add_surface(x=xrange, y=yrange, z=pred, alpha = 0.65, type = 'mesh3d', name = 'pred_surface')
+fig
+
+```
+
+
+```{r}
+
+```
+
+```{r}
+
+```
