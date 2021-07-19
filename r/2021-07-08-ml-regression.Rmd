@@ -16,7 +16,9 @@ We will be using the [Linear Regression][lr], which is a simple model that fit a
 ### Linear Regression with R
 
 ```{r}
-library(reshape2) #to load tips data
+library(reshape2) # to load tips data
+library(tidyverse)
+library(tidymodels) # for the fit() function
 library(plotly)
 data(tips)
 
