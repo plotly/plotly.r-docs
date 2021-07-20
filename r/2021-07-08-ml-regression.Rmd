@@ -253,7 +253,60 @@ s <- subplot(
 layout(s, showlegend = FALSE)
 
 ```
-
+## Residual plots
+Just like prediction error plots, it's easy to visualize your prediction residuals in just a few lines of codes using `ggplotly` built-in capabilities.
 ```{r}
+library(plotly)
+library(ggplot2)
+library(tideyverse)
+library(tidymodels)
 
+data(iris)
+
+X <- iris %>% select(Sepal.Width, Sepal.Length)
+y <- iris %>% select(Petal.Width)
+
+set.seed(0)
+iris_split <- initial_split(iris, prop = 3/4)
+iris_training <- iris_split %>% 
+  training()
+iris_test <- iris_split %>% 
+  testing()
+
+train_index <- as.integer(rownames(iris_training))
+test_index <- as.integer(rownames(iris_test))
+
+iris[train_index,'split'] = 'train'
+iris[test_index,'split'] = 'test'
+
+lm_model <- linear_reg() %>% 
+  set_engine('lm') %>% 
+  set_mode('regression') %>%
+  fit(Petal.Width ~ Sepal.Width + Sepal.Length, data = iris_training) 
+
+prediction <- lm_model %>%
+  predict(X) 
+colnames(prediction) <- c('prediction')
+iris = cbind(iris, prediction)
+residual <- prediction - iris$Petal.Width
+colnames(residual) <- c('residual')
+iris = cbind(iris, residual)
+
+scatter <- ggplot(iris, aes(x = prediction, y = residual, color = split)) + 
+  geom_point() + 
+  geom_smooth(method=lm, se=FALSE) 
+
+scatter <- ggplotly(p = scatter, type = 'scatter')
+
+violin <- iris %>%
+  plot_ly(x = ~split, y = ~residual, split = ~split, type = 'violin' )
+
+s <- subplot(
+  scatter,
+  violin,
+  nrows = 1, heights = c(1), widths = c(0.65, 0.35), margin = 0.01,
+  shareX = TRUE, shareY = TRUE, titleX = TRUE, titleY = TRUE
+)
+
+layout(s, showlegend = FALSE)
 ```
