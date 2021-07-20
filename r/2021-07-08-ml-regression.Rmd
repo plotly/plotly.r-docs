@@ -187,7 +187,70 @@ fig
 ```
 
 
+### Enhanced prediction error analysis using `ggplotly`
+
+Add marginal histograms to quickly diagnoses any prediction bias your model might have.
+
 ```{r}
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+library(tidymodels)
+data(iris)
+
+X <- iris %>% select(Sepal.Width, Sepal.Length)
+y <- iris %>% select(Petal.Width)
+
+set.seed(0)
+iris_split <- initial_split(iris, prop = 3/4)
+iris_training <- iris_split %>% 
+  training()
+iris_test <- iris_split %>% 
+  testing()
+
+train_index <- as.integer(rownames(iris_training))
+test_index <- as.integer(rownames(iris_test))
+
+iris[train_index,'split'] = 'train'
+iris[test_index,'split'] = 'test'
+
+lm_model <- linear_reg() %>% 
+  set_engine('lm') %>% 
+  set_mode('regression') %>%
+  fit(Petal.Width ~ Sepal.Width + Sepal.Length, data = iris_training) 
+
+prediction <- lm_model %>%
+  predict(X) 
+colnames(prediction) <- c('prediction')
+iris = cbind(iris, prediction)
+
+hist_top <- ggplot(iris,aes(x=Petal.Width)) + 
+  geom_histogram(data=subset(iris,split == 'train'),fill = "red", alpha = 0.2, bins = 6) +
+  geom_histogram(data=subset(iris,split == 'test'),fill = "blue", alpha = 0.2, bins = 6) +
+  theme(axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank())
+hist_top <- ggplotly(p = hist_top)
+
+scatter <- ggplot(iris, aes(x = Petal.Width, y = prediction, color = split)) +
+  geom_point() + 
+  geom_smooth(method=lm, se=FALSE) 
+scatter <- ggplotly(p = scatter, type = 'scatter')
+
+hist_right <- ggplot(iris,aes(x=prediction)) + 
+  geom_histogram(data=subset(iris,split == 'train'),fill = "red", alpha = 0.2, bins = 13) +
+  geom_histogram(data=subset(iris,split == 'test'),fill = "blue", alpha = 0.2, bins = 13) +
+  theme(axis.title.x=element_blank(),axis.text.x=element_blank(),axis.ticks.x=element_blank())+
+  coord_flip()
+hist_right <- ggplotly(p = hist_right)
+
+s <- subplot(
+  hist_top, 
+  plotly_empty(), 
+  scatter,
+  hist_right,
+  nrows = 2, heights = c(0.2, 0.8), widths = c(0.8, 0.2), margin = 0,
+  shareX = TRUE, shareY = TRUE, titleX = TRUE, titleY = TRUE
+)
+layout(s, showlegend = FALSE)
 
 ```
 
