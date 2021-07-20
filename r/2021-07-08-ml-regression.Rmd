@@ -258,7 +258,7 @@ Just like prediction error plots, it's easy to visualize your prediction residua
 ```{r}
 library(plotly)
 library(ggplot2)
-library(tideyverse)
+library(tidyverse)
 library(tidymodels)
 
 data(iris)
