@@ -1,7 +1,7 @@
 <!-- #region -->
 This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like Linear Regression and progressively move towards models like Decision Tree and Polynomial Features. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, and [surface plots](https://plotly.com/r/3d-surface-plots/) for 3D data.
 
-We will use [tidymodels](https://tidymodels.tidymodels.org/) to split and preprocess our data and train various regression models. Tidymodels is a popular Machine Learning (ML) library in R that is compatible with the "tidyverse" concepts, and offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It is the next-gen version of the popular [caret](http://topepo.github.io/caret/index.html) library in R.
+We will use [tidymodels](https://tidymodels.tidymodels.org/) to split and preprocess our data and train various regression models. Tidymodels is a popular Machine Learning (ML) library in R that is compatible with the "tidyverse" concepts, and offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. It is the next-gen version of the popular [caret](http://topepo.github.io/caret/index.html) library for R.
 
 <!-- #endregion -->
 
