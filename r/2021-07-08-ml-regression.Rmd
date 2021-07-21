@@ -9,7 +9,7 @@ We will use [tidymodels](https://tidymodels.tidymodels.org/) to split and prepro
 
 In this section, we show you how to apply a simple regression model for predicting tips a server will receive based on various client attributes (such as sex, time of the week, and whether they are a smoker).
 
-We will be using the [Linear Regression][lr], which is a simple model that fit an intercept (the mean tip received by a server), and add a slope for each feature we use, such as the value of the total bill.
+We will be using the [Linear Regression][lr], which is a simple model that fits an intercept (the mean tip received by a server), and adds a slope for each feature we use, such as the value of the total bill.
 
 [lr]: https://parsnip.tidymodels.org/reference/linear_reg.html
 
