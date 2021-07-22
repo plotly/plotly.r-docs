@@ -141,7 +141,7 @@ fig
 
 ## 3D regression surface with `mesh3d` and `add_surface`
 
-Visualize the decision plane of your model whenever you have more than one variable in your input data. Here, we will use [`svm_rbf`](https://parsnip.tidymodels.org/reference/svm_rbf.html) with [`kernlab`](https://cran.r-project.org/web/packages/kernlab/index.html) engine in `regression` mode. For generating the 2D mesh on the surface, we use the package [`pracma`](https://cran.r-project.org/web/packages/pracma/index.html)
+Visualize the decision plane of your model whenever you have more than one variable in your input data. Here, we will use [`svm_rbf`](https://parsnip.tidymodels.org/reference/svm_rbf.html) with [`kernlab`](https://cran.r-project.org/web/packages/kernlab/index.html) engine in `regression` mode. For generating the 2D mesh on the surface, we use the  [`pracma`](https://cran.r-project.org/web/packages/pracma/index.html) package.
 
 ```{r}
 library(reshape2)
