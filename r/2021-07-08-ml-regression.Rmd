@@ -106,10 +106,13 @@ data(tips)
 y <- tips$tip
 X <- tips$total_bill
 
+# Model #1
 knn_dist <- nearest_neighbor(neighbors = 10, weight_func = 'inv') %>% 
   set_engine('kknn') %>% 
   set_mode('regression') %>%
   fit(tip ~ total_bill, data = tips)
+  
+# Model #2
 knn_uni <- nearest_neighbor(neighbors = 10, weight_func = 'rectangular') %>% 
   set_engine('kknn') %>% 
   set_mode('regression') %>%
