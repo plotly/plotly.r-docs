@@ -46,7 +46,7 @@ fig
 ```
 ## Model generalization on unseen data
 
-With `add_trace()`, you can easily color your plot based on a predefined data split. By coloring the training and the testing data points with different colors, you can easily see if whether the model generalizes well to the test data or not.
+With `add_trace()`, you can easily color your plot based on a predefined data split. By coloring the training and the testing data points with different colors, you can easily see if the model generalizes well to the test data or not.
 
 ```{r}
 library(reshape2)
