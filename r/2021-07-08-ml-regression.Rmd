@@ -257,7 +257,7 @@ layout(s, showlegend = FALSE)
 
 ```
 ## Residual plots
-Just like prediction error plots, it's easy to visualize your prediction residuals in just a few lines of codes using `ggplotly` built-in capabilities.
+Just like prediction error plots, it's easy to visualize your prediction residuals in just a few lines of codes using `ggplotly` and `tidymodels` capabilities.
 ```{r}
 library(plotly)
 library(ggplot2)
