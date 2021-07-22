@@ -232,7 +232,7 @@ hist_top <- ggplotly(p = hist_top)
 
 scatter <- ggplot(iris, aes(x = Petal.Width, y = prediction, color = split)) +
   geom_point() + 
-  geom_smooth(method=lm, se=FALSE) 
+  geom_smooth(formula=y ~ x, method=lm, se=FALSE) 
 scatter <- ggplotly(p = scatter, type = 'scatter')
 
 hist_right <- ggplot(iris,aes(x=prediction)) + 
