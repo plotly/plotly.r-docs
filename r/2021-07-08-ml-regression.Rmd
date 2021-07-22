@@ -294,7 +294,7 @@ iris = cbind(iris, residual)
 
 scatter <- ggplot(iris, aes(x = prediction, y = residual, color = split)) + 
   geom_point() + 
-  geom_smooth(method=lm, se=FALSE) 
+  geom_smooth(formula=y ~ x, method=lm, se=FALSE) 
 
 scatter <- ggplotly(p = scatter, type = 'scatter')
 
