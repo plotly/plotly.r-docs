@@ -32,13 +32,13 @@ lm_model <- linear_reg() %>%
 
 x_range <- seq(min(X), max(X), length.out = 100)
 x_range <- matrix(x_range, nrow=100, ncol=1)
-x_range <- data.frame(x_range)
-colnames(x_range) <- c('total_bill')
+xdf <- data.frame(x_range)
+colnames(xdf) <- c('total_bill')
 
-y_range <- lm_model %>% predict(x_range) 
+ydf <- lm_model %>% predict(xdf) 
 
-colnames(y_range) <- c('tip')
-xy <- data.frame(x_range, y_range) 
+colnames(ydf) <- c('tip')
+xy <- data.frame(xdf, ydf) 
 
 fig <- plot_ly(tips, x = ~total_bill, y = ~tip, type = 'scatter', alpha = 0.65, mode = 'markers', name = 'Tips')
 fig <- fig %>% add_trace(data = xy, x = ~total_bill, y = ~tip, name = 'Regression Fit', mode = 'lines', alpha = 1)
@@ -72,14 +72,14 @@ lm_model <- linear_reg() %>%
 
 x_range <- seq(min(X), max(X), length.out = 100)
 x_range <- matrix(x_range, nrow=100, ncol=1)
-x_range <- data.frame(x_range)
-colnames(x_range) <- c('total_bill')
+xdf <- data.frame(x_range)
+colnames(xdf) <- c('total_bill')
 
-y_range <- lm_model %>%
-  predict(x_range) 
+ydf <- lm_model %>%
+  predict(xdf) 
 
-colnames(y_range) <- c('tip')
-xy <- data.frame(x_range, y_range) 
+colnames(ydf) <- c('tip')
+xy <- data.frame(xdf, ydf) 
 
 fig <- plot_ly(data = tips_training, x = ~total_bill, y = ~tip, type = 'scatter', name = 'train', mode = 'markers', alpha = 0.65) %>% 
   add_trace(data = tips_test, x = ~total_bill, y = ~tip, type = 'scatter', name = 'test', mode = 'markers', alpha = 0.65 ) %>% 
@@ -93,7 +93,7 @@ In addition to linear regression, it's possible to fit the same data using [k-Ne
 
 Notice how we can combine scatter points with lines using Plotly. You can learn more about [multiple chart types](https://plotly.com/r/graphing-multiple-chart-types/).
 
-[knn]: https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html
+[knn]: http://klausvigo.github.io/kknn/
 
 ```{r}
 library(reshape2)
@@ -120,17 +120,17 @@ knn_uni <- nearest_neighbor(neighbors = 10, weight_func = 'rectangular') %>%
 
 x_range <- seq(min(X), max(X), length.out = 100)
 x_range <- matrix(x_range, nrow=100, ncol=1)
-x_range <- data.frame(x_range)
-colnames(x_range) <- c('total_bill')
+xdf <- data.frame(x_range)
+colnames(xdf) <- c('total_bill')
 
 y_dist <- knn_dist %>%
-  predict(x_range) 
+  predict(xdf) 
 y_uni <- knn_uni %>%
-  predict(x_range) 
+  predict(xdf) 
 
 colnames(y_dist) <- c('dist')
 colnames(y_uni) <- c('uni')
-xy <- data.frame(x_range, y_dist, y_uni) 
+xy <- data.frame(xdf, y_dist, y_uni) 
 
 fig <- plot_ly(tips, type = 'scatter', mode = 'markers', colors = c("#FF7F50", "#6495ED")) %>% 
   add_trace(data = tips, x = ~total_bill, y = ~tip, type = 'scatter', mode = 'markers', color = ~sex, alpha = 0.65) %>% 
@@ -181,14 +181,56 @@ pred <- model %>%
 pred <- pred$.pred
 pred <- matrix(pred, dim_val[1], dim_val[2])
 
-dim(pred)
 fig <- plot_ly(iris, x = ~Sepal.Width, y = ~Sepal.Length, z = ~Petal.Width ) %>% 
   add_markers(size = 5) %>% 
   add_surface(x=xrange, y=yrange, z=pred, alpha = 0.65, type = 'mesh3d', name = 'pred_surface')
 fig
 
 ```
+## Prediction Error Plots
 
+When you are working with very high-dimensional data, it is inconvenient to plot every dimension with your output `y`. Instead, you can use methods such as prediction error plots, which let you visualize how well your model does compared to the ground truth.
+
+### Simple actual vs predicted plot
+
+This example shows you the simplest way to compare the predicted output vs. the actual output. A good model will have most of the scatter dots near the diagonal black line.
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(plotly)
+library(ggplot2)
+
+data("iris")
+
+X <- data.frame(Sepal.Width = c(iris$Sepal.Width), Sepal.Length = c(iris$Sepal.Length))
+y <- iris$Petal.Width
+
+lm_model <- linear_reg() %>% 
+  set_engine('lm') %>% 
+  set_mode('regression') %>%
+  fit(Petal.Width ~ Sepal.Width + Sepal.Length, data = iris) 
+
+y_pred <- lm_model %>%
+  predict(X) 
+
+db = cbind(iris, y_pred)
+
+colnames(db)[4] <- "Ground_truth"
+colnames(db)[6] <- "prediction"
+
+x0 = min(y)
+y0 = max(y)
+x1 = max(y)
+y1 = max(y)
+p1 <- ggplot(db, aes(x= Ground_truth, y= prediction  )) +
+  geom_point(aes(color = "Blue"), show.legend = FALSE) + geom_segment(aes(x = x0, y = x0, xend = y1, yend = y1 ),linetype = 2)
+
+
+p1 <-  ggplotly(p1)
+p1
+
+```
 
 ### Enhanced prediction error analysis using `ggplotly`
 
