@@ -18,8 +18,6 @@ We get the synthetic data that form the shape of a moon. We then split it into a
 
 In the graph, we display all the negative labels as squares, and positive labels as circles. We differentiate the training and test set by adding a dot to the center of test data.
 
-In this example, we will use graph objects, Plotly's low-level API for building figures.
-
 ```{r}
 library(tidyverse)
 library(tidymodels)
