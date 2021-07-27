@@ -23,7 +23,7 @@ library(tidyverse)
 library(tidymodels)
 library(plotly)
 
-make_moons <- read.csv(file = "make_moons.csv")
+make_moons <- read.csv(file = "data/make_moons.csv")
 make_moons$y <- as.character(make_moons$y)
 set.seed(123)
 make_moons_split <- initial_split(make_moons, prop = 3/4)
