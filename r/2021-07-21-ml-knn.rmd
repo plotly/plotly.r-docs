@@ -206,7 +206,7 @@ fig
 
 ## Multi-class prediction confidence with [`Heatmap`](https://plotly.com/r/heatmaps/)
 
-It is also possible to visualize the prediction confidence of the model using [heatmaps](https://plotly.com/r/heatmaps/). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the score of the other classes summed, at a certain point.
+It is also possible to visualize the prediction confidence of the model using [heatmaps](https://plotly.com/r/heatmaps/). In this example, you can see how to compute how confident the model is about its prediction at every point in the 2D grid. Here, we define the confidence as the difference between the highest score and the sum of the score of the other classes, at a certain point.
 
 ```{r}
 library(pracma)
