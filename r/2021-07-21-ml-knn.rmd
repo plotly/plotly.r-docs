@@ -49,7 +49,7 @@ fig
 
 Now, we train the kNN model on the same training data displayed in the previous graph. Then, we predict the confidence score of the model for each of the data points in the test set. We will use shapes to denote the true labels, and the color will indicate the confidence of the model for assign that score.
 
-Notice that `scatter` only requires one function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `yscore` output by our kNN model.
+Notice that `plot_ly` only requires one function call to plot both negative and positive labels, and can additionally set a continuous color scale based on the `yscore` output by our kNN model.
 
 ```{r}
 library(plotly)
