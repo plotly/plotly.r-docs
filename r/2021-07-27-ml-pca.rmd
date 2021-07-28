@@ -1,0 +1,351 @@
+## PCA Visualization in Python
+Visualize Principle Component Analysis (PCA) of your high-dimensional data in R with Plotly.
+
+This page first shows how to visualize higher dimension data using various Plotly figures combined with dimensionality reduction (aka projection). Then, we dive into the specific details of our projection algorithm. 
+
+We will use [Tidymodels](https://www.tidymodels.org/) or [Caret](https://cran.r-project.org/web/packages/caret/vignettes/caret.html#) to load one of the datasets, and apply dimensionality reduction. Tidymodels is a popular Machine Learning (ML) library that offers various tools for creating and training ML algorithms, feature engineering, data cleaning, and evaluating and testing models. 
+
+
+## High-dimensional PCA Analysis with  `splom`
+
+The dimensionality reduction technique we will be using is called the [Principal Component Analysis (PCA)](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/prcomp). It is a powerful technique that arises from linear algebra and probability theory. In essence, it computes a matrix that represents the variation of your data ([covariance matrix/eigenvectors][covmatrix]), and rank them by their relevance (explained variance/eigenvalues). 
+
+[covmatrix]: https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues#:~:text=As%20it%20is%20a%20square%20symmetric%20matrix%2C%20it%20can%20be%20diagonalized%20by%20choosing%20a%20new%20orthogonal%20coordinate%20system%2C%20given%20by%20its%20eigenvectors%20(incidentally%2C%20this%20is%20called%20spectral%20theorem)%3B%20corresponding%20eigenvalues%20will%20then%20be%20located%20on%20the%20diagonal.%20In%20this%20new%20coordinate%20system%2C%20the%20covariance%20matrix%20is%20diagonal%20and%20looks%20like%20that%3A
+
+
+### Visualize all the original dimensions
+
+First, let's plot all the features and see how the `species` in the Iris dataset are grouped. In a [Scatter Plot Matrix (splom)](https://plot.ly/r/splom/), each subplot displays a feature against another, so if we have $N$ features we have a $N \times N$ matrix.
+
+In our example, we are plotting all 4 features from the Iris dataset, thus we can see how `sepal_width` is compared against `sepal_length`, then against `petal_width`, and so forth. Keep in mind how some pairs of features can more easily separate different species.
+
+```{r}
+library(plotly) 
+ 
+data(iris) 
+ 
+axis = list(showline=FALSE, 
+            zeroline=FALSE, 
+            gridcolor='#ffff', 
+            ticklen=4, 
+            titlefont=list(size=13)) 
+ 
+ 
+fig <- iris %>% 
+  plot_ly()  
+fig <- fig %>% 
+  add_trace( 
+    type = 'splom', 
+    dimensions = list( 
+      list(label='sepal length', values=~Sepal.Length), 
+      list(label='sepal width', values=~Sepal.Width), 
+      list(label='petal length', values=~Petal.Length), 
+      list(label='petal width', values=~Petal.Width) 
+    ), 
+    color = ~Species, colors = c('#636EFA','#EF553B','#00CC96') , 
+    marker = list( 
+      size = 7, 
+      line = list( 
+        width = 1, 
+        color = 'rgb(230,230,230)' 
+      ) 
+    ) 
+  ) 
+fig <-  fig %>% style(diagonal = list(visible = FALSE)) 
+fig <- fig %>% 
+  layout( 
+    hovermode='closest', 
+    dragmode= 'select', 
+    plot_bgcolor='rgba(240,240,240, 0.95)', 
+    xaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4), 
+    yaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4), 
+    xaxis2=axis, 
+    xaxis3=axis, 
+    xaxis4=axis, 
+    yaxis2=axis, 
+    yaxis3=axis, 
+    yaxis4=axis 
+  ) 
+ 
+fig
+```
+
+
+###  Visualize all the principal components
+
+Now, we apply `PCA` the same dataset, and retrieve **all** the components. We use the same `splom` trace to display our results, but this time our features are the resulting *principal components*, ordered by how much variance they are able to explain.
+
+The importance of explained variance is demonstrated in the example below. The subplot between PC3 and PC4 is clearly unable to separate each class, whereas the subplot between PC1 and PC2 shows a clear separation between each species.
+
+```{r}
+library(plotly)
+library(stats)
+data(iris)
+X <- subset(iris, select = -c(Species))
+prin_comp <- prcomp(X)
+explained_variance_ratio <- summary(prin_comp)[["importance"]]['Proportion of Variance',]
+explained_variance_ratio <- 100 * explained_variance_ratio
+components <- prin_comp[["x"]]
+components <- data.frame(components)
+components <- cbind(components, iris$Species)
+components$PC3 <- -components$PC3
+components$PC2 <- -components$PC2
+
+axis = list(showline=FALSE, 
+            zeroline=FALSE, 
+            gridcolor='#ffff', 
+            ticklen=4, 
+            titlefont=list(size=13)) 
+
+fig <- components %>% 
+  plot_ly()  %>% 
+  add_trace( 
+    type = 'splom', 
+    dimensions = list( 
+      list(label=paste('PC 1 (',toString(round(explained_variance_ratio[1],1)),'%)',sep = ''), values=~PC1), 
+      list(label=paste('PC 2 (',toString(round(explained_variance_ratio[2],1)),'%)',sep = ''), values=~PC2), 
+      list(label=paste('PC 3 (',toString(round(explained_variance_ratio[3],1)),'%)',sep = ''), values=~PC3), 
+      list(label=paste('PC 4 (',toString(round(explained_variance_ratio[4],1)),'%)',sep = ''), values=~PC4) 
+    ), 
+    color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96')
+  ) %>% 
+  style(diagonal = list(visible = FALSE)) %>% 
+  layout( 
+    legend=list(title=list(text='color')),
+    hovermode='closest', 
+    dragmode= 'select', 
+    plot_bgcolor='rgba(240,240,240, 0.95)', 
+    xaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4), 
+    yaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4), 
+    xaxis2=axis, 
+    xaxis3=axis, 
+    xaxis4=axis, 
+    yaxis2=axis, 
+    yaxis3=axis, 
+    yaxis4=axis 
+  ) 
+
+fig
+```
+
+
+### Visualize a subset of the principal components
+
+When you will have too many features to visualize, you might be interested in only visualizing the most relevant components. Those components often capture a majority of the [explained variance](https://en.wikipedia.org/wiki/Explained_variation), which is a good way to tell if those components are sufficient for modelling this dataset.
+
+In the example below, our dataset contains 10 features, but we only select the first 4 components, since they explain 99% of the total variance.
+
+```{r}
+library(plotly)    
+library(stats)    
+library(MASS)  
+ 
+db = Boston   
+ 
+prin_comp <- prcomp(db, rank. = 4)    
+ 
+components <- prin_comp[["x"]]    
+components <- data.frame(components)    
+components <- cbind(components, db$medv)  
+components$PC2 <- -components$PC2   
+colnames(components)[5] = 'Median_Price'  
+ 
+tot_explained_variance_ratio <- summary(prin_comp)[["importance"]]['Proportion of Variance',]    
+tot_explained_variance_ratio <- 100 * sum(tot_explained_variance_ratio)   
+ 
+tit = 'Total Explained Variance = 99.56'   
+ 
+axis = list(showline=FALSE,  
+            zeroline=FALSE,  
+            gridcolor='#ffff',  
+            ticklen=4)  
+ 
+fig <- components %>%  
+  plot_ly() %>%  
+  add_trace(  
+    type = 'splom',  
+    dimensions = list(  
+      list(label='PC1', values=~PC1),  
+      list(label='PC2', values=~PC2),  
+      list(label='PC3', values=~PC3),  
+      list(label='PC4', values=~PC4)  
+    ),  
+    color=~Median_Price,  
+    marker = list(  
+      size = 7  
+    )  
+  ) %>% style(diagonal = list(visible = F)) %>%  
+  layout(  
+    title= tit,  
+    hovermode='closest',  
+    dragmode= 'select',  
+    plot_bgcolor='rgba(240,240,240, 0.95)',  
+    xaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4),  
+    yaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4),  
+    xaxis2=axis,  
+    xaxis3=axis,  
+    xaxis4=axis,  
+    yaxis2=axis,  
+    yaxis3=axis,  
+    yaxis4=axis  
+  )  
+options(warn=-1)  
+fig
+```
+
+
+## 2D PCA Scatter Plot
+
+In the previous examples, you saw how to visualize high-dimensional PCs. In this example, we show you how to simply visualize the first two principal components of a PCA, by reducing a dataset of 4 dimensions to 2D.
+
+```{r}
+library(plotly)
+library(stats)
+data(iris)
+X <- subset(iris, select = -c(Species))
+prin_comp <- prcomp(X, rank. = 2)
+components <- prin_comp[["x"]]
+components <- data.frame(components)
+components <- cbind(components, iris$Species)
+components$PC2 <- -components$PC2
+
+fig <- plot_ly(components, x = ~PC1, y = ~PC2, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96'), type = 'scatter', mode = 'markers')%>% 
+  layout( 
+    legend=list(title=list(text='color')),
+    xaxis = list(
+      title = "0"), 
+    yaxis = list(
+      title = "1"))
+fig
+```
+
+
+## Visualize PCA with scatter3d
+
+With scatter3d, you can visualize an additional dimension, which let you capture even more variance.
+
+```{r}
+data("iris") 
+ 
+X <- subset(iris, select = -c(Species))  
+ 
+prin_comp <- prcomp(X, rank. = 3)  
+ 
+components <- prin_comp[["x"]]  
+components <- data.frame(components)  
+components$PC2 <- -components$PC2 
+components$PC3 <- -components$PC3 
+components = cbind(components, iris$Species) 
+ 
+tot_explained_variance_ratio <- summary(prin_comp)[["importance"]]['Proportion of Variance',]  
+tot_explained_variance_ratio <- 100 * sum(tot_explained_variance_ratio) 
+ 
+tit = 'Total Explained Variance = 99.48'  
+ 
+fig <- plot_ly(components, x = ~PC1, y = ~PC2, z = ~PC3, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96') ) %>%  
+  add_markers(size = 12)  
+ 
+   
+fig <- fig %>%  
+  layout(  
+    title= tit) 
+ 
+fig
+```
+
+
+## Plotting explained variance
+
+Often, you might be interested in seeing how much variance PCA is able to explain as you increase the number of components, in order to decide how many dimensions to ultimately keep or analyze. This example shows you how to quickly plot the cumulative sum of explained variance for a high-dimensional dataset like [PimaIndiansDiabetes](https://rdrr.io/cran/mlbench/man/PimaIndiansDiabetes.html).
+
+With a higher explained variance, you are able to capture more variability in your dataset, which could potentially lead to better performance when training your model. For a more mathematical explanation, see this [Q&A thread](https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained).
+
+```{r}
+library(plotly)
+library(stats)
+library(base)
+library(mlbench)
+data(PimaIndiansDiabetes)
+
+X <- subset(PimaIndiansDiabetes, select = -c(diabetes))
+prin_comp <- prcomp(X)
+explained_variance_ratio <- summary(prin_comp)[["importance"]]['Proportion of Variance',]
+cumsum <- cumsum(explained_variance_ratio)
+data <- data.frame(cumsum,seq(1, length(cumsum), 1))
+colnames(data) <- c('Explained_Variance','Components')
+
+fig <-  plot_ly(data = data, x = ~Components, y = ~Explained_Variance, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>% 
+  layout( 
+    xaxis = list(
+      title = "# Components", tickvals = seq(1, length(cumsum), 1)), 
+    yaxis = list(
+      title = "Explained Variance"))
+fig
+```
+
+
+## Visualize Loadings
+
+It is also possible to visualize loadings using `shapes`, and use `annotations` to indicate which feature a certain loading original belong to. Here, we define loadings as:
+
+$$
+loadings = eigenvectors \cdot \sqrt{eigenvalues}
+$$
+
+For more details about the linear algebra behind eigenvectors and loadings, see this [Q&A thread](https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another).
+
+```{r}
+library(plotly)
+library(stats)
+data(iris)
+X <- subset(iris, select = -c(Species))
+prin_comp <- prcomp(X, rank = 2)
+components <- prin_comp[["x"]]
+components <- data.frame(components)
+components <- cbind(components, iris$Species)
+components$PC2 <- -components$PC2
+explained_variance <- summary(prin_comp)[["sdev"]]
+explained_variance <- explained_variance[1:2]
+comp <- prin_comp[["rotation"]]
+comp[,'PC2'] <- - comp[,'PC2']
+loadings <- comp
+for (i in seq(explained_variance)){
+  loadings[,i] <- comp[,i] * explained_variance[i]
+}
+
+features = c('sepal_length', 'sepal_width', 'petal_length', 'petal_width')
+
+fig <- plot_ly(components, x = ~PC1, y = ~PC2, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96'), type = 'scatter', mode = 'markers')%>% 
+  layout( 
+    legend=list(title=list(text='color')),
+    xaxis = list(
+      title = "0"), 
+    yaxis = list(
+      title = "1"))
+for (i in seq(4)){
+  fig <- fig %>%
+    add_segments(x = 0, xend = loadings[i, 1], y = 0, yend = loadings[i, 2], line = list(color = 'black'),inherit = FALSE, showlegend = FALSE) %>%
+    add_annotations(x=loadings[i, 1], y=loadings[i, 2], ax = 0, ay = 0,text = features[i], xanchor = 'center', yanchor= 'bottom')
+}
+
+fig
+```
+
+
+## References
+
+Learn more about `scatter3d`, and `splom` here:
+
+* https://plot.ly/r/3d-scatter-plots/
+
+* https://plot.ly/r/splom/
+
+The following resources offer an in-depth overview of PCA and explained variance:
+
+* https://en.wikipedia.org/wiki/Explained_variation
+
+* https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579
+
+* https://stats.stackexchange.com/questions/143905/loadings-vs-eigenvectors-in-pca-when-to-use-one-or-another
+
+* https://stats.stackexchange.com/questions/22569/pca-and-proportion-of-variance-explained
