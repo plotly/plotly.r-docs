@@ -203,7 +203,8 @@ pdb <- pr_curve(rdb, y, yscore)
 auc = roc_auc(rdb, y, yscore)
 auc = auc$.estimate
 
-tit = paste('ROC Curve (Auc = ',toString(round(auc,2)),')',sep = '')
+tit = paste('ROC Curve (AUC = ',toString(round(auc,2)),')',sep = '')
+
 
 fig <-  plot_ly(data = pdb ,x =  ~recall, y = ~precision, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>%
   add_segments(x = 0, xend = 1, y = 1, yend = 0, line = list(dash = "dash", color = 'black'),inherit = FALSE, showlegend = FALSE) %>%
