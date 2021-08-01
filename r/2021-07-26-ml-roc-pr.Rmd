@@ -86,7 +86,8 @@ pdb$specificity <- 1 - pdb$specificity
 auc = roc_auc(rdb, y, yscore)
 auc = auc$.estimate
 
-tit = paste('ROC Curve (Auc = ',toString(round(auc,2)),')',sep = '')
+tit = paste('ROC Curve (AUC = ',toString(round(auc,2)),')',sep = '')
+
 
 fig <-  plot_ly(data = pdb ,x =  ~specificity, y = ~sensitivity, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>%
   layout(title = tit,xaxis = list(title = "False Positive Rate"), yaxis = list(title = "True Positive Rate")) %>%
