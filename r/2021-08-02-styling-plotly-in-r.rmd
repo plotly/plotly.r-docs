@@ -1,0 +1,128 @@
+### Styling Figures made with Plotly 
+
+Plotly's R graphing library makes it easy to create interactive, publication-quality graphs.
+
+More specifically, here are the 3 ways you can style and customize figures made with Plotly:
+
+1. Control common parameters like titles, labeling and colors using built-in Plotly function arguments
+2. Updating the plotly figure attributes
+3. Using ggplot2's template via theme attribute.
+
+### Built-in Plotly Styling Arguments
+
+Many common styling options can be set directly. Every Plotly  function accepts the following arguments:
+
+- `title` to set the figure title
+- `labels` to override the default axis and legend labels behaviour, which is to use the data frame column name if available, and otherwise to use the label name itself like "x", "y", "color" etc. `labels` accepts list whose  values are the desired labels. These labels appear in axis labels, legend and color bar titles, and in hover labels.
+- `category_orders` to override the default category ordering behaviour, which is to use the order in which the data appears in the input. `category_orders` accepts an array  whose values are a `list` of values in the desired order. These orderings apply everywhere categories appear: in legends, on axes, in bar stacks, in the order of facets, in the order of animation frames etc.
+- `hoverformat` and `hoverinfo` to control which attributes appear in the hover label and how they are formatted.
+- Various color-related attributes such as `color`, `colors`, `colorbar` and `colorRampPalette` set the colors used in the figure. 
+
+To illustrate each of these, here is a simple, default figure made with Plotly. Note the default orderings for the x-axis categories.
+
+```{r}
+library(reshape2)
+library(plotly)
+
+data("tips")
+
+fig1 <- plot_ly(tips, x = ~day, y = ~total_bill, type = 'bar', color = ~sex) %>% 
+  layout( barmode = 'stack')
+options(warn = -1)
+fig1
+
+
+```
+
+Here is the same figure, restyled by adding some extra parameters to the initial Plotly function call:
+
+```{r}
+
+library(reshape2)
+library(plotly)
+
+data("tips")
+
+xform <- list(title = 'Day of Week',
+              categoryorder = "array",
+              categoryarray = c("Thur", 
+                                "Fri", 
+                                "Sat",
+                                "Sun"))
+
+fig2 <- plot_ly(tips, x = ~day, y = ~total_bill, type = 'bar', color = ~sex, colors = c("#3399FF", "#FF6666")) %>% 
+  layout( barmode = 'stack', xaxis = xform, yaxis = list(title = 'Sum of Receipts'), title = "Receipts by Payer Gender and Day of Week",
+          legend=list(title=list(text='<b> Payer Gender </b>')))
+fig2
+
+```
+
+### Updating or Modifying Figures made with Plotly 
+
+
+Here is the same figure as above, with some additional customizations to the axes and legend.
+
+```{r}
+
+library(reshape2)
+library(plotly)
+
+data("tips")
+
+xform <- list(title = 'Day of Week',
+              categoryorder = "array",
+              categoryarray = c("Thur", 
+                                "Fri", 
+                                "Sat",
+                                "Sun"))
+
+# add a text callout with arrow
+a <- list(
+  x = 'Fri',
+  y = 400,
+  text = 'Below Target !',
+  showarrow = TRUE,
+  arrowhead = 1,
+  ax = 20,
+  ay = -40
+)
+# the y-axis prefix given as dollars
+fig <- plot_ly(tips, x = ~day, y = ~total_bill, type = 'bar', color = ~sex, colors = c("#3399FF", "#FF6666")) %>% 
+  layout( barmode = 'stack', xaxis = xform, yaxis = list(title = 'Sum of Receipts', tickprefix = '$'), title = "Receipts by Payer Gender and Day of Week")
+# customie legend orientation & position
+fig <- fig %>% layout(legend = list(x = 0.2, y = 1, orientation = 'h'))
+# add a horizontal "target" line
+fig <- fig %>% add_segments(x = 'Thur', xend = 0, y = 950, yend = 950,  
+                            line = list(dash = "dash", color = 'black'),inherit = FALSE, showlegend = FALSE)
+fig <- fig %>% layout(annotations = a) 
+# customize font 
+fig <- fig %>% layout(font = list(family = "Rockwell"))
+fig
+
+```
+
+### How ggplot2 Express Works with Templates
+
+In this example, we will be using a template for the color palette.
+
+```{r}
+
+library(ggplot2)
+library(plotly)
+data(mpg)
+base <- ggplot(mpg, aes(cty, hwy, color = factor(cyl))) +
+  geom_jitter() + 
+  geom_abline(colour = "grey50", size = 2)
+labelled <- base +
+  labs(
+    x = "City mileage/gallon",
+    y = "Highway mileage/gallon",
+    colour = "Cylinders",
+    title = "Highway and city mileage are highly correlated"
+  ) +
+  scale_colour_brewer(type = "seq", palette = "Spectral")
+fig <- ggplotly(labelled)
+fig
+
+```
+
