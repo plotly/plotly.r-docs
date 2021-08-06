@@ -57,6 +57,76 @@ fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Sepal.Width, color = ~Specie
 fig
 ```
 
+### Fonts and Labels in Dash
+[Dash for R](https://dashr.plotly.com) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
+
+Learn about how to install Dash for R at https://dashr.plot.ly/installation.
+
+Everywhere in this page that you see fig, you can display the same figure in a Dash for R application by passing it to the figure argument.
+
+```{r}
+
+library(dash)
+library(dashCoreComponents)
+library(dashHtmlComponents)
+library(devtools)
+library(plotly)
+install_github("plotly/dash-daq", upgrade=TRUE)
+library(dashDaq)
+data("iris")
+
+
+app <- Dash$new()
+
+app$layout(
+  htmlDiv(
+    list(
+      dccGraph(id = 'graph'),
+      daqColorPicker(id = 'font',
+                     label = 'Font Color',
+                     value = list(hex = "#119DFF")),
+      daqColorPicker(id = 'title',
+                     label = 'Title Color',
+                     value = list(hex = "#2A0203"))
+      
+    )
+  )
+)
+
+app$callback(
+  output(id = 'graph', property='figure'),
+  params=list(input(id='font', property='value'), 
+              input(id='title', property='value')),
+  function(font_color, title_color) {
+    t <- list(
+      family = "Courier New",
+      size = 14,
+      color = strsplit(toString(font_color), split = ",")[[1]][1]
+      )
+    t1 <- list(
+      family = "Times New Roman",
+      color = strsplit(toString(title_color), split = ",")[[1]][1]
+    )
+    t2 <- list(
+      family = "Courier New",
+      size = 14,
+      color = strsplit(toString(font_color), split = ",")[[1]][1])
+    t3 <- list(family = 'Arial')
+    
+    fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Sepal.Width, color = ~Species, 
+                   type = 'scatter', mode = 'markers')%>% 
+      layout(title= list(text = "Playing with Fonts",font = t1), font=t, 
+             legend=list(title=list(text='Species',font = t2)), 
+             xaxis = list(title = list(text ='Sepal.Length', font = t3)))
+  
+    return(fig)
+  })
+
+
+```
+
+After executing this code, give app$run_server() in the console to start the dash.
+
 ### Manual Labelling in Plotly 
 
 Explicitly Labeling traces and axes in Plotly.
