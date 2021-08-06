@@ -38,7 +38,7 @@ Inspired by <a href="http://www.cookbook-r.com/Graphs/Scatterplots_(ggplot2)/">C
 library(plotly)
 
 ## read in data set (tolerance data from the ALDA book)
-tolerance <- read.table("https://stats.idre.ucla.edu/wp-content/uploads/2016/02/tolerance1_pp.txt",
+tolerance <- read.table("https://raw.githubusercontent.com/ASKurz/Applied-Longitudinal-Data-Analysis-with-brms-and-the-tidyverse/master/data/tolerance1_pp.txt",
     sep = ",", header = TRUE)
 
 ## change id and male to factor variables
