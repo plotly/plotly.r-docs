@@ -1,0 +1,361 @@
+## Images in R
+How to add images to charts as background images or logos.
+
+### Add a Background Image
+
+In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](https://plotly.com/r/displaying-images/).
+
+A background image can be added to the layout of a figure by setting the `images` parameter of `plot_ly.layout`. The
+`source` attribute of a `layout.images` can be the URL of an image, or a PIL
+Image object (`from PIL import Image; img = Image.open('filename.png')`).
+
+```{r}
+library('plotly')
+# Create figure
+plot_ly(x = c(0, 0.5, 1, 2, 2.2), y = c(1.23, 2.5, 0.42, 3, 1), type = 'scatter', mode = 'lines+markers') %>% 
+  # Add trace
+  layout(
+    images = list(
+      list(
+        # Add images
+        source =  "https://images.plot.ly/language-icons/api-home/r-logo.png?raw=true",
+        xref = "x",
+        yref = "y",
+        x = 0.2,
+        y = 3,
+        sizex = 2,
+        sizey = 2,
+        sizing = "stretch",
+        opacity = 0.4,
+        layer = "below"
+      )
+    )
+  )
+```
+
+### Add a Logo
+See more examples of [adding logos to charts](https://plotly.com/r/logos/)!
+
+```{r}
+library(plotly) 
+x= c("-35.3", "-15.9", "-15.8", "-15.6", "-11.1", 
+     "-9.6", "-9.2", "-3.5", "-1.9", "-0.9", 
+     "1.0", "1.4", "1.7", "2.0", "2.8", "6.2", 
+     "8.1", "8.5", "8.5", "8.6", "11.4", "12.5", 
+     "13.3", "13.7", "14.4", "17.5", "17.7", 
+     "18.9", "25.1", "28.9", "41.4") 
+ 
+y = c("Designers, musicians, artists, etc.", 
+      "Secretaries and administrative assistants", 
+      "Waiters and servers", "Archivists, curators, and librarians", 
+      "Sales and related", "Childcare workers, home car workers, etc.", 
+      "Food preparation occupations", "Janitors, maids, etc.", 
+      "Healthcare technicians, assistants. and aides", 
+      "Counselors, social and religious workers", 
+      "Physical, life and social scientists", "Construction", 
+      "Factory assembly workers", "Machinists, repairmen, etc.", 
+      "Media and communications workers", "Teachers", 
+      "Mechanics, repairmen, etc.", "Financial analysts and advisers", 
+      "Farming, fishing and forestry workers", 
+      "Truck drivers, heavy equipment operator, etc.", "Accountants and auditors", 
+      "Human resources, management analysts, etc.", "Managers", 
+      "Lawyers and judges", "Engineers, architects and surveyors", 
+      "Nurses", "Legal support workers", 
+      "Computer programmers and system admin.", "Police officers and firefighters", 
+      "Chief executives", "Doctors, dentists and surgeons") 
+ 
+df = data.frame(x,y,stringsAsFactors = FALSE) 
+
+m = list(r=20, l=300, b=75, t=125) 
+
+fig <- plot_ly(data = df, x = ~x, y = ~y, type = 'bar', orientation = 'h', 
+               marker = list(color = 'rgb(253, 240, 54)',  
+               line = list(width = 2, color = 'rgb(0, 0, 0)'))) %>%  
+  layout( xaxis = list(title = ""), yaxis = list(title = ""),
+    images = list(  
+      list(  
+        source =  "https://raw.githubusercontent.com/cldougl/plot_images/add_r_img/vox.png",  
+        xref = "paper",  
+        yref = "paper",  
+        x = 1.05,  
+        y = 1.05,  
+        sizex = 0.2,  
+        sizey = 0.2,  
+        xanchor="right",  
+        yanchor="bottom" 
+      )  
+    ) ) 
+ 
+fig <- fig %>% layout(autosize = F, margin = m, 
+                      title=(paste("Moving Up, Moving Down<br>" , 
+                               "<i>Percentile change in income between childhood and adulthood</i>")), 
+                      hovermode="x" 
+                      ) 
+fig
+```
+
+### Zoom on Static Images
+
+```{r}
+library(plotly) 
+ 
+#Constants 
+img_width = 1600 
+img_height = 900 
+scale_factor = 0.5 
+ 
+ 
+# Add invisible scatter trace. 
+# This trace is added to help the autoresize logic work. 
+fig <- plot_ly(width=img_width * scale_factor, 
+               height=img_height * scale_factor 
+) %>% 
+  add_trace( x= c(0, img_width * scale_factor), 
+             y= c(0, img_height * scale_factor), 
+             type = 'scatter',  mode = 'markers', alpha = 0) 
+ 
+# Configure axes 
+xconfig <- list( 
+  title = "", 
+  zeroline = FALSE, 
+  showline = FALSE, 
+  showticklabels = FALSE, 
+  showgrid = FALSE, 
+  range = c(0, img_width * scale_factor) 
+) 
+ 
+yconfig <- list( 
+  title = "", 
+  zeroline = FALSE, 
+  showline = FALSE, 
+  showticklabels = FALSE, 
+  showgrid = FALSE, 
+  range = c(0, img_height * scale_factor), 
+  scaleanchor="x" 
+) 
+ 
+fig <- fig %>% layout(xaxis = xconfig, yaxis = yconfig) 
+ 
+# Add image 
+ 
+fig <- fig %>% layout( 
+  images = list(  
+    list(  
+      source =  "https://raw.githubusercontent.com/michaelbabyn/plot_data/master/bridge.jpg",  
+      x=0, 
+      sizex=img_width * scale_factor, 
+      y=img_height * scale_factor, 
+      sizey=img_height * scale_factor, 
+      xref="x", 
+      yref="y", 
+      opacity=1.0, 
+      layer="below", 
+      sizing="stretch" 
+    )  
+  )) 
+ 
+# Configure other layout 
+ 
+m = list(r=0, l=0, b=0, t=0) 
+fig <- fig %>% layout(margin = m) 
+fig
+```
+
+### Annotating layout image with shapes
+It can be useful to add shapes to a layout image, for highlighting an object, drawing bounding boxes as part of a machine learning training set, or identifying seeds for a segmentation algorithm.
+
+In order to enable shape drawing, you need to
+
++ define a dragmode corresponding to a drawing tool (`'drawline'`,`'drawopenpath'`, `'drawclosedpath'`, `'drawcircle'`, or `'drawrect'`)
+
++ add [modebar buttons](https://plotly-r.com/control-modebar.html) corresponding to the drawing tools you wish to use.
+
+The style of new shapes is specified by the `newshape` layout attribute. Shapes can be selected and modified after they have been drawn. More details and examples are given in the [tutorial on shapes](https://plotly.com/r/shapes/#drawing-shapes-on-cartesian-plots).
+
+Drawing or modifying a shape triggers a `relayout` event, which [can be captured by a callback inside a Dash application](https://dashr.plotly.com/interactive-graphing).
+
+```{r}
+library(plotly) 
+ 
+#Constants 
+img_width = 1600 
+img_height = 900 
+scale_factor = 0.5 
+ 
+fig <- plot_ly() %>% 
+  add_trace( x= c(0, img_width ), 
+             y= c(0, img_height ), 
+             type = 'scatter',  mode = 'markers', alpha = 0)%>% 
+  layout(images = list(  
+    list(  
+      source =  "https://raw.githubusercontent.com/michaelbabyn/plot_data/master/bridge.jpg",  
+      x=0, 
+      sizex=img_width, 
+      y=0, 
+      sizey=img_height, 
+      xref="x", 
+      yref="y", 
+      opacity=1.0, 
+      layer="below" 
+    )  
+  )) 
+ 
+xconfig <- list( 
+  title = "", 
+  showgrid = FALSE, 
+  range = c(0, img_width) 
+) 
+ 
+yconfig <- list( 
+  title = "", 
+  showgrid = FALSE, 
+  range = c(img_height,0), 
+  scaleanchor="x" 
+) 
+ 
+fig <- fig %>% layout(xaxis = xconfig, yaxis = yconfig) 
+ 
+#Add lineshape 
+fig <- fig %>%  
+  add_segments(x = 650, xend = 1080, y = 380, yend = 180, line = list( color = 'cyan'),inherit = FALSE, showlegend = FALSE) 
+ 
+fig <- fig %>% layout(dragmode='drawrect', 
+                      newshape=list(line = list(color='cyan')), 
+                      title = 'Drag to add annotations - use modebar to change drawing tool') 
+ 
+#Add modebar buttons 
+fig <- fig %>%  
+  config(modeBarButtonsToAdd = c('drawline', 
+                                 'drawopenpath', 
+                                 'drawclosedpath', 
+                                 'drawcircle', 
+                                 'drawrect', 
+                                 'eraseshape')) 
+ 
+fig
+```
+
+
+### Images Placed Relative to Axes
+
+Using `xref='x domain'` or `yref='y domain'`, images can be placed relative to
+axes. As an example, the following shows how to put an image in the top corner
+of a subplot (try panning and zooming the resulting figure):
+
+```{r}
+library(plotly) 
+
+db1 <- iris[iris$Species == "setosa", ] 
+db2 <- iris[iris$Species == "versicolor", ] 
+db3 <- iris[iris$Species == "virginica", ] 
+
+fig1 <- plot_ly(data = db1, x = ~Sepal.Length, y = ~Sepal.Width, type = 'scatter', mode = 'markers') %>% 
+  layout(xaxis = list(range = c(4,8))) 
+# add images
+fig1 <- fig1 %>% layout( 
+  images = list(  
+    list(  
+      # sources of images
+      source =  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Iris_setosa_var._setosa_%282595031014%29.jpg/360px-Iris_setosa_var._setosa_%282595031014%29.jpg",  
+      row=1, 
+      col=1, 
+      source=1, 
+      xref="x domain", 
+      yref="y domain", 
+      x=1, 
+      y=1, 
+      xanchor="right", 
+      yanchor="top", 
+      sizex=0.2, 
+      sizey=0.2 
+    )  
+  )) 
+
+fig2 <- plot_ly(data = db2, x = ~Sepal.Length, y = ~Sepal.Width, type = 'scatter', mode = 'markers') %>% 
+  layout(xaxis = list(range = c(4,8))) 
+# add images
+fig2 <- fig2 %>% layout( 
+  images = list(  
+    list(  
+      # sources of images
+      source =  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Iris_versicolor_quebec_1.jpg/320px-Iris_versicolor_quebec_1.jpg",  
+      row=1, 
+      col=2, 
+      source=2, 
+      xref="x domain", 
+      yref="y domain", 
+      x=2.05, 
+      y=1, 
+      xanchor="right", 
+      yanchor="top", 
+      sizex=0.2, 
+      sizey=0.2 
+    )  
+  )) 
+
+fig3 <- plot_ly(data = db3, x = ~Sepal.Length, y = ~Sepal.Width, type = 'scatter', mode = 'markers') %>% 
+  layout(xaxis = list(range = c(4,8), title = 'Sepal..Length')) 
+# add images  
+fig3 <- fig3 %>% layout( 
+  images = list(  
+    list(  
+      # sources of images
+      source =  "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Iris_virginica_2.jpg/480px-Iris_virginica_2.jpg",  
+      row=1, 
+      col=3, 
+      source=2, 
+      xref="x domain", 
+      yref="y domain", 
+      x=3.15, 
+      y=1, 
+      xanchor="right", 
+      yanchor="top", 
+      sizex=0.2, 
+      sizey=0.2 
+    )  
+  )) 
+
+fig <- subplot(fig1, fig2, fig3, shareY = TRUE, shareX = TRUE) %>% layout(showlegend = FALSE) 
+
+annotations = list(  
+  list(  
+    x = 0.2,   
+    y = 1.0,   
+    font = list(size = 10),   
+    text = "species=setosa",   
+    xref = "paper",   
+    yref = "paper",   
+    xanchor = "center",   
+    yanchor = "bottom",   
+    showarrow = FALSE  
+  ),   
+  list(  
+    x = 0.8,   
+    y = 1,   
+    font = list(size = 10),   
+    text = "species=versicolor",   
+    xref = "paper",   
+    yref = "paper",   
+    xanchor = "center",   
+    yanchor = "bottom",   
+    showarrow = FALSE  
+  ),   
+  list(  
+    x = 0.5,   
+    y = 1,   
+    font = list(size = 10),   
+    text = "species=virginica",   
+    xref = "paper",   
+    yref = "paper",   
+    xanchor = "center",   
+    yanchor = "bottom",   
+    showarrow = FALSE  
+  )) 
+
+fig <- fig %>%layout(annotations = annotations)  
+options(warn = -1) 
+fig
+```
+
+#### Reference
+See https://plotly.com/r/reference/layout/images/ for more information and chart attribute options!
