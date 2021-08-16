@@ -213,10 +213,17 @@ components$PC2 <- -components$PC2
 fig <- plot_ly(components, x = ~PC1, y = ~PC2, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96'), type = 'scatter', mode = 'markers')%>% 
   layout( 
     legend=list(title=list(text='color')),
+    plot_bgcolor='#e5ecf6',
     xaxis = list(
-      title = "0"), 
+      title = "0",
+      zerolinecolor = "#ffff",
+      zerolinewidth = 2,
+      gridcolor='#ffff'), 
     yaxis = list(
-      title = "1"))
+      title = "1",
+      zerolinecolor = "#ffff",
+      zerolinewidth = 2,
+      gridcolor='#ffff'))
 fig
 ```
 
