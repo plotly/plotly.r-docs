@@ -1,4 +1,5 @@
-## t-SNE and UMAP projections in Python
+## t-SNE and UMAP projections in R
+
 
 This page presents various ways to visualize two popular dimensionality reduction techniques, namely the [t-distributed stochastic neighbor embedding](https://lvdmaaten.github.io/tsne/) (t-SNE) and [Uniform Manifold Approximation and Projection](https://umap-learn.readthedocs.io/en/latest/index.html) (UMAP). They are needed whenever you want to visualize data with more than two or three features (i.e. dimensions).
 
