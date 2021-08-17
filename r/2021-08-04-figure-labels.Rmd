@@ -91,7 +91,6 @@ library(dashCoreComponents)
 library(dashHtmlComponents)
 library(devtools)
 library(plotly)
-install_github("plotly/dash-daq", upgrade=TRUE)
 library(dashDaq)
 data("iris")
 
