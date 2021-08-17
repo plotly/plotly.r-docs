@@ -109,10 +109,13 @@ In this example, we will be using a template for the color palette.
 
 library(ggplot2)
 library(plotly)
+
 data(mpg)
+
 base <- ggplot(mpg, aes(cty, hwy, color = factor(cyl))) +
   geom_jitter() + 
   geom_abline(colour = "grey50", size = 2)
+
 labelled <- base +
   labs(
     x = "City mileage/gallon",
@@ -121,8 +124,11 @@ labelled <- base +
     title = "Highway and city mileage are highly correlated"
   ) +
   scale_colour_brewer(type = "seq", palette = "Spectral")
+
 fig <- ggplotly(labelled)
+
 fig
+
 
 ```
 

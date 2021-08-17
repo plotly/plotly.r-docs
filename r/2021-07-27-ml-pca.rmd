@@ -73,7 +73,8 @@ fig
 
 ###  Visualize all the principal components
 
-Now, we apply `PCA` the same dataset, and retrieve **all** the components. We use the same `splom` trace to display our results, but this time our features are the resulting *principal components*, ordered by how much variance they are able to explain.
+Now, we apply `PCA` to the same dataset, and retrieve **all** the components. We use the same `splom` trace to display our results, but this time our features are the resulting *principal components*, ordered by how much variance they are able to explain.
+
 
 The importance of explained variance is demonstrated in the example below. The subplot between PC3 and PC4 is clearly unable to separate each class, whereas the subplot between PC1 and PC2 shows a clear separation between each species.
 
@@ -212,10 +213,17 @@ components$PC2 <- -components$PC2
 fig <- plot_ly(components, x = ~PC1, y = ~PC2, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96'), type = 'scatter', mode = 'markers')%>% 
   layout( 
     legend=list(title=list(text='color')),
+    plot_bgcolor='#e5ecf6',
     xaxis = list(
-      title = "0"), 
+      title = "0",
+      zerolinecolor = "#ffff",
+      zerolinewidth = 2,
+      gridcolor='#ffff'), 
     yaxis = list(
-      title = "1"))
+      title = "1",
+      zerolinecolor = "#ffff",
+      zerolinewidth = 2,
+      gridcolor='#ffff'))
 fig
 ```
 
