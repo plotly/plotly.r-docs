@@ -25,7 +25,7 @@ jobs:
           name: install application-level dependencies
           command: |
             sudo apt-get install -y pandoc libudunits2-dev libgdal-dev libxt-dev libglu1-mesa-dev libfftw3-dev libglpk40 libxml2-dev libcurl4-openssl-dev  apt-transport-https software-properties-common
-            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm", "hexbin", "tidyverse", "tidymodels", "kknn", "kernlab", "pracma", "reshape2", "tsne", "ggplot2", "datasets", "fastDummies")); devtools::install_github("ropensci/plotly"); devtools::install_github("johannesbjork/LaCroixColoR"); install.packages("BiocManager"); BiocManager::install("EBImage"); devtools::install_deps(dependencies = TRUE) '
+            sudo R -e 'install.packages(c("curl", "devtools", "mvtnorm", "hexbin", "tidyverse", "tidymodels", "kknn", "kernlab", "pracma", "reshape2", "tsne", "umap", "ggplot2", "datasets", "fastDummies")); devtools::install_github("ropensci/plotly"); devtools::install_github("johannesbjork/LaCroixColoR"); install.packages("BiocManager"); BiocManager::install("EBImage"); devtools::install_deps(dependencies = TRUE) '
             sudo R -e 'devtools::install_github("hypertidy/anglr@v0.7.0", dependencies = TRUE) '
             sudo R -e 'devtools::install_deps(dependencies = TRUE) '
       - save_cache:
