@@ -1,3 +1,20 @@
+---
+description: Visualize t-SNE and UMAP in R with Plotly.
+display_as: ai_ml
+language: r
+layout: base
+name: t-SNE and UMAP projections
+order: 5
+output:
+  html_document:
+    keep_md: true
+permalink: r/t-sne-and-umap-projections/
+thumbnail: thumbnail/tsne-umap-projections.png
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
 ## t-SNE and UMAP projections in R
 
 
@@ -74,6 +91,12 @@ tsne <- data.frame(tsne)
 pdb <- cbind(tsne,iris$Species)
 options(warn = -1)
 fig <-  plot_ly(data = pdb ,x =  ~X1, y = ~X2, type = 'scatter', mode = 'markers', split = ~iris$Species)
+
+fig <- fig %>%
+  layout(
+    plot_bgcolor = "#e5ecf6"
+  )
+
 fig
 
 ```
@@ -97,7 +120,6 @@ options(warn = -1)
 fig <-  plot_ly(data = pdb ,x =  ~X1, y = ~X2, z = ~X3, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96') ) %>% 
   add_markers(size = 8) %>%
   layout( 
-    plot_bgcolor='#e5ecf6',
     xaxis = list(
       zerolinecolor = "#ffff",
       zerolinewidth = 2,
@@ -105,7 +127,8 @@ fig <-  plot_ly(data = pdb ,x =  ~X1, y = ~X2, z = ~X3, color = ~iris$Species, c
     yaxis = list(
       zerolinecolor = "#ffff",
       zerolinewidth = 2,
-      gridcolor='#ffff'))
+      gridcolor='#ffff'),
+    scene =list(bgcolor = "#e5ecf6"))
 fig
 
 ```
@@ -128,7 +151,8 @@ layout <- data.frame(layout)
 final <- cbind(layout, iris$Species) 
  
 fig <- plot_ly(final, x = ~X1, y = ~X2, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96'), type = 'scatter', mode = 'markers')%>%  
-  layout(  
+  layout(
+    plot_bgcolor = "#e5ecf6",
     legend=list(title=list(text='species')), 
     xaxis = list( 
       title = "0"),  
@@ -171,6 +195,7 @@ colnames(final) <- c('X1', 'X2', 'label')
 
 fig <- plot_ly(final, x = ~X1, y = ~X2, split = ~label,  type = 'scatter', mode = 'markers')%>%  
   layout(  
+    plot_bgcolor = "#e5ecf6",
     legend=list(title=list(text='digit')), 
     xaxis = list( 
       title = "0"),  
