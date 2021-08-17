@@ -5,7 +5,7 @@ display_as: basic
 language: r
 layout: base
 name: Dot Plots
-order: 13
+order: 12
 output:
   html_document:
     keep_md: true

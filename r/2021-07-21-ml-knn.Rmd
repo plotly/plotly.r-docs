@@ -1,6 +1,23 @@
+---
+description: Visualize a k-Nearest-Neighbors (kNN) classification in R with Tidymodels.
+display_as: ai_ml
+language: r
+layout: base
+name: kNN Classification
+order: 2
+output:
+  html_document:
+    keep_md: true
+permalink: r/knn-classification/
+thumbnail: thumbnail/knn-classification.png
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
 ## kNN Classification in R
 
-Visualize Tidymodels's k-Nearest Neighbors (kNN) classification in R with Plotly.
+Visualize Tidymodels' k-Nearest Neighbors (kNN) classification in R with Plotly.
 
 
 ## Basic binary classification with kNN

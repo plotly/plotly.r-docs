@@ -1,3 +1,20 @@
+---
+description: Visualize regression in Tidymodels with Plotly
+display_as: ai_ml
+language: r
+layout: base
+name: ML Regression
+order: 1
+output:
+  html_document:
+    keep_md: true
+permalink: r/ml-regression/
+thumbnail: thumbnail/ml-regression.png
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
 <!-- #region -->
 This page shows how to use Plotly charts for displaying various types of regression models, starting from simple models like [Linear Regression](https://parsnip.tidymodels.org/reference/linear_reg.html) and progressively move towards models like Decision Tree and Polynomial Features. We highlight various capabilities of plotly, such as comparative analysis of the same model with different parameters, displaying Latex, and [surface plots](https://plotly.com/r/3d-surface-plots/) for 3D data.
 

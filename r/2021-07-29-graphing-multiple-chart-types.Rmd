@@ -1,0 +1,81 @@
+---
+description: How to design figures with multiple chart types in Plotly for R.
+display_as: file_settings
+language: r
+layout: base
+name: Multiple Chart Types
+order: 21
+output:
+  html_document:
+    keep_md: true
+permalink: r/graphing-multiple-chart-types/
+thumbnail: thumbnail/multiple-chart-type.jpg
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+## Multiple Chart Types in R
+
+How to design figures with multiple chart types in R.
+
+### Chart Types versus Trace Types
+
+Plotly's figure data structure supports defining [subplots](https://plotly.com/r/subplots/) of [various types](https://plotly.com/r/mixed-subplots/) (e.g. [cartesian](https://plotly.com/r/axes/), [polar](https://plotly.com/r/polar-chart/), [3-dimensional](https://plotly.com/r/3d-charts/), [maps](https://plotly.com/r/maps/) etc) with attached traces of various compatible types (e.g. scatter, bar, choropleth, surface etc). This means that **Plotly figures are not constrained to representing a fixed set of "chart types"** such as scatter plots only or bar charts only or line charts only: any subplot can contain multiple traces of different types.
+
+
+### Multiple Trace Types with Plotly
+
+Figures produced with Plotly have the add_trace() method, so it is easy to start with a Plotly figure containing only traces of a given type, and add traces of another type.
+
+```{r}
+library(plotly)
+data <- data.frame(
+  Fruits = c ("apples", "bananas", "oranges"),
+  Line = c(1,3,2),
+  Bar = c(2,1,3))
+
+fig <- plot_ly(data , x = ~Fruits, y = ~Bar, type = 'bar', name = 'Last Year') %>%
+  add_trace(data , x = ~Fruits, y = ~Line, type = 'scatter',  mode = 'lines', name = 'This year')
+
+fig <- fig %>% layout(yaxis = list(title = "Amount"))
+fig <- fig %>% layout(legend=list(title=list(text='<b> Time Period </b>')))
+fig
+```
+
+#### Line Chart and a Bar Chart
+
+```{r}
+library(plotly)
+data <- data.frame(
+  X = c (0, 1, 2, 3, 4, 5),
+  Line = c(1.5, 1, 1.3, 0.7, 0.8, 0.9),
+  Bar = c(1, 0.5, 0.7, -1.2, 0.3, 0.4))
+
+fig <- plot_ly(data , x = ~X, y = ~Bar, type = 'bar') %>%
+  add_trace(data , x = ~X, y = ~Line, type = 'scatter',  mode = 'lines+markers')
+
+fig
+```
+
+#### A Contour and Scatter Plot of the Method of Steepest Descent
+
+```{r}
+library(plotly)
+library(jsonlite)
+urlfile<-'https://raw.githubusercontent.com/plotly/datasets/master/steepest.json'
+data<-fromJSON(url(urlfile))
+X <- data[["contour_x"]][,]
+Y <- data[["contour_y"]][,]
+Z <- data[["contour_z"]][,,]
+fig <- plot_ly() %>%
+  add_trace(x = X, y= Y, z = Z, type = "contour") %>%
+  hide_colorbar()%>% layout(showlegend = FALSE) %>%
+  add_trace(x = data$trace_x, y = data$trace_y, type = "scatter",
+            mode = "lines+markers", name = 'steepest', inherit =  FALSE,
+            marker = list(color = 'black'), line = list(color = 'black'))
+fig
+```
+
+#### Reference
+See https://plotly.com/r/reference/ for more information and attribute options!

@@ -1,0 +1,426 @@
+---
+description: How to add annotated horizontal and vertical lines in R
+display_as: file_settings
+language: r
+layout: base
+name: Horizontal and Vertical Lines and Rectangles
+order: 23
+output:
+  html_document:
+    keep_md: true
+permalink: r/horizontal-vertical-shapes/
+thumbnail: thumbnail/shape.png
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+## Horizontal and Vertical Lines and Rectangles in R
+
+How to add annotated horizontal and vertical lines in R.
+
+### Horizontal and Vertical Lines and Rectangles
+
+Horizontal and vertical lines and rectangles that span an entire plot can be added via the `shapes` parameter of `layout`. Shapes added with these methods are added as [layout shapes](https://plotly.com/r/shapes/). These shapes are fixed to the endpoints of one axis, regardless of the range of the plot, and fixed to data coordinates on the other axis. The following shows some possibilities, try panning and zooming the resulting figure to see how the shapes stick to some axes:
+
+```{r}
+library(plotly)
+data("iris")
+
+hline <- function(y = 0, color = "black") {
+  list(
+    type = "line",
+    x0 = 0,
+    x1 = 1,
+    xref = "paper",
+    y0 = y,
+    y1 = y,
+    line = list(color = color)
+  )
+}
+
+fig <- plot_ly(data = iris, x = ~Petal.Length, y = ~Petal.Width,
+               type = 'scatter', mode = 'markers') %>%
+  layout(shapes = list(hline(0.9), list(type = "rect",line = list(color = "black"),
+                                        x0 = 0.9, x1 = 2)), plot_bgcolor = "#e5ecf6")
+fig
+```
+
+The shapes can also be filled with a specified color using `fillcolor` and the lines can also be changed to dotted lines using the `dash` parameter.
+
+```{r}
+library(plotly)
+data("iris")
+
+vline <- function(x = 0, color = "green") {
+  list(
+    type = "line",
+    y0 = 0,
+    y1 = 1,
+    yref = "paper",
+    x0 = x,
+    x1 = x,
+    line = list(color = color, dash="dot")
+  )
+}
+
+fig <- plot_ly(data = iris, x = ~Petal.Length, y = ~Petal.Width,
+               type = 'scatter', mode = 'markers') %>%
+  layout(plot_bgcolor = "#e5ecf6", shapes = list(vline(2.5), list(type = "rect",
+                                        fillcolor = "red", line = list(color = "red"), opacity = 0.2,
+                                        y0 = 0.9, y1 = 2.6, x0 = 0.5, x1 = 7.5)))
+fig
+```
+
+### Horizontal and Vertical Lines in Dash
+
+[Dash for R](https://dashr.plotly.com) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
+
+Learn about how to install Dash for R at https://dashr.plot.ly/installation.
+
+Everywhere in this page that you see fig, you can display the same figure in a Dash for R application by passing it to the figure argument.
+
+```{r eval=FALSE}
+
+library(dash)
+library(dashCoreComponents)
+library(dashHtmlComponents)
+library(plotly)
+data("iris")
+
+vline <- function(x = 0, color = "green") {
+  list(
+    type = "line",
+    y0 = 0,
+    y1 = 1,
+    yref = "paper",
+    x0 = x,
+    x1 = x,
+    line = list(color = color, dash="dot")
+  )
+}
+
+app <- Dash$new()
+
+app$layout(
+  htmlDiv(
+    list(
+      dccGraph(id = 'graph-with-slider'),
+      htmlLabel('Position of hline'),
+      dccSlider(
+        id='slider',
+        min = 1,
+        max = 7,
+        marks = c("","1","","","","","","7"),
+        value = 2.5,
+        step=0.1
+      )
+
+    )
+  )
+)
+app$callback(
+  output(id = 'graph-with-slider', property='figure'),
+  params=list(input(id='slider', property='value')),
+  function(value) {
+    fig <- plot_ly(data = iris, x = ~Petal.Length, y = ~Petal.Width,
+                   type = 'scatter', mode = 'markers') %>%
+      layout(plot_bgcolor = "#e5ecf6", shapes = list(vline(value), list(type = "rect",
+                                            fillcolor = "red", line = list(color = "red"), opacity = 0.2,
+                                            y0 = 0.9, y1 = 2.6, x0 = 0.5, x1 = 7.5)))
+    return(fig)
+  })
+```
+
+After executing this code, give app$run_server() in the console to start the dash.
+
+### Adding Text Annotations
+
+[Text annotations](https://plotly.com/r/text-and-annotations/) can optionally be added to a shape using the `add_text` keyword argument, and positioned using the `x` and `y` arguments:
+
+```{r}
+library(tidyquant)
+library(plotly)
+tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+for (i in tickers){
+getSymbols(i,
+           from = "2018-01-01",
+           to = "2019-12-31")}
+stock <- data.frame(GOOG$GOOG.Adjusted,
+                    AAPL$AAPL.Adjusted,
+                    AMZN$AMZN.Adjusted,
+                    FB$FB.Adjusted,
+                    NFLX$NFLX.Adjusted,
+                    MSFT$MSFT.Adjusted)
+stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
+stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
+stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
+stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
+stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
+stock <- data.frame(stock,rownames(stock))
+colnames(stock) <- append(tickers,'Dates')
+
+hline <- function(y = 0, color = "black") {
+  list(
+    type = "line",
+    x0 = 0,
+    x1 = 1,
+    xref = "paper",
+    y0 = y,
+    y1 = y,
+    line = list(color = color, dash="dot")
+  )
+}
+
+x <- list(
+  title = "date"
+)
+y <- list(
+  title = "value"
+)
+
+fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
+  add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
+  add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
+  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
+  add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
+  layout(legend=list(title=list(text='company')), shapes = list(list(type = "rect", text = 'Decline', fillcolor = "green", line = list(color = "green"),
+                            opacity = 0.2, y0 = 0.6, y1 = 2.25, x0 = "2018-10-01", x1 = "2018-12-17"), hline(1)), xaxis = x, yaxis = y, plot_bgcolor = "#e5ecf6") %>%
+  add_text(showlegend = FALSE, x = c("2018-11-01","2019-09-20"), y = c(2.2,0.95),
+           text = c("decline","Jan 1, 2018 baseline"))
+
+fig
+```
+
+Extra formatting of the annotation can be done by adding `textfont` argument.
+
+```{r}
+library(tidyquant)
+library(plotly)
+tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+for (i in tickers){
+  getSymbols(i,
+             from = "2018-01-01",
+             to = "2019-12-31")}
+stock <- data.frame(GOOG$GOOG.Adjusted,
+                    AAPL$AAPL.Adjusted,
+                    AMZN$AMZN.Adjusted,
+                    FB$FB.Adjusted,
+                    NFLX$NFLX.Adjusted,
+                    MSFT$MSFT.Adjusted)
+stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
+stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
+stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
+stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
+stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
+stock <- data.frame(stock,rownames(stock))
+colnames(stock) <- append(tickers,'Dates')
+
+hline <- function(y = 0, color = "black") {
+  list(
+    type = "line",
+    x0 = 0,
+    x1 = 1,
+    xref = "paper",
+    y0 = y,
+    y1 = y,
+    line = list(color = color, dash="dot")
+  )
+}
+
+x <- list(
+  title = "date"
+)
+y <- list(
+  title = "value"
+)
+
+fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
+  add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
+  add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
+  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
+  add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
+  layout(legend=list(title=list(text='company')), plot_bgcolor = "#e5ecf6", shapes = list(list(type = "rect", text = 'decline', fillcolor = "green", line = list(color = "green"),
+                                                                     opacity = 0.2, y0 = 0.6, y1 = 2.25, x0 = "2018-10-01", x1 = "2018-12-17"), hline(1)), xaxis = x, yaxis = y)%>%
+  add_text(showlegend = FALSE, x = c("2018-11-10","2019-08-20"), y = c(2.2,0.95),
+           text = c("decline","Jan 1, 2018 baseline"),
+           textfont = list(color = c('#000000','blue'), size = c(20,20), family = c("Open Sans","Times New Roman")))
+
+fig
+```
+
+### Adding to Multiple Facets / Subplots
+
+The same line or box is added to multiple plots, and these plots are finally added to the existing figure using `subplot` method.
+
+```{r}
+library(tidyquant)
+library(plotly)
+tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+for (i in tickers){
+  getSymbols(i,
+             from = "2018-01-01",
+             to = "2019-12-31")}
+hline <- function(y = 0, color = "black") {
+  list(
+    type = "line",
+    x0 = 0,
+    x1 = 1,
+    xref = "paper",
+    y0 = y,
+    y1 = y,
+    line = list(color = color, dash="dot")
+  )
+}
+
+x <- list(
+  title = "date"
+)
+y <- list(
+  title = "value"
+)
+
+stock <- data.frame(GOOG$GOOG.Adjusted,
+                    AAPL$AAPL.Adjusted,
+                    AMZN$AMZN.Adjusted,
+                    FB$FB.Adjusted,
+                    NFLX$NFLX.Adjusted,
+                    MSFT$MSFT.Adjusted)
+stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
+stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
+stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
+stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
+stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
+stock <- data.frame(stock,rownames(stock))
+colnames(stock) <- append(tickers,'Dates')
+
+ax <- list(
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE
+)
+
+fig1 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
+  layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2), title = 'value'), shapes = list(list(type = "rect", text = 'Decline', fillcolor = "green", line = list(color = "green"),
+                                                                                                                                  opacity = 0.2, y0 = 0.6, y1 = 2, x0 = "2018-10-01", x1 = "2018-12-17"), hline(1)), xaxis = x, yaxis = y)%>%
+  add_text(showlegend = FALSE, x = c("2018-11-5","2019-10-20"), y = c(1.9,0.95),
+           text = c("decline","Jan 1, 2018 baseline"))
+
+fig2 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
+  layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2),title = '', showticklabels = FALSE), shapes = list( hline(1)), xaxis = x, yaxis = y)%>%
+  add_text(showlegend = FALSE, x = c("2019-10-20"), y = c(0.95),
+           text = c("Jan 1, 2018 baseline"))
+
+fig3 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
+  layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2), title = 'value'), shapes = list(type = "rect", text = 'Decline', fillcolor = "green", line = list(color = "green"),
+                                                                                                                             opacity = 0.2, y0 = 0.6, y1 = 2, x0 = "2018-10-01", x1 = "2018-12-17"))%>%
+  add_text(showlegend = FALSE, x = c("2018-11-5"), y = c(1.9),
+           text = c("decline"))
+
+fig4 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2),title = '', showticklabels = FALSE))
+
+fig5 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
+  layout(legend=list(title=list(text='company')), xaxis = list(title = 'Date'), yaxis = list(range = c(0.5,2), title = 'value'), shapes = list(type = "rect", text = 'Decline', fillcolor = "green", line = list(color = "green"),
+                                                                                                                                               opacity = 0.2, y0 = 0.6, y1 = 2, x0 = "2018-10-01", x1 = "2018-12-17"))%>%
+  add_text(showlegend = FALSE, x = c("2018-11-5"), y = c(1.9),
+           text = c("decline"))
+
+fig6 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
+  add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
+  layout( legend=list(title=list(text='company')), yaxis = list(range = c(0.5,2) ,showticklabels = FALSE, title =''),  xaxis = list(title = 'Date')
+  )
+
+fig <- subplot(fig1, fig2, fig3, fig4, fig5, fig6,
+               nrows = 3, titleY = TRUE, titleX = TRUE)
+annotations = list(
+  list(
+    x = 0.225,
+    y = 1.0,
+    font = list(size = 10),
+    text = "company=GOOG",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.775,
+    y = 1,
+    font = list(size = 10),
+    text = "company=AAPL",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.225,
+    y = 0.666,
+    font = list(size = 10),
+    text = "company=AMZN",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.775,
+    y = 0.666,
+    font = list(size = 10),
+    text = "company=FB",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.225,
+    y = 0.333,
+    font = list(size = 10),
+    text = "company=NFLX",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.775,
+    y = 0.333,
+    font = list(size = 10),
+    text = "company=MSFT",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  )
+)
+
+fig <- fig %>% layout(annotations = annotations, plot_bgcolor = "#e5ecf6")
+
+fig
+```
+### Reference
+
+More details are available about [layout shapes](https://plotly.com/r/shapes/) and [annotations](https://plotly.com/r/text-and-annotations/),
+[adding line](https://plotly.com/r/shapes/#lines),
+[adding rectangle](https://plotly.com/r/shapes/#rectangles).

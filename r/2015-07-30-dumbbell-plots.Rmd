@@ -5,7 +5,7 @@ display_as: basic
 language: r
 layout: base
 name: Dumbbell Plots
-order: 14
+order: 13
 output:
   html_document:
     keep_md: true
