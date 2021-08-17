@@ -15,7 +15,6 @@ thumbnail: thumbnail/ml-pca.png
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
-## PCA Visualization in Python
 Visualize Principle Component Analysis (PCA) of your high-dimensional data in R with Plotly.
 
 This page first shows how to visualize higher dimension data using various Plotly figures combined with dimensionality reduction (aka projection). Then, we dive into the specific details of our projection algorithm.
