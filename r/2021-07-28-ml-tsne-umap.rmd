@@ -95,7 +95,17 @@ tsne <- data.frame(tsne)
 pdb <- cbind(tsne,iris$Species)
 options(warn = -1)
 fig <-  plot_ly(data = pdb ,x =  ~X1, y = ~X2, z = ~X3, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96') ) %>% 
-  add_markers(size = 8) 
+  add_markers(size = 8) %>%
+  layout( 
+    plot_bgcolor='#e5ecf6',
+    xaxis = list(
+      zerolinecolor = "#ffff",
+      zerolinewidth = 2,
+      gridcolor='#ffff'), 
+    yaxis = list(
+      zerolinecolor = "#ffff",
+      zerolinewidth = 2,
+      gridcolor='#ffff'))
 fig
 
 ```

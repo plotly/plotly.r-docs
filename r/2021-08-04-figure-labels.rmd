@@ -54,7 +54,8 @@ fig <- plot_ly(data = iris, x = ~Sepal.Length, y = ~Sepal.Width, color = ~Specie
                type = 'scatter', mode = 'markers')%>% 
   layout(title= list(text = "Playing with Fonts",font = t1), font=t, 
          legend=list(title=list(text='Species',font = t2)), 
-         xaxis = list(title = list(text ='Sepal.Length', font = t3)))
+         xaxis = list(title = list(text ='Sepal.Length', font = t3)),
+         plot_bgcolor='#e5ecf6')
 fig
 ```
 
