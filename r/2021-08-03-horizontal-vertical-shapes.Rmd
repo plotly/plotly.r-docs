@@ -9,7 +9,7 @@ output:
   html_document:
     keep_md: true
 permalink: r/horizontal-vertical-shapes/
-thumbnail: thumbnail/shape.png
+thumbnail: thumbnail/shape.jpg
 ---
 
 ```{r, echo = FALSE, message=FALSE}
