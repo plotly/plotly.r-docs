@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: The Figure Data Structure
-order: 1
+order: 24
 page_type: u-guide
 permalink: r/figure-structure/
 thumbnail: thumbnail/violin.jpg
