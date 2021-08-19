@@ -7,6 +7,9 @@ language: r
 layout: base
 name: Discrete Colors
 order: 25
+output:
+  html_document:
+    keep_md: true
 permalink: r/discrete-color/
 thumbnail: thumbnail/heatmap_colorscale.jpg
 ---
@@ -133,7 +136,7 @@ Learn about how to install Dash for R at https://dashr.plot.ly/installation.
  
 Everywhere in this page that you see fig, you can display the same figure in a Dash for R application by passing it to the figure argument.
 
-```{r}
+```{r eval=FALSE}
 
 library(dash) 
 library(dashCoreComponents) 
@@ -457,7 +460,7 @@ Learn about how to install Dash at https://dashr.plot.ly/installation.
  
 Everywhere in this page that you see fig, you can display the same figure in a Dash application by passing it to the figure argument of the Graph component from the built-in dash_core_components package like this: 
  
-{r} 
+```{r eval=FALSE}
 library(dash) 
 library(dashCoreComponents) 
 library(dashHtmlComponents) 
@@ -477,6 +480,5 @@ app$layout(
 ) 
  
 #app$run_server() 
- 
- 
+```
 Use app$run_server() to run the dash app.
