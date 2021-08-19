@@ -1,0 +1,584 @@
+---
+description: Creating and Updating Figures with Plotly's R graphing library
+display_as: file_settings
+language: r
+layout: base
+name: Creating and Updating Figures
+order: 27
+page_type: example_index
+permalink: r/creating-and-updating-figures/
+thumbnail: thumbnail/creating-and-updating-figures.png
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+
+The `plotly` R package exists to create, manipulate and [render](https://plotly.com/r/getting-started/#rendering-charts) graphical figures (i.e. charts, plots, maps and diagrams) represented by data structures also referred to as figures. The rendering process uses the [Plotly.js JavaScript library](https://plotly.com/javascript/) under the hood although R developers using this module very rarely need to interact with the Javascript library directly, if ever. Figures can be represented in R either as lists or as instances of the Plotly Figures, and are serialized as text in [JavaScript Object Notation (JSON)](https://json.org/) before being passed to Plotly.js.
+
+### Figures As Lists
+
+Figures can be represented as Lists and displayed using `plotly_build` function. The `fig` list in the example below describes a figure. It contains a single `bar` trace and a title.
+
+```{r}
+library(plotly)
+fig = list(
+  data = list(
+    list(
+      x = c(1, 2, 3),
+      y = c(1, 3, 2),
+      type = 'bar'
+    )
+  ),
+  layout = list(
+    title = 'A Figure Specified By R List',
+    plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff')
+  )
+)
+# To display the figure defined by this list, use the plotly_build function
+plotly_build(fig)
+```
+
+### Plotly Figures 
+
+The `plot_ly` function provides an automatically-generated hierarchy of classes that may be used to represent figures.
+
+`plot_ly` figures have several benefits compared to plain R Lists.
+
+1. `plot_ly` figures provide precise data validation. If you provide an invalid property name or an invalid property value as the key to a Plotly Figure, an exception will be raised with a helpful error message describing the problem. This is not the case if you use plain R lists to build your figures.
+2. `plot_ly` figures contain descriptions of each valid property as R docstrings. You can use these docstrings in the development environment of your choice to learn about the available properties as an alternative to consulting the online [Full Reference](https://plotly.com/r/reference/).
+3. Properties of `plot_ly` figures can be accessed using both dictionary-style key lookup (e.g. `fig$x`).
+4. `plot_ly` figures support higher-level convenience functions for making updates to already constructed figures (`.layout()`, `.add_trace()` etc).
+5. `plot_ly` figures support attached rendering and exporting functions that automatically invoke the appropriate functions.
+
+Below you can find an example of one way that the figure in the example above could be specified using a `plot_ly` figure instead of a list.
+
+```{r}
+library(plotly) 
+ 
+fig <- plot_ly(x = c(1, 2, 3), y = c(1, 3, 2), type = 'bar')%>% 
+  layout(title = 'A Plotly Figure',
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff')) 
+fig
+```
+
+##### Converting plot_ly figures To Lists and JSON
+
+`plot_ly` figures can be turned into their R List representation. You can also retrieve the JSON string representation of a plotly figure using the `fig.to_JSON()` method.
+
+```{r, attr.output='style="max-height: 200px;"'}
+library(plotly) 
+library(jsonlite)
+fig <- plot_ly(x = c(1, 2, 3), y = c(1, 3, 2), type = 'bar')
+plotly_json <- function(p, ...) {
+    plotly:::to_JSON(plotly_build(p), ...)
+  }
+jfig <- plotly_json(fig, pretty = TRUE)
+
+listprint <- paste("List Representation of A plot_ly figure:",toString(fig),sep = "\n")
+cat(listprint[1])
+JSONprint <- paste("JSON Representation of A plot_ly figure:",jfig,sep = "\n")
+cat(JSONprint[1])
+```
+
+### Representing Figures in Dash
+
+[Dash for R](https://dashr.plotly.com/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. 
+ 
+Learn about how to install Dash for R at https://dashr.plot.ly/installation. 
+ 
+Everywhere in this page that you see fig, you can display the same figure in a Dash for R application by passing it to the figure argument.
+
+```{r}
+library(dash)
+library(dashCoreComponents)
+library(dashHtmlComponents)
+library(plotly)
+
+fig <- plot_ly() %>%
+  add_lines(x = c("a","b","c"), y = c(1,3,2))%>%
+  layout(title="sample figure")
+
+app <- Dash$new()
+
+app$layout(
+  htmlDiv(
+    list(
+      dccGraph(id = 'graph', figure=fig),
+      htmlPre(
+        id='structure',
+        style = list(border = 'thin lightgrey solid',
+                     overflowY = 'scroll',
+                     height = '275px')
+      )
+    )
+  )
+)
+app$callback(
+  output(id = 'structure', property='children'),
+  params=list(input(id='graph', property='figure')),
+  function(fig_json) {
+    plotly_json <- function(p, ...) {
+      plotly:::to_JSON(plotly_build(p), ...)
+    }
+    jfig <- plotly_json(fig, pretty = TRUE)
+    return(jfig)
+  })
+#app$run_server()
+```
+
+Use `app$run_server()` to run the dash app.
+
+### Creating Figures
+
+This section summarizes several ways to create new `plot_ly` figures with the `plotly` graphing library.
+
+#### Plotly Scatter Plot
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- plot_ly(data = iris, x = ~Sepal.Width, y = ~Sepal.Length, color = ~Species, 
+               type = "scatter", mode = "markers")%>%
+  layout(title="A Plotly Figure", legend=list(title=list(text='species')),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig
+```
+
+#### Make Subplots
+
+The `subplots()` function produces a `plot_ly` figure that is preconfigured with a grid of subplots that traces can be added to. 
+
+```{r}
+library(plotly)
+
+fig1 <- plot_ly(y = c(4, 2, 1), type = "scatter", mode = "lines") %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig2 <- plot_ly(y = c(2, 1, 3), type = "bar") %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig <- subplot(fig1, fig2)
+fig
+```
+
+### Updating Figures
+
+Regardless of how a `plot_ly` figure was constructed, it can be updated by adding additional traces to it and modifying its properties.
+
+#### Adding Traces
+
+New traces can be added to a `plot_ly` figure using the `add_trace()` method. This method accepts a `plot_ly` figure trace and adds it to the figure. This allows you to start with an empty figure, and add traces to it sequentially. 
+
+```{r}
+library(plotly) 
+
+fig <- plot_ly()%>%
+  add_trace(x = c(1, 2, 3), y = c(1, 3, 2), type = 'bar') %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig
+```
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- plot_ly()%>%
+  add_trace(data = iris, x = ~Sepal.Width, y = ~Sepal.Length, color = ~Species, 
+               type = "scatter", mode = "markers")%>%
+  layout(title="Using The add_trace() method With A Plotly Figure",  legend=list(title=list(text='species')),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))%>%
+  add_trace(x = c(2, 4), y = c(4, 8), type = "scatter", mode = "lines", line = list(color = 'grey')
+            , showlegend = FALSE)
+fig
+```
+
+#### Updating Figure Layouts
+
+`plot_ly` figures support an `style()` method that may be used to update multiple nested properties of a figure's layout.
+
+Here is an example of updating the font size of a figure's title using `style()`.
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(x = c(1, 2, 3), y = c(1, 3, 2), type = 'bar')%>%
+  layout(title = list(text ='Using layout() With Plotly Figures', font = list(size = 17)),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig
+```
+
+
+#### Updating Traces
+
+`plot_ly` figures support an `style()` method that may be used to update multiple nested properties of one or more of a figure's traces.
+
+To show some examples, we will start with a figure that contains `bar` and `scatter` traces across two subplots.
+
+```{r}
+library(plotly)
+
+fig1 <-  plot_ly(x = c(0,1, 2), y = c(2, 1, 3), type = 'bar', name = 'b', color = I("red")) %>%
+  add_trace(x = c(0,1, 2), y = c(4, 2, 3.5), type = 'scatter', mode = 'markers', name = 'a',
+            marker = list(size = 20, color = 'rgb(51, 204, 51)')) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig2 <-  plot_ly(x = c(0,1, 2), y = c(1, 3, 2), type = 'bar', name = 'c', color = I("#33cc33")) %>%
+  add_trace(x = c(0,1, 2), y = c(2, 3.5, 4), type = 'scatter', mode = 'markers', name = 'd',
+            marker = list(size = 20, color = 'rgb(255, 0, 0)')) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig <- subplot(fig1, fig2)
+fig
+```
+
+Note that both `scatter` and `bar` traces have a `marker.color` property to control their coloring. Here is an example of using `style()` to modify the color of all traces.
+
+```{r}
+
+library(plotly)
+
+fig1 <-  plot_ly(x = c(0,1, 2), y = c(2, 1, 3), type = 'bar', name = 'b', color = I("red")) %>%
+  add_trace(x = c(0,1, 2), y = c(4, 2, 3.5), type = 'scatter', mode = 'markers', name = 'a',
+            marker = list(size = 20, color = 'rgb(51, 204, 51)')) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig1 <- style(fig1, marker = list(size = 20, color = "blue"))
+
+fig2 <-  plot_ly(x = c(0,1, 2), y = c(1, 3, 2), type = 'bar', name = 'c', color = I("#33cc33")) %>%
+  add_trace(x = c(0,1, 2), y = c(2, 3.5, 4), type = 'scatter', mode = 'markers', name = 'd',
+            marker = list(size = 20, color = 'rgb(255, 0, 0)')) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig2 <- style(fig1, marker = list(size = 20, color = "blue"))
+
+fig <- subplot(fig1, fig2)
+fig
+```
+
+The `style()` method supports a `traces` argument to control which traces should be updated. Only traces given  will be updated. Here is an example of using a traces to only update the color of the `bar` traces.
+
+```{r}
+
+library(plotly)
+
+fig1 <-  plot_ly(x = c(0,1, 2), y = c(2, 1, 3), type = 'bar', name = 'b', color = I("red")) %>%
+  add_trace(x = c(0,1, 2), y = c(4, 2, 3.5), type = 'scatter', mode = 'markers', name = 'a',
+            marker = list(size = 20, color = 'rgb(51, 204, 51)')) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig1 <- style(fig1, marker = list(color = "blue"), traces = c(1))
+
+fig2 <-  plot_ly(x = c(0,1, 2), y = c(1, 3, 2), type = 'bar', name = 'c', color = I("#33cc33")) %>%
+  add_trace(x = c(0,1, 2), y = c(2, 3.5, 4), type = 'scatter', mode = 'markers', name = 'd',
+            marker = list(size = 20, color = 'rgb(255, 80, 80)')) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig2 <- style(fig2, marker = list(color = "blue"), traces = c(1))
+
+fig <- subplot(fig1, fig2)
+fig
+
+```
+
+### Overwrite Existing Properties When Using Update Methods
+
+`style()` will overwrite the prior value of existing properties, with the provided value.
+
+In the example below, the red color of markers is overwritten when updating `marker` in `style()`. Note that setting instead `opacity` with the magic underscore would not overwrite `marker_color` because properties would be overwritten starting only at the level of `marker.opacity`.
+
+```{r}
+library(plotly) 
+
+fig <- plot_ly()%>%
+  add_trace(x = c(1, 2, 3), y = c(1, 3, 2), type = 'bar', marker = list(color = 'red')) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+style(fig, marker = list(opacity = 0.4))
+
+```
+
+#### Updating Figure Axes
+
+Plotly figures support `layout` method that may be used to update multiple nested properties of one or more of a figure's axes. Here is an example of using `layout` to disable the vertical grid lines across all subplots in a figure produced by Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, color = ~Species, type = "scatter", mode = "markers")) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout(title = "Updating x axis in a Plotly Figure", legend=list(title=list(text='species')),
+         xaxis = list(showgrid = F), 
+         xaxis2 = list(showgrid = F), 
+         xaxis3 = list(showgrid = F),
+         annotations = list(  
+           list(  
+             x = 0.16,   
+             y = 0.95,   
+             font = list(size = 10),   
+             text = "species=setosa",   
+             xref = "paper",   
+             yref = "paper",   
+             xanchor = "center",   
+             yanchor = "bottom",   
+             showarrow = FALSE  
+           ),   
+           list(  
+             x = 0.5,   
+             y = 0.95,   
+             font = list(size = 10),   
+             text = "species=versicolor",   
+             xref = "paper",   
+             yref = "paper",   
+             xanchor = "center",   
+             yanchor = "bottom",   
+             showarrow = FALSE  
+           ),   
+           list(  
+             x = 0.85,   
+             y = 0.95,   
+             font = list(size = 10),   
+             text = "species=virginica",   
+             xref = "paper",   
+             yref = "paper",   
+             xanchor = "center",   
+             yanchor = "bottom",   
+             showarrow = FALSE  
+           )),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig
+```
+
+### Other Update Methods
+
+Figures created with the plotly graphing library also support:
+
+  - the `images()` method in order to [update background layout images](https://plotly.com/r/displaying-images/),
+  - `annotations()` in order to [update annotations](https://plotly.com/r/text-and-annotations/),
+  - and `shapes()` in order to [update shapes](https://plotly.com/r/shapes/).
+
+#### Chaining Figure Operations
+
+All of the figure update operations described above are methods that return a reference to the figure being modified. This makes it possible to chain multiple figure modification operations together into a single expression.
+
+Here is an example of a chained expression that:
+
+  - sets the title font size using `layout.title.font.size`,
+  - disables vertical grid lines using `layout.xaxis`,
+  - updates the size and color of the markers and bar using `style()`,
+  - and then displaying the figure.
+
+```{r}
+library(plotly) 
+
+t <- list(size = 15)
+
+fig <-  plot_ly(x = c(0,1, 2), y = c(2, 1, 3), type = 'bar', name = 'b', color = I("red")) %>% 
+  add_trace(x = c(0,1, 2), y = c(4, 2, 3.5), type = 'scatter', mode = 'markers', name = 'a', 
+            marker = list(size = 10, color = 'rgb(51, 204, 51)')) 
+#updates the size and color of the markers and bar
+fig <- style(fig, marker = list(size = 20, color = "blue")) 
+
+fig <- style(fig, marker = list(color = "yellow"), traces = c(1)) 
+
+fig <- style(fig, marker = list(color = "yellow", line = list(color = 'rgb(8,48,107)', 
+                                                                width = 1.5)), traces = c(1)) 
+fig <- fig %>%
+  layout(title = list(text = "Chaining Multiple Figure Operations With A Plotly Figure",
+#setting the title font size                      
+                      font = t),
+#disables vertical grid lines
+         xaxis = list(showgrid = F),
+plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+#displaying the figure
+fig 
+```
+
+#### Property Assignment
+
+Trace and layout properties can be updated using property assignment syntax. Here is an example of setting the figure title using property assignment.
+
+```{r}
+library(plotly) 
+
+fig <- plot_ly()%>%
+  add_trace(x = c(1, 2, 3), y = c(1, 3, 2), type = 'bar')%>%
+  layout(title = 'Using Property Assignment Syntax With A Plotly Figure',
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig <- style(fig,marker = list(line = list(color = 'lightblue', width = 0)))
+
+fig
+```
+
+And here is an example of updating the bar outline using property assignment.
+
+```{r}
+library(plotly) 
+
+fig <- plot_ly()%>%
+  add_trace(x = c(1, 2, 3), y = c(1, 3, 2), type = 'bar') %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig <- style(fig,marker = list(line = list(color = 'lightblue', width = 0)))
+fig$x$data[[1]]$marker$line$color <- 'black'
+fig$x$data[[1]]$marker$line$width <- 4
+
+fig
+```
