@@ -573,7 +573,7 @@ Here is an example that creates and populates a 2 x 2 subplot grid containing 4 
 
 ```{r}
 library(plotly) 
- 
+
 fig1 <- plot_ly(y = c(2, 3, 1), type = 'bar') 
  
 data <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv") 
@@ -611,5 +611,5 @@ All of the axis properties are found here: https://plotly.com/r/axes/#
 
 
 ```{r}
-help(subplot)
+tools:::Rd2ex(utils:::.getHelpFile(as.character(help(subplot))))
 ```
