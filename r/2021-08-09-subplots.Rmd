@@ -1,0 +1,615 @@
+---
+description: How to make subplots in with Plotly's R graphing library. Examples of stacked, custom-sized, gridded, and annotated subplots.
+display_as: file_settings
+language: r
+layout: base
+name: Subplots
+order: 28
+output:
+  html_document:
+    keep_md: true
+page_type: u-guide
+permalink: r/subplots/
+thumbnail: thumbnail/subplots.jpg
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+### Subplots with Plotly
+
+Plotly’s R graphing library makes it easy to create interactive, publication-quality graphs.
+
+Plotly also has subplot capabilities. This page documents the usage of the lower-level `subplot` module. 
+
+#### Simple Subplot
+
+Figures with subplots are created using the `subplot` function.
+
+Here is an example of creating a figure that includes two `scatter` traces which are side-by-side since there are 2 columns and 1 row in the subplot layout.
+
+```{r}
+
+library(plotly)
+
+fig1 <- plot_ly(x = c(1,2,3), y = c(4,5,6), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3))) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+
+fig2 <- plot_ly(x = c(20,30,40), y = c(50,60,70), type = 'scatter', mode = 'lines+markers',
+                marker = list(line = list(width = 3))) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig <- subplot(fig1, fig2) %>% 
+  layout(title = 'Side By Side Subplots')
+fig
+
+```
+
+#### Stacked Subplots
+
+Here is an example of creating a figure with subplots that are stacked on top of each other since there are 3 rows and 1 column in the subplot layout.
+
+```{r}
+library(plotly) 
+fig1 <- plot_ly(x = c(3, 4, 5), y = c(1000, 1100, 1200), type = 'scatter', mode = 'lines+markers') 
+fig2 <- plot_ly(x = c(2, 3, 4), y = c(100, 110, 120), type = 'scatter', mode = 'lines+markers') 
+fig3 <- plot_ly(x = c(0, 1, 2), y = c(10, 11, 12), type = 'scatter', mode = 'lines+markers') 
+fig <- subplot(fig1, fig2, fig3, nrows = 3) %>% 
+  layout(title = list(text = "Stacked Subplots"),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff')) 
+fig
+
+```
+
+#### Multiple Subplots
+
+Here is an example of creating a 2 x 2 subplot grid and populating each subplot with  `scatter` trace.
+
+```{r}
+
+library(plotly)
+
+fig1 <- plot_ly(x = c(1,2,3), y = c(4,5,6), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))
+
+
+fig2 <- plot_ly(x = c(20,30,40), y = c(50,60,70), type = 'scatter', mode = 'lines+markers',
+                marker = list(line = list(width = 3)))
+
+
+fig3 <- plot_ly(x = c(300,400,500), y = c(600,700,800), type = 'scatter', mode = 'lines+markers',
+                marker = list(line = list(width = 3)))
+
+
+fig4 <- plot_ly(x = c(4000,5000,6000), y = c(7000,8000,9000), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))
+
+fig <- subplot(fig1, fig2, fig3, fig4, nrows = 2) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig
+```
+
+#### Multiple Subplots with Titles
+The `annotations` argument can be used to position text annotations as titles for each subplot.
+
+Here is an example of adding subplot titles to a 2 x 2 subplot grid of scatter traces.
+
+```{r}
+
+library(plotly)
+
+fig1 <- plot_ly(x = c(1,2,3), y = c(4,5,6), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))
+
+
+fig2 <- plot_ly(x = c(20,30,40), y = c(50,60,70), type = 'scatter', mode = 'lines+markers',
+                marker = list(line = list(width = 3)))
+
+
+fig3 <- plot_ly(x = c(300,400,500), y = c(600,700,800), type = 'scatter', mode = 'lines+markers',
+                marker = list(line = list(width = 3)))
+
+
+fig4 <- plot_ly(x = c(4000,5000,6000), y = c(7000,8000,9000), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))
+
+fig <- subplot(fig1, fig2, fig3, fig4, nrows = 2)%>% 
+  layout(title = 'Multiple Subplots with Titles',
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+annotations = list( 
+  list( 
+    x = 0.2,  
+    y = 1.0,  
+    text = "Plot 1",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),  
+  list( 
+    x = 0.8,  
+    y = 1,  
+    text = "Plot 2",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),  
+  list( 
+    x = 0.2,  
+    y = 0.45,  
+    text = "Plot 3",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),
+  list( 
+    x = 0.8,  
+    y = 0.45,  
+    text = "Plot 4",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ))
+
+fig <- fig %>%layout(annotations = annotations) 
+#options(warn = -1)
+fig
+```
+
+#### Subplots with Annotations
+
+```{r}
+library(plotly) 
+fig1 <- plot_ly(x = c(1, 2, 3), y = c(4, 5, 6), type = 'scatter', mode = 'markers+text' 
+                ,text = list("Text D", "Text E", "Text F"), textposition = "bottom center" 
+                ,texttemplate = "%{text}") 
+ 
+fig2 <- plot_ly(x = c(20, 30, 40), y = c(50, 60, 70), type = 'scatter', mode = 'markers+text' 
+                ,text = list("Text D", "Text E", "Text F"), textposition = "bottom center" 
+                ,texttemplate = "%{text}") 
+ 
+fig <- subplot(fig1, fig2)%>% 
+  layout(title = list(text = "Subplots with Annotations"),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff')) 
+fig
+
+```
+
+#### Customize Subplot Column Widths and Row Heights
+The `widths` argument can be used to customize the relative widths of the columns in a subplot grid. It should be set in a list of numbers so that they sum to 1, and used to compute the relative widths of the subplot grid columns. The `heights` argument serves the same purpose for controlling the relative heights of rows in the subplot grid.
+
+Here is an example of creating a figure with two scatter traces in side-by-side subplots. The left subplot is set to be wider than the right one.
+
+```{r}
+
+library(plotly)
+
+fig1 <- plot_ly(x = c(1,2,3), y = c(4,5,6), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))
+
+
+fig2 <- plot_ly(x = c(20,30,40), y = c(50,60,70), type = 'scatter', mode = 'lines+markers',
+                marker = list(line = list(width = 3)))
+
+fig <- subplot(fig1, fig2, widths = c(0.7, 0.3)) %>%
+               layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig
+```
+
+#### Subplots in Dash
+
+[Dash for R](https://dashr.plotly.com) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
+
+Learn about how to install Dash for R at https://dashr.plot.ly/installation.
+
+Everywhere in this page that you see fig, you can display the same figure in a Dash for R application by passing it to the figure argument.
+
+
+```{r eval=FALSE}
+
+library(dash)
+library(dashCoreComponents)
+library(dashHtmlComponents)
+library(plotly)
+
+app <- Dash$new()
+
+app$layout(
+  htmlDiv(
+    list(
+      dccGraph(id = 'graph-with-slider'),
+      htmlLabel('Subplots Width:'),
+      dccSlider(
+        id='slider',
+        min = 0,
+        max = 1,
+        value = 0.5, 
+        step=0.01
+      )
+      
+    )
+  )
+)
+app$callback(
+  output(id = 'graph-with-slider', property='figure'),
+  params=list(input(id='slider', property='value')),
+  function(value) {
+    fig1 <- plot_ly(x = c(1,2,3), y = c(4,5,6), type = 'scatter', mode = 'lines+marker', 
+                    marker = list(line = list(width = 3)))
+    
+    
+    fig2 <- plot_ly(x = c(20,30,40), y = c(50,60,70), type = 'scatter', mode = 'lines+marker',
+                    marker = list(line = list(width = 3)))
+    
+    fig <- subplot(fig1, fig2, widths = c(value, 1 - value))
+    return(fig)
+  })
+```
+
+After executing this code, give app$run_server() in the console to start the dash.
+
+#### Customizing Subplot Axes
+After a figure with subplots is created using the `subplot` function, its axis properties (title, font, range, grid style, etc.) can be customized using the `xaxis` and `yaxis` graph object figure methods.  By default, these methods apply to all of the x axes or y axes in the figure. The `row` and `col` arguments can be used to control which axes are targeted by the update.
+
+Here is an example that creates a figure with a 2 x 2 subplot grid, populates each subplot with a scatter trace, and then updates the x and y axis titles for each subplot individually.
+
+```{r}
+
+library(plotly)
+
+#Initialize figures 
+fig1 <- plot_ly(x = c(1,2,3), y = c(4,5,6), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))%>%
+  layout(xaxis = list(title = 'xaxis1 title'), yaxis = list(title = 'yaxis1 title'))
+
+fig2 <- plot_ly(x = c(20,30,40), y = c(50,60,70), type = 'scatter', mode = 'lines+markers',
+                marker = list(line = list(width = 3)))%>%
+  layout(xaxis = list(title = 'xaxis2 title', range = c(10,50)), yaxis = list(title = 'yaxis2 title', range = c(40,80)))
+
+
+fig3 <- plot_ly(x = c(300,400,500), y = c(600,700,800), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))%>%
+  layout(xaxis = list(title = 'xaxis3 title', showgrid = FALSE), yaxis = list(title = 'yaxis3 title', showgrid = FALSE))
+
+
+fig4 <- plot_ly(x = c(4000,5000,6000), y = c(7000,8000,9000), type = 'scatter', mode = 'lines+markers', 
+                marker = list(line = list(width = 3)))%>%
+  layout(xaxis = list(title = 'xaxis4 title', type = 'log'), yaxis = list(title = 'yaxis4 title'))
+
+#creating subplot
+fig <- subplot(fig1, fig2, fig3, fig4, nrows = 2, titleY = TRUE, titleX = TRUE, margin = 0.1 )
+fig <- fig %>%layout(title = 'Customizing Subplot Axes',
+                     plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+# Update title
+annotations = list( 
+  list( 
+    x = 0.2,  
+    y = 1.0,  
+    text = "Plot 1",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),  
+  list( 
+    x = 0.8,  
+    y = 1,  
+    text = "Plot 2",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),  
+  list( 
+    x = 0.2,  
+    y = 0.4,  
+    text = "Plot 3",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ),
+  list( 
+    x = 0.8,  
+    y = 0.4,  
+    text = "Plot 4",  
+    xref = "paper",  
+    yref = "paper",  
+    xanchor = "center",  
+    yanchor = "bottom",  
+    showarrow = FALSE 
+  ))
+
+fig <- fig %>%layout(annotations = annotations) 
+fig
+```
+
+#### Subplots with Shared X-Axes
+The `shareX_x` argument  can be used to link the x axes of subplots in the resulting figure. The `margin` argument is used to control the vertical spacing between rows in the subplot grid.
+
+Here is an example that creates a figure with 3 vertically stacked subplots with linked x axes. A small margin value is used to reduce the spacing between subplot rows.
+
+```{r}
+
+library(plotly) 
+fig1 <- plot_ly(x = c(3, 4, 5), y = c(1000, 1100, 1200), type = 'scatter', mode = 'lines+markers') 
+fig2 <- plot_ly(x = c(2, 3, 4), y = c(100, 110, 120), type = 'scatter', mode = 'lines+markers') 
+fig3 <- plot_ly(x = c(0, 1, 2), y = c(10, 11, 12), type = 'scatter', mode = 'lines+markers') 
+fig <- subplot(fig1, fig2, fig3, nrows = 3, shareX = TRUE) %>% 
+  layout(title = list(text = "Stacked Subplots with Shared X-Axes"),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff')) 
+fig
+```
+
+#### Subplots with Shared Y-Axes
+The `shareY` argument can be used to link the y axes of subplots in the resulting figure.
+
+Here is an example that creates a figure with a 2 x 2 subplot grid, where the y axes of each row are linked.
+
+
+```{r}
+library(plotly) 
+fig1 <- plot_ly(x = c(1, 2, 3), y = c(2, 3, 4), type = 'scatter', mode = 'lines+markers') 
+fig2 <- plot_ly(x = c(20, 30, 40), y = c(5, 5, 5), type = 'scatter', mode = 'lines+markers') 
+fig3 <- plot_ly(x = c(2, 3, 4), y = c(600, 700, 800), type = 'scatter', mode = 'lines+markers') 
+fig4 <- plot_ly(x = c(4000, 5000, 6000), y = c(7000, 8000, 9000), type = 'scatter', mode = 'lines+markers') 
+fig <- subplot(fig1, fig2, fig3, fig4, nrows = 2, shareY = TRUE) %>% 
+  layout(title = list(text = "Multiple Subplots with Shared Y-Axes"),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff')) 
+fig
+
+```
+
+### Subplots with Shared Colorscale
+
+To share colorscale information in multiple subplots, you can use [coloraxis](https://plotly.com/r/reference/layout/coloraxis/).
+
+```{r}
+
+library(plotly)
+
+fig1 <- plot_ly(x = c(1,2,3), y = c(4,5,6), type = 'bar', 
+                marker = list(color = c(4,5,6), coloraxis="coloraxis"))
+
+fig2 <- plot_ly(x = c(1,2,3), y = c(2,3,5), type = 'bar', 
+                marker = list(color = c(2,3,5), coloraxis="coloraxis"))
+
+fig <- subplot(fig1, fig2, shareY = TRUE)
+fig <- fig %>%layout(showlegend = FALSE, coloraxis=list(colorscale='RdBu'),
+                     plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+fig
+```
+
+#### Custom Sized Subplot with Subplot Titles
+The heights and weights argument in subplot function is used to custom size the individual plots in the subplot.
+
+Here is an example that creates a 2 by 2 subplot grid containing 3 subplots. 
+
+```{r}
+
+library(plotly) 
+fig1 <- plot_ly(x = c(1, 2), y = c(1, 2), type = 'scatter', mode = 'lines+markers') 
+fig2 <- plot_ly(x = c(1, 2), y = c(1, 2), type = 'scatter', mode = 'lines+markers') 
+fig3 <- plot_ly(x = c(1, 2, 3), y = c(2, 1, 2), type = 'scatter', mode = 'lines+markers')%>%  
+  layout(annotations = list( 
+    list(x = 0.52 , y = 1.05, text = "Third Subplot", showarrow = F, xref='paper', yref='paper')) 
+  ) 
+
+s1 <- subplot(fig1, fig2)%>%  
+  layout(annotations = list( 
+    list(x = 0.15 , y = 1.2, text = "First Subplot", showarrow = F, xref='paper', yref='paper'), 
+    list(x = 0.85 , y = 1.2, text = "Second Subplot", showarrow = F, xref='paper', yref='paper')) 
+  ) 
+fig <- subplot(s1, fig3, nrows = 2, margin = 0.07) %>%  
+  layout(title = "Specs with Subplot Title", 
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'),
+         showlegend=FALSE,showlegend2=FALSE, 
+         margin = 0.01) 
+
+fig
+```
+
+#### Multiple Custom Sized Subplots
+
+Here is an example that uses the `heights` and `weights` subplot options to create a custom subplot layout with subplots of mixed sizes. 
+
+```{r}
+
+library(plotly)
+
+fig1 <- plot_ly(x = c(1,2), y = c(1,2), type = 'scatter', mode = 'lines+markers', name = '(1,1)',
+                marker = list(line = list(width = 3)))
+
+fig2 <- plot_ly(x = c(1,2), y = c(1,2), type = 'scatter', mode = 'lines+markers', name = '(2,1)',
+                marker = list(line = list(width = 3)))
+
+fig3 <- plot_ly(x = c(1,2), y = c(1,2), type = 'scatter', mode = 'lines+markers', name = '(1,2)',
+                marker = list(line = list(width = 3)))
+
+fig4 <- plot_ly(x = c(1,2), y = c(1,2), type = 'scatter', mode = 'lines+markers', name = '(3,1)',
+                marker = list(line = list(width = 3)))
+
+fig5 <- plot_ly(x = c(1,2), y = c(1,2), type = 'scatter', mode = 'lines+markers', name = '(5,1)',
+                marker = list(line = list(width = 3)))
+
+fig6 <- plot_ly(x = c(1,2), y = c(1,2), type = 'scatter', mode = 'lines+markers', name = '(5,2)',
+                marker = list(line = list(width = 3)))
+
+s1 <- subplot(fig1, fig2, nrows = 2)
+s2 <- subplot(s1, fig3)
+s3 <- subplot(s2, fig4, nrows = 2)
+s4 <- subplot(fig5, fig6)
+s5 <- subplot(s3, s4, nrows = 2, heights = c(0.8,0.2)) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+s5
+```
+
+#### Subplots Types
+By default, the `subplots` function assumes that the traces that will be added to all subplots are 2-dimensional cartesian traces (e.g. `scatter`, `bar`, `histogram`, `violin`, etc.).  
+
+
+ - trace type: A trace type name (e.g. `"bar"`, `"contour"`, `"density"`, `"scatter"`, etc.) which will be used to determine the appropriate subplot type for that trace.
+
+Here is an example that creates and populates a 2 x 2 subplot grid containing 4 different subplot types.
+
+```{r}
+library(plotly) 
+
+fig1 <- plot_ly(y = c(2, 3, 1), type = 'bar') 
+ 
+data <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv") 
+fig2 <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', color = ~Gap, colors = 'Reds', 
+                marker = list(size = ~Gap, opacity = 0.5))%>%  
+  layout(xaxis = list(showgrid = FALSE), 
+         yaxis = list(showgrid = FALSE)) 
+fig2 <- hide_colorbar(fig2) 
+ 
+fig3<- plot_ly(z = ~volcano, type = "contour") 
+fig3 <- hide_colorbar(fig3) 
+ 
+density <- density(diamonds$carat) 
+fig4 <- plot_ly(x = ~density$x, y = ~density$y, type = 'scatter', mode = 'lines', fill = 'tozeroy') 
+fig4 <- fig4 %>% layout(xaxis = list(title = 'Carat'), 
+                      yaxis = list(title = 'Density'), showlegend=FALSE) 
+ 
+fig <- subplot(fig1, fig2, fig3, fig4, nrows = 2, margin = 0.05) %>%
+  layout(plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+ 
+fig
+```
+
+
+#### Reference
+All of the axis properties are found here: https://plotly.com/r/axes/#
+
+
+```{r}
+tools:::Rd2ex(utils:::.getHelpFile(as.character(help(subplot))))
+```
