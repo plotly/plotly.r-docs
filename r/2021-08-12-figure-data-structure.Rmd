@@ -5,6 +5,9 @@ language: r
 layout: base
 name: The Figure Data Structure
 order: 24
+output:
+  html_document:
+    keep_md: true
 page_type: u-guide
 permalink: r/figure-structure/
 thumbnail: thumbnail/violin.jpg
@@ -42,7 +45,7 @@ Learn about how to install Dash for R at https://dashr.plot.ly/installation.
 Everywhere in this page that you see fig, you can display the same figure in a Dash for R application by passing it to the figure argument.
 
 
-```{r}
+```{r eval=FALSE}
 library(dash) 
 library(dashCoreComponents) 
 library(dashHtmlComponents) 
