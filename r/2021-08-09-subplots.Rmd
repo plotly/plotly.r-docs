@@ -4,7 +4,10 @@ display_as: file_settings
 language: r
 layout: base
 name: Subplots
-order: 29
+order: 28
+output:
+  html_document:
+    keep_md: true
 page_type: u-guide
 permalink: r/subplots/
 thumbnail: thumbnail/subplots.jpg
@@ -14,13 +17,11 @@ thumbnail: thumbnail/subplots.jpg
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
 
-### Subplots and Plotly Express
+### Subplots with Plotly
 
 Plotly’s R graphing library makes it easy to create interactive, publication-quality graphs.
 
-Plotly also has subplot capabilities.
-
-This page documents the usage of the lower-level `subplot` module. 
+Plotly also has subplot capabilities. This page documents the usage of the lower-level `subplot` module. 
 
 #### Simple Subplot
 
@@ -271,7 +272,7 @@ Learn about how to install Dash for R at https://dashr.plot.ly/installation.
 Everywhere in this page that you see fig, you can display the same figure in a Dash for R application by passing it to the figure argument.
 
 
-```{r}
+```{r eval=FALSE}
 
 library(dash)
 library(dashCoreComponents)
