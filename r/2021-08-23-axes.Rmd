@@ -1,0 +1,1831 @@
+---
+display_as: file_settings
+language: r
+layout: base
+name: Axes
+order: 14
+permalink: r/axes/
+thumbnail: thumbnail/axes.png
+title: Axes in R
+description: How to adjust axes properties in R - axes titles, styling and coloring axes and grid lines, ticks, tick labels and more.
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+This tutorial explain how to set the properties of 2-dimensional Cartesian axes, namely X-axis and Y-axis.
+
+Other kinds of subplots and axes are described in other tutorials:
+
+- [3D axes](https://plotly.com/r/3d-axes/) The axis object is 'scene'.
+- [Polar axes](https://plotly.com/r/polar-chart/). The axis object is 'polar'.
+- [Ternary axes](https://plotly.com/r/ternary-plots/). The axis object is 'ternary'.
+- Geo axes: The axis object is [`Geo`](https://plotly.com/r/reference/layout/geo/).
+- [Mapbox axes](https://plotly.com/r/mapbox-layers/). The axis object is 'mapbox'.
+- [Color axes](https://plotly.com/r/colorscales/). The axis object is 'coloraxis'.
+
+**See also** the tutorials on  [subplots](https://plotly.com/r/subplots/#) 
+
+### 2-D Cartesian Axis Types and Auto-Detection
+
+The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
+
+- `'linear'` 
+- `'log'` 
+- `'date'` 
+- `'category'` 
+- `'multicategory'` 
+
+The axis type is auto-detected by looking at data from the first trace linked to this axis:
+
+* First check for `multicategory`, then `date`, then `category`, else default to `linear` (`log` is never automatically selected)
+* `multicategory` is just a shape test: is the array nested?
+* `date` and `category`: require **more than twice as many distinct date or category strings as distinct numbers** in order to choose that axis type.
+	* Both of these test an evenly-spaced sample of at most 1000 values
+
+
+### Forcing an axis to be categorical
+
+It is possible to force the axis type by setting explicitly `autotypenumber`. In the example below the automatic X axis type would be `linear` (because there are not more than twice as many unique strings as unique numbers) but we force it to be `category`.
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c("a", "a", "b", "3"), y = c(1,2,3,4), type = 'bar') %>%
+  layout(xaxis = list(autotypenumbers = 'strict', title = 'x'),
+         yaxis = list(title = 'y'),
+         plot_bgcolor='#e5ecf6', 
+         xaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'), 
+         yaxis = list( 
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'))
+
+fig
+
+```
+
+
+#### General Axis properties
+
+The different groups of Cartesian axes properties are
+
+- title of the axis
+- tick values (locations of tick marks) and tick labels. Tick labels and grid lines are placed at tick values.
+- lines: grid lines (passing through tick values), axis lines, zero lines
+- range of the axis
+- domain of the axis
+
+The examples on this page apply to axes of any type, but extra attributes are available for [axes of type `category`](https://plotly.com/r/axes/#categorical-axes) and axes of type `date`.
+
+
+#### Set and Style Axes Title Labels
+
+##### Set axis title text with Plotly
+
+Axis titles are automatically set to the column names when using Plotly with a data frame as input.
+
+```{r}
+
+library(plotly)
+library(reshape2)
+
+data("tips")
+
+fig <- plot_ly(tips, x = ~total_bill, y = ~tip, type = 'scatter', mode = 'markers', split = ~sex) %>%
+  layout( plot_bgcolor='#e5ecf6', 
+          xaxis = list( 
+            zerolinecolor = '#ffff', 
+            zerolinewidth = 2, 
+            gridcolor = 'ffff'), 
+          yaxis = list( 
+            zerolinecolor = '#ffff', 
+            zerolinewidth = 2, 
+            gridcolor = 'ffff'))
+fig
+
+```
+
+Axis titles (and [legend titles](https://plotly.com/r/legend/) can also be overridden using the `title` argument of Plotly function:
+
+```{r}
+
+library(plotly)
+library(reshape2)
+
+data("tips")
+
+fig <- plot_ly(tips, x = ~total_bill, y = ~tip, type = 'scatter', mode = 'markers', split = ~sex) %>%
+  layout(legend=list(title=list(text='Payer Gender')),
+         xaxis = list(title = 'Total Bill ($)',
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         yaxis = list(title = 'Tip ($)',
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         plot_bgcolor='#e5ecf6')
+fig
+```
+
+The `title` argument can also be used without a data frame argument:
+
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c("Apples", "Oranges"), y = c(10,20), type = 'bar', split = c("Here", "There")) %>%
+  layout(legend=list(title=list(text='Place')),
+         xaxis = list(title = 'Fruit',
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         yaxis = list(title = 'Amount',
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         plot_bgcolor='#e5ecf6')
+fig
+```
+
+
+##### Set axis title text 
+
+Axis titles are set using the nested `title.text` property of the x or y axis. Here is an example of creating a new figure and using `layout.xaxes.title.text` and `layout.yaxes.title.text`, to set the axis titles.
+
+```{r}
+library(plotly) 
+ 
+fig <- plot_ly()%>% 
+  add_lines(y = c(1, 0), x = c(0, 1))%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff')) 
+fig
+```
+
+### Set axis title position
+
+This example sets `standoff` attribute to cartesian axes to determine the distance between the tick labels and the axis title. Note that the axis title position is always constrained within the margins, so the actual standoff distance is always less than the set or default value. By default [automargin](https://plotly.com/r/setting-graph-size/#automatically-adjust-margins) is `TRUE` in Plotly template for the cartesian axis, so the margins will be pushed to fit the axis title at given standoff distance.
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(x = list("December", "January", "February"), y = list(4, 1, 3), type = 'scatter', 
+            mode = 'lines+markers')%>%
+  layout(plot_bgcolor='#e5ecf6',  
+         xaxis = list(  
+           title=list(text='Month', font = list(size = 20), standoff = 25),
+           zerolinecolor = '#ffff',  
+           zerolinewidth = 2,  
+           gridcolor = 'ffff'),  
+         yaxis = list(  
+           title=list(text='Temperature', standoff = 25),
+           zerolinecolor = '#ffff',  
+           zerolinewidth = 2,  
+           gridcolor = 'ffff'))
+fig
+```
+
+##### Set axis title font
+
+Here is an example that configures the font family, size, and color for the axis titles in a figure created using Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+           list(  
+             x = 0.16,   
+             y = 1,   
+             font = list(size = 10),   
+             text = "species=setosa",   
+             xref = "paper",   
+             yref = "paper",   
+             xanchor = "center",   
+             yanchor = "bottom",   
+             showarrow = FALSE  
+           ),   
+           list(  
+             x = 0.5,   
+             y = 1,   
+             font = list(size = 10),   
+             text = "species=versicolor",   
+             xref = "paper",   
+             yref = "paper",   
+             xanchor = "center",   
+             yanchor = "bottom",   
+             showarrow = FALSE  
+           ),   
+           list(  
+             x = 0.85,   
+             y = 1,   
+             font = list(size = 10),   
+             text = "species=virginica",   
+             xref = "paper",   
+             yref = "paper",   
+             xanchor = "center",   
+             yanchor = "bottom",   
+             showarrow = FALSE  
+           )))%>%layout(plot_bgcolor='#e5ecf6',  
+                        xaxis = list(  
+                          title=list(text='Sepal.Width',
+                                     font=list(size=15, family='Courier', color='crimson')),
+                          zerolinecolor = '#ffff',  
+                          zerolinewidth = 2,  
+                          gridcolor = 'ffff'),
+                        xaxis2 = list(  
+                          title=list(text='Sepal.Width',
+                                     font=list(size=15, family='Courier', color='crimson')),
+                          zerolinecolor = '#ffff',  
+                          zerolinewidth = 2,  
+                          gridcolor = 'ffff'),
+                        xaxis3 = list(  
+                          title=list(text='Sepal.Width',
+                                     font=list(size=15, family='Courier', color='crimson')),
+                          zerolinecolor = '#ffff',  
+                          zerolinewidth = 2,  
+                          gridcolor = 'ffff'),
+                        yaxis = list(  
+                          title=list(text='Sepal.Length',
+                                     font=list(size=18, family='Courier', color='crimson')),
+                          zerolinecolor = '#ffff',  
+                          zerolinewidth = 2,  
+                          gridcolor = 'ffff')  
+                        ,showlegend = F)
+
+fig
+```
+
+#### Tick Placement, Color, and Style
+
+##### Toggling axis tick marks
+
+Axis tick marks are disabled by default for the default `plotly` theme, but they can easily be turned on by setting the `ticks` axis property to `"inside"` (to place ticks inside plotting area) or `"outside"` (to place ticks outside the plotting area).
+
+Here is an example of turning on inside x-axis and y-axis ticks in a faceted figure created using Plotly. Note how the `col` argument to `yaxis` is used to only turn on the y-axis ticks for the left-most subplot.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     ticks="inside"),
+                   xaxis2 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     ticks="inside"),
+                   xaxis3 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     ticks="inside"),
+                   yaxis = list(  nticks=20,
+                                  zerolinecolor = '#ffff',  
+                                  zerolinewidth = 2,  
+                                  gridcolor = 'ffff',
+                                  ticks="inside")
+                   ,showlegend = F)
+
+fig
+```
+
+##### Set number of tick marks (and grid lines)
+
+The approximate number of ticks displayed for an axis can be specified using the `nticks` axis property.
+
+Here is an example of updating the y-axes of a figure created using Plotly to display approximately 20 ticks.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis2 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis3 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   yaxis = list(  nticks=20,
+                                  zerolinecolor = '#ffff',  
+                                  zerolinewidth = 2,  
+                                  gridcolor = 'ffff')
+      ,showlegend = F)
+
+fig
+```
+
+##### Set start position and distance between ticks
+
+The `tick0` and `dtick` axis properties can be used to control the placement of axis ticks as follows: If specified, a tick will fall exactly on the location of `tick0` and additional ticks will be added in both directions at intervals of `dtick`.
+
+Here is an example of updating the y axis of a figure created using Plotly to position the ticks at intervals of 0.5, starting at 0.25.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis2 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis3 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   yaxis = list(  
+                                  zerolinecolor = '#ffff',  
+                                  zerolinewidth = 2,  
+                                  gridcolor = 'ffff',
+                                  tick0=0.25, dtick=0.5)
+                   ,showlegend = F)
+
+fig
+```
+
+##### Set exact location of axis ticks
+
+It is possible to configure an axis to display ticks at a set of predefined locations by setting the `tickvals` property to an array of positions.
+
+Here is an example of setting the exact location of ticks on the y axes of a figure created using Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis2 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis3 = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     tickvals = list(5.1, 5.9, 6.3, 7.5))
+                   ,showlegend = F)
+
+fig
+```
+
+##### Style tick marks
+
+As discussed above, tick marks are disabled by default in the default `plotly` theme, but they can be enabled by setting the `ticks` axis property to `"inside"` (to place ticks inside plotting area) or `"outside"` (to place ticks outside the plotting area).
+
+The appearance of these tick marks can be customized by setting their length (`ticklen`), width (`tickwidth`), and color (`tickcolor`).
+
+Here is an example of enabling and styling the tick marks of a faceted figure created using Plotly. Note how the `col` argument to `yaxis` is used to only turn on and style the y-axis ticks for the left-most subplot.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis2 = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   xaxis3 = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff'),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff', tick0=0.25, dtick=0.5,
+                     ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, col=1)
+                   ,showlegend = F)
+
+fig
+```
+
+##### Toggling axis labels
+
+The axis tick mark labels can be disabled by setting the `showticklabels` axis property to `FALSE`.
+
+Here is an example of disabling tick labels in all subplots for a faceted figure created using Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff',
+                                showticklabels=FALSE),
+                   xaxis2 = list(zerolinecolor = '#ffff',  
+                                  zerolinewidth = 2,  
+                                  gridcolor = 'ffff',
+                                 showticklabels=FALSE),
+                   xaxis3 = list(zerolinecolor = '#ffff',  
+                                  zerolinewidth = 2,  
+                                  gridcolor = 'ffff',
+                                 showticklabels=FALSE),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     showticklabels=FALSE)
+                   ,showlegend = F)
+
+fig
+```
+
+##### Set axis label rotation and font
+
+The orientation of the axis tick mark labels is configured using the `tickangle` axis property. The value of `tickangle` is the angle of rotation, in the clockwise direction, of the labels from vertical in units of degrees. The font family, size, and color for the tick labels are stored under the `tickfont` axis property.
+
+Here is an example of rotating the x-axis tick labels by 45 degrees, and customizing their font properties, in a faceted histogram figure created using Plotly.
+
+```{r}
+library(plotly)
+
+fig1 <- plot_ly(x = c("Female","Male"), y = c(150, 302), type = 'bar')%>%
+  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6', 
+         yaxis = list( 
+           title = 'sum of tip',
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff'),
+         xaxis = list(title = 'sex',
+           tickangle=45, tickfont = list(family='Rockwell', color='crimson', size=14)))
+
+fig2 <- plot_ly(x = c("Female","Male"), y = c(96, 183), type = 'bar')%>%
+  layout(showlegend = FALSE,  
+         xaxis = list(title = 'sex',
+           tickangle=45, tickfont = list(family='Rockwell', color='crimson', size=14)))
+
+subplot(fig1, fig2, shareY = T, shareX = T)%>%  
+  layout(margin = 0.01,
+         annotations = list( 
+           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'), 
+           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper')) 
+  ) 
+```
+
+#### Enumerated Ticks with Tickvals and Ticktext
+
+The `tickvals` and `ticktext` axis properties can be used together to display custom tick label text at custom locations along an axis. They should be set to lists of the same length where the `tickvals` list contains positions along the axis, and `ticktext` contains the strings that should be displayed at the corresponding positions.
+
+Here is an example.
+
+```{r}
+library(tidyquant)
+library(plotly)
+getSymbols('AAPL',
+           from = "2016-01-01",
+           to = "2016-12-31")
+
+apple <- data.frame(AAPL$AAPL.High)
+apple <- data.frame(rownames(apple), apple$AAPL.High)
+colnames(apple) <- list('dates', 'value')
+
+fig <- plot_ly(data = apple, x = ~dates, y = ~value, type = 'scatter', mode = 'lines')%>%
+  layout(
+    plot_bgcolor='#e5ecf6',   
+    xaxis=list(
+    zerolinecolor = '#ffff',   
+    zerolinewidth = 2,   
+    gridcolor = 'ffff',
+    ticktext=list("End of Q1", "End of Q2", "End of Q3", "End of Q4"),
+    tickvals=list("2016-04-01", "2016-07-01", "2016-10-01", "2016-12-30")
+    ),
+    yaxis = list(   
+      zerolinecolor = '#ffff',   
+      zerolinewidth = 2,   
+      
+      gridcolor = 'ffff',
+      tickprefix="$"), 
+    title = "Apple Stock Price")
+fig
+```
+
+### Axis lines: grid and zerolines
+
+##### Toggling Axis grid lines
+
+Axis grid lines can be disabled by setting the `showgrid` property to `FALSE` for the x and/or y axis.
+
+Here is an example of setting `showgrid` to `FALSE` in the figure constructor.
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c(0,1), y = c(1,0), type = 'scatter', mode = 'line') %>%
+  layout(xaxis = list(title = 'x',
+                      showgrid = F,
+                      zerolinecolor = '#ffff'
+  ),
+  yaxis = list(title = 'y',
+               zerolinecolor = '#ffff',
+               showgrid = F),
+  plot_bgcolor='#e5ecf6')
+fig
+```
+
+##### Toggling Axis zero lines
+
+The lines passing through zero can be disabled as well by setting the `zeroline` axis property to `FALSE`
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c(0,1), y = c(1,0), type = 'scatter', mode = 'line') %>%
+  layout(xaxis = list(title = 'x',
+                      zeroline = F, 
+                      showgrid = F 
+                     ),
+         yaxis = list(title = 'y',
+                      zeroline = F, 
+                      showgrid = F),
+         plot_bgcolor='#e5ecf6')
+fig
+```
+
+#### Styling and Coloring Axes and the Zero-Line
+
+##### Styling axis lines
+
+The `showline` axis property controls the visibility of the axis line, and the `linecolor` and `linewidth` axis properties control the color and width of the axis line.
+
+Here is an example of enabling the x and y axis lines, and customizing their width and color, for a faceted histogram created with Plotly.
+
+```{r}
+library(plotly)
+
+fig1 <- plot_ly(x = c("Female","Male"), y = c(150, 302), type = 'bar')%>%
+  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6', 
+         yaxis = list( title = 'sum of tip',
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff',
+           showline= T, linewidth=2, linecolor='black'),
+         xaxis = list(title = 'sex',
+                      showline= T, linewidth=2, linecolor='black'))
+
+fig2 <- plot_ly(x = c("Female","Male"), y = c(96, 183), type = 'bar')%>%
+  layout(showlegend = FALSE,  
+         yaxis = list(showline= T, linewidth=2, linecolor='black', showticklabels = F),
+         xaxis = list(title = 'sex',
+                      showline= T, linewidth=2, linecolor='black'))
+
+subplot(fig1, fig2, shareY = F, titleX = TRUE, titleY = TRUE)%>%  
+  layout(margin = list(t = 90),
+         annotations = list( 
+           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'), 
+           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper')) 
+  ) 
+```
+
+##### Mirroring axis lines
+
+Axis lines can be mirrored to the opposite side of the plotting area by setting the `mirror` axis property to `TRUE`.
+
+Here is an example of mirroring the x and y axis lines in a faceted histogram created using Plotly.
+
+```{r}
+
+library(plotly)
+
+fig1 <- plot_ly(x = c("Female","Male"), y = c(150, 302), type = 'bar')%>%
+  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6', 
+         yaxis = list( title = 'sum of tip',
+           zerolinecolor = '#ffff', 
+           zerolinewidth = 2, 
+           gridcolor = 'ffff',
+           showline= T, linewidth=2, linecolor='black', mirror = T),
+         xaxis = list(title = 'sex',
+                      showline= T, linewidth=2, linecolor='black', mirror = T))
+
+fig2 <- plot_ly(x = c("Female","Male"), y = c(96, 183), type = 'bar')%>%
+  layout(showlegend = FALSE,  
+         yaxis = list(showline= T, linewidth=2, linecolor='black', mirror = T, showticklabels = F),
+         xaxis = list(title = 'sex',
+                      showline= T, linewidth=2, linecolor='black', mirror = T))
+
+subplot(fig1, fig2, shareY = F, titleX = TRUE, titleY = TRUE)%>%  
+  layout(margin = list(t = 90),
+         annotations = list( 
+           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'), 
+           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper')) 
+  ) 
+```
+
+##### Styling grid lines
+
+The width and color of axis grid lines are controlled by the `gridwidth` and `gridcolor` axis properties.
+
+Here is an example of customizing the grid line width and color for a faceted scatter plot created with Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1, 
+                                zerolinewidth = 2,  
+                                gridcolor = 'LightPink'),
+                   xaxis2 = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1,  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'LightPink'),
+                   xaxis3 = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1, 
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'LightPink'),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1, 
+                     zerolinewidth = 2,  
+                     gridcolor = 'LightPink')
+                   ,showlegend = F)
+
+fig
+```
+
+##### Styling zero lines
+
+The width and color of axis zero lines are controlled by the `zerolinewidth` and `zerolinecolor` axis properties.
+
+Here is an example of configuring the zero line width and color for a simple figure using the `xaxis` and `yaxis` figure methods.
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c(0,1), y = c(1,0), type = 'scatter', mode = 'line') %>%
+  layout(xaxis = list(zeroline=T, zerolinewidth=2, zerolinecolor='LightPink', title = 'x',
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         yaxis = list(zeroline=T, zerolinewidth=2, zerolinecolor='LightPink', title = 'y',
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         plot_bgcolor='#e5ecf6')
+fig
+```
+
+#### Setting the Range of Axes Manually
+
+The visible x and y axis range can be configured manually by setting the `range` axis property to a list of two values, the lower and upper boundary.
+
+Here's an example of manually specifying the x and y axis range for a faceted scatter plot created with Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(zerolinecolor = '#ffff',  
+                                zerolinewidth = 2,  
+                                gridcolor = 'ffff',
+                                range = list(1.5, 4.5)),
+                   xaxis2 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff',
+                                 range = list(1.5, 4.5)),
+                   xaxis3 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff',
+                                 range = list(1.5, 4.5)),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     range = list(3, 9))
+                   ,showlegend = F)
+
+fig
+```
+
+#### Disabling Pan/Zoom on Axes (Fixed Range)
+
+Pan/Zoom can be disabled for a given axis by setting `fixedrange` to `TRUE`.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(zerolinecolor = '#ffff',  
+                                zerolinewidth = 2,  
+                                gridcolor = 'ffff',
+                                fixedrange=TRUE),
+                   xaxis2 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff',
+                                 fixedrange=TRUE),
+                   xaxis3 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff',
+                                 fixedrange=TRUE),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff')
+                   ,showlegend = F)
+
+fig
+```
+
+### Fixed Ratio Axes
+
+The `scaleanchor` and `scaleratio` axis properties can be used to force a fixed ratio of pixels per unit between two axes.
+
+Here is an example of anchoring the scale of the x and y axis with a scale ratio of 1. Notice how the zoom box is constrained to prevent the distortion of the shape of the line plot.
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+               type = 'scatter', mode = 'lines+markers')%>%
+  layout(xaxis = list(
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         yaxis = list(
+                      scaleanchor = "x",
+                      scaleratio = 1,
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         title = "fixed-ratio axes",
+         plot_bgcolor='#e5ecf6'
+  )
+fig
+
+```
+
+### Fixed Ratio Axes with Compressed domain
+
+If an axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), `constrain` determines how that happens: by increasing the "range" (default), or by decreasing the "domain".
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+               type = 'scatter', mode = 'lines+markers')%>%
+  layout(xaxis = list(
+                      constrain="domain",
+                      range = c(-1,4),
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         yaxis = list(
+                      scaleanchor = "x",
+                      scaleratio = 1,
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         title = "fixed-ratio axes with compressed axes",
+         plot_bgcolor='#e5ecf6'
+  )
+fig
+```
+
+##### Decreasing the domain spanned by an axis
+
+In the example below, the x and y axis are anchored together, and the range of the `xaxis` is set manually. By default, plotly extends the range of the axis (overriding the `range` parameter) to fit in the figure `domain`. You can restrict the `domain` to force the axis to span only the set range, by setting `constrain='domain'` as below.
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+               type = 'scatter', mode = 'lines+markers')%>%
+  layout(xaxis = list(
+    scaleanchor = "x",
+    scaleratio = 1,
+    zerolinecolor = '#ffff', 
+    zerolinewidth = 2, 
+    gridcolor = 'ffff'),
+    yaxis = list(
+      range = c(-0.5, 3.5),
+      constrain="domain",
+      zerolinecolor = '#ffff', 
+      zerolinewidth = 2, 
+      gridcolor = 'ffff'),
+    title = "fixed-ratio axes",
+    plot_bgcolor='#e5ecf6'
+  )
+fig
+```
+
+### Fixed Ratio Axes with Compressed domain
+
+If an axis needs to be compressed (either due to its own `scaleanchor` and `scaleratio` or those of the other axis), `constrain` determines how that happens: by increasing the "range" (default), or by decreasing the "domain".
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+               type = 'scatter', mode = 'lines+markers')%>%
+  layout(xaxis = list(
+    constrain="domain",
+    range = c(-1,4),
+    zerolinecolor = '#ffff', 
+    zerolinewidth = 2, 
+    gridcolor = 'ffff'),
+    yaxis = list(
+      scaleanchor = "x",
+      scaleratio = 1,
+      zerolinecolor = '#ffff', 
+      zerolinewidth = 2, 
+      gridcolor = 'ffff'),
+    title = "fixed-ratio axes with compressed axes",
+    plot_bgcolor='#e5ecf6'
+  )
+fig
+```
+
+#### Reversed Axes
+
+You can tell plotly's automatic axis range calculation logic to reverse the direction of an axis by setting the `autorange` axis property to `"reversed"`.
+
+Here is an example of reversing the direction of the y axes for a faceted scatter plot created using Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(zerolinecolor = '#ffff',  
+                                zerolinewidth = 2,  
+                                gridcolor = 'ffff'),
+                   xaxis2 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff'),
+                   xaxis3 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff'),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     autorange="reversed")
+                   ,showlegend = F)
+
+fig
+```
+
+#### Reversed Axes with Range ( Min/Max ) Specified
+
+The direction of an axis can be reversed when manually setting the range extents by specifying a list containing the upper bound followed by the lower bound (rather that the lower followed by the upper) as the `range` axis property.
+
+Here is an example of manually setting the reversed range of the y axes in a faceted scatter plot figure created using Plotly.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(zerolinecolor = '#ffff',  
+                                zerolinewidth = 2,  
+                                gridcolor = 'ffff'),
+                   xaxis2 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff'),
+                   xaxis3 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff'),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     range=list(9,3))
+                   ,showlegend = F)
+
+fig
+```
+
+### Axis range for log axis type
+
+If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.layout`. However, with `plotly` functions you pass directly the values of the range bounds (`plotly` then computes the appropriate values to pass to the figure layout).
+
+```{r}
+library(pracma) 
+library(plotly) 
+ 
+x = linspace(1, 200, 30) 
+ 
+fig <- plot_ly(x = x, y = x**3, type = 'scatter', mode = 'markers') %>% 
+  layout(xaxis = list(range = c(log10(0.8), log10(250)), 
+                      type = 'log', 
+                      zerolinecolor = '#ffff',  
+                      zerolinewidth = 2,  
+                      gridcolor = 'ffff', 
+                      title = 'x'), 
+         yaxis = list(type = 'log', 
+         zerolinecolor = '#ffff',  
+         zerolinewidth = 2,  
+         gridcolor = 'ffff', 
+         title = 'y'), 
+         plot_bgcolor='#e5ecf6') 
+ 
+fig
+```
+
+```{r}
+library(pracma)
+library(plotly)
+
+x = linspace(1, 200, 30)
+
+fig <- plot_ly(x = x, y = x**3, type = 'scatter', mode = 'line') %>%
+  layout(yaxis = list(type = 'log',
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         xaxis = list(type = 'log', 
+                      range = c(log10(0.8), log10(250)),
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         plot_bgcolor='#e5ecf6')
+
+fig
+```
+
+#### <code>nonnegative</code>, <code>tozero</code>, and <code>normal</code> Rangemode
+
+The axis auto-range calculation logic can be configured using the `rangemode` axis parameter.
+
+If `rangemode` is `"normal"` (the default), the range is computed based on the min and max values of the input data. If `"tozero"`, the range will always include zero. If `"nonnegative"`, the range will not extend below zero, regardless of the input data.
+
+Here is an example of configuring a faceted scatter plot created using Plotly to always include zero for both the x and y axes.
+
+```{r}
+library(plotly)
+data(iris)
+
+fig <- iris%>%
+  group_by(Species) %>%
+  do(p=plot_ly(., x = ~Sepal.Width, y = ~Sepal.Length, type = "scatter", opacity = 0.5,
+               mode = "markers",
+               marker = list(
+                 color = "blue"
+               ))) %>%
+  subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
+fig <- fig%>%
+  layout( 
+    annotations = list(  
+      list(  
+        x = 0.16,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=setosa",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.5,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=versicolor",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      ),   
+      list(  
+        x = 0.85,   
+        y = 1,   
+        font = list(size = 10),   
+        text = "species=virginica",   
+        xref = "paper",   
+        yref = "paper",   
+        xanchor = "center",   
+        yanchor = "bottom",   
+        showarrow = FALSE  
+      )))%>%layout(plot_bgcolor='#e5ecf6',  
+                   xaxis = list(zerolinecolor = '#ffff',  
+                                zerolinewidth = 2,  
+                                gridcolor = 'ffff',
+                                rangemode="tozero"),
+                   xaxis2 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff',
+                                 rangemode="tozero"),
+                   xaxis3 = list(zerolinecolor = '#ffff',  
+                                 zerolinewidth = 2,  
+                                 gridcolor = 'ffff',
+                                 rangemode="tozero"),
+                   yaxis = list(  
+                     zerolinecolor = '#ffff',  
+                     zerolinewidth = 2,  
+                     gridcolor = 'ffff',
+                     rangemode="tozero")
+                   ,showlegend = F)
+
+fig
+```
+
+#### Setting the domain of the axis
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+               type = 'scatter', mode = 'lines+markers')%>%
+  layout(xaxis = list(domain = c(0.25, 0.75),
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         yaxis = list(domain = c(0.25, 0.75),
+                      zerolinecolor = '#ffff', 
+                      zerolinewidth = 2, 
+                      gridcolor = 'ffff'),
+         plot_bgcolor='#e5ecf6')
+fig
+```
+
+#### Synchronizing axes in subplots with `matches`
+
+Using `group_by` in `plotly` let [zoom](https://help.plotly.com/zoom-pan-hover-controls/#step-3-zoom-in-and-zoom-out-autoscale-the-plot) and [pan](https://help.plotly.com/zoom-pan-hover-controls/#step-6-pan-along-axes) each facet to the same range implicitly. However, if the subplots are created with `subplots`, the axis needs to be updated with `matches` parameter to update all the subplots accordingly.
+
+Zoom in one trace below, to see the other subplots zoomed to the same x-axis range. To pan all the subplots, click and drag from the center of x-axis to the side:
+
+```{r}
+library(plotly)
+N <- 20
+X <- seq(from = 0, to = 1, length.out = N)
+
+y <- runif(n=20, min=0, max=1)
+fig1 <- plot_ly(x = X, y = y, type = 'scatter', mode = 'lines')
+
+y <- runif(n=20, min=0, max=1)
+fig2 <- plot_ly(x = X, y = y, type = 'scatter', mode = 'lines')
+
+y <- runif(n=20, min=0, max=1)
+fig3 <- plot_ly(x = X, y = y, type = 'scatter', mode = 'lines')
+
+fig <- subplot(fig1, fig2, fig3, nrows = 1, margin = 0.05, shareX = TRUE)%>% 
+  layout(
+         plot_bgcolor='#e5ecf6',  
+         xaxis = list(  matches='x',
+                        zerolinecolor = '#ffff',  
+                        zerolinewidth = 2,  
+                        gridcolor = 'ffff'), 
+         xaxis2 = list(  matches='x',
+                        zerolinecolor = '#ffff',  
+                        zerolinewidth = 2,  
+                        gridcolor = 'ffff'), 
+         xaxis3 = list(  matches='x',
+                        zerolinecolor = '#ffff',  
+                        zerolinewidth = 2,  
+                        gridcolor = 'ffff'), 
+         yaxis = list(  
+           zerolinecolor = '#ffff',  
+           zerolinewidth = 2,  
+           gridcolor = 'ffff',
+           range = list(0, 1)),
+         yaxis2 = list(  
+           zerolinecolor = '#ffff',  
+           zerolinewidth = 2,  
+           gridcolor = 'ffff',
+           range = list(0, 1)),
+         yaxis3 = list(  
+           zerolinecolor = '#ffff',  
+           zerolinewidth = 2,  
+           gridcolor = 'ffff',
+           range = list(0, 1)),
+         showlegend = T) 
+fig
+```
+
+### Subcategory Axes
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(orientation='h', line=list(color='gray'), height=400, width=600)
+fig <- fig %>% add_boxplot(x=c(2,3,1,5), y=c('A','A','A','A'), name='A')
+fig <- fig %>% add_boxplot(x=c(8,3,6,5), y=c('B','B','B','B'), name='B')
+fig <- fig %>% add_boxplot(x=c(2,3,2,5), y=c('C','C','C','C'), name='C')
+fig <- fig %>% add_boxplot(x=c(7.5,3,6,4), y=c('D','D','D','D'), name='D')
+fig <- fig %>% layout(
+    title = '',
+    yaxis = list(
+      autorange = TRUE, 
+      categoryorder = "category descending", 
+      domain = c(0, 1), 
+      range = c(-0.5, 3.5), 
+      showline = TRUE, 
+      title = "", 
+      type = "category"
+    ),
+    margin = list(
+      r = 10, 
+      t = 25, 
+      b = 40, 
+      l = 110
+    ),
+    legend = list(
+      x = 0.986145833333, 
+      y = 0.936263886049
+    ), 
+    shapes = list(
+      list(
+        line = list(
+          color = "rgba(68, 68, 68, 0.5)", 
+          width = 1
+        ), 
+        type = "line", 
+        x0 = -0.3, 
+        x1 = 1.2, 
+        xref = "paper", 
+        y0 = 0.5, 
+        y1 = 0.5, 
+        yref = "paper"
+      ), 
+      list(
+        line = list(
+          color = "rgba(68, 68, 68, 0.63)", 
+          width = 1
+        ), 
+        type = "line", 
+        x0 = -0.3, 
+        x1 = 1.2, 
+        xref = "paper", 
+        y0 = 1, 
+        y1 = 1, 
+        yref = "paper"
+      )
+    ),
+    annotations = list(
+        list(
+          x = -0.0951769406393, 
+          y = 1.06972670892, 
+          showarrow = FALSE, 
+          text = "Subgroup", 
+          xref = "paper", 
+          yref = "paper"
+        ), 
+        list(
+          x = -0.235516552511, 
+          y = 1.07060587474, 
+          showarrow = FALSE, 
+          text = "Group", 
+          xref = "paper", 
+          yref = "paper"
+        ), 
+        list(
+          x = -0.235516552511, 
+          y = 0.922906017856, 
+          showarrow = FALSE, 
+          text = "One", 
+          xref = "paper", 
+          yref = "paper"
+        ), 
+        list(
+          x = -0.235516552511, 
+          y = 0.375, 
+          showarrow = FALSE, 
+          text = "Two", 
+          xref = "paper", 
+          yref = "paper"
+        )
+      )
+    )%>%layout(plot_bgcolor='#e5ecf6',  
+          xaxis = list(  
+            zerolinecolor = '#ffff',  
+            zerolinewidth = 2,  
+            gridcolor = 'ffff'),  
+          yaxis = list(  
+            zerolinecolor = '#ffff',  
+            zerolinewidth = 2,  
+            gridcolor = 'ffff')  
+          )
+
+fig
+```
+
+### Fixed-Ratio Axes
+
+```{r}
+
+library(plotly)
+
+fig <- plot_ly(
+    width = 800,
+    height = 500
+  )
+fig <- fig %>% add_trace(
+    x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3),
+    y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0),
+    type = 'scatter',
+    mode = 'lines'
+  )
+fig <- fig %>% add_trace(
+    x = c(0,1,2,3),
+    y = c(1,2,4,8),
+    yaxis = "y2",
+    type = 'scatter',
+    mode = 'lines'
+  )
+fig <- fig %>% add_trace(
+    x = c(1,10,100,10,1),
+    y = c(0,1,2,3,4),
+    xaxis = "x2",
+    yaxis ="y3",
+    type = 'scatter',
+    mode = 'lines'
+  )
+fig <- fig %>% add_trace(
+    x = c(1,100,30,80,1),
+    y = c(1,1.5,2,2.5,3),
+    xaxis = "x2",
+    yaxis = "y4",
+    type = 'scatter',
+    mode = 'lines'
+  )
+fig <- fig %>% layout(
+    title = "fixed-ratio axes",
+    xaxis = list(
+      nticks = 10,
+      domain = c(0, 0.45),
+      title = "shared X axis"
+    ),
+    yaxis = list(
+      scaleanchor = "x",
+      domain = c(0, 0.45),
+      title = "1:1"
+    ),
+    yaxis2 = list(
+      scaleanchor = "x",
+      scaleratio = 0.2,
+      domain = c(0.55,1),
+      title = "1:5"
+    ),
+    xaxis2 = list(
+      type = "log",
+      domain = c(0.55, 1),
+      anchor = "y3",
+      title = "unconstrained log X"
+    ),
+    yaxis3 = list(
+      domain = c(0, 0.45),
+      anchor = "x2",
+      title = "Scale matches ->"
+    ),
+    yaxis4 = list(
+      scaleanchor = "y3",
+      domain = c(0.55, 1),
+      anchor = "x2",
+      title = "Scale matches <-"
+    ),
+    showlegend= FALSE
+)%>%layout(plot_bgcolor='#e5ecf6',  
+          xaxis = list(  
+            zerolinecolor = '#ffff',  
+            zerolinewidth = 2,  
+            gridcolor = 'ffff'),  
+          yaxis = list(  
+            zerolinecolor = '#ffff',  
+            zerolinewidth = 2,  
+            gridcolor = 'ffff')  
+          )
+
+fig
+```
+
+#### Reference
+
+See https://plotly.com/r/reference/layout/xaxis/# and https://plotly.com/r/reference/layout/yaxis/# for more information and chart attribute options!
