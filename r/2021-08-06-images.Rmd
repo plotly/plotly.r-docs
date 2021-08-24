@@ -4,7 +4,10 @@ display_as: file_settings
 language: r
 layout: base
 name: Images
-order: 30
+order: 29
+output:
+  html_document:
+    keep_md: true
 permalink: r/images/
 thumbnail: thumbnail/images.png
 ---
@@ -17,9 +20,8 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 In this page we explain how to add static, non-interactive images as background, logo or annotation images to a figure. For exploring image data in interactive charts, see the [tutorial on displaying image data](https://plotly.com/r/displaying-images/).
 
-A background image can be added to the layout of a figure by setting the `images` parameter of `plot_ly.layout`. The
-`source` attribute of a `layout.images` can be the URL of an image, or a PIL
-Image object (`from PIL import Image; img = Image.open('filename.png')`).
+A background image can be added to the layout of a figure by setting the `images` parameter of `plot_ly$layout`. The
+`source` attribute of a `layout$images` can be the URL of an image, or an image object.
 
 ```{r}
 library('plotly')
