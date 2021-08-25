@@ -1,5 +1,5 @@
 ---
-description:How to adjust axes properties in R - axes titles, styling and coloring axes and grid lines, ticks, tick labels and more
+description: How to adjust axes properties in R - axes titles, styling and coloring axes and grid lines, ticks, tick labels and more
 display_as: file_settings
 language: r
 layout: base
