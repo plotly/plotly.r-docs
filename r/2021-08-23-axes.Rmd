@@ -1,4 +1,5 @@
 ---
+description:How to adjust axes properties in R - axes titles, styling and coloring axes and grid lines, ticks, tick labels and more
 display_as: file_settings
 language: r
 layout: base
@@ -8,14 +9,14 @@ output:
   html_document:
     keep_md: true
 permalink: r/axes/
+page_type: example_index
 thumbnail: thumbnail/axes.png
-title: Axes in R
-description: How to adjust axes properties in R - axes titles, styling and coloring axes and grid lines, ticks, tick labels and more.
 ---
 
 ```{r, echo = FALSE, message=FALSE}
 knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 ```
+
 
 This tutorial explain how to set the properties of 2-dimensional Cartesian axes, namely X-axis and Y-axis.
 
