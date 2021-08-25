@@ -3,7 +3,10 @@ display_as: file_settings
 language: r
 layout: base
 name: Axes
-order: 14
+order: 1
+output:
+  html_document:
+    keep_md: true
 permalink: r/axes/
 thumbnail: thumbnail/axes.png
 title: Axes in R
@@ -25,17 +28,17 @@ Other kinds of subplots and axes are described in other tutorials:
 - [Mapbox axes](https://plotly.com/r/mapbox-layers/). The axis object is 'mapbox'.
 - [Color axes](https://plotly.com/r/colorscales/). The axis object is 'coloraxis'.
 
-**See also** the tutorials on  [subplots](https://plotly.com/r/subplots/#) 
+**See also** the tutorials on  [subplots](https://plotly.com/r/subplots/#)
 
 ### 2-D Cartesian Axis Types and Auto-Detection
 
-The different types of Cartesian axes are configured via the `xaxis.type` or `yaxis.type` attribute, which can take on the following values:
+The different types of Cartesian axes are configured via the `xaxis$type` or `yaxis$type` attribute, which can take on the following values:
 
-- `'linear'` 
-- `'log'` 
-- `'date'` 
-- `'category'` 
-- `'multicategory'` 
+- `'linear'`
+- `'log'`
+- `'date'`
+- `'category'`
+- `'multicategory'`
 
 The axis type is auto-detected by looking at data from the first trace linked to this axis:
 
@@ -56,14 +59,14 @@ library(plotly)
 fig <- plot_ly(x = c("a", "a", "b", "3"), y = c(1,2,3,4), type = 'bar') %>%
   layout(xaxis = list(autotypenumbers = 'strict', title = 'x'),
          yaxis = list(title = 'y'),
-         plot_bgcolor='#e5ecf6', 
-         xaxis = list( 
-           zerolinecolor = '#ffff', 
-           zerolinewidth = 2, 
-           gridcolor = 'ffff'), 
-         yaxis = list( 
-           zerolinecolor = '#ffff', 
-           zerolinewidth = 2, 
+         plot_bgcolor='#e5ecf6',
+         xaxis = list(
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
+           gridcolor = 'ffff'),
+         yaxis = list(
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff'))
 
 fig
@@ -98,14 +101,14 @@ library(reshape2)
 data("tips")
 
 fig <- plot_ly(tips, x = ~total_bill, y = ~tip, type = 'scatter', mode = 'markers', split = ~sex) %>%
-  layout( plot_bgcolor='#e5ecf6', 
-          xaxis = list( 
-            zerolinecolor = '#ffff', 
-            zerolinewidth = 2, 
-            gridcolor = 'ffff'), 
-          yaxis = list( 
-            zerolinecolor = '#ffff', 
-            zerolinewidth = 2, 
+  layout( plot_bgcolor='#e5ecf6',
+          xaxis = list(
+            zerolinecolor = '#ffff',
+            zerolinewidth = 2,
+            gridcolor = 'ffff'),
+          yaxis = list(
+            zerolinecolor = '#ffff',
+            zerolinewidth = 2,
             gridcolor = 'ffff'))
 fig
 
@@ -123,12 +126,12 @@ data("tips")
 fig <- plot_ly(tips, x = ~total_bill, y = ~tip, type = 'scatter', mode = 'markers', split = ~sex) %>%
   layout(legend=list(title=list(text='Payer Gender')),
          xaxis = list(title = 'Total Bill ($)',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          yaxis = list(title = 'Tip ($)',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6')
 fig
@@ -144,38 +147,38 @@ library(plotly)
 fig <- plot_ly(x = c("Apples", "Oranges"), y = c(10,20), type = 'bar', split = c("Here", "There")) %>%
   layout(legend=list(title=list(text='Place')),
          xaxis = list(title = 'Fruit',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          yaxis = list(title = 'Amount',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6')
 fig
 ```
 
 
-##### Set axis title text 
+##### Set axis title text
 
 Axis titles are set using the nested `title.text` property of the x or y axis. Here is an example of creating a new figure and using `layout.xaxes.title.text` and `layout.yaxes.title.text`, to set the axis titles.
 
 ```{r}
-library(plotly) 
- 
-fig <- plot_ly()%>% 
-  add_lines(y = c(1, 0), x = c(0, 1))%>% 
-  layout(plot_bgcolor='#e5ecf6',   
-             xaxis = list(   
-               title='Time', 
-               zerolinecolor = '#ffff',   
-               zerolinewidth = 2,   
-               gridcolor = 'ffff'),   
-             yaxis = list(   
-               title='Value A', 
-               zerolinecolor = '#ffff',   
-               zerolinewidth = 2,   
-               gridcolor = 'ffff')) 
+library(plotly)
+
+fig <- plot_ly()%>%
+  add_lines(y = c(1, 0), x = c(0, 1))%>%
+  layout(plot_bgcolor='#e5ecf6',
+             xaxis = list(
+               title='Time',
+               zerolinecolor = '#ffff',
+               zerolinewidth = 2,
+               gridcolor = 'ffff'),
+             yaxis = list(
+               title='Value A',
+               zerolinecolor = '#ffff',
+               zerolinewidth = 2,
+               gridcolor = 'ffff'))
 fig
 ```
 
@@ -186,18 +189,18 @@ This example sets `standoff` attribute to cartesian axes to determine the distan
 ```{r}
 library(plotly)
 
-fig <- plot_ly(x = list("December", "January", "February"), y = list(4, 1, 3), type = 'scatter', 
+fig <- plot_ly(x = list("December", "January", "February"), y = list(4, 1, 3), type = 'scatter',
             mode = 'lines+markers')%>%
-  layout(plot_bgcolor='#e5ecf6',  
-         xaxis = list(  
+  layout(plot_bgcolor='#e5ecf6',
+         xaxis = list(
            title=list(text='Month', font = list(size = 20), standoff = 25),
-           zerolinecolor = '#ffff',  
-           zerolinewidth = 2,  
-           gridcolor = 'ffff'),  
-         yaxis = list(  
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
+           gridcolor = 'ffff'),
+         yaxis = list(
            title=list(text='Temperature', standoff = 25),
-           zerolinecolor = '#ffff',  
-           zerolinewidth = 2,  
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff'))
 fig
 ```
@@ -219,65 +222,65 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-           list(  
-             x = 0.16,   
-             y = 1,   
-             font = list(size = 10),   
-             text = "species=setosa",   
-             xref = "paper",   
-             yref = "paper",   
-             xanchor = "center",   
-             yanchor = "bottom",   
-             showarrow = FALSE  
-           ),   
-           list(  
-             x = 0.5,   
-             y = 1,   
-             font = list(size = 10),   
-             text = "species=versicolor",   
-             xref = "paper",   
-             yref = "paper",   
-             xanchor = "center",   
-             yanchor = "bottom",   
-             showarrow = FALSE  
-           ),   
-           list(  
-             x = 0.85,   
-             y = 1,   
-             font = list(size = 10),   
-             text = "species=virginica",   
-             xref = "paper",   
-             yref = "paper",   
-             xanchor = "center",   
-             yanchor = "bottom",   
-             showarrow = FALSE  
-           )))%>%layout(plot_bgcolor='#e5ecf6',  
-                        xaxis = list(  
+  layout(
+    annotations = list(
+           list(
+             x = 0.16,
+             y = 1,
+             font = list(size = 10),
+             text = "species=setosa",
+             xref = "paper",
+             yref = "paper",
+             xanchor = "center",
+             yanchor = "bottom",
+             showarrow = FALSE
+           ),
+           list(
+             x = 0.5,
+             y = 1,
+             font = list(size = 10),
+             text = "species=versicolor",
+             xref = "paper",
+             yref = "paper",
+             xanchor = "center",
+             yanchor = "bottom",
+             showarrow = FALSE
+           ),
+           list(
+             x = 0.85,
+             y = 1,
+             font = list(size = 10),
+             text = "species=virginica",
+             xref = "paper",
+             yref = "paper",
+             xanchor = "center",
+             yanchor = "bottom",
+             showarrow = FALSE
+           )))%>%layout(plot_bgcolor='#e5ecf6',
+                        xaxis = list(
                           title=list(text='Sepal.Width',
                                      font=list(size=15, family='Courier', color='crimson')),
-                          zerolinecolor = '#ffff',  
-                          zerolinewidth = 2,  
+                          zerolinecolor = '#ffff',
+                          zerolinewidth = 2,
                           gridcolor = 'ffff'),
-                        xaxis2 = list(  
+                        xaxis2 = list(
                           title=list(text='Sepal.Width',
                                      font=list(size=15, family='Courier', color='crimson')),
-                          zerolinecolor = '#ffff',  
-                          zerolinewidth = 2,  
+                          zerolinecolor = '#ffff',
+                          zerolinewidth = 2,
                           gridcolor = 'ffff'),
-                        xaxis3 = list(  
+                        xaxis3 = list(
                           title=list(text='Sepal.Width',
                                      font=list(size=15, family='Courier', color='crimson')),
-                          zerolinecolor = '#ffff',  
-                          zerolinewidth = 2,  
+                          zerolinecolor = '#ffff',
+                          zerolinewidth = 2,
                           gridcolor = 'ffff'),
-                        yaxis = list(  
+                        yaxis = list(
                           title=list(text='Sepal.Length',
                                      font=list(size=18, family='Courier', color='crimson')),
-                          zerolinecolor = '#ffff',  
-                          zerolinewidth = 2,  
-                          gridcolor = 'ffff')  
+                          zerolinecolor = '#ffff',
+                          zerolinewidth = 2,
+                          gridcolor = 'ffff')
                         ,showlegend = F)
 
 fig
@@ -304,59 +307,59 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      ticks="inside"),
-                   xaxis2 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis2 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      ticks="inside"),
-                   xaxis3 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis3 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      ticks="inside"),
                    yaxis = list(  nticks=20,
-                                  zerolinecolor = '#ffff',  
-                                  zerolinewidth = 2,  
+                                  zerolinecolor = '#ffff',
+                                  zerolinewidth = 2,
                                   gridcolor = 'ffff',
                                   ticks="inside")
                    ,showlegend = F)
@@ -383,56 +386,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis2 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis2 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis3 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis3 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
                    yaxis = list(  nticks=20,
-                                  zerolinecolor = '#ffff',  
-                                  zerolinewidth = 2,  
+                                  zerolinecolor = '#ffff',
+                                  zerolinewidth = 2,
                                   gridcolor = 'ffff')
       ,showlegend = F)
 
@@ -458,56 +461,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis2 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis2 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis3 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis3 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   yaxis = list(  
-                                  zerolinecolor = '#ffff',  
-                                  zerolinewidth = 2,  
+                   yaxis = list(
+                                  zerolinecolor = '#ffff',
+                                  zerolinewidth = 2,
                                   gridcolor = 'ffff',
                                   tick0=0.25, dtick=0.5)
                    ,showlegend = F)
@@ -534,56 +537,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis2 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis2 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis3 = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis3 = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      tickvals = list(5.1, 5.9, 6.3, 7.5))
                    ,showlegend = F)
@@ -612,56 +615,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10,
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis2 = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis2 = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10,
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   xaxis3 = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, 
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   xaxis3 = list( ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10,
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff'),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff', tick0=0.25, dtick=0.5,
                      ticks="outside", tickwidth=2, tickcolor='crimson', ticklen=10, col=1)
                    ,showlegend = F)
@@ -688,56 +691,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff',
                                 showticklabels=FALSE),
-                   xaxis2 = list(zerolinecolor = '#ffff',  
-                                  zerolinewidth = 2,  
+                   xaxis2 = list(zerolinecolor = '#ffff',
+                                  zerolinewidth = 2,
                                   gridcolor = 'ffff',
                                  showticklabels=FALSE),
-                   xaxis3 = list(zerolinecolor = '#ffff',  
-                                  zerolinewidth = 2,  
+                   xaxis3 = list(zerolinecolor = '#ffff',
+                                  zerolinewidth = 2,
                                   gridcolor = 'ffff',
                                  showticklabels=FALSE),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      showticklabels=FALSE)
                    ,showlegend = F)
@@ -755,26 +758,26 @@ Here is an example of rotating the x-axis tick labels by 45 degrees, and customi
 library(plotly)
 
 fig1 <- plot_ly(x = c("Female","Male"), y = c(150, 302), type = 'bar')%>%
-  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6', 
-         yaxis = list( 
+  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6',
+         yaxis = list(
            title = 'sum of tip',
-           zerolinecolor = '#ffff', 
-           zerolinewidth = 2, 
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff'),
          xaxis = list(title = 'sex',
            tickangle=45, tickfont = list(family='Rockwell', color='crimson', size=14)))
 
 fig2 <- plot_ly(x = c("Female","Male"), y = c(96, 183), type = 'bar')%>%
-  layout(showlegend = FALSE,  
+  layout(showlegend = FALSE,
          xaxis = list(title = 'sex',
            tickangle=45, tickfont = list(family='Rockwell', color='crimson', size=14)))
 
-subplot(fig1, fig2, shareY = T, shareX = T)%>%  
+subplot(fig1, fig2, shareY = T, shareX = T)%>%
   layout(margin = 0.01,
-         annotations = list( 
-           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'), 
-           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper')) 
-  ) 
+         annotations = list(
+           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper'))
+  )
 ```
 
 #### Enumerated Ticks with Tickvals and Ticktext
@@ -796,20 +799,20 @@ colnames(apple) <- list('dates', 'value')
 
 fig <- plot_ly(data = apple, x = ~dates, y = ~value, type = 'scatter', mode = 'lines')%>%
   layout(
-    plot_bgcolor='#e5ecf6',   
+    plot_bgcolor='#e5ecf6',
     xaxis=list(
-    zerolinecolor = '#ffff',   
-    zerolinewidth = 2,   
+    zerolinecolor = '#ffff',
+    zerolinewidth = 2,
     gridcolor = 'ffff',
     ticktext=list("End of Q1", "End of Q2", "End of Q3", "End of Q4"),
     tickvals=list("2016-04-01", "2016-07-01", "2016-10-01", "2016-12-30")
     ),
-    yaxis = list(   
-      zerolinecolor = '#ffff',   
-      zerolinewidth = 2,   
-      
+    yaxis = list(
+      zerolinecolor = '#ffff',
+      zerolinewidth = 2,
+
       gridcolor = 'ffff',
-      tickprefix="$"), 
+      tickprefix="$"),
     title = "Apple Stock Price")
 fig
 ```
@@ -848,11 +851,11 @@ library(plotly)
 
 fig <- plot_ly(x = c(0,1), y = c(1,0), type = 'scatter', mode = 'line') %>%
   layout(xaxis = list(title = 'x',
-                      zeroline = F, 
-                      showgrid = F 
+                      zeroline = F,
+                      showgrid = F
                      ),
          yaxis = list(title = 'y',
-                      zeroline = F, 
+                      zeroline = F,
                       showgrid = F),
          plot_bgcolor='#e5ecf6')
 fig
@@ -870,27 +873,27 @@ Here is an example of enabling the x and y axis lines, and customizing their wid
 library(plotly)
 
 fig1 <- plot_ly(x = c("Female","Male"), y = c(150, 302), type = 'bar')%>%
-  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6', 
+  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6',
          yaxis = list( title = 'sum of tip',
-           zerolinecolor = '#ffff', 
-           zerolinewidth = 2, 
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff',
            showline= T, linewidth=2, linecolor='black'),
          xaxis = list(title = 'sex',
                       showline= T, linewidth=2, linecolor='black'))
 
 fig2 <- plot_ly(x = c("Female","Male"), y = c(96, 183), type = 'bar')%>%
-  layout(showlegend = FALSE,  
+  layout(showlegend = FALSE,
          yaxis = list(showline= T, linewidth=2, linecolor='black', showticklabels = F),
          xaxis = list(title = 'sex',
                       showline= T, linewidth=2, linecolor='black'))
 
-subplot(fig1, fig2, shareY = F, titleX = TRUE, titleY = TRUE)%>%  
+subplot(fig1, fig2, shareY = F, titleX = TRUE, titleY = TRUE)%>%
   layout(margin = list(t = 90),
-         annotations = list( 
-           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'), 
-           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper')) 
-  ) 
+         annotations = list(
+           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper'))
+  )
 ```
 
 ##### Mirroring axis lines
@@ -904,27 +907,27 @@ Here is an example of mirroring the x and y axis lines in a faceted histogram cr
 library(plotly)
 
 fig1 <- plot_ly(x = c("Female","Male"), y = c(150, 302), type = 'bar')%>%
-  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6', 
+  layout(showlegend = FALSE, plot_bgcolor='#e5ecf6',
          yaxis = list( title = 'sum of tip',
-           zerolinecolor = '#ffff', 
-           zerolinewidth = 2, 
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff',
            showline= T, linewidth=2, linecolor='black', mirror = T),
          xaxis = list(title = 'sex',
                       showline= T, linewidth=2, linecolor='black', mirror = T))
 
 fig2 <- plot_ly(x = c("Female","Male"), y = c(96, 183), type = 'bar')%>%
-  layout(showlegend = FALSE,  
+  layout(showlegend = FALSE,
          yaxis = list(showline= T, linewidth=2, linecolor='black', mirror = T, showticklabels = F),
          xaxis = list(title = 'sex',
                       showline= T, linewidth=2, linecolor='black', mirror = T))
 
-subplot(fig1, fig2, shareY = F, titleX = TRUE, titleY = TRUE)%>%  
+subplot(fig1, fig2, shareY = F, titleX = TRUE, titleY = TRUE)%>%
   layout(margin = list(t = 90),
-         annotations = list( 
-           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'), 
-           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper')) 
-  ) 
+         annotations = list(
+           list(x = 0.15 , y = 1.2, text = "smoker=NO", showarrow = F, xref='paper', yref='paper'),
+           list(x = 0.85 , y = 1.2, text = "smoker=YES", showarrow = F, xref='paper', yref='paper'))
+  )
 ```
 
 ##### Styling grid lines
@@ -946,53 +949,53 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1, 
-                                zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1,
+                                zerolinewidth = 2,
                                 gridcolor = 'LightPink'),
-                   xaxis2 = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1,  
-                                 zerolinewidth = 2,  
+                   xaxis2 = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1,
+                                 zerolinewidth = 2,
                                  gridcolor = 'LightPink'),
-                   xaxis3 = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1, 
-                                 zerolinewidth = 2,  
+                   xaxis3 = list(zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1,
+                                 zerolinewidth = 2,
                                  gridcolor = 'LightPink'),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1, 
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff', showgrid=TRUE, gridwidth=1,
+                     zerolinewidth = 2,
                      gridcolor = 'LightPink')
                    ,showlegend = F)
 
@@ -1011,12 +1014,12 @@ library(plotly)
 
 fig <- plot_ly(x = c(0,1), y = c(1,0), type = 'scatter', mode = 'line') %>%
   layout(xaxis = list(zeroline=T, zerolinewidth=2, zerolinecolor='LightPink', title = 'x',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          yaxis = list(zeroline=T, zerolinewidth=2, zerolinecolor='LightPink', title = 'y',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6')
 fig
@@ -1041,56 +1044,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(zerolinecolor = '#ffff',  
-                                zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(zerolinecolor = '#ffff',
+                                zerolinewidth = 2,
                                 gridcolor = 'ffff',
                                 range = list(1.5, 4.5)),
-                   xaxis2 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis2 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff',
                                  range = list(1.5, 4.5)),
-                   xaxis3 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis3 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff',
                                  range = list(1.5, 4.5)),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      range = list(3, 9))
                    ,showlegend = F)
@@ -1115,56 +1118,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(zerolinecolor = '#ffff',  
-                                zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(zerolinecolor = '#ffff',
+                                zerolinewidth = 2,
                                 gridcolor = 'ffff',
                                 fixedrange=TRUE),
-                   xaxis2 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis2 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff',
                                  fixedrange=TRUE),
-                   xaxis3 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis3 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff',
                                  fixedrange=TRUE),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff')
                    ,showlegend = F)
 
@@ -1180,17 +1183,17 @@ Here is an example of anchoring the scale of the x and y axis with a scale ratio
 ```{r}
 library(plotly)
 
-fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0),
                type = 'scatter', mode = 'lines+markers')%>%
   layout(xaxis = list(
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          yaxis = list(
                       scaleanchor = "x",
                       scaleratio = 1,
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          title = "fixed-ratio axes",
          plot_bgcolor='#e5ecf6'
@@ -1207,19 +1210,19 @@ If an axis needs to be compressed (either due to its own `scaleanchor` and `scal
 
 library(plotly)
 
-fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0),
                type = 'scatter', mode = 'lines+markers')%>%
   layout(xaxis = list(
                       constrain="domain",
                       range = c(-1,4),
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          yaxis = list(
                       scaleanchor = "x",
                       scaleratio = 1,
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          title = "fixed-ratio axes with compressed axes",
          plot_bgcolor='#e5ecf6'
@@ -1235,19 +1238,19 @@ In the example below, the x and y axis are anchored together, and the range of t
 
 library(plotly)
 
-fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0),
                type = 'scatter', mode = 'lines+markers')%>%
   layout(xaxis = list(
     scaleanchor = "x",
     scaleratio = 1,
-    zerolinecolor = '#ffff', 
-    zerolinewidth = 2, 
+    zerolinecolor = '#ffff',
+    zerolinewidth = 2,
     gridcolor = 'ffff'),
     yaxis = list(
       range = c(-0.5, 3.5),
       constrain="domain",
-      zerolinecolor = '#ffff', 
-      zerolinewidth = 2, 
+      zerolinecolor = '#ffff',
+      zerolinewidth = 2,
       gridcolor = 'ffff'),
     title = "fixed-ratio axes",
     plot_bgcolor='#e5ecf6'
@@ -1263,19 +1266,19 @@ If an axis needs to be compressed (either due to its own `scaleanchor` and `scal
 
 library(plotly)
 
-fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0),
                type = 'scatter', mode = 'lines+markers')%>%
   layout(xaxis = list(
     constrain="domain",
     range = c(-1,4),
-    zerolinecolor = '#ffff', 
-    zerolinewidth = 2, 
+    zerolinecolor = '#ffff',
+    zerolinewidth = 2,
     gridcolor = 'ffff'),
     yaxis = list(
       scaleanchor = "x",
       scaleratio = 1,
-      zerolinecolor = '#ffff', 
-      zerolinewidth = 2, 
+      zerolinecolor = '#ffff',
+      zerolinewidth = 2,
       gridcolor = 'ffff'),
     title = "fixed-ratio axes with compressed axes",
     plot_bgcolor='#e5ecf6'
@@ -1302,53 +1305,53 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(zerolinecolor = '#ffff',  
-                                zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(zerolinecolor = '#ffff',
+                                zerolinewidth = 2,
                                 gridcolor = 'ffff'),
-                   xaxis2 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis2 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff'),
-                   xaxis3 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis3 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff'),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      autorange="reversed")
                    ,showlegend = F)
@@ -1375,53 +1378,53 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(zerolinecolor = '#ffff',  
-                                zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(zerolinecolor = '#ffff',
+                                zerolinewidth = 2,
                                 gridcolor = 'ffff'),
-                   xaxis2 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis2 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff'),
-                   xaxis3 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis3 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff'),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      range=list(9,3))
                    ,showlegend = F)
@@ -1434,25 +1437,25 @@ fig
 If you are using a `log` type of axis and you want to set the range of the axis, you have to give the `log10` value of the bounds when using `fig.layout`. However, with `plotly` functions you pass directly the values of the range bounds (`plotly` then computes the appropriate values to pass to the figure layout).
 
 ```{r}
-library(pracma) 
-library(plotly) 
- 
-x = linspace(1, 200, 30) 
- 
-fig <- plot_ly(x = x, y = x**3, type = 'scatter', mode = 'markers') %>% 
-  layout(xaxis = list(range = c(log10(0.8), log10(250)), 
-                      type = 'log', 
-                      zerolinecolor = '#ffff',  
-                      zerolinewidth = 2,  
-                      gridcolor = 'ffff', 
-                      title = 'x'), 
-         yaxis = list(type = 'log', 
-         zerolinecolor = '#ffff',  
-         zerolinewidth = 2,  
-         gridcolor = 'ffff', 
-         title = 'y'), 
-         plot_bgcolor='#e5ecf6') 
- 
+library(pracma)
+library(plotly)
+
+x = linspace(1, 200, 30)
+
+fig <- plot_ly(x = x, y = x**3, type = 'scatter', mode = 'markers') %>%
+  layout(xaxis = list(range = c(log10(0.8), log10(250)),
+                      type = 'log',
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
+                      gridcolor = 'ffff',
+                      title = 'x'),
+         yaxis = list(type = 'log',
+         zerolinecolor = '#ffff',
+         zerolinewidth = 2,
+         gridcolor = 'ffff',
+         title = 'y'),
+         plot_bgcolor='#e5ecf6')
+
 fig
 ```
 
@@ -1464,13 +1467,13 @@ x = linspace(1, 200, 30)
 
 fig <- plot_ly(x = x, y = x**3, type = 'scatter', mode = 'line') %>%
   layout(yaxis = list(type = 'log',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         xaxis = list(type = 'log', 
+         xaxis = list(type = 'log',
                       range = c(log10(0.8), log10(250)),
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6')
 
@@ -1498,56 +1501,56 @@ fig <- iris%>%
                ))) %>%
   subplot(nrows = 1, shareX = TRUE, shareY = TRUE)
 fig <- fig%>%
-  layout( 
-    annotations = list(  
-      list(  
-        x = 0.16,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=setosa",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.5,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=versicolor",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      ),   
-      list(  
-        x = 0.85,   
-        y = 1,   
-        font = list(size = 10),   
-        text = "species=virginica",   
-        xref = "paper",   
-        yref = "paper",   
-        xanchor = "center",   
-        yanchor = "bottom",   
-        showarrow = FALSE  
-      )))%>%layout(plot_bgcolor='#e5ecf6',  
-                   xaxis = list(zerolinecolor = '#ffff',  
-                                zerolinewidth = 2,  
+  layout(
+    annotations = list(
+      list(
+        x = 0.16,
+        y = 1,
+        font = list(size = 10),
+        text = "species=setosa",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.5,
+        y = 1,
+        font = list(size = 10),
+        text = "species=versicolor",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      ),
+      list(
+        x = 0.85,
+        y = 1,
+        font = list(size = 10),
+        text = "species=virginica",
+        xref = "paper",
+        yref = "paper",
+        xanchor = "center",
+        yanchor = "bottom",
+        showarrow = FALSE
+      )))%>%layout(plot_bgcolor='#e5ecf6',
+                   xaxis = list(zerolinecolor = '#ffff',
+                                zerolinewidth = 2,
                                 gridcolor = 'ffff',
                                 rangemode="tozero"),
-                   xaxis2 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis2 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff',
                                  rangemode="tozero"),
-                   xaxis3 = list(zerolinecolor = '#ffff',  
-                                 zerolinewidth = 2,  
+                   xaxis3 = list(zerolinecolor = '#ffff',
+                                 zerolinewidth = 2,
                                  gridcolor = 'ffff',
                                  rangemode="tozero"),
-                   yaxis = list(  
-                     zerolinecolor = '#ffff',  
-                     zerolinewidth = 2,  
+                   yaxis = list(
+                     zerolinecolor = '#ffff',
+                     zerolinewidth = 2,
                      gridcolor = 'ffff',
                      rangemode="tozero")
                    ,showlegend = F)
@@ -1561,15 +1564,15 @@ fig
 
 library(plotly)
 
-fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0), 
+fig <- plot_ly(x = c(0,1,1,0,0,1,1,2,2,3,3,2,2,3), y = c(0,0,1,1,3,3,2,2,3,3,1,1,0,0),
                type = 'scatter', mode = 'lines+markers')%>%
   layout(xaxis = list(domain = c(0.25, 0.75),
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          yaxis = list(domain = c(0.25, 0.75),
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6')
 fig
@@ -1595,37 +1598,37 @@ fig2 <- plot_ly(x = X, y = y, type = 'scatter', mode = 'lines')
 y <- runif(n=20, min=0, max=1)
 fig3 <- plot_ly(x = X, y = y, type = 'scatter', mode = 'lines')
 
-fig <- subplot(fig1, fig2, fig3, nrows = 1, margin = 0.05, shareX = TRUE)%>% 
+fig <- subplot(fig1, fig2, fig3, nrows = 1, margin = 0.05, shareX = TRUE)%>%
   layout(
-         plot_bgcolor='#e5ecf6',  
+         plot_bgcolor='#e5ecf6',
          xaxis = list(  matches='x',
-                        zerolinecolor = '#ffff',  
-                        zerolinewidth = 2,  
-                        gridcolor = 'ffff'), 
+                        zerolinecolor = '#ffff',
+                        zerolinewidth = 2,
+                        gridcolor = 'ffff'),
          xaxis2 = list(  matches='x',
-                        zerolinecolor = '#ffff',  
-                        zerolinewidth = 2,  
-                        gridcolor = 'ffff'), 
+                        zerolinecolor = '#ffff',
+                        zerolinewidth = 2,
+                        gridcolor = 'ffff'),
          xaxis3 = list(  matches='x',
-                        zerolinecolor = '#ffff',  
-                        zerolinewidth = 2,  
-                        gridcolor = 'ffff'), 
-         yaxis = list(  
-           zerolinecolor = '#ffff',  
-           zerolinewidth = 2,  
+                        zerolinecolor = '#ffff',
+                        zerolinewidth = 2,
+                        gridcolor = 'ffff'),
+         yaxis = list(
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff',
            range = list(0, 1)),
-         yaxis2 = list(  
-           zerolinecolor = '#ffff',  
-           zerolinewidth = 2,  
+         yaxis2 = list(
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff',
            range = list(0, 1)),
-         yaxis3 = list(  
-           zerolinecolor = '#ffff',  
-           zerolinewidth = 2,  
+         yaxis3 = list(
+           zerolinecolor = '#ffff',
+           zerolinewidth = 2,
            gridcolor = 'ffff',
            range = list(0, 1)),
-         showlegend = T) 
+         showlegend = T)
 fig
 ```
 
@@ -1643,95 +1646,95 @@ fig <- fig %>% add_boxplot(x=c(7.5,3,6,4), y=c('D','D','D','D'), name='D')
 fig <- fig %>% layout(
     title = '',
     yaxis = list(
-      autorange = TRUE, 
-      categoryorder = "category descending", 
-      domain = c(0, 1), 
-      range = c(-0.5, 3.5), 
-      showline = TRUE, 
-      title = "", 
+      autorange = TRUE,
+      categoryorder = "category descending",
+      domain = c(0, 1),
+      range = c(-0.5, 3.5),
+      showline = TRUE,
+      title = "",
       type = "category"
     ),
     margin = list(
-      r = 10, 
-      t = 25, 
-      b = 40, 
+      r = 10,
+      t = 25,
+      b = 40,
       l = 110
     ),
     legend = list(
-      x = 0.986145833333, 
+      x = 0.986145833333,
       y = 0.936263886049
-    ), 
+    ),
     shapes = list(
       list(
         line = list(
-          color = "rgba(68, 68, 68, 0.5)", 
+          color = "rgba(68, 68, 68, 0.5)",
           width = 1
-        ), 
-        type = "line", 
-        x0 = -0.3, 
-        x1 = 1.2, 
-        xref = "paper", 
-        y0 = 0.5, 
-        y1 = 0.5, 
+        ),
+        type = "line",
+        x0 = -0.3,
+        x1 = 1.2,
+        xref = "paper",
+        y0 = 0.5,
+        y1 = 0.5,
         yref = "paper"
-      ), 
+      ),
       list(
         line = list(
-          color = "rgba(68, 68, 68, 0.63)", 
+          color = "rgba(68, 68, 68, 0.63)",
           width = 1
-        ), 
-        type = "line", 
-        x0 = -0.3, 
-        x1 = 1.2, 
-        xref = "paper", 
-        y0 = 1, 
-        y1 = 1, 
+        ),
+        type = "line",
+        x0 = -0.3,
+        x1 = 1.2,
+        xref = "paper",
+        y0 = 1,
+        y1 = 1,
         yref = "paper"
       )
     ),
     annotations = list(
         list(
-          x = -0.0951769406393, 
-          y = 1.06972670892, 
-          showarrow = FALSE, 
-          text = "Subgroup", 
-          xref = "paper", 
+          x = -0.0951769406393,
+          y = 1.06972670892,
+          showarrow = FALSE,
+          text = "Subgroup",
+          xref = "paper",
           yref = "paper"
-        ), 
+        ),
         list(
-          x = -0.235516552511, 
-          y = 1.07060587474, 
-          showarrow = FALSE, 
-          text = "Group", 
-          xref = "paper", 
+          x = -0.235516552511,
+          y = 1.07060587474,
+          showarrow = FALSE,
+          text = "Group",
+          xref = "paper",
           yref = "paper"
-        ), 
+        ),
         list(
-          x = -0.235516552511, 
-          y = 0.922906017856, 
-          showarrow = FALSE, 
-          text = "One", 
-          xref = "paper", 
+          x = -0.235516552511,
+          y = 0.922906017856,
+          showarrow = FALSE,
+          text = "One",
+          xref = "paper",
           yref = "paper"
-        ), 
+        ),
         list(
-          x = -0.235516552511, 
-          y = 0.375, 
-          showarrow = FALSE, 
-          text = "Two", 
-          xref = "paper", 
+          x = -0.235516552511,
+          y = 0.375,
+          showarrow = FALSE,
+          text = "Two",
+          xref = "paper",
           yref = "paper"
         )
       )
-    )%>%layout(plot_bgcolor='#e5ecf6',  
-          xaxis = list(  
-            zerolinecolor = '#ffff',  
-            zerolinewidth = 2,  
-            gridcolor = 'ffff'),  
-          yaxis = list(  
-            zerolinecolor = '#ffff',  
-            zerolinewidth = 2,  
-            gridcolor = 'ffff')  
+    )%>%layout(plot_bgcolor='#e5ecf6',
+          xaxis = list(
+            zerolinecolor = '#ffff',
+            zerolinewidth = 2,
+            gridcolor = 'ffff'),
+          yaxis = list(
+            zerolinecolor = '#ffff',
+            zerolinewidth = 2,
+            gridcolor = 'ffff')
           )
 
 fig
@@ -1812,15 +1815,15 @@ fig <- fig %>% layout(
       title = "Scale matches <-"
     ),
     showlegend= FALSE
-)%>%layout(plot_bgcolor='#e5ecf6',  
-          xaxis = list(  
-            zerolinecolor = '#ffff',  
-            zerolinewidth = 2,  
-            gridcolor = 'ffff'),  
-          yaxis = list(  
-            zerolinecolor = '#ffff',  
-            zerolinewidth = 2,  
-            gridcolor = 'ffff')  
+)%>%layout(plot_bgcolor='#e5ecf6',
+          xaxis = list(
+            zerolinecolor = '#ffff',
+            zerolinewidth = 2,
+            gridcolor = 'ffff'),
+          yaxis = list(
+            zerolinecolor = '#ffff',
+            zerolinewidth = 2,
+            gridcolor = 'ffff')
           )
 
 fig
