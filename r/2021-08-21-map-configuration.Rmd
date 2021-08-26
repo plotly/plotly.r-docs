@@ -249,7 +249,8 @@ Learn about how to install Dash at https://dashr.plot.ly/installation.
 
 Everywhere in this page that you see fig, you can display the same figure in a Dash application by passing it to the figure argument of the Graph component from the built-in dash_core_components package like this:
 
-```{r}
+```{r eval=FALSE}
+
 library(dash)
 library(dashCoreComponents)
 library(dashHtmlComponents)
