@@ -1,0 +1,96 @@
+---
+title: Troubleshooting in R
+description: How to troubleshoot import and rendering problems in Plotly with R.
+display_as: file_settings
+language: r
+layout: base
+name: Troubleshooting
+order: 27
+page_type: u-guide
+permalink: r/troubleshooting/
+thumbnail: thumbnail/modebar-icons.png
+---
+
+<!-- #region -->
+### Version Problems
+
+In order to follow the examples in this documentation site, you should have the latest version of `plotly` installed (5.x), as detailed in the [Getting Started](https://plotly.com/r/getting-started/) guide. This documentation (under https://plotly.com/r) is compatible with `plotly` version 4.x but *not* with version 3.x. In general you must also have the correct version of the underlying Plotly.js rendering engine installed, and the way to do that depends on the environment in which you are rendering figures: Dash. Read on for details about troubleshooting `plotly` in these environments.
+
+### Import Problems
+
+Most `import` problems or `AttributeErrors` can be traced back to having multiple versions of `plotly` installed. It's often worthwhile to uninstall before following the [Getting Started](https://plotly.com/r/getting-started/) instructions from scratch with one or the other. You can run the following commands in the console to fully remove `plotly` before installing again:
+
+```
+remove.packages('plotly')
+```
+
+> Problems can also arise if you have a file named `plotly.R` in the same directory as the code you are executing.
+
+### Dash Problems
+
+If you are encountering problems using `plotly` with [Dash](https://dashr.plotly.com/) please first ensure that you have upgraded `dash` to the latest version, which will automatically upgrade `dash-core-components` to the latest version, ensuring that Dash is using an up-to-date version of the Plotly.js rendering engine for `plotly`. If this does not resolve your issue, please visit our [Dash Community Forum](https://community.plotly.com/) and we will be glad to help you out.
+
+This is an example of a `plotly` graph correctly rendering inside `dash`:
+<!-- #endregion -->
+
+```{r}
+library(plotly) 
+ 
+fig <- plot_ly(x = c(0,1,2), y = c(3,7,9), type = 'bar') 
+#fig 
+ 
+library(dash) 
+library(dashCoreComponents) 
+library(dashHtmlComponents) 
+ 
+app <- Dash$new() 
+ 
+app$layout( 
+  htmlDiv( 
+    list( 
+      dccGraph( id = 'graph', 
+        figure= fig 
+      ))) 
+  
+  ) 
+ 
+#app$run_server()
+```
+
+Use `app$run_server()` to run the dash app.
+
+### Orca Problems
+
+If you get an error message stating that the `orca` executable that was found is not valid, this may be because another executable with the same name was found on your system. Please specify the complete path to the Plotly-Orca binary that you downloaded.
+
+### What About Dash? 
+ 
+[Dash](https://dashr.plotly.com/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. 
+ 
+Learn about how to install Dash at https://dashr.plot.ly/installation. 
+ 
+Everywhere in this page that you see fig, you can display the same figure in a Dash application by passing it to the figure argument of the Graph component from the built-in dash_core_components package like this: 
+ 
+```{r} 
+library(dash) 
+library(dashCoreComponents) 
+library(dashHtmlComponents) 
+library(plotly) 
+ 
+fig <-  plot_ly() 
+# fig <- fig%>%add_trace( ... ) 
+# fig <- fig%>%layout( ... ) 
+app <- Dash$new() 
+ 
+app$layout( 
+  htmlDiv( 
+    list( 
+      dccGraph(id = 'graph', figure = fig) 
+    ) 
+  ) 
+) 
+ 
+#app$run_server() 
+```
+
+Use `app$run_server()` to run the dash app.
