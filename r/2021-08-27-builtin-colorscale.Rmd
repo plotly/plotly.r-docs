@@ -5,7 +5,10 @@ display_as: file_settings
 language: r
 layout: base
 name: Built-in Continuous Color Scales
-order: 28
+order: 30
+output:
+  html_document:
+    keep_md: true
 permalink: r/builtin-colorscales/
 thumbnail: thumbnail/heatmap_colorscale.jpg
 v4upgrade: true
@@ -13,7 +16,7 @@ v4upgrade: true
 
 ### Using Built-In Continuous Color Scales
 
-Plotly R comes with a large number of built-in continuous color scales. It can be viewed using 'RColorBrewer' package. 
+Plotly R supports a large number of built-in continuous color scales. These can be viewed and used with the 'RColorBrewer' package.
 
 When using continuous color scales, you will often want to [configure various aspects of its range and colorbar](https://plotly.com/r/colorscales/).
 
@@ -21,14 +24,14 @@ When using continuous color scales, you will often want to [configure various as
 
 Plotly also comes with some built-in discrete color sequences.
 
-### Named Built-In Continuous Color Scales
+### Supported Built-In Continuous Color Scales
 
 You can use any of the following names as string values to set `colorscale` arguments.
 These strings are case-sensitive.
 
 ```{r}
 
-library("RColorBrewer") 
+library("RColorBrewer")
 brewer.pal.info
 
 ```
@@ -37,7 +40,7 @@ Built-in color scales are stored as a string of CSS colors:
 
 ```{r}
 
-library("RColorBrewer") 
+library("RColorBrewer")
 brewer.pal(n = 8, name = "YlGn")
 ```
 
@@ -51,7 +54,7 @@ Here are all the built-in scales in the 'RColorBrewer' package:
 
 ```{r}
 
-library("RColorBrewer") 
+library("RColorBrewer")
 display.brewer.all(type = 'seq')
 ```
 
@@ -66,7 +69,7 @@ Here are all the built-in scales in the 'RColorBrewer' package:
 
 ```{r}
 
-library("RColorBrewer") 
+library("RColorBrewer")
 display.brewer.all(type = 'div')
 ```
 
