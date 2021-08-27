@@ -1,6 +1,31 @@
-## Map Configuration and Styling in R
+---
+title : Map Configuration and Styling in R
+description: How to configure and style base maps for Choropleths and Bubble Maps.
+display_as: maps
+language: r
+layout: base
+name: Map Configuration and Styling
+order: 12
+page_type: u-guide
+permalink: r/map-configuration/
+thumbnail: thumbnail/county-level-choropleth.jpg
+---
 
-How to configure and style base maps for Choropleths and Bubble Maps.
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+
+### Mapbox Maps vs Geo Maps
+
+Plotly supports two different kinds of maps:
+
+1. **Mapbox maps** are [tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map). If your figure is created with one or more traces of type `Scattermapbox`, `Choroplethmapbox` or `Densitymapbox`, the `layout.mapbox` object in your figure contains configuration information for the map itself.
+2. **Geo maps** are outline-based maps. If your figure is created with a `scattergeo` or `choropleth` function, the `layout.geo` object in your figure contains configuration information for the map itself.
+
+This page documents Geo outline-based maps, and the [Mapbox Layers documentation](https://plotly.com/r/mapbox-layers/) describes how to configure Mapbox tile-based maps.
+
+**Note:** Every configuration option here is equally applicable to non-empty maps created with the Plotly  `scattergeo` and `choropleth` functions.
 
 ### Physical Base Maps
 
