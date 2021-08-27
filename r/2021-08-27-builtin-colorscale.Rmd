@@ -54,14 +54,14 @@ brewer.pal(n = 8, name = "YlGn")
 
 A collection of predefined sequential colorscales is provided in the 'RColorBrewer' package. Sequential color scales are appropriate for most continuous data, but in some cases it can be helpful to use a diverging or cyclical color scale (see below).
 
-Here are all the built-in scales in the 'RColorBrewer' package:
+Here are all the built-in sequential scales in the 'RColorBrewer' package:
 
-```{r}
+```{r eval=FALSE}
 
 library("RColorBrewer")
 display.brewer.all(type = 'seq')
 ```
-
+![](https://i0.wp.com/datavizpyr.com/wp-content/uploads/2020/01/RColorBrewer_sequential_color_palettes-1.jpeg?w=597&ssl=1)
 
 ### Built-In Diverging Color scales
 
@@ -69,11 +69,12 @@ A collection of predefined diverging color scales is provided in the 'RColorBrew
 Diverging color scales are appropriate for continuous data that has a natural midpoint or an  otherwise informative special value, such as 0 altitude, or the boiling point
 of a liquid. These scales are intended to be used when explicitly setting the midpoint of the scale.
 
-Here are all the built-in scales in the 'RColorBrewer' package:
+Here are all the built-in diverging scales in the 'RColorBrewer' package:
 
-```{r}
+```{r eval=FALSE}
 
 library("RColorBrewer")
 display.brewer.all(type = 'div')
 ```
+![](https://i1.wp.com/datavizpyr.com/wp-content/uploads/2020/01/RColorBrewer_diverging_palettes-1.jpeg?w=595&ssl=1)
 
