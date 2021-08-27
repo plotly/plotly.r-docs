@@ -1,0 +1,48 @@
+---
+title: Plot CSV Data using R
+description: How to create charts from csv files with Plotly and Python
+display_as: advanced_opt
+language: r
+layout: base
+name: Plot CSV Data
+order: 1
+page_type: example_index
+permalink: r/plot-data-from-csv/
+thumbnail: thumbnail/csv.jpg
+---
+
+CSV or comma-delimited-values is a very popular format for storing structured data. In this tutorial, we will see how to plot beautiful graphs using csv data. We will learn how to import csv data from an external source (a url), and plot it using Plotly.
+
+First we import the data and look at it.
+
+```{r}
+data <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_apple_stock.csv')
+head(data)
+```
+
+### Plot from CSV with Plotly
+
+```{r}
+library(plotly)
+data <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_apple_stock.csv')
+fig <- plot_ly(x = as.Date(data$AAPL_x), y = data$AAPL_y, type = 'scatter', mode = 'lines'
+               , name = 'Share Prices (in USD)')%>% 
+  layout(title = 'Apple Share Prices over time (2014)',
+         plot_bgcolor='#e5ecf6',  
+         xaxis = list(  
+           title = 'AAPL_x',
+           zerolinecolor = '#ffff',  
+           zerolinewidth = 2,  
+           gridcolor = 'ffff'),  
+         yaxis = list(  
+           title = 'AAPL_y',
+           zerolinecolor = '#ffff',  
+           zerolinewidth = 2,  
+           gridcolor = 'ffff'),
+         showlegend = TRUE, width = 1100)
+fig
+```
+
+#### Reference
+
+See https://plotly.com/r/getting-started for more information about Plotly's R API!
