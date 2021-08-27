@@ -14,6 +14,10 @@ thumbnail: thumbnail/heatmap_colorscale.jpg
 v4upgrade: true
 ---
 
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
 ### Using Built-In Continuous Color Scales
 
 Plotly R supports a large number of built-in continuous color scales. These can be viewed and used with the 'RColorBrewer' package.
