@@ -5,7 +5,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Built-in Continuous Color Scales
-order: 30
+order: 20
 output:
   html_document:
     keep_md: true
