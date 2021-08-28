@@ -6,7 +6,7 @@ has_thumbnail: true
 language: r
 layout: base
 name: Discrete Colors
-order: 25
+order: 21
 output:
   html_document:
     keep_md: true

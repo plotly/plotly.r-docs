@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: LaTeX Typesetting in R Graphs
-order: 11
+order: 27
 output:
   html_document:
     keep_md: true

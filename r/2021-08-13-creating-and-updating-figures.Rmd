@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Creating and Updating Figures
-order: 27
+order: 2
 output:
   html_document:
     keep_md: true

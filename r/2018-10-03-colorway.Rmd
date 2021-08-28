@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Colorway
-order: 18
+order: 31
 output:
   html_document:
     keep_md: true
