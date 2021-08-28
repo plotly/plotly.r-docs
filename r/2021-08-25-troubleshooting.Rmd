@@ -1,5 +1,4 @@
 ---
-title: Troubleshooting in R
 description: How to troubleshoot import and rendering problems in Plotly with R.
 display_as: file_settings
 language: r
