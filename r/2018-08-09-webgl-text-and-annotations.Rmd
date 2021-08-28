@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: WebGL Text and Annotations
-order: 17
+order: 30
 output:
   html_document:
     keep_md: true
