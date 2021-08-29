@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Marker Styling
-order: 15
+order: 14
 output:
   html_document:
     keep_md: true

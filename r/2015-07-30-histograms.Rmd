@@ -76,7 +76,7 @@ fig
 fig <- plot_ly(alpha = 0.6)
 fig <- fig %>% add_histogram(x = ~rnorm(500))
 fig <- fig %>% add_histogram(x = ~rnorm(500) + 1)
-fig <- fig %>% layout(barmode = "overlay")
+fig <- fig %>% layout(barmode = "stack")
 
 fig
 ```

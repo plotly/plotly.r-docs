@@ -4,14 +4,14 @@ display_as: file_settings
 language: r
 layout: base
 name: Exporting Graphs as Static Images
-order: 20
+order: 4
 output:
   html_document:
     keep_md: true
 page_type: u-guide
 permalink: r/static-image-export/
 redirect_from: ggplot2/embedding-plotly-graphs-in-HTML/
-thumbnail: thumbnail/sizing.png
+thumbnail: thumbnail/static-image-export.png
 ---
 
 ```{r, echo = FALSE, message=FALSE}
