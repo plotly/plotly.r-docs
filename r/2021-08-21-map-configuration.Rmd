@@ -6,6 +6,9 @@ language: r
 layout: base
 name: Map Configuration and Styling
 order: 12
+output:
+  html_document:
+    keep_md: true
 page_type: u-guide
 permalink: r/map-configuration/
 thumbnail: thumbnail/county-level-choropleth.jpg
@@ -206,11 +209,11 @@ library(plotly)
 
 g <- list(
   visible = F,
-  resolution = 50, 
+  resolution = 50,
   scope = "north america",
-  showcountries = T, 
+  showcountries = T,
   countrycolor = toRGB("Black"),
-  showsubunits = T, 
+  showsubunits = T,
   subunitcolor = toRGB("Blue"),
   showland = TRUE,
   landcolor = toRGB("#e5ecf6")
@@ -228,11 +231,11 @@ library(plotly)
 
 g <- list(
   visible = F,
-  resolution = 110, 
+  resolution = 110,
   scope = "usa",
-  showcountries = T, 
+  showcountries = T,
   countrycolor = toRGB("Black"),
-  showsubunits = T, 
+  showsubunits = T,
   subunitcolor = toRGB("Blue"),
   showland = TRUE,
   landcolor = toRGB("#e5ecf6")
