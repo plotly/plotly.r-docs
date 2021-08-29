@@ -6,6 +6,9 @@ language: r
 layout: base
 name: Time Series and Date Axes
 order: 1
+output:
+  html_document:
+    keep_md: true
 page_type: example_index
 permalink: r/time-series/
 thumbnail: thumbnail/time-series.jpg
@@ -40,16 +43,16 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   layout(showlegend = F)
 options(warn = -1)
 
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -62,16 +65,16 @@ stock <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/fina
 fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   add_trace(x = ~Date, y = ~AAPL.High)%>%
   layout(showlegend = F)
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -83,39 +86,39 @@ Any kind of cartesian chart can be placed on `date` axes, for example this fille
 
 ```{r}
 
-library(tidyquant)   
-library(plotly)   
+library(tidyquant)
+library(plotly)
 
-getSymbols("GOOG",   
-           from = "2018-01-01",   
-           to = "2020-01-01")   
-stock <- data.frame(GOOG$GOOG.Adjusted)   
-stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]   
-stock <- data.frame(stock,rownames(stock))   
-colnames(stock) <- append('GOOG','date')   
-stock$date <- as.Date(stock$date) 
+getSymbols("GOOG",
+           from = "2018-01-01",
+           to = "2020-01-01")
+stock <- data.frame(GOOG$GOOG.Adjusted)
+stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
+stock <- data.frame(stock,rownames(stock))
+colnames(stock) <- append('GOOG','date')
+stock$date <- as.Date(stock$date)
 
-fig <- plot_ly()%>% 
-  add_trace(data = stock, type = 'scatter', mode = 'lines', fill = 'tozeroy', x = ~date, y = ~GOOG, name = 'GOOG')%>%   
+fig <- plot_ly()%>%
+  add_trace(data = stock, type = 'scatter', mode = 'lines', fill = 'tozeroy', x = ~date, y = ~GOOG, name = 'GOOG')%>%
   layout(showlegend = F, yaxis = list(range = c(0.8,1.25),
-                                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         plot_bgcolor='#e5ecf6') 
-options(warn = -1)   
-fig <- fig %>% 
+         plot_bgcolor='#e5ecf6')
+options(warn = -1)
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -123,152 +126,152 @@ fig
 Or this facetted area plot:
 
 ```{r}
-library(tidyquant) 
-library(plotly) 
-tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT") 
-for (i in tickers){ 
-  getSymbols(i, 
-             from = "2018-01-01", 
-             to = "2019-12-31")} 
+library(tidyquant)
+library(plotly)
+tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+for (i in tickers){
+  getSymbols(i,
+             from = "2018-01-01",
+             to = "2019-12-31")}
 
-x <- list( 
-  title = "date" 
-) 
-y <- list( 
-  title = "value" 
-) 
+x <- list(
+  title = "date"
+)
+y <- list(
+  title = "value"
+)
 
-stock <- data.frame(GOOG$GOOG.Adjusted, 
-                    AAPL$AAPL.Adjusted, 
-                    AMZN$AMZN.Adjusted, 
-                    FB$FB.Adjusted, 
-                    NFLX$NFLX.Adjusted, 
-                    MSFT$MSFT.Adjusted) 
-stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1] 
-stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1] 
-stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]  
-stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1] 
-stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1] 
-stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]  
-stock <- data.frame(stock,rownames(stock)) 
-colnames(stock) <- append(tickers,'Dates') 
+stock <- data.frame(GOOG$GOOG.Adjusted,
+                    AAPL$AAPL.Adjusted,
+                    AMZN$AMZN.Adjusted,
+                    FB$FB.Adjusted,
+                    NFLX$NFLX.Adjusted,
+                    MSFT$MSFT.Adjusted)
+stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
+stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
+stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
+stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
+stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
+stock <- data.frame(stock,rownames(stock))
+colnames(stock) <- append(tickers,'Dates')
 
-ax <- list( 
-  title = "", 
-  zeroline = FALSE, 
-  showline = FALSE, 
-  showticklabels = FALSE 
-) 
+ax <- list(
+  title = "",
+  zeroline = FALSE,
+  showline = FALSE,
+  showticklabels = FALSE
+)
 
-fig1 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>% 
-  add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>% 
+fig1 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
+  add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
   layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2), title = 'value'))
 
 
-fig2 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>% 
-  add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>% 
+fig2 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
+  add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
   layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2),title = '', showticklabels = FALSE))
 
 
-fig3 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>% 
-  add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>% 
+fig3 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
+  add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
   layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2), title = 'value'))
 
 
-fig4 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>% 
-  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>% 
+fig4 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
+  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
   layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2),title = '', showticklabels = FALSE))
 
 
-fig5 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>% 
-  add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>% 
+fig5 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
+  add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
   layout(legend=list(title=list(text='company')), xaxis = list(title = 'Date'), yaxis = list(range = c(0.5,2), title = 'value'))
 
 
-fig6 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>% 
-  add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>% 
+fig6 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
+  add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
   layout( legend=list(title=list(text='company')), yaxis = list(range = c(0.5,2) ,showticklabels = FALSE, title =''),  xaxis = list(title = 'Date'))
 
 
-fig <- subplot(fig1, fig2, fig3, fig4, fig5, fig6, 
+fig <- subplot(fig1, fig2, fig3, fig4, fig5, fig6,
                nrows = 3, titleY = TRUE, titleX = TRUE) %>% layout(
-                 xaxis = list(zerolinecolor = '#ffff', 
-                              zerolinewidth = 2, 
+                 xaxis = list(zerolinecolor = '#ffff',
+                              zerolinewidth = 2,
                               gridcolor = 'ffff'),
-                 yaxis = list(zerolinecolor = '#ffff', 
-                              zerolinewidth = 2, 
+                 yaxis = list(zerolinecolor = '#ffff',
+                              zerolinewidth = 2,
                               gridcolor = 'ffff'),
-                 plot_bgcolor='#e5ecf6') 
-annotations = list( 
-  list( 
-    x = 0.225,  
-    y = 1.0,  
-    font = list(size = 10),  
-    text = "company=GOOG",  
-    xref = "paper",  
-    yref = "paper",  
-    xanchor = "center",  
-    yanchor = "bottom",  
-    showarrow = FALSE 
-  ),  
-  list( 
-    x = 0.775,  
-    y = 1,  
-    font = list(size = 10),  
-    text = "company=AAPL",  
-    xref = "paper",  
-    yref = "paper",  
-    xanchor = "center",  
-    yanchor = "bottom",  
-    showarrow = FALSE 
-  ),  
-  list( 
-    x = 0.225,  
-    y = 0.64,  
-    font = list(size = 10),  
-    text = "company=AMZN",  
-    xref = "paper",  
-    yref = "paper",  
-    xanchor = "center",  
-    yanchor = "bottom",  
-    showarrow = FALSE 
-  ),  
-  list( 
-    x = 0.775,  
-    y = 0.64,  
-    font = list(size = 10),  
-    text = "company=FB",  
-    xref = "paper",  
-    yref = "paper",  
-    xanchor = "center",  
-    yanchor = "bottom",  
-    showarrow = FALSE 
-  ), 
-  list( 
-    x = 0.225,  
-    y = 0.315,  
-    font = list(size = 10),  
-    text = "company=NFLX",  
-    xref = "paper",  
-    yref = "paper",  
-    xanchor = "center",  
-    yanchor = "bottom",  
-    showarrow = FALSE 
-  ), 
-  list( 
-    x = 0.775,  
-    y = 0.315,  
-    font = list(size = 10),  
-    text = "company=MSFT",  
-    xref = "paper",  
-    yref = "paper",  
-    xanchor = "center",  
-    yanchor = "bottom",  
-    showarrow = FALSE 
-  ) 
-) 
+                 plot_bgcolor='#e5ecf6')
+annotations = list(
+  list(
+    x = 0.225,
+    y = 1.0,
+    font = list(size = 10),
+    text = "company=GOOG",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.775,
+    y = 1,
+    font = list(size = 10),
+    text = "company=AAPL",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.225,
+    y = 0.64,
+    font = list(size = 10),
+    text = "company=AMZN",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.775,
+    y = 0.64,
+    font = list(size = 10),
+    text = "company=FB",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.225,
+    y = 0.315,
+    font = list(size = 10),
+    text = "company=NFLX",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  ),
+  list(
+    x = 0.775,
+    y = 0.315,
+    font = list(size = 10),
+    text = "company=MSFT",
+    xref = "paper",
+    yref = "paper",
+    xanchor = "center",
+    yanchor = "bottom",
+    showarrow = FALSE
+  )
+)
 
-fig <- fig %>%layout(annotations = annotations, width = 900) 
+fig <- fig %>%layout(annotations = annotations, width = 900)
 options(warn = -1)
 fig
 
@@ -296,10 +299,10 @@ stock <- data.frame(GOOG$GOOG.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
-stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1] 
+stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
 stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
-stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1] 
+stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
 colnames(stock) <- append(tickers,'Dates')
 
@@ -313,16 +316,16 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   layout(title = 'custom tick labels',legend=list(title=list(text='variable')),
          xaxis = list(dtick = "M1", tickformat="%b<br>%Y"), width = 1000)
 options(warn = -1)
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6')
-          
+
 
 fig
 ```
@@ -349,10 +352,10 @@ stock <- data.frame(GOOG$GOOG.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
-stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1] 
+stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
 stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
-stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1] 
+stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
 colnames(stock) <- append(tickers,'Dates')
 
@@ -367,16 +370,16 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
          xaxis = list(dtick = "M1", tickformat="%b\n%Y",
                       ticklabelmode="period"), width = 1000)
 options(warn = -1)
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6')
-          
+
 
 fig
 ```
@@ -387,9 +390,9 @@ Plotly [histograms](https://plotly.com/r/histograms/) are powerful data-aggregat
 
 ```{r}
 
-library(plotly) 
+library(plotly)
 
-stock <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv') 
+stock <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
 stock$Date = as.Date(stock$Date)
 
 fig <- plot_ly(stock, x = ~AAPL.Close,y = ~Date, type = 'scatter', mode = 'markers', name = 'daily') %>%
@@ -399,25 +402,25 @@ add_trace(data = stock, x = ~AAPL.Close, type = 'histogram', histfunc = 'avg', x
 
 fig <- fig %>%
   layout(xaxis = list(title = 'avg of AAPL.Close',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6',
          title = 'Histogram on Date Axes',
          bargap = 0.1)
-fig <- fig %>% 
+fig <- fig %>%
   layout(hovermode="x unified",
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -430,9 +433,9 @@ If your data coded "January 1" or "January 31" in fact refers to data collected 
 
 ```{r}
 
-library(plotly) 
+library(plotly)
 
-date = c(as.Date("2020-01-10"), as.Date("2020-02-10"), as.Date("2020-03-10"), 
+date = c(as.Date("2020-01-10"), as.Date("2020-02-10"), as.Date("2020-03-10"),
          as.Date("2020-04-10"), as.Date("2020-05-10"), as.Date("2020-06-10"))
 value = c(1,2,3,1,2,3)
 
@@ -451,11 +454,11 @@ fig <- plot_ly() %>%
 
 
 fig <- fig %>%
-  layout(xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+  layout(xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
 
@@ -488,16 +491,16 @@ fig <- plot_ly() %>%
             hovertemplate="%{y}%{_xother}")
 
 
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -510,23 +513,23 @@ The data range can be set manually using `layout.xaxis.range` objects.
 
 ```{r}
 library(plotly)
-  
+
 stock <- read.csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
-  
+
 fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
     add_trace(x = ~Date, y = ~AAPL.High)%>%
     layout(showlegend = F, xaxis = list(range = c('2016-07-01','2016-12-31')))
-  
-fig <- fig %>% 
+
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -545,16 +548,16 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   add_trace(x = ~Date, y = ~AAPL.High)%>%
   layout(showlegend = F, title='Time Series with Rangeslider',
          xaxis = list(rangeslider = list(visible = T)))
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -580,13 +583,13 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
                           list(count=1, label="1y", step="year", stepmode="backward"),
                           list(step="all")
                         ))))
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', margin = 0.1, width = 900)
 fig
@@ -612,15 +615,15 @@ fig <- plot_ly(data = data, x = ~Date, y = ~mavg, type = 'scatter', mode = 'line
            list(dtickrange=list("M1", "M12"), value="%b '%y M"),
            list(dtickrange=list("M12", NULL), value="%Y Y")
          )))
-fig <- fig %>% 
+fig <- fig %>%
   layout(
          xaxis = list(title = '',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          yaxis = list(title = '',
-                      zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+                      zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
 fig
@@ -640,16 +643,16 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'markers')%>%
   layout(showlegend = F, xaxis = list(range = c('2015-12-01', '2016-01-15')),
          title="Default Display with Gaps")
 
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -667,16 +670,16 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'markers')%>%
                                         list(values=list("2015-12-25", "2016-01-01")))),
          title="Hide Weekend and Holiday Gaps with rangebreaks")
 
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 
 fig
 ```
@@ -716,16 +719,16 @@ fig <- plot_ly(data, type = 'scatter', mode = 'markers')%>%
          title="Default Display with Gaps"
   )
 
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-          
+
 options(warn = -1)
 fig
 
@@ -759,55 +762,24 @@ fig <- plot_ly(data, type = 'scatter', mode = 'markers')%>%
   add_trace(x = ~date, y = ~value)%>%
   layout(showlegend = F, xaxis = list(rangebreaks=
                                         list(
-                                          list(bounds=list(17, 9), 
-                                        pattern="hour")),#hide hours outside of 9am-5pm 
+                                          list(bounds=list(17, 9),
+                                        pattern="hour")),#hide hours outside of 9am-5pm
                                       dtick=86400000.0/2,
                                       tickformat="%H:%M\n%b\n%Y"),
          title="Hide Non-Business Hour Gaps with rangebreaks"
          )
-fig <- fig %>% 
+fig <- fig %>%
   layout(
-         xaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         xaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
-         yaxis = list(zerolinecolor = '#ffff', 
-                      zerolinewidth = 2, 
+         yaxis = list(zerolinecolor = '#ffff',
+                      zerolinewidth = 2,
                       gridcolor = 'ffff'),
          plot_bgcolor='#e5ecf6', width = 900)
-options(warn = -1)          
+options(warn = -1)
 
 fig
 
 ```
 
-### What About Dash? 
- 
-[Dash](https://dashr.plotly.com/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. 
- 
-Learn about how to install Dash at https://dashr.plot.ly/installation. 
- 
-Everywhere in this page that you see fig, you can display the same figure in a Dash application by passing it to the figure argument of the Graph component from the built-in dash_core_components package like this: 
- 
-```{r} 
-library(dash) 
-library(dashCoreComponents) 
-library(dashHtmlComponents) 
-library(plotly) 
- 
-fig <-  plot_ly() 
-# fig <- fig%>%add_trace( ... ) 
-# fig <- fig%>%layout( ... ) 
-app <- Dash$new() 
- 
-app$layout( 
-  htmlDiv( 
-    list( 
-      dccGraph(id = 'graph', figure = fig) 
-    ) 
-  ) 
-) 
- 
-#app$run_server() 
-```
-
-Use `app$run_server()` to run the dash app.
