@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Locales
-order: 16
+order: 29
 output:
   html_document:
     keep_md: true
