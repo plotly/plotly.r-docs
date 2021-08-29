@@ -1,5 +1,4 @@
 ---
-title : Map Configuration and Styling in R
 description: How to configure and style base maps for Choropleths and Bubble Maps.
 display_as: maps
 language: r
