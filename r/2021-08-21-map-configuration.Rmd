@@ -1,0 +1,302 @@
+---
+description: How to configure and style base maps for Choropleths and Bubble Maps.
+display_as: maps
+language: r
+layout: base
+name: Map Configuration and Styling
+order: 12
+output:
+  html_document:
+    keep_md: true
+page_type: u-guide
+permalink: r/map-configuration/
+thumbnail: thumbnail/county-level-choropleth.jpg
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+
+### Mapbox Maps vs Geo Maps
+
+Plotly supports two different kinds of maps:
+
+1. **Mapbox maps** are [tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map). If your figure is created with one or more traces of type `Scattermapbox`, `Choroplethmapbox` or `Densitymapbox`, the `layout$mapbox` object in your figure contains configuration information for the map itself.
+2. **Geo maps** are outline-based maps. If your figure is created with a `scattergeo` or `choropleth` function, the `layout$geo` object in your figure contains configuration information for the map itself.
+
+This page documents Geo outline-based maps, and the [Mapbox Layers documentation](https://plotly.com/r/mapbox-layers/) describes how to configure Mapbox tile-based maps.
+
+**Note:** Every configuration option here is equally applicable to non-empty maps created with the Plotly  `scattergeo` and `choropleth` functions.
+
+### Physical Base Maps
+
+Plotly Geo maps have a built-in base map layer composed of "physical" and "cultural" (i.e. administrative border) data from the [Natural Earth Dataset](https://www.naturalearthdata.com/downloads/). Various lines and area fills can be shown or hidden, and their color and line-widths specified. In the default `plotly` template, a map frame and physical features such as a coastal outline and filled land areas are shown, at a small-scale 1:110m resolution:
+
+```{r}
+library(plotly)
+g <- list(showland = TRUE,
+  landcolor = toRGB("#e5ecf6"))
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+Here is a map with all physical features enabled and styled, at a larger-scale 1:50m resolution:
+
+```{r}
+library(plotly)
+
+g <- list(
+  scope = 'world',
+  showland = TRUE,
+  landcolor = toRGB("LightGreen"),
+  showocean = TRUE,
+  oceancolor = toRGB("LightBlue"),
+  showlakes = TRUE,
+  lakecolor = toRGB("Blue"),
+  showrivers = TRUE,
+  rivercolor = toRGB("Blue"),
+  resolution = 50,
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+### Disabling Base Maps
+
+In certain cases, such as large scale [choropleth maps](plotly.com/r/choropleth-maps/), the default physical map can be distracting. In this case the `layout$geo$visible` attribute can be set to `FALSE` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
+
+```{r}
+library(plotly)
+
+g <- list(
+  scope = 'world',
+  visible = F,
+  showlakes = TRUE,
+  lakecolor = toRGB("Blue"),
+  showrivers = TRUE,
+  rivercolor = toRGB("Blue"),
+  resolution = 50
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+### Cultural Base Maps
+
+In addition to physical base map features, a "cultural" base map is included which is composed of country borders and selected sub-country borders such as states.
+
+**Note and disclaimer:** cultural features are by definition subject to change, debate and dispute. Plotly includes data from Natural Earth "as-is" and defers to the [Natural Earth policy regarding disputed borders](https://www.naturalearthdata.com/downloads/50m-cultural-vectors/50m-admin-0-countries-2/) which read:
+
+> Natural Earth Vector draws boundaries of countries according to defacto status. We show who actually controls the situation on the ground.
+
+**To create a map with your own cultural features** please refer to our [choropleth documentation](plotly.com/r/choropleth-maps/).
+
+Here is a map with only cultural features enabled and styled, at a 1:50m resolution, which includes only country boundaries. See below for country sub-unit cultural base map features:
+
+```{r}
+library(plotly)
+
+g <- list(
+  scope = 'world',
+  visible = F,
+  showcountries = T,
+  countrycolor = toRGB("Purple"),
+  resolution = 50,
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+### Map Projections
+
+Geo maps are drawn according to a given map [projection](https://en.wikipedia.org/wiki/Map_projection) that flattens the Earth's roughly-spherical surface into a 2-dimensional space.
+
+The available projections are `'equirectangular'`, `'mercator'`, `'orthographic'`, `'natural earth'`, `'kavrayskiy7'`, `'miller'`, `'robinson'`, `'eckert4'`, `'azimuthal equal area'`, `'azimuthal equidistant'`, `'conic equal area'`, `'conic conformal'`, `'conic equidistant'`, `'gnomonic'`, `'stereographic'`, `'mollweide'`, `'hammer'`, `'transverse mercator'`, `'albers usa'`, `'winkel tripel'`, `'aitoff'` and `'sinusoidal'`.
+
+```{r}
+library(plotly)
+
+g <- list(
+  projection = list(
+    type = 'orthographic'
+  ),
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+```{r}
+library(plotly)
+
+g <- list(
+  projection = list(
+    type = 'natural earth'
+  ),
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+Map projections can be rotated using the `layout$geo$projection$rotation` attribute, and maps can be translated using the `layout$geo$center` attributed, as well as truncated to a certain longitude and latitude range using the `layout$geo$lataxis$range` and `layout$geo$lonaxis$range`.
+
+The map below uses all of these attributes to demonstrate the types of effect this can yield:
+
+```{r}
+library(plotly)
+
+g <- list(
+  projection = list(
+    rotation = list(lon=30, lat=30, roll=30)
+  ),
+  center = list(lon=-30, lat=-30),
+  lonaxis = list(range = c(0, 200)),
+  lataxis = list(range = c(-50,20)),showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+### Automatic Zooming or Bounds Fitting
+
+The `layout$geo$fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted. See the [choropleth maps](https://plotly.com/r/choropleth-maps/) documentation for more information.
+
+```{r}
+library(plotly)
+
+g <- list(
+  fitbounds = "locations",
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'lines', lat = list(0,15,20,35), lon = list(5,10,25,30))
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+### Named Map Scopes and Country Sub-Units
+
+In addition, the named "scope" of a map defines a sub-set of the earth's surface to draw. Each scope has a _default projection type, center and roll, as well as bounds_, and certain scopes contain country sub-unit cultural layers certain resolutions, such as `scope="north america"` at `resolution=50` which contains US state and Canadian province boundaries.
+
+The available scopes are: `'world'`, `'usa'`, `'europe'`, `'asia'`, `'africa'`, `'north america'`, `'south america'`.
+
+```{r}
+library(plotly)
+
+g <- list(
+  visible = F,
+  resolution = 50,
+  scope = "north america",
+  showcountries = T,
+  countrycolor = toRGB("Black"),
+  showsubunits = T,
+  subunitcolor = toRGB("Blue"),
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+The `"usa"` scope contains state boundaries at both resolutions, and uses the special `'albers usa'` projection which moves Alaska and Hawaii closer to the "lower 48 states" to reduce projection distortion and produce a more compact map.
+
+```{r}
+library(plotly)
+
+g <- list(
+  visible = F,
+  resolution = 110,
+  scope = "usa",
+  showcountries = T,
+  countrycolor = toRGB("Black"),
+  showsubunits = T,
+  subunitcolor = toRGB("Blue"),
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+### Graticules (Latitude and Longitude Grid Lines)
+
+A graticule can be drawn using `layout$geo$lataxis$showgrid` and `layout$geo$lonaxis$showgrid` with options similar to [2d cartesian ticks](https://plotly.com/r/axes/).
+
+```{r}
+library(plotly)
+
+g <- list(
+  lonaxis = list(showgrid = T),
+  lataxis = list(showgrid = T),
+  showland = TRUE,
+  landcolor = toRGB("#e5ecf6")
+)
+
+fig <- plot_ly(type = 'scattergeo', mode = 'markers')
+fig <- fig %>% layout(geo = g)
+fig
+```
+
+### Reference
+
+See https://plotly.com/r/reference/layout/geo/ for more information and chart attribute options!
+
+### What About Dash?
+
+Dash is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library.
+
+Learn about how to install Dash at https://dashr.plot.ly/installation.
+
+Everywhere in this page that you see fig, you can display the same figure in a Dash application by passing it to the figure argument of the Graph component from the built-in dash_core_components package like this:
+
+```{r eval=FALSE}
+
+library(dash)
+library(dashCoreComponents)
+library(dashHtmlComponents)
+library(plotly)
+
+fig <-  plot_ly()
+# fig <- fig%>%add_trace( ... )
+# fig <- fig%>%layout( ... )
+app <- Dash$new()
+
+app$layout(
+  htmlDiv(
+    list(
+      dccGraph(id = 'graph', figure = fig)
+    )
+  )
+)
+
+#app$run_server()
+```
+
+Use `app$run_server()` to run the dash app.
