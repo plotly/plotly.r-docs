@@ -22,8 +22,8 @@ knitr::opts_chunk$set(message = FALSE, warning = FALSE)
 
 Plotly supports two different kinds of maps:
 
-1. **Mapbox maps** are [tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map). If your figure is created with one or more traces of type `Scattermapbox`, `Choroplethmapbox` or `Densitymapbox`, the `layout.mapbox` object in your figure contains configuration information for the map itself.
-2. **Geo maps** are outline-based maps. If your figure is created with a `scattergeo` or `choropleth` function, the `layout.geo` object in your figure contains configuration information for the map itself.
+1. **Mapbox maps** are [tile-based maps](https://en.wikipedia.org/wiki/Tiled_web_map). If your figure is created with one or more traces of type `Scattermapbox`, `Choroplethmapbox` or `Densitymapbox`, the `layout$mapbox` object in your figure contains configuration information for the map itself.
+2. **Geo maps** are outline-based maps. If your figure is created with a `scattergeo` or `choropleth` function, the `layout$geo` object in your figure contains configuration information for the map itself.
 
 This page documents Geo outline-based maps, and the [Mapbox Layers documentation](https://plotly.com/r/mapbox-layers/) describes how to configure Mapbox tile-based maps.
 
@@ -69,7 +69,7 @@ fig
 
 ### Disabling Base Maps
 
-In certain cases, such as large scale [choropleth maps](plotly.com/r/choropleth-maps/), the default physical map can be distracting. In this case the `layout.geo.visible` attribute can be set to `FALSE` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
+In certain cases, such as large scale [choropleth maps](plotly.com/r/choropleth-maps/), the default physical map can be distracting. In this case the `layout$geo$visible` attribute can be set to `FALSE` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
 
 ```{r}
 library(plotly)
@@ -157,7 +157,7 @@ fig <- fig %>% layout(geo = g)
 fig
 ```
 
-Map projections can be rotated using the `layout.geo.projection.rotation` attribute, and maps can be translated using the `layout.geo.center` attributed, as well as truncated to a certain longitude and latitude range using the `layout.geo.lataxis.range` and `layout.geo.lonaxis.range`.
+Map projections can be rotated using the `layout$geo$projection$rotation` attribute, and maps can be translated using the `layout$geo$center` attributed, as well as truncated to a certain longitude and latitude range using the `layout$geo$lataxis$range` and `layout$geo$lonaxis$range`.
 
 The map below uses all of these attributes to demonstrate the types of effect this can yield:
 
@@ -181,7 +181,7 @@ fig
 
 ### Automatic Zooming or Bounds Fitting
 
-The `layout.geo.fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted. See the [choropleth maps](https://plotly.com/r/choropleth-maps/) documentation for more information.
+The `layout$geo$fitbounds` attribute can be set to `locations` to automatically set the center and latitude and longitude range according to the data being plotted. See the [choropleth maps](https://plotly.com/r/choropleth-maps/) documentation for more information.
 
 ```{r}
 library(plotly)
@@ -247,7 +247,7 @@ fig
 
 ### Graticules (Latitude and Longitude Grid Lines)
 
-A graticule can be drawn using `layout.geo.lataxis.showgrid` and `layout.geo.lonaxis.showgrid` with options similar to [2d cartesian ticks](https://plotly.com/r/axes/).
+A graticule can be drawn using `layout$geo$lataxis$showgrid` and `layout$geo$lonaxis$showgrid` with options similar to [2d cartesian ticks](https://plotly.com/r/axes/).
 
 ```{r}
 library(plotly)
