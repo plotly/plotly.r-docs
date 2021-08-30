@@ -451,34 +451,3 @@ fig <- plot_ly(wind, r = ~r, theta = ~t, type="barpolar", color = ~nms,
 fig
 
 ```
-
-### What About Dash? 
- 
-Dash is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. 
- 
-Learn about how to install Dash at https://dashr.plot.ly/installation. 
- 
-Everywhere in this page that you see fig, you can display the same figure in a Dash application by passing it to the figure argument of the Graph component from the built-in dash_core_components package like this: 
- 
-```{r eval=FALSE}
-library(dash) 
-library(dashCoreComponents) 
-library(dashHtmlComponents) 
-library(plotly) 
- 
-fig <-  plot_ly() 
-# fig <- fig%>%add_trace( ... ) 
-# fig <- fig%>%layout( ... ) 
-app <- Dash$new() 
- 
-app$layout( 
-  htmlDiv( 
-    list( 
-      dccGraph(id = 'graph', figure = fig) 
-    ) 
-  ) 
-) 
- 
-#app$run_server() 
-```
-Use app$run_server() to run the dash app.
