@@ -1,6 +1,7 @@
 ---
-description: How to create charts from csv files with Plotly and Python
+description: How to create charts from csv files with Plotly and R
 display_as: advanced_opt
+has_thumbnail: false
 language: r
 layout: base
 name: Plot CSV Data
