@@ -1,0 +1,389 @@
+---
+description: How to make interactive Distplots in R with Plotly.
+display_as: statistical
+language: r
+layout: base
+name: Distplots
+order: 8
+output:
+  html_document:
+    keep_md: true
+page_type: example_index
+permalink: r/distplot/
+thumbnail: thumbnail/distplot.jpg
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+```
+
+## Combined statistical representations with histogram
+
+Several representations of statistical distributions are available in plotly, such as [histograms](https://plotly.com/r/histograms/), [violin plots](https://plotly.com/r/violin/), [box plots](https://plotly.com/r/box-plots/#) (see [the complete list here](https://plotly.com/r/statistical-charts/)). It is also possible to combine several representations in the same plot.
+
+
+```{r}
+
+library(plotly)
+library(ggplot2)
+library(reshape2)
+data(tips)
+
+p <- ggplot(tips, aes(x=total_bill, weight = tip, color=sex, fill = sex)) +
+  geom_histogram(binwidth=2.5) +
+  ylab("sum of tip") + 
+  geom_rug(sides="t", length = unit(0.3, "cm"))
+fig <- ggplotly(p)
+fig
+```
+
+
+## Combined statistical representations with distplot figure factory
+
+The distplot figure factory displays a combination of statistical representations of numerical data, such as histogram, kernel density estimation or normal curve, and rug plot.
+
+#### Basic Distplot
+
+A histogram, a kde plot and a rug plot are displayed.
+
+```{r}
+library(ggplot2)  
+library(plotly)
+
+set.seed(1)    
+hist_data <- data.frame(rnorm(1000, mean = 0, sd = 1))   
+colnames(hist_data) = c('x')  
+gg <- ggplot(hist_data,aes(x = x, color = 'density')) +  
+  geom_histogram(aes(y = ..density..), bins = 7,  fill = '#67B7D1', alpha = 0.5) +  
+  geom_density(color = '#67B7D1') +  
+  geom_rug(color = '#67B7D1') + 
+  ylab("") + 
+  xlab("")  + theme(legend.title=element_blank()) +
+  scale_color_manual(values = c('density' = '#67B7D1'))
+
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff')) 
+```
+
+#### Plot Multiple Datasets
+
+```{r}
+library(ggplot2)    
+library(plotly) 
+set.seed(1)    
+x1 <- rnorm(200, mean = 0, sd = 1) - 2  
+x2 <- rnorm(200, mean = 0, sd = 1)   
+x3 <- rnorm(200, mean = 0, sd = 1) + 2  
+x4 <- rnorm(200, mean = 0, sd = 1) +4  
+group_labels = c('Group 1', 'Group 2', 'Group 3', 'Group 4')  
+
+df1 <- data.frame(x1, group_labels[1])  
+colnames(df1) <- c('x', 'Group') 
+df2 <- data.frame(x2, group_labels[2]) 
+colnames(df2) <- c('x', 'Group') 
+df3 <- data.frame(x3, group_labels[3]) 
+colnames(df3) <- c('x', 'Group') 
+df4 <- data.frame(x4, group_labels[4]) 
+colnames(df4) <- c('x', 'Group') 
+df <- rbind(df1,df2,df3,df4) 
+colnames(df) <- c('x', 'Group') 
+
+gg <- ggplot(data = df ) +  
+  geom_histogram(aes(x=x, y = ..density.., fill=Group),bins = 29, alpha = 0.7) + 
+ geom_density(aes(x=x, color=Group)) + geom_rug(aes(x=x, color=Group))+ 
+  ylab("") + 
+  xlab("")
+
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff')) 
+```
+
+#### Use Multiple Bin Sizes
+
+Different bin sizes are used for the different datasets with the `bin_size` argument.
+
+```{r}
+library(ggplot2) 
+library(plotly)
+
+set.seed(1)  
+x1 <- rnorm(1000, mean = 0, sd = 1) - 2
+x2 <- rnorm(1000, mean = 0, sd = 1) 
+x3 <- rnorm(1000, mean = 0, sd = 1) + 2
+x4 <- rnorm(1000, mean = 0, sd = 1) +4
+group_labels = c('Group 1', 'Group 2', 'Group 3', 'Group 4')
+
+df = data.frame(x1,x2,x3,x4, group_labels)
+
+gg <- ggplot(df,aes() ) + 
+  geom_histogram(aes(x = x1, y = ..density.., fill = '#67B7D1'), alpha = 0.7, bins = 29) +
+  geom_histogram(aes(x = x2, y = ..density.., fill = '#ff8080'), alpha = 0.7, bins = 20) +
+  geom_histogram(aes(x = x3, y = ..density.., fill = '#ff99dd'), alpha = 0.7, bins = 10) +
+  geom_histogram(aes(x = x4, y = ..density.., fill = '#ff9900'), alpha = 0.7, bins = 5) +
+  geom_density(aes(x = x1),color = '#67B7D1') + 
+  geom_density(aes(x = x2),color = '#ff8080') +
+  geom_density(aes(x = x3),color = '#ff99dd') +
+  geom_density(aes(x = x4),color = '#ff9900') +
+  geom_rug(aes(x = x1),color = '#67B7D1') + 
+  geom_rug(aes(x = x2),color = '#ff8080') +
+  geom_rug(aes(x = x3),color = '#ff99dd') +
+  geom_rug(aes(x = x4),color = '#ff9900') + 
+  theme(legend.title=element_blank()) +
+  scale_fill_identity(labels = c('Group 1', 'Group 2', 'Group 3', 'Group 4'),
+                      guide = "legend")  +
+  labs(x = '',
+       y = '')
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff')) 
+```
+
+
+#### Plot Normal Curve
+
+```{r}
+library(ggplot2)    
+library(plotly) 
+set.seed(1)    
+x1 <- rnorm(200, mean = 0, sd = 1)  
+x2 <- rnorm(200, mean = 0, sd = 1) + 2 
+ 
+group_labels = c('Group 1', 'Group 2')  
+ 
+df1 <- data.frame(x1, group_labels[1])  
+colnames(df1) <- c('x', 'Group') 
+df2 <- data.frame(x2, group_labels[2]) 
+colnames(df2) <- c('x', 'Group') 
+ 
+df <- rbind(df1,df2) 
+colnames(df) <- c('x', 'Group') 
+ 
+gg <- ggplot(data = df , aes(x=x)) +  
+  geom_histogram(aes(y = ..density.., fill=Group),bins = 30, alpha = 0.7)+ 
+  geom_density(aes(color=Group))+  
+  geom_rug(aes(color=Group))+ 
+  labs(x = '',  
+       y = '',  
+       title = 'Distplot with Normal Distribution')  
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff')) 
+```
+
+#### Plot Only Curve and Rug
+
+```{r}
+library(ggplot2)    
+library(plotly) 
+set.seed(1)    
+x1 <- rnorm(200, mean = 0, sd = 1) - 1
+x2 <- rnorm(200, mean = 0, sd = 1) 
+x3 <- rnorm(200, mean = 0, sd = 1) + 1
+
+group_labels = c('Group 1', 'Group 2', 'Group 3')  
+
+df1 <- data.frame(x1, group_labels[1])  
+colnames(df1) <- c('x', 'Group') 
+df2 <- data.frame(x2, group_labels[2]) 
+colnames(df2) <- c('x', 'Group') 
+df3 <- data.frame(x3, group_labels[3]) 
+colnames(df3) <- c('x', 'Group') 
+
+df <- rbind(df1,df2,df3) 
+colnames(df) <- c('x', 'Group') 
+
+gg <- ggplot(data = df ) +  
+ geom_density(aes(x=x, color=Group)) + geom_rug(aes(x=x, color=Group)) + 
+  ylab("") + 
+  xlab("")
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),
+         title = 'Curve and Rug Plot') 
+```
+
+#### Plot Only Hist and Rug
+
+```{r}
+library(ggplot2)    
+library(plotly) 
+set.seed(1)    
+x1 <- rnorm(200, mean = 0, sd = 1) - 1
+x2 <- rnorm(200, mean = 0, sd = 1) 
+x3 <- rnorm(200, mean = 0, sd = 1) + 1
+
+group_labels = c('Group 1', 'Group 2', 'Group 3')  
+
+df1 <- data.frame(x1, group_labels[1])  
+colnames(df1) <- c('x', 'Group') 
+df2 <- data.frame(x2, group_labels[2]) 
+colnames(df2) <- c('x', 'Group') 
+df3 <- data.frame(x3, group_labels[3]) 
+colnames(df3) <- c('x', 'Group') 
+
+df <- rbind(df1,df2,df3) 
+colnames(df) <- c('x', 'Group') 
+
+gg <- ggplot(data = df ) +  
+  geom_histogram(aes(x=x, y = ..density.., fill=Group),bins = 29, alpha = 0.7) + 
+  geom_rug(aes(x=x, color=Group)) + 
+  ylab("") + 
+  xlab("")
+
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),
+         title = 'Hist and Rug Plot') 
+```
+
+#### Plot Hist and Rug with Different Bin Sizes
+
+```{r}
+library(ggplot2)  
+library(plotly)
+
+set.seed(1) 
+x1 <- rnorm(1000, mean = 0, sd = 1) - 2
+x2 <- rnorm(1000, mean = 0, sd = 1) 
+x3 <- rnorm(1000, mean = 0, sd = 1) + 2
+
+df <- data.frame(x1, x2, x3)
+
+gg <- ggplot(df,aes() ) + 
+  geom_histogram(aes(x = x1, y = ..density.., fill = '#67B7D1'), alpha = 0.7, bins = 5) +
+  geom_histogram(aes(x = x2, y = ..density.., fill = '#ff8080'), alpha = 0.7, bins = 17) +
+  geom_histogram(aes(x = x3, y = ..density.., fill = '#ff99dd'), alpha = 0.7, bins = 29) +
+  geom_rug(aes(x = x1),color = '#67B7D1') + 
+  geom_rug(aes(x = x2),color = '#ff8080') +
+  geom_rug(aes(x = x3),color = '#ff99dd') +
+  labs(x = '',
+       y = '',
+       title = 'Hist and Rug Plot') +
+  theme(legend.title=element_blank()) +
+  scale_fill_identity(labels = c('Group 1', 'Group 2', 'Group 3'),
+                      guide = "legend") 
+
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),
+         title = 'Hist and Rug Plot') 
+```
+
+#### Plot Only Hist and Curve
+
+```{r}
+library(ggplot2)    
+library(plotly) 
+set.seed(1)    
+x1 <- rnorm(200, mean = 0, sd = 1) - 2  
+x2 <- rnorm(200, mean = 0, sd = 1)   
+x3 <- rnorm(200, mean = 0, sd = 1) + 2  
+x4 <- rnorm(200, mean = 0, sd = 1) +4  
+group_labels = c('Group 1', 'Group 2', 'Group 3', 'Group 4')  
+
+df1 <- data.frame(x1, group_labels[1])  
+colnames(df1) <- c('x', 'Group') 
+df2 <- data.frame(x2, group_labels[2]) 
+colnames(df2) <- c('x', 'Group') 
+df3 <- data.frame(x3, group_labels[3]) 
+colnames(df3) <- c('x', 'Group') 
+df4 <- data.frame(x4, group_labels[4]) 
+colnames(df4) <- c('x', 'Group') 
+df <- rbind(df1,df2,df3,df4) 
+colnames(df) <- c('x', 'Group') 
+
+gg <- ggplot(data = df ) +  
+  geom_histogram(aes(x=x, y = ..density.., fill=Group),bins = 29, alpha = 0.7) + 
+ geom_density(aes(x=x, color=Group)) + 
+  ylab("") + 
+  xlab("")
+
+
+ggplotly(gg)%>% 
+  layout(plot_bgcolor='#e5ecf6',   
+             xaxis = list(   
+               title='Time', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),   
+             yaxis = list(   
+               title='Value A', 
+               zerolinecolor = '#ffff',   
+               zerolinewidth = 2,   
+               gridcolor = 'ffff'),
+         title = 'Hist and Curve Plot') 
+```
+
+

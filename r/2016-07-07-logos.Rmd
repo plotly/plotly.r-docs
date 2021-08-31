@@ -4,7 +4,7 @@ display_as: file_settings
 language: r
 layout: base
 name: Embedding Logos in Plotly Graphs
-order: 13
+order: 28
 output:
   html_document:
     keep_md: true
