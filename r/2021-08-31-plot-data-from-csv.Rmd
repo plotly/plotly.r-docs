@@ -1,14 +1,15 @@
 ---
 description: How to create charts from csv files with Plotly and R
-display_as: file_settings
+display_as: advanced_opt
+has_thumbnail: false
 language: r
 layout: base
 name: Plot CSV Data
-order: 32
+order: 1
 output:
   html_document:
     keep_md: true
-page_type: u-guide
+page_type: example_index
 permalink: r/plot-data-from-csv/
 thumbnail: thumbnail/csv.jpg
 ---
