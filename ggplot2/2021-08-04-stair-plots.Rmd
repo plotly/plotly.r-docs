@@ -1,0 +1,37 @@
+---
+description: How to make Stair Plots in ggplot2 with Plotly.
+name: Stair Plots
+permalink: ggplot2/stair-plots/
+thumbnail: thumbnail/
+layout: base
+language: ggplot2
+display_as: basic 
+page_type: u-guide
+order: 20
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default stair plot
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+d=data.frame(x=c(1,2,4,5,7,8,9), y=c(1,2,3,5,6,7,9))
+p <- ggplot() +
+      geom_step(data=d, mapping=aes(x=x, y=y)) +
+      geom_step(data=d, mapping=aes(x=x, y=y), direction="vh", linetype=3) +
+      geom_point(data=d, mapping=aes(x=x, y=y), color="red") 
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

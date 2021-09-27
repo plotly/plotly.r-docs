@@ -1,0 +1,248 @@
+---
+description: How to make Dot Plots in ggplot2 with Plotly.
+name: Dot Plots
+permalink: ggplot2/dot-plots/
+thumbnail: thumbnail/dot-plot.jpg
+layout: base
+language: ggplot2
+display_as: base
+page_type: u-guide
+order: 6
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+# Default dotplot
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot()
+  
+plotly::ggplotly(p)
+```
+
+
+
+# Increase dot size
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot(binwidth = 1.5)
+  
+plotly::ggplotly(p)
+```
+
+
+Using fixed-width bins.
+
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot(method="histodot", binwidth = 1.5)
+  
+plotly::ggplotly(p)
+```
+
+
+# Various stack methods
+
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot(binwidth = 1.5, stackdir = "center")
+  
+plotly::ggplotly(p)
+```
+
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot(binwidth = 1.5, stackdir = "centerwhole")
+  
+plotly::ggplotly(p)
+```
+
+# Hiding y axis
+
+
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) + geom_dotplot(binwidth = 1.5) +
+  scale_y_continuous(NULL, breaks = NULL)
+  
+plotly::ggplotly(p)
+```
+
+
+# Overlapping dots vertically
+
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot(binwidth = 1.5, stackratio = .7)
+  
+plotly::ggplotly(p)
+```
+
+# Expanding dot diameter
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot(binwidth = 1.5, dotsize = 1.25)
+  
+plotly::ggplotly(p)
+```
+
+
+# Changing fill colour and stroke witdth
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg)) +
+  geom_dotplot(binwidth = 1.5, fill = "white", stroke = 2)
+  
+plotly::ggplotly(p)
+```
+
+# Stacking along y axis
+
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = 1, y = mpg)) +
+  geom_dotplot(binaxis = "y", stackdir = "center")
+  
+plotly::ggplotly(p)
+```
+
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_dotplot(binaxis = "y", stackdir = "center")
+  
+plotly::ggplotly(p)
+```
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_dotplot(binaxis = "y", stackdir = "centerwhole")
+  
+plotly::ggplotly(p)
+```
+
+
+# Changing colour with dodge position
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = factor(vs), fill = factor(cyl), y = mpg)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", position = "dodge")
+  
+plotly::ggplotly(p)
+```
+
+
+# Aligning bins between groups
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = factor(am), y = mpg)) +
+  geom_dotplot(binaxis = "y", stackdir = "center", binpositions="all")
+  
+plotly::ggplotly(p)
+```
+
+
+
+# Stacking groups with different fill
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg, fill = factor(cyl))) +
+  geom_dotplot(stackgroups = TRUE, binwidth = 1, binpositions = "all")
+  
+plotly::ggplotly(p)
+```
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = mpg, fill = factor(cyl))) +
+  geom_dotplot(stackgroups = TRUE, binwidth = 1, method = "histodot")
+  
+plotly::ggplotly(p)
+```
+
+
+
+# Flip plot orientation
+
+
+```{r}
+library(plotly)
+
+p <-    
+ ggplot(mtcars, aes(x = 1, y = mpg, fill = factor(cyl))) +
+  geom_dotplot(binaxis = "y", stackgroups = TRUE, binwidth = 1, method = "histodot")
+  
+plotly::ggplotly(p)
+```

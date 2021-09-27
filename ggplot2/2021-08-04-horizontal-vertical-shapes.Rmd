@@ -1,0 +1,119 @@
+---
+description: How to add Horizontal and Vertical Lines in ggplot2 with Plotly.
+name: Horizontal and Vertical Lines
+permalink: ggplot2/horizontal-vertical-shapes/
+thumbnail: thumbnail/shape.jpg
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 36
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Add horizontal line
+
+To do this, use `geom_vline()`:
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=mtcars, aes(x=wt, y=mpg)) + geom_point() +
+      geom_vline(xintercept = 3)
+
+ggplotly(p)
+```
+
+
+## Add vertical line
+
+To do this, use `geom_hline()`:
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=mtcars, aes(x=wt, y=mpg)) + 
+      geom_point() +
+      geom_hline(yintercept=20)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change line type
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=mtcars, aes(x=wt, y=mpg)) + 
+      geom_point() +
+      geom_vline(xintercept = 3, linetype="dotted", 
+                color = "blue", size=1.5)
+
+ggplotly(p)
+```
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=mtcars, aes(x=wt, y=mpg)) + 
+      geom_point() +
+      geom_hline(yintercept=20, linetype="dashed", 
+              color = "green", size=4)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Add a segment line
+
+If you do not wish to add line that goes across the whole plot, use `geom_segment()`:
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=mtcars, aes(x=wt, y=mpg)) + 
+      geom_point() +
+      geom_segment(aes(x = 4, y = 15, xend = 4, yend = 27))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Adding regression line
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+require(stats)
+
+reg <- lm(mpg ~ wt, data = mtcars)
+coeff = coefficients(reg)
+
+eq = paste0("y = ", round(coeff[2],1), "*x + ", round(coeff[1],1))
+
+p <- ggplot(data=mtcars, aes(x=wt, y=mpg)) + geom_point() +
+      geom_abline(intercept = 37, slope = -5, color="red", 
+                 linetype="dashed", size=1.5)+
+      ggtitle(eq)
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

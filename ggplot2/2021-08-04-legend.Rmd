@@ -1,0 +1,162 @@
+---
+description: How to work with Legends in ggplot2 with Plotly.
+name: Legends
+permalink: ggplot2/legend/
+thumbnail: thumbnail/legends.gif
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 14
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default box plot
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+  geom_boxplot()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change the legend position
+
+The position of the legend can be changed using the function `theme()` as follow:
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+  geom_boxplot()
+
+p + theme(legend.position="bottom")
+
+ggplotly(p)
+```
+Note that, the argument `legend.position` can be also a numeric vector `c(x,y)`. In this case it is possible to position the legend inside the plotting area. x and y are the coordinates of the legend box. Their values should be between 0 and 1. `c(0,0)` corresponds to the `bottom left` and `c(1,1)` corresponds to the `top right` position.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+  geom_boxplot()
+
+p + theme(legend.position = c(0.8, 0.2))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change the legend title and text font styles
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+  geom_boxplot()
+
+p <- p + theme(legend.title = element_text(colour="red", size=10, 
+                                      face="italic"))
+p <- p + theme(legend.text = element_text(colour="blue", size=10, 
+                                     face="bold"))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change the background color of the legend box
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+  geom_boxplot()
+
+p <- p + theme(legend.background = element_rect(fill="lightblue",
+                                  size=0.5, linetype="solid", 
+                                  colour ="red"))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change the order of legend items
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+  geom_boxplot()
+
+p + scale_x_discrete(limits=c("2", "0.5", "1"))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Remove the plot legend
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+  geom_boxplot()
+
+p <- p + theme(legend.title = element_blank())
+p <- p + theme(legend.position='none')
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

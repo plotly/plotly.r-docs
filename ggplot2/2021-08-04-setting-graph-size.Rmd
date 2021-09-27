@@ -1,0 +1,95 @@
+---
+description: How to Set Graph Size in ggplot2 with Plotly.
+name: Setting Graph Size
+permalink: ggplot2/setting-graph-size/
+thumbnail: thumbnail/sizing.png
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 10
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default plot
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mpg, aes(displ, hwy)) + geom_point()+ 
+  theme(
+  plot.margin = margin(1, 1, 1, 1, "cm"),
+  panel.background = element_rect(fill = "white"),
+  plot.background = element_rect(
+    fill = "grey90",
+    colour = "black"
+  )
+)
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Add margin
+
+To add margin use `plot.margin()`. 
+
+For the argument you can either use `margin(2, 2, 2, 2, "cm")` or `unit(c(2,2,2,2), "cm")`.
+
+This two arguments are shorthand for `margin`:
+* `t` = 2  - top
+* `r` = 2  - right
+* `b` = 2  - bottom
+* `l` = 2  - left
+* `unit ` = "cm"
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mpg, aes(displ, hwy)) + geom_point()+ 
+  theme(
+  plot.margin = margin(1, 1, 2, 2, "cm")
+)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change background colour
+
+To change the colour of the plot background `panel.background()`.
+
+To change the colour of the background around the plot use `plot.background()`.
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mpg, aes(displ, hwy)) + geom_point()+ 
+  theme(
+  plot.margin = margin(1, 1, 1, 1, "cm"),
+  panel.background = element_rect(fill = "white"),
+  plot.background = element_rect(
+    fill = "grey90",
+    colour = "black"
+  )
+)
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

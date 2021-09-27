@@ -1,0 +1,231 @@
+---
+description: How to make ROC and PR Curves in ggplot2 with Plotly.
+name: ROC and PR Curves
+permalink: ggplot2/roc-and-pr-curves/
+thumbnail: thumbnail/ml-roc-pr.png
+layout: base
+language: ggplot2
+display_as: ai_ml
+page_type: u-guide
+order: 3
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Roc curve
+
+We create an example data set. There are 2 markers, one that is moderately predictive and one that is not as predictive.
+
+Next use the ggplot function to define the aesthetics, and the `geom_roc` function to add an ROC curve layer. The `geom_roc` function requires the aesthetics d for disease status, and m for marker. The disease status need not be coded as 0/1, but if it is not, `stat_roc` assumes (with a warning) that the lowest value in sort order signifies disease-free status. `stat_roc` and `geom_roc` are linked by default, with the stat doing the underlying computation of the empirical ROC curve, and the geom consisting of the ROC curve layer.
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+p <- ggplot(test, aes(d = D, m = M1)) + 
+      geom_roc()
+
+ggplotly(p)
+```
+
+The `geom_roc` layer includes the ROC curve line combined with points and labels to display the values of the biomarker at the different cutpoints. It accepts the argument `n.cuts` to define the number of cutpoints to display along the curve. Labels can be supressed by using `n.cuts = 0` or `labels = FALSE`. The size of the labels and the number of significant digits can be adjusted with `labelsize` and `labelround`, respectively.
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Modify legend
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+p <- ggplot(test, aes(d = D, m = M1)) + 
+      geom_roc(n.cuts = 0)
+
+ggplotly(p)
+```
+
+Change label size and number of labels.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+p <- ggplot(test, aes(d = D, m = M1)) + 
+      geom_roc(n.cuts = 5, labelsize = 5, labelround = 2)
+
+ggplotly(p)
+```
+
+Increase number of labels.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+p <- ggplot(test, aes(d = D, m = M1)) + 
+      geom_roc(n.cuts = 50, labels = FALSE)
+
+ggplotly(p)
+```
+
+`style_roc` that can be added to a ggplot that contains an ROC curve layer. This adds a diagonal guideline, sets the axis labels, and adjusts the major and minor grid lines. The `direct_label` function operates on a ggplot object, adding a direct label to the plot. It attempts to intellegently select an appropriate location for the label, but the location can be adjusted with `nudge_x`, `nudge_y` and `label.angle`. If the labels argument is NULL, it will take the name from the mapped aesthetic.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+p <- ggplot(test, aes(d = D, m = M1)) + geom_roc() +
+      style_roc(theme = theme_grey, xlab = "1 - Specificity")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Confidence regions
+
+It is common to compute confidence regions for points on the ROC curve using the Clopper and Pearson (1934) exact method. Briefly, exact confidence intervals are calculated for the FPF and TPF separately. 
+
+This is implemented in the `stat_rocci` and displayed as a `geom_rocci` layer. These both require the same aesthetics as the ROC geom, d for disease status and `m` for marker. By default, a set of 3 evenly spaced points along the curve are chosed to display confidence regions. You can select points by passing a vector of values in the range of m to the `ci.at` argument. By default, the significance level α is set to 0.05, this can be changed using the `sig.level` option.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+p <- ggplot(test, aes(d = D, m = M1)) + geom_roc() +
+      style_roc(theme = theme_grey, xlab = "1 - Specificity") +
+      geom_rocci()
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Multiple ROC curves
+
+If you have grouping factors in your dataset, or you have multiple markers measured on the same subjects, you may wish to plot multiple ROC curves on the same plot. plotROC fully supports faceting and grouping done by ggplot2. In out example dataset, we have 2 markers measured in a paired manner.
+These data are in wide format, with the 2 markers going across 2 columns. ggplot requires long format, with the marker result in a single column, and a third variable identifying the marker. We provide the function melt_roc to perform this transformation. The arguments are the data frame, a name or index identifying the disease status column, and a vector of names or indices identifying the the markers. Optionally, the names argument gives a vector of names to assign to the marker, replacing their column names. The result is a data frame in long format.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+longtest <- melt_roc(test, "D", c("M1", "M2"))
+
+p <- ggplot(longtest, aes(d = D, m = M, color = name)) + 
+      geom_roc() + 
+      style_roc()
+
+ggplotly(p)
+```
+
+
+Similarly to a single ROC curve, you can add confidence intervals.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+longtest <- melt_roc(test, "D", c("M1", "M2"))
+
+p <- ggplot(longtest, aes(d = D, m = M, linetype = name)) + 
+      geom_roc() + 
+      geom_rocci()
+
+ggplotly(p)
+```
+
+You can create a facet plot for every curve.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(plotROC)
+
+D.ex <- rbinom(200, size = 1, prob = .5)
+M1 <- rnorm(200, mean = D.ex, sd = .65)
+M2 <- rnorm(200, mean = D.ex, sd = 1.5)
+
+test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1], 
+                   M1 = M1, M2 = M2, stringsAsFactors = FALSE)
+
+longtest <- melt_roc(test, "D", c("M1", "M2"))
+
+p <- ggplot(longtest, aes(d = D, m = M, color = name)) + 
+      geom_roc() + 
+      facet_wrap(~ name) +
+      style_roc()
+
+ggplotly(p)
+```

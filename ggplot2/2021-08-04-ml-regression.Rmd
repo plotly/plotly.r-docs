@@ -1,0 +1,67 @@
+---
+description: How to make ML Regression Plots in ggplot2 with Plotly.
+name: ML Regression
+permalink: ggplot2/ml-regression/
+thumbnail: thumbnail/ml-regression.png
+layout: base
+language: ggplot2
+display_as: ai_ml
+page_type: u-guide
+order: 1
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Linear regerssion plot
+
+Sometimes it's nice to quickly visualise the data that went into a simple linear regression, especially when you are performing lots of tests at once. Here is a quick solution with ggplot2.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+data(iris)
+
+p <- ggplot(iris, aes(x = Petal.Width, y = Sepal.Length)) + 
+      geom_point() +
+      stat_smooth(method = "lm", col = "red")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Disaplay additional statistics
+
+You can create a quick function to pull the data out of a linear regression, and return important values (R-squares, slope, intercept and P value) at the top of a nice ggplot graph with the regression line.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+data(iris)
+
+ggplotRegression <- function (fit) {
+  ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
+    geom_point() +
+    stat_smooth(method = "lm", col = "red") +
+    labs(title = paste("Adj R2 = ",signif(summary(fit)$adj.r.squared, 5),
+                       "Intercept =",signif(fit$coef[[1]],5 ),
+                       " Slope =",signif(fit$coef[[2]], 5),
+                       " P =",signif(summary(fit)$coef[2,4], 5)))
+}
+
+fit1 <- lm(Sepal.Length ~ Petal.Width, data = iris)
+p <- ggplotRegression(fit1)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

@@ -1,0 +1,190 @@
+---
+description: How to make Time Series and Date Axes in ggplot2 with Plotly.
+name: Time Series and Date Axes
+permalink: ggplot2/time-series/
+thumbnail: thumbnail/time-series.jpg
+layout: base
+language: ggplot2
+display_as: financial
+page_type: u-guide
+order: 1
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Continuous Scale
+
+
+```{r}
+library(plotly)
+library(tidyverse)
+library(tidyquant)
+library(ggplot2)
+
+data("FANG") 
+AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
+
+p <- AMZN %>%
+    ggplot(aes(x = date, y = adjusted)) +
+    geom_line(color = palette_light()[[1]]) + 
+    scale_y_continuous() +
+    labs(title = "AMZN Line Chart", 
+         subtitle = "Continuous Scale", 
+         y = "Closing Price", x = "") + 
+    theme_tq()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Log Scale
+
+
+```{r}
+library(plotly)
+library(tidyverse)
+library(tidyquant)
+library(ggplot2)
+
+data("FANG") 
+AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
+
+p <- AMZN %>%
+    ggplot(aes(x = date, y = adjusted)) +
+    geom_line(color = palette_light()[[1]]) + 
+    scale_y_log10() +
+    labs(title = "AMZN Line Chart", 
+         subtitle = "Log Scale", 
+         y = "Closing Price", x = "") + 
+    theme_tq()
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Regression trendlines
+
+
+```{r}
+library(plotly)
+library(tidyverse)
+library(tidyquant)
+library(ggplot2)
+
+data("FANG") 
+AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
+
+p <- AMZN %>%
+    ggplot(aes(x = date, y = adjusted)) +
+    geom_line(color = palette_light()[[1]]) + 
+    scale_y_log10() +
+    geom_smooth(method = "lm") +
+    labs(title = "AMZN Line Chart", 
+         subtitle = "Log Scale, Applying Linear Trendline", 
+         y = "Adjusted Closing Price", x = "") + 
+    theme_tq()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Charting volume
+
+We can use the `geom_segment()` function to chart daily volume, which uses xy points for the beginning and end of the line. Using the aesthetic color argument, we color based on the value of volume to make these data stick out.
+
+```{r}
+library(plotly)
+library(tidyverse)
+library(tidyquant)
+library(ggplot2)
+
+data("FANG") 
+AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
+
+p <- AMZN %>%
+    ggplot(aes(x = date, y = volume)) +
+    geom_segment(aes(xend = date, yend = 0, color = volume)) + 
+    geom_smooth(method = "loess", se = FALSE) +
+    labs(title = "AMZN Volume Chart", 
+         subtitle = "Charting Daily Volume", 
+         y = "Volume", x = "") +
+    theme_tq() +
+    theme(legend.position = "none") 
+
+ggplotly(p)
+```
+
+And, we can zoom in on a specific region. Using `scale_color_gradient` we can quickly visualize the high and low points, and using `geom_smooth` we can see the trend.
+
+```{r}
+library(plotly)
+library(tidyverse)
+library(tidyquant)
+library(ggplot2)
+
+data("FANG") 
+AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
+
+end <- as_date("2016-12-31")
+start <- end - weeks(24)
+p <- AMZN %>%
+    filter(date >= start - days(50)) %>%
+    ggplot(aes(x = date, y = volume)) +
+    geom_segment(aes(xend = date, yend = 0, color = volume)) +
+    geom_smooth(method = "loess", se = FALSE) +
+    labs(title = "AMZN Bar Chart", 
+         subtitle = "Charting Daily Volume, Zooming In", 
+         y = "Volume", x = "") + 
+    coord_x_date(xlim = c(start, end)) +
+    scale_color_gradient(low = "red")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Themes
+The `tidyquant` package comes with three themes to help quickly customize financial charts:
+
+* Light: `theme_tq()` + `scale_color_tq()` + `scale_fill_tq()`
+* Dark: `theme_tq_dark()` + `scale_color_tq(theme = "dark")` + `scale_fill_tq(theme = "dark")`
+* Green: `theme_tq_green()` + `scale_color_tq(theme = "green")` + `scale_fill_tq(theme = "green")`
+
+```{r}
+library(plotly)
+library(tidyverse)
+library(tidyquant)
+library(ggplot2)
+
+data("FANG") 
+
+n_mavg <- 50 # Number of periods (days) for moving average
+p <- FANG %>%
+    filter(date >= start - days(2 * n_mavg)) %>%
+    ggplot(aes(x = date, y = close, color = symbol)) +
+    geom_line(size = 1) +
+    geom_ma(n = 15, color = "darkblue", size = 1) + 
+    geom_ma(n = n_mavg, color = "red", size = 1) +
+    labs(title = "Dark Theme",
+         x = "", y = "Closing Price") +
+    coord_x_date(xlim = c(start, end)) +
+    facet_wrap(~ symbol, scales = "free_y") +
+    theme_tq_dark() +
+    scale_color_tq(theme = "dark") +
+    scale_y_continuous(labels = scales::dollar)
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

@@ -1,0 +1,193 @@
+---
+description: How to work with Axes in ggplot2 with Plotly.
+name: Axes
+permalink: ggplot2/axes/
+thumbnail: thumbnail/axes.png
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 13
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default plot
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(name = "Displacement")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Changing axis limits
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(limits = c(0, 600))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Changing axis ticks
+
+ The `breaks` argument is used to specify where the ticks appear. It takes a numeric vector equal to the length of the number of ticks.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(breaks = c(150, 300, 450))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Changing tick labels
+
+You can change the tick labels using the `labels` argument. In the below example, we use words instead of numbers. When adding labels, we need to ensure that the length of the `breaks` and `labels` are same.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(breaks = c(150, 300, 450),
+  labels = c('One Hundred Fifty', 'Three Hundred', 'Four Hundred Fifity'))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Changing position of labels
+
+
+```{r}
+library(ggplot2)
+
+p <- ggplot(mtcars) +
+  geom_point(aes(disp, mpg)) +
+  scale_x_continuous(position = 'top')
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Y-axis example
+
+Everything above using `scale_x_continuous()` can be used in the same way for y axis with `scale_y_continuous()`.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars) + geom_point(aes(disp, mpg)) +
+  scale_y_continuous(name = "Miles Per Gallon", limits = c(0, 45),
+                     breaks = c(0, 15, 30, 45), position = 'right',
+                     labels = c('zero', 'fifteen', 'thirty', 'fourtyfive'))
+
+ggplotly(p)
+
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Discrete axis labels
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars) +
+  geom_bar(aes(factor(cyl))) +
+  scale_x_discrete(labels = c("4" = "Four", "6" = "Six", "8" = "Eight"))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Remove Axis Labels
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
+
+p <- ggplot(df, aes(carat, price, color = cut)) +
+  geom_point() +
+  theme(axis.text = element_blank())
+
+ ggplotly(p)
+```
+
+## Vertical Text Orientation
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+lab <- paste("Vertical Label", c(1, 2, 3, 4, 5))
+
+ds <- data.frame(x = sample(lab, size = 1000, replace = T),
+                 y = sample(LETTERS[1:5], size = 1000, replace = T))
+
+p <- ggplot(ds, aes(x = x, fill = y)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 90)) +
+  ggtitle("Vertical Axis Labels")
+
+ggplotly(p)
+```
+
+## Angled Text Orientation
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+lab <- paste("Angle Label", c(1, 2, 3, 4, 5))
+
+ds <- data.frame(x = sample(lab, size = 1000, replace = T),
+                 y = sample(LETTERS[1:5], size = 1000, replace = T))
+
+p <- ggplot(ds, aes(x = x, fill = y)) +
+  geom_bar() +
+  theme(axis.text.x = element_text(angle = 45)) +
+  ggtitle("Angle Axis Labels")
+
+ggplotly(p)
+```

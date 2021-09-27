@@ -1,0 +1,309 @@
+---
+description: How to make Scatter Plots in ggplot2 with Plotly.
+name: Scatter Plots
+display_as: basic
+order: 1
+permalink: ggplot2/line-and-scatter/
+thumbnail: thumbnail/line-and-scatter.jpg
+layout: base
+language: ggplot2
+page_type: u-guide
+output:
+  html_document:
+    keep_md: true
+---
+
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+# Default point plot
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point()
+
+ggplotly(p)
+```
+# Add colour
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point(aes(colour = factor(cyl)))
+
+ggplotly(p)
+```
+
+# Changing shapes of data points
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point(aes(shape = factor(cyl)))
+
+ggplotly(p)
+```
+
+# Changing size of data points
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point(aes(size = qsec))
+
+ggplotly(p)
+```
+
+
+# Manually setting aesthetics
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <-  ggplot(mtcars, aes(wt, mpg)) + geom_point(colour = "red", size = 3)
+
+ggplotly(p)
+```
+
+# Optional shape arguments
+
+For shapes that have a border (like shape 21), you can colour the inside and outside separately. Use the stroke aesthetic to modify the width of the border.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <-    
+ ggplot(mtcars, aes(wt, mpg)) +
+  geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 5)
+  
+ggplotly(p)
+```
+
+
+# Mix multiples shapes
+
+You can create interesting shapes by layering multiple points of different sizes.
+
+Default plot:
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(mpg, wt, shape = factor(cyl)))
+p <-    
+ p +
+  geom_point(aes(colour = factor(cyl)), size = 4) +
+  geom_point(colour = "grey90", size = 1.5)
+  
+ggplotly(p)
+```
+
+
+Mixed shapes:
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(mpg, wt, shape = factor(cyl)))
+p <-    
+ p +
+  geom_point(colour = "black", size = 4.5) +
+  geom_point(colour = "pink", size = 4) +
+  geom_point(aes(shape = factor(cyl)))
+  
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+## Liner Regression
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+dat <- data.frame(cond = rep(c("A", "B"), each=10),
+                  xvar = 1:20 + rnorm(20,sd=3),
+                  yvar = 1:20 + rnorm(20,sd=3))
+
+p <- ggplot(dat, aes(x=xvar, y=yvar)) +
+    geom_point(shape=1) +    # Use hollow circles
+    geom_smooth(method=lm)   # Add linear regression line
+
+ggplotly(p)
+```
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+dat <- data.frame(cond = rep(c("A", "B"), each=10),
+                  xvar = 1:20 + rnorm(20,sd=3),
+                  yvar = 1:20 + rnorm(20,sd=3))
+
+p <- ggplot(dat, aes(x=xvar, y=yvar)) +
+    geom_point(shape=1) +
+    geom_smooth()
+```
+
+
+Without confidence boundary area:
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+dat <- data.frame(cond = rep(c("A", "B"), each=10),
+                  xvar = 1:20 + rnorm(20,sd=3),
+                  yvar = 1:20 + rnorm(20,sd=3))
+
+p <- ggplot(dat, aes(x=xvar, y=yvar)) +
+    geom_point(shape=1) +    # Use hollow circles
+    geom_smooth(method=lm,   # Add linear regression line
+                se=FALSE)    # Don't add shaded confidence region
+
+ggplotly(p)
+```
+
+Multiple regressions:
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+x <-  1:10
+dd <- rbind(data.frame(x=x,fac="a", y=x+rnorm(10)),
+            data.frame(x=2*x,fac="b", y=x+rnorm(10)))
+coef <- lm(y~x:fac, data=dd)$coefficients
+p <- qplot(data=dd, x=x, y=y, color=fac)+
+    geom_abline(slope=coef["x:faca"], intercept=coef["(Intercept)"])+
+    geom_abline(slope=coef["x:facb"], intercept=coef["(Intercept)"])
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+
+## Constrained slope
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+n <- 20
+
+x1 <- rnorm(n); x2 <- rnorm(n)
+y1 <- 2 * x1 + rnorm(n)
+y2 <- 3 * x2 + (2 + rnorm(n))
+A <- as.factor(rep(c(1, 2), each = n))
+df <- data.frame(x = c(x1, x2), y = c(y1, y2), A = A)
+fm <- lm(y ~ x + A, data = df)
+
+p <- ggplot(data = cbind(df, pred = predict(fm)), aes(x = x, y = y, color = A))
+p <- p + geom_point() + geom_line(aes(y = pred))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Stat Summary
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+hist <- data.frame(date=Sys.Date() + 0:13, counts=1:14)
+hist <- transform(hist, weekday=factor(weekdays(date), levels=c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')))
+
+p <- ggplot(hist, aes(x=weekday, y=counts, group=1)) +
+    geom_point(stat='summary', fun.y=sum) +
+    stat_summary(fun.y=sum, geom="line")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Line order
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+dat <- data.frame(x = sample(1:10), y = sample(1:10), order = sample(1:10))
+p <- ggplot(dat[order(dat$order),], aes(x, y)) + geom_point() + geom_text(aes(y = y + 0.25,label =      order)) +
+     geom_path()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Adding horizontal line
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars,aes(mpg,qsec))+geom_point() +
+  geom_segment(aes(x=15,xend=20,y=18,yend=18))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Adding points to line
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+df <- data.frame(time=as.factor(c(1,1,2,2,3,3,4,4,5,5)), 
+               value=as.numeric(c(7, 8, 9, 10, 10, 11, 10.5, 11.4, 10.9, 11.6)), 
+               side=as.factor(c("E","F","E","F","E","F","E","F","E","F")))
+
+
+p <- ggplot(df, aes(time, value, group=side, colour=side)) + 
+     geom_line(size=1)
+p <- p + geom_point()
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

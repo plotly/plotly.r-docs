@@ -1,0 +1,103 @@
+---
+description: How to make Random Walk in ggplot2 with Plotly.
+name: Random Walk
+permalink: ggplot2/random-walk/
+thumbnail: thumbnail/static-image
+layout: base
+language: ggplot2
+display_as: advanced
+page_type: u-guide
+order: 2
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+A random walk can be thought of as a random process in which a token or a marker is randomly moved around some space, that is, a space with a metric used to compute distance. In the visualizations below, we will be using scatter plots as well as a colorscale to denote the time sequence of the walk.
+
+## Random Walk in 1D
+
+The jitter in the data points along the x and y axes are meant to illuminate where the points are being drawn and what the tendency of the random walk is.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+dat <- data.frame(x = seq_along(P1), y = P1)
+p <- ggplot(dat, aes(x = x, y = y)) + geom_line()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Random Walk in 2D
+
+
+```{r}
+library(plotly)
+require(ggplot2)
+
+random_walk <- function(n.org, steps, left.p = .5, up.p = .5, plot = TRUE){
+ 
+ 
+whereto <- matrix(ncol = 2)
+ 
+for(x in 1:n.org){
+walker <- matrix(c(0,0), nrow = steps+1, ncol = 2, byrow = T)
+ 
+for(i in 1:steps){
+# left/right = 1/0
+horizontal <- rbinom(1, 1, left.p)
+ 
+# distance 2
+h.dist <- abs(rnorm(1, 0, 1))
+ 
+# Horizontal Movement
+if(horizontal == 0){
+walker[i+1,1] <- walker[i,1] + h.dist
+}
+if(horizontal == 1){
+walker[i+1,1] <- walker[i,1] - h.dist
+}
+ 
+# up/down = 1/0
+vertical <- rbinom(1, 1, up.p)
+ 
+#distance 2
+v.dist <- abs(rnorm(1, 0, 1))
+ 
+# Vertical Movement
+if(vertical == 1){
+walker[i+1,2] <- walker[i,2] + v.dist
+}
+if(vertical == 0){
+walker[i+1,2] <- walker[i,2] - v.dist
+}
+}
+ 
+whereto <- rbind(whereto, walker)
+}
+ 
+id <- rep(1:n.org, each = 1001)
+colnames(whereto) <- c("x" , "y")
+whereto <- as.data.frame(whereto)
+whereto <- cbind(whereto[2:nrow(whereto),], org = factor(id))
+ 
+p <- ggplot(whereto, aes(x = x, y = y, colour = org))
+p <- p + geom_path()
+ 
+return(p)
+}
+ 
+p <- random_walk(1, 1000, .5, .5)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

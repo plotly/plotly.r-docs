@@ -1,0 +1,138 @@
+---
+description: How to make Continuous Error Bands in ggplot2 with Plotly.
+name: Continuous Error Bands
+permalink: ggplot2/continuous-error-bars/
+thumbnail: thumbnail/error-cont.jpg
+layout: base
+language: ggplot2
+display_as: statistical
+page_type: u-guide
+order: 15
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## XXXXXXXXXXXXX
+
+To create continuous errorbar plot we need to use `df.summary`.
+To add lower and upper error bars, use `ymin = len-sd` and `ymax = len+sd`.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+
+df <- ToothGrowth
+df$dose <- as.factor(df$dose)
+df.summary <- df %>%
+  group_by(dose) %>%
+  summarise(
+    sd = sd(len, na.rm = TRUE),
+    len = mean(len)
+  )
+
+p <- ggplot(df.summary, aes(dose, len)) +
+      geom_line(aes(group = 1)) +
+      geom_errorbar( aes(ymin = len-sd, ymax = len+sd),width = 0.2) +
+      geom_point(size = 2)
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Add jitter
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+
+df <- ToothGrowth
+df$dose <- as.factor(df$dose)
+df.summary <- df %>%
+  group_by(dose) %>%
+  summarise(
+    sd = sd(len, na.rm = TRUE),
+    len = mean(len)
+  )
+
+p <- ggplot(df, aes(dose, len)) +
+  geom_jitter( position = position_jitter(0.2), color = "darkgray") + 
+  geom_line(aes(group = 1), data = df.summary) +
+  geom_errorbar(
+    aes(ymin = len-sd, ymax = len+sd),
+    data = df.summary, width = 0.2) +
+  geom_point(data = df.summary, size = 2)
+  
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Create groups
+
+To make sure groups do not overlay, use `position_dodge()`
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+
+df <- ToothGrowth
+df$dose <- as.factor(df$dose)
+df.summary <- df %>%
+  group_by(dose, supp) %>%
+  summarise(
+    sd = sd(len),
+    len = mean(len)
+  )
+
+p <- ggplot(df.summary, aes(dose, len)) +
+        geom_errorbar(
+          aes(ymin = len-sd, ymax = len+sd, color = supp),
+          position = position_dodge(0.3), width = 0.2
+          )+
+        geom_point(aes(color = supp), position = position_dodge(0.3)) +
+        scale_color_manual(values = c("#00AFBB", "#E7B800")) 
+
+ggplotly(p)
+```
+
+Add line with `geom_line()`, remember to apply `position_dodge()` to make sure groups do not overlay each other.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+
+df <- ToothGrowth
+df$dose <- as.factor(df$dose)
+df.summary <- df %>%
+  group_by(dose, supp) %>%
+  summarise(
+    sd = sd(len),
+    len = mean(len)
+  )
+
+p <- ggplot(df.summary, aes(dose, len)) +
+      geom_line(aes(linetype = supp, group = supp), position = position_dodge(0.3))+
+      geom_errorbar(
+        aes(ymin = len-sd, ymax = len+sd, color = supp),
+        position = position_dodge(0.3), width = 0.2
+        )+
+      geom_point(aes(color = supp), position = position_dodge(0.3)) +
+      scale_color_manual(values = c("#00AFBB", "#E7B800")) 
+
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

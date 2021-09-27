@@ -1,0 +1,41 @@
+---
+description: How to make Stem Plots in ggplot2 with Plotly.
+name: Stem Plots
+permalink: ggplot2/stem-plots/
+thumbnail: thumbnail/
+layout: base
+language: ggplot2
+display_as: statistical
+page_type: u-guide
+order: 17
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Stem plot
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+x <- 0:25
+y <- cbind(exp(-.07*x)*cos(x), exp(.05*x)*cos(x))
+df <-  data.frame(y=c(exp(.05*x)*cos(x),exp(-.07*x)*cos(x)),
+   x=rep(x,2), grp=factor(rep(c(1,2),each=length(x))))
+
+p <- ggplot(aes(group=grp, col=grp, shape=grp), data=df) + 
+    geom_hline(aes(yintercept=0)) +
+    geom_segment(aes(x,y,xend=x,yend=y-y)) + 
+    geom_point(aes(x,y),size=3) 
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

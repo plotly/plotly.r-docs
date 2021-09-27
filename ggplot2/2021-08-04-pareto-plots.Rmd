@@ -1,0 +1,144 @@
+---
+description: How to make Pareto Plots in ggplot2 with Plotly.
+name: Pareto Plots
+permalink: ggplot2/pareto-plots/
+thumbnail: thumbnail/
+layout: base
+language: ggplot2
+display_as: financial
+page_type: u-guide
+order: 9
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default pareto plot
+
+
+```{r}
+library(plotly)
+require(ggQC)
+require(ggplot2)
+
+df <- data.frame(
+                  x = letters[1:10],
+                  y = as.integer(runif(n = 10, min = 0, max=100))
+                 )
+
+p <- ggplot(df, aes(x=x, y=y)) +
+ stat_pareto(point.color = "red",
+             point.size = 3,
+             line.color = "black",
+             #size.line = 1,
+             bars.fill = c("blue", "orange"),
+ )
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## XXXXXXXXXXXXX
+
+
+```{r}
+library(plotly)
+
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

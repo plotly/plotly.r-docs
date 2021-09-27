@@ -1,0 +1,45 @@
+---
+description: How to make Horizontal Bar plots ggplot2 with Plotly.
+name: Horizontal Bar
+display_as: basic
+order: 8
+permalink: ggplot2/horizontal-bar-charts/
+thumbnail: thumbnail/horizontal-bar.jpg
+layout: base
+language: ggplot2
+page_type: u-guide
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+# Changing bar plot orientation
+
+```{r}
+library(plotly)
+g <- ggplot(mpg, aes(class))  
+p <-  ggplot(mpg) + geom_bar(aes(y = class))
+
+ggplotly(p)
+```
+
+# Stacking bar plots
+
+Bar plots are automatically stacked when multiple bars are at the same location. The order of the fill is designed to match the legend.
+
+To flip the order (because you've flipped the orientation) call `position_stack()` explicitly.
+
+```{r}
+library(plotly)
+g <- ggplot(mpg, aes(class))  
+p <-    
+ ggplot(mpg, aes(y = class)) +
+ geom_bar(aes(fill = drv), position = position_stack(reverse = TRUE)) +
+ theme(legend.position = "top")
+ 
+ggplotly(p)
+```

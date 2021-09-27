@@ -1,0 +1,50 @@
+---
+description: How to make OHLC Charts in ggplot2 with Plotly.
+name: OHLC Charts
+permalink: ggplot2/ohlc-charts/
+thumbnail: thumbnail/ohlc.jpg
+layout: base
+language: ggplot2
+display_as: financial
+page_type: u-guide
+order: 5
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default plot
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(quantmod)
+
+FOSL <- getSymbols("FOSL", from="2015-01-01", auto.assign=FALSE)
+names(FOSL) <- gsub("^.+\\.","",names(FOSL))
+
+rng <- "2015-08"
+FOSL <- FOSL[rng]
+FOSL <- data.frame(Date=as.POSIXct(index(FOSL)), FOSL[,1:4])
+
+FOSL$chg <- ifelse(Cl(FOSL) > Op(FOSL), "up", "dn")
+FOSL$width <- as.numeric(periodicity(FOSL)[1])
+
+p <- ggplot(data=FOSL, aes(x=Date, colour = chg)) +
+  theme_bw() +
+  geom_linerange(aes(ymin=Low, ymax=High)) +
+  geom_segment(aes(y = Open, yend = Open, xend = Date - width / 2 )) +
+  geom_segment(aes(y = Close, yend = Close, xend = Date + width / 2)) +
+  scale_colour_manual(values = c("dn" = "darkred", "up" = "darkgreen")) + guides(colour = FALSE)
+
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

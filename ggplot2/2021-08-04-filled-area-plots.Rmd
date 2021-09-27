@@ -1,0 +1,94 @@
+---
+description: How to make Filled Area Plots in ggplot2 with Plotly.
+name: Filled Area
+permalink: ggplot2/filled-area-plots/
+thumbnail: thumbnail/area.jpg
+layout: base
+language: ggplot2
+display_as: basic
+page_type: u-guide
+order: 7
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Basic stacked area plot
+
+The data frame used as input to build a stacked area chart requires 3 columns:
+* `x`: numeric variable used for the X axis, often it is a time.
+* `y`: numeric variable used for the Y axis. What are we looking at?
+* `group`: one shape will be done per group.
+
+The chart is built using the `geom_area()` function.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+
+time <- as.numeric(rep(seq(1,7),each=7))
+value <- runif(49, 10, 100)
+group <- rep(LETTERS[1:7],times=7)
+data <- data.frame(time, value, group)
+
+p <- ggplot(data, aes(x=time, y=value, fill=group)) + 
+    geom_area()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Control stacking order
+
+The gallery offers a post dedicated to reordering with ggplot2. This step can be tricky but the code below shows how to:
+
+* give a specific order with the `factor()` function.
+* order alphabetically using `sort()`
+* order following values at a specific data
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+
+time <- as.numeric(rep(seq(1,7),each=7))
+value <- runif(49, 10, 100)
+group <- rep(LETTERS[1:7],times=7)
+data <- data.frame(time, value, group)
+
+data$group <- factor(data$group , levels=c("B", "A", "D", "E", "G", "F", "C") )
+
+p <- ggplot(data, aes(x=time, y=value, fill=group)) + 
+    geom_area()
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Proportional stack
+In a proportional stacked area graph, the sum of each year is always equal to hundred and value of each group is represented through percentages.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+data <- data  %>%
+  group_by(time, group) %>%
+  summarise(n = sum(value)) %>%
+  mutate(percentage = n / sum(n))
+
+p <- ggplot(data, aes(x=time, y=percentage, fill=group)) + 
+    geom_area(alpha=0.6 , size=1, colour="black")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

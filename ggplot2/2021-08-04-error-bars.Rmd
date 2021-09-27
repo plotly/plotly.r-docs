@@ -1,0 +1,56 @@
+---
+name: Error Bars
+permalink: ggplot2/error-bars/
+description: How to make Error Plots in ggplot2 with Plotly.
+layout: base
+thumbnail: thumbnail/error-bar.jpg
+language: ggplot2
+page_type: u-guide
+display_as: statistics
+order: 1
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+### Basic Error Bar
+
+```{r}
+library(plotly)
+
+df <- data.frame(x = 1:10,
+                 y = 1:10,
+                 ymin = (1:10) - runif(10),
+                 ymax = (1:10) + runif(10),
+                 xmin = (1:10) - runif(10),
+                 xmax = (1:10) + runif(10))
+
+p <- ggplot(data = df,aes(x = x,y = y)) + 
+    geom_point() + 
+    geom_errorbar(aes(ymin = ymin,ymax = ymax)) + 
+    geom_errorbarh(aes(xmin = xmin,xmax = xmax))
+
+ggplotly(p)
+```
+
+### Margin Error Bar
+
+```{r}
+library(plotly)
+
+population <- data.frame(Year=seq(1790, 1970, length.out=length(uspop)), 
+                         Population=uspop, 
+                         Error=rnorm(length(uspop), 5))
+
+library(ggplot2)
+p <- ggplot(population, aes(x=Year, y=Population, 
+                       ymin=Population-Error, ymax=Population+Error))+
+  geom_line()+
+  geom_point(pch=2)+
+  geom_errorbar(width=0.9)
+
+ggplotly(p)
+```
