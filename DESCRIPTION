@@ -64,4 +64,5 @@ Imports:
 	ggrepel,
 	ggdendro,
 	treemapify,
-	GGally
+	GGally,
+	tree
