@@ -59,4 +59,5 @@ Imports:
     nlme,
     Lahman,
     quantreg,
-    backports
+    backports,
+	mapproj
