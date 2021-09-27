@@ -29,7 +29,7 @@ library(ggplot2)
 
 p <- ggplot(data=iris, aes(x = Sepal.Length, y = Sepal.Width)) +
       geom_point(aes(color=Species, shape=Species)) +
-      labs(title = "Iris sepal width vs length") +
+      labs(title = "Iris sepal width vs length")
 
 ggplotly(p)
 ```
@@ -48,7 +48,7 @@ p <- ggplot(data=iris, aes(x = Sepal.Length, y = Sepal.Width)) +
       geom_point(aes(color=Species, shape=Species)) +
       labs(title = "Iris sepal width vs length", 
             x = "Sepal Length", 
-            y = "Sepal Width") +
+            y = "Sepal Width")
 
 ggplotly(p)
 ```

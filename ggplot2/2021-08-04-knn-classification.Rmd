@@ -19,7 +19,7 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 
 `ggfortify` supports `stats::kmeans` class. You must explicitly pass original data to `autoplot` function via `data` keyword. Because kmeans object doesn't store original data. The result will be automatically colorized by categorized cluster.
 
-## XXXXXXXXXXXXX
+## Default clustered scatterplot
 
 
 ```{r}

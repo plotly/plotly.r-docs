@@ -89,5 +89,3 @@ ggplotly(p)
 ```
 
 <!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX

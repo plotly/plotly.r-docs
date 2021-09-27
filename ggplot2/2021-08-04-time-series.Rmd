@@ -109,7 +109,7 @@ library(tidyquant)
 library(ggplot2)
 
 data("FANG") 
-AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2016-12-31")
+AMZN <- tq_get("AMZN", get = "stock.prices", from = "2000-01-01", to = "2001-06-01")
 
 p <- AMZN %>%
     ggplot(aes(x = date, y = volume)) +

@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-## XXXXXXXXXXXXX
+## Default radar plot
 
 Radar charts are also called Spider or Web or Polar charts. 
 

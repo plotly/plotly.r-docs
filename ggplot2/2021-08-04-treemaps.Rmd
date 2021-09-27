@@ -29,10 +29,10 @@ library(plotly)
 library(treemapify)
 library(ggplot2)
 
-ggplot(G20, aes(area = gdp_mil_usd, fill = hdi)) +
+p <- ggplot(G20, aes(area = gdp_mil_usd, fill = hdi)) +
   geom_treemap()
 
-ggplotly(p)
+p
 ```
 
 This plot isn’t very useful without the knowing what country is represented by each tile. `geom_treemap_text()` can be used to add a text label to each tile. It uses the `ggfittext` package to resize the text so it fits the tile. In addition to standard text formatting aesthetics you would use in `geom_text()`, like fontface or colour, we can pass additional options specific for `ggfittext`. For example, we can place the text in the centre of the tile with place = "centre", and expand it to fill as much of the tile as possible with grow = TRUE.
@@ -48,12 +48,12 @@ library(plotly)
 library(treemapify)
 library(ggplot2)
 
-ggplot(G20, aes(area = gdp_mil_usd, fill = hdi, label = country)) +
+p <- ggplot(G20, aes(area = gdp_mil_usd, fill = hdi, label = country)) +
   geom_treemap() +
   geom_treemap_text(fontface = "italic", colour = "white", place = "centre",
                     grow = TRUE)
 
-ggplotly(p)
+p
 ```
 
 Note that several tiles in the top right corner have no labels. `geom_treemap_text()` will hide text labels that cannot fit a tile without being shrunk below a minimum size, by default 4 points. This can be adjusted with the min.size argument.
@@ -70,7 +70,7 @@ library(plotly)
 library(treemapify)
 library(ggplot2)
 
-ggplot(G20, aes(area = gdp_mil_usd, fill = hdi, label = country,
+p <- ggplot(G20, aes(area = gdp_mil_usd, fill = hdi, label = country,
                 subgroup = region)) +
   geom_treemap() +
   geom_treemap_subgroup_border() +
@@ -78,7 +78,7 @@ ggplot(G20, aes(area = gdp_mil_usd, fill = hdi, label = country,
                              "black", fontface = "italic", min.size = 0) +
   geom_treemap_text(colour = "white", place = "topleft", reflow = T)
 
-ggplotly(p)
+p
 ```
 Up to three nested levels of subgrouping are supported with the subgroup2 and subgroup3 aesthetics. Borders and text labels for these subgroups can be drawn with `geom_treemap_subgroup2_border()`, etc. Note that `ggplot2` draws plot layers in the order that they are added. This means it is possible to accidentally hide one layer of subgroup borders with another. Usually, it’s best to add the border layers in order from deepest to shallowest, i.e. `geom_treemap_subgroup3_border()` then `geom_treemap_subgroup2_border()` then `geom_treemap_subgroup_border()`.
 
@@ -88,7 +88,7 @@ library(plotly)
 library(treemapify)
 library(ggplot2)
 
-ggplot(G20, aes(area = 1, label = country, subgroup = hemisphere,
+p <- ggplot(G20, aes(area = 1, label = country, subgroup = hemisphere,
                 subgroup2 = region, subgroup3 = econ_classification)) +
   geom_treemap() +
   geom_treemap_subgroup3_border(colour = "blue", size = 1) +
@@ -108,7 +108,7 @@ ggplot(G20, aes(area = 1, label = country, subgroup = hemisphere,
   geom_treemap_subgroup3_text(place = "top", colour = "blue", alpha = 0.5) +
   geom_treemap_text(colour = "white", place = "middle", reflow = T)
 
-ggplotly(p)
+p
 ```
 
 As demonstrated, there is no assurance that the resulting plot will look good.

@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-## XXXXXXXXXXXXX
+## Default splot plot
 
 The `ggpairs()` function of the `GGally` package allows to build a great scatterplot matrix.
 
@@ -53,7 +53,7 @@ data$v5 = -(data$var1 ** 2)
  
 p <- ggcorr(data, method = c("everything", "pearson")) 
 
-ggplotly(p)
+p
 ```
 
 <!--------------------- EXAMPLE BREAK ------------------------->
@@ -91,10 +91,7 @@ p <- ggpairs(
       lower = list(continuous = "points", combo = "dot_no_facet")
 )
 
-ggplotly(p)
-
-
-ggplotly(p)
+p
 ```
 
 <!--------------------- EXAMPLE BREAK ------------------------->

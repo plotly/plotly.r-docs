@@ -27,6 +27,7 @@ The jitter in the data points along the x and y axes are meant to illuminate whe
 library(plotly)
 library(ggplot2)
 
+P1 <- cumsum(rnorm(1000))
 dat <- data.frame(x = seq_along(P1), y = P1)
 p <- ggplot(dat, aes(x = x, y = y)) + geom_line()
 

@@ -76,9 +76,11 @@ library(plotly)
 
 p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
-ggplotly(p) <- fig %>% layout(dragmode = "pan")
+p <- ggplotly(p)
 
-fig
+p <- p %>% layout(dragmode = "pan")
+
+p
 ```
 
 #### Modifying Layers
@@ -109,9 +111,9 @@ library(plotly)
 
 p <- ggplot(fortify(forecast::gold), aes(x, y)) + geom_line()
 
-ggplotly(p) <- fig %>% style(line = list(color = 'gold'), hoverinfo = "y", traces = 1)
+p <- p %>% style(line = list(color = 'gold'), hoverinfo = "y", traces = 1)
 
-fig
+ggplotly(p)
 ```
 
 #### Modify with Build
@@ -131,7 +133,13 @@ Here is the ggplot2 figure described as a plotly object
 
 
 ```{r}
-fig <- plotly_build(fig)
+df <- data.frame(x=c(1, 2, 3, 4), y=c(1, 5, 3, 5), group=c('A', 'A', 'B', 'B'))
+
+p <- ggplot(data=df, aes(x=x, y=y, colour=group)) + geom_point()
+
+p <- ggplotly(p)
+
+fig <- plotly_build(p)
 str(fig)
 ```
 

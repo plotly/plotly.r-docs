@@ -158,9 +158,6 @@ p <- ggplot(ToothGrowth, aes(x=dose, y=len, color=dose, shape=dose)) +
   labs(title="Plot of length  by dose",x="Dose (mg)", y = "Length")
 p + theme_classic()
 
-fig <- ggplotly(p)
-
-
 ggplotly(p)
 ```
 

@@ -42,6 +42,7 @@ You can also format the axis ticks to be displayed as exponents.
 ```{r}
 library(plotly)
 library(ggplot2)
+library(scales)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 

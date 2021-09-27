@@ -19,6 +19,8 @@ knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 
 ## Default dentogram
 
+The `hclust()` and `dendrogram()` functions in R makes it easy to plot the results of hierarchical cluster analysis and other dendrograms in R. However, it is hard to extract the data from this analysis to customize these plots, since the `plot()` functions for both these classes prints directly without the option of returning the plot data.
+
 
 ```{r}
 library(plotly)
@@ -32,11 +34,6 @@ ggplotly(p)
 ```
 
 
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-The `hclust()` and `dendrogram()` functions in R makes it easy to plot the results of hierarchical cluster analysis and other dendrograms in R. However, it is hard to extract the data from this analysis to customize these plots, since the `plot()` functions for both these classes prints directly without the option of returning the plot data.
 
 ```{r}
 library(plotly)
@@ -71,7 +68,7 @@ data <- dendro_data(dhc, type = "rectangle")
 p <- ggplot(segment(data)) + 
   geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) + 
   coord_flip() + 
-  scale_y_reverse(expand = c(0.2, 0))+ 
+  scale_y_reverse(expand = c(0.2, 0))
 
 p <- p + 
       coord_flip() + 

@@ -17,7 +17,7 @@ output:
 knitr::opts_chunk$set(message = FALSE, warning=FALSE)
 ```
 
-## XXXXXXXXXXXXX
+## Default error bar plot
 
 To create continuous errorbar plot we need to use `df.summary`.
 To add lower and upper error bars, use `ymin = len-sd` and `ymax = len+sd`.

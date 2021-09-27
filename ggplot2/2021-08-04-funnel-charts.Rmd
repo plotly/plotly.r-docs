@@ -37,7 +37,7 @@ df <- data.frame(STAGE, GENDER, USERS)
 brks <- c(seq(-15000000, 15000000, by = 5000000))
 lbls = c(seq(15, 0, -5), seq(5, 15, 5))
 
-plt <- df %>% mutate(USERS = as.numeric(USERS)) %>%
+p <- df %>% mutate(USERS = as.numeric(USERS)) %>%
               ggplot(aes(x = reorder(STAGE,abs(USERS)), y = USERS, fill = GENDER)) +
               geom_bar(stat = "identity", width = .6) +
               scale_y_continuous(breaks = brks, labels = lbls) +
@@ -50,104 +50,5 @@ plt <- df %>% mutate(USERS = as.numeric(USERS)) %>%
 ggplotly(p)
 ```
 
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
-
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
-
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
-
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
-
-<!--------------------- EXAMPLE BREAK ------------------------->
-
-## XXXXXXXXXXXXX
-
-
-```{r}
-library(plotly)
-
-
-ggplotly(p)
-```
 
 <!--------------------- EXAMPLE BREAK ------------------------->
