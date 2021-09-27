@@ -65,4 +65,6 @@ Imports:
 	ggdendro,
 	treemapify,
 	GGally,
-	tree
+	tree,
+	ggfortify,
+	cluster
