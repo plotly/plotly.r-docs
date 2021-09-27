@@ -60,4 +60,8 @@ Imports:
     Lahman,
     quantreg,
     backports,
-	mapproj
+	mapproj,
+	ggrepel,
+	ggdendro,
+	treemapify,
+	GGally
