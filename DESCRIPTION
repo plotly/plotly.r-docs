@@ -68,4 +68,5 @@ Imports:
     tree,
     ggfortify,
     cluster,
-	hrbrthemes
+	hrbrthemes,
+	ggQC
