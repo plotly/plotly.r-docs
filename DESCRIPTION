@@ -67,4 +67,5 @@ Imports:
     GGally,
     tree,
     ggfortify,
-    cluster
+    cluster,
+	hrbrthemes
