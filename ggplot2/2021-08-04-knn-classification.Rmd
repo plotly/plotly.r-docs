@@ -1,0 +1,111 @@
+---
+description: How to do kNN Classification in ggplot2 with Plotly.
+name: kNN Classification
+permalink: ggplot2/knn-classification/
+thumbnail: thumbnail/knn-classification.png
+layout: base
+language: ggplot2
+display_as: ai_ml
+page_type: u-guide
+order: 2
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+`ggfortify` supports `stats::kmeans` class. You must explicitly pass original data to `autoplot` function via `data` keyword. Because kmeans object doesn't store original data. The result will be automatically colorized by categorized cluster.
+
+## Default clustered scatterplot
+
+
+```{r}
+library(plotly)
+library(ggfortify)
+
+set.seed(1)
+p <- autoplot(kmeans(USArrests, 3), data = USArrests)
+
+ggplotly(p)
+```
+
+
+```{r}
+library(plotly)
+library(ggfortify)
+
+p <- autoplot(kmeans(USArrests, 3), data = USArrests, label = TRUE, label.size = 3)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Using `cluster` package
+
+{`ggfortify`} supports `cluster::clara`, `cluster::fanny`, `cluster::pam` as well as `cluster::silhouette` classes. Because these instances should contains original data in its property, there is no need to pass original data explicitly.
+
+```{r}
+library(plotly)
+library(ggfortify)
+library(cluster)
+
+p <- autoplot(clara(iris[-5], 3))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Plotting cluster converx
+
+Specifying `frame = TRUE` in autoplot for `stats::kmeans` and `cluster::*` draws convex for each cluster.
+
+
+```{r}
+library(plotly)
+library(ggfortify)
+library(cluster)
+
+p <-  autoplot(fanny(iris[-5], 3), frame = TRUE)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Plotting cluster probability ellipse
+
+If you want probability ellipse, specify whatever supported in `ggplot2::stat_ellipse`'s type keyword via `frame.type` option.
+
+```{r}
+library(plotly)
+library(ggfortify)
+library(cluster)
+
+p <- autoplot(pam(iris[-5], 3), frame = TRUE, frame.type = 'norm')
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Silhouette plot
+
+
+```{r}
+library(plotly)
+library(ggfortify)
+library(cluster)
+
+p <- autoplot(silhouette(pam(iris[-5], 3L)))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

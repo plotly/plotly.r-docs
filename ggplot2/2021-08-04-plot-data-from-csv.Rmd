@@ -1,0 +1,41 @@
+---
+description: How to Plot CSV Data in ggplot2 with Plotly.
+name: Plot CSV Data
+permalink: ggplot2/plot-data-from-csv/
+thumbnail: thumbnail/csv.jpg
+layout: base
+language: ggplot2
+display_as: advanced
+page_type: u-guide
+order: 1
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Plot from CSV
+
+When reading in files most often `stringsAsFactors = FALSE` is used. This setting ensures that non-numeric data (strings) are not converted to factors.
+
+A factor is similar to a category. However factors can be numerically interpreted (they can have an order) and may have a level associated with them.
+```{r}
+library(plotly)
+require(ggplot2)
+
+df <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/iris-data.csv",
+      stringsAsFactors = FALSE)
+
+p <- ggplot(data=iris, aes(x = Sepal.Length, y = Sepal.Width)) 
+p <- p + geom_point(aes(color=Species, shape=Species)) +
+  xlab("Sepal Length") +  ylab("Sepal Width") +
+  ggtitle("Sepal Length-Width")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

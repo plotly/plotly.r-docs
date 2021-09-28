@@ -1,0 +1,195 @@
+---
+description: How to make Dendrograms in ggplot2 with Plotly.
+name: Dendrograms
+permalink: ggplot2/dendrogram/
+thumbnail: thumbnail/dendrogram.jpg
+layout: base
+language: ggplot2
+display_as: scientific
+page_type: u-guide
+order: 6
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default dentogram
+
+The `hclust()` and `dendrogram()` functions in R makes it easy to plot the results of hierarchical cluster analysis and other dendrograms in R. However, it is hard to extract the data from this analysis to customize these plots, since the `plot()` functions for both these classes prints directly without the option of returning the plot data.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(ggdendro)
+
+hc <- hclust(dist(USArrests), "ave")
+p <- ggdendrogram(hc, rotate = FALSE, size = 2)
+
+ggplotly(p)
+```
+
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(ggdendro)
+
+model <- hclust(dist(USArrests), "ave")
+dhc <- as.dendrogram(model)
+
+data <- dendro_data(dhc, type = "rectangle")
+p <- ggplot(segment(data)) + 
+  geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) + 
+  coord_flip() + 
+  scale_y_reverse(expand = c(0.2, 0))
+
+ggplotly(p)
+```
+
+Of course, using `ggplot2` to create the dendrogram means one has full control over the appearance of the plot. For example, here is the same data, but this time plotted horizontally with a clean background. In ggplot2 this means passing a number of options to `theme`. The `ggdendro` packages exports a function, `theme_dendro()` that wraps these options into a convenient function.
+
+Note that coordinate system already present. Adding new coordinate system, which will replace the existing one.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(ggdendro)
+
+model <- hclust(dist(USArrests), "ave")
+dhc <- as.dendrogram(model)
+
+data <- dendro_data(dhc, type = "rectangle")
+p <- ggplot(segment(data)) + 
+  geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) + 
+  coord_flip() + 
+  scale_y_reverse(expand = c(0.2, 0))
+
+p <- p + 
+      coord_flip() + 
+      theme_dendro()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Triangular segments
+You can draw dendrograms with triangular line segments (instead of rectangular segments). For example:
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(ggdendro)
+
+model <- hclust(dist(USArrests), "ave")
+dhc <- as.dendrogram(model)
+
+data <- dendro_data(dhc, type = "triangle")
+p <- ggplot(segment(data)) + 
+      geom_segment(aes(x = x, y = y, xend = xend, yend = yend)) + 
+      coord_flip() + 
+      scale_y_reverse(expand = c(0.2, 0)) +
+      theme_dendro()
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Regression tree diagrams
+
+`tree()` function in package `tree` creates tree diagrams. To extract the plot data for these diagrams using `ggdendro`, you use the the same idiom as for plotting dendrograms:
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(tree)
+library(ggdendro)
+
+data(cpus, package = "MASS")
+model <- tree(log10(perf) ~ syct + mmin + mmax + cach + chmin + chmax, 
+              data = cpus)
+tree_data <- dendro_data(model)
+p <- ggplot(segment(tree_data)) +
+  geom_segment(aes(x = x, y = y, xend = xend, yend = yend, size = n), 
+               colour = "blue", alpha = 0.5) +
+  scale_size("n") +
+  geom_text(data = label(tree_data), 
+            aes(x = x, y = y, label = label), vjust = -0.5, size = 3) +
+  geom_text(data = leaf_label(tree_data), 
+            aes(x = x, y = y, label = label), vjust = 0.5, size = 2) +
+  theme_dendro()
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Classification tree diagrams
+
+The `rpart()` function in package `rpart` creates classification diagrams. To extract the plot data for these diagrams using `ggdendro` follows the same basic pattern as dendrograms:
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(rpart)
+library(ggdendro)
+
+model <- rpart(Kyphosis ~ Age + Number + Start, 
+               method = "class", data = kyphosis)
+data <- dendro_data(model)
+p <- ggplot() + 
+      geom_segment(data = data$segments, 
+                   aes(x = x, y = y, xend = xend, yend = yend)) + 
+      geom_text(data = data$labels, 
+                aes(x = x, y = y, label = label), size = 3, vjust = 0) +
+      geom_text(data = data$leaf_labels, 
+                aes(x = x, y = y, label = label), size = 3, vjust = 1) +
+      theme_dendro()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Twins diagrams: agnes and diana
+
+The `cluster` package allows you to draw `agnes` and `diana` diagrams.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(cluster)
+library(ggdendro)
+
+model <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
+dg <- as.dendrogram(model)
+p <- ggdendrogram(dg)
+
+ggplotly(p)
+```
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(cluster)
+library(ggdendro)
+
+model <- diana(votes.repub, metric = "manhattan", stand = TRUE)
+dg <- as.dendrogram(model)
+p <- ggdendrogram(dg)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

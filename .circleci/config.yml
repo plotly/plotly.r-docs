@@ -29,6 +29,7 @@ jobs:
             sudo R -e 'devtools::install_github("hypertidy/anglr@v0.7.0", dependencies = TRUE) '
             sudo R -e 'devtools::install_github("plotly/dash-daq", dependencies = TRUE, upgrade = TRUE) '
             sudo R -e 'devtools::install_deps(dependencies = TRUE) '
+            sudo R -e 'devtools::install_github("briatte/ggnet", dependencies = TRUE) '
       - save_cache:
           key: cache4
           paths:

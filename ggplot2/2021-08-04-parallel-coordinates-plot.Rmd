@@ -1,0 +1,225 @@
+---
+description: How to make Parallel Coordinates Plot in ggplot2 with Plotly.
+name: Parallel Coordinates Plot
+permalink: ggplot2/parallel-coordinates-plot/
+thumbnail: thumbnail/parcoords.jpg
+layout: base
+language: ggplot2
+display_as: scientific
+page_type: u-guide
+order: 9
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default parallel coordinates plot
+
+The input dataset must be a data frame with several numeric variables, each being used as a vertical axis on the chart. Columns number of these variables are specified in the `columns` argument of the function.
+
+For this example, a categoric variable is used to color lines, as specified in the `groupColumn` variable.
+```{r}
+library(plotly)
+library(GGally)
+
+data <- iris
+
+p <- ggparcoord(data,
+    columns = 1:4, groupColumn = 5
+    )
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Custom colour, theme and style
+
+This is the same chart as the previous one, except for the following customizations:
+
+* color palette is improved thanks to the `viridis` package
+* title is added with `title`, and customized in `theme`
+* dots are added with `showPoints`
+* a bit of transparency is applied to lines with `alphaLines`
+* `theme_ipsum()` is used for the general appearance
+
+```{r}
+library(plotly)
+library(GGally)
+library(viridis)
+library(hrbrthemes)
+
+data <- iris
+
+p <- ggparcoord(data,
+    columns = 1:4, groupColumn = 5, order = "anyClass",
+    showPoints = TRUE, 
+    title = "Parallel Coordinate Plot for the Iris Data",
+    alphaLines = 0.3
+    ) + 
+  scale_color_viridis(discrete=TRUE) +
+  theme_ipsum()+
+  theme(
+    plot.title = element_text(size=10)
+  )
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Scaling
+
+Scaling transforms the raw data to a new scale that is common with other variables. It is a crucial step to compare variables that do not have the same unit, but can also help otherwise as shown in the example below.
+
+The `ggally` package offers a `scale` argument. Four possible options are applied on the same dataset below:
+
+* `globalminmax` → No scaling
+* `uniminmax` → Standardize to Min = 0 and Max = 1
+* `std` → Normalize univariately (substract mean & divide by sd)
+* `center` → Standardize and center variables
+```{r}
+library(plotly)
+library(GGally)
+library(viridis)
+library(hrbrthemes)
+
+data <- iris
+
+p <- ggparcoord(data,
+    columns = 1:4, groupColumn = 5, order = "anyClass",
+    scale="globalminmax",
+    showPoints = TRUE, 
+    title = "No scaling",
+    alphaLines = 0.3
+    ) + 
+  scale_color_viridis(discrete=TRUE) +
+  theme_ipsum()+
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=13)
+  ) +
+  xlab("")
+
+ggplotly(p)
+```
+
+Standardize to Min = 0 and Max = 1:
+```{r}
+library(plotly)
+library(GGally)
+library(viridis)
+library(hrbrthemes)
+
+data <- iris
+
+p <- ggparcoord(data,
+    columns = 1:4, groupColumn = 5, order = "anyClass",
+    scale="uniminmax",
+    showPoints = TRUE, 
+    title = "Standardize to Min = 0 and Max = 1",
+    alphaLines = 0.3
+    ) + 
+  scale_color_viridis(discrete=TRUE) +
+  theme_ipsum()+
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=13)
+  ) +
+  xlab("")
+
+ggplotly(p)
+```
+
+Normalize univariately (substract mean & divide by sd):
+```{r}
+library(plotly)
+library(GGally)
+library(viridis)
+library(hrbrthemes)
+
+data <- iris
+
+p <- ggparcoord(data,
+    columns = 1:4, groupColumn = 5, order = "anyClass",
+    scale="std",
+    showPoints = TRUE, 
+    title = "Normalize univariately (substract mean & divide by sd)",
+    alphaLines = 0.3
+    ) + 
+  scale_color_viridis(discrete=TRUE) +
+  theme_ipsum()+
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=13)
+  ) +
+  xlab("")
+
+ggplotly(p)
+```
+
+Standardize and center variables:
+
+```{r}
+library(plotly)
+library(GGally)
+library(viridis)
+library(hrbrthemes)
+
+data <- iris
+
+p <- ggparcoord(data,
+    columns = 1:4, groupColumn = 5, order = "anyClass",
+    scale="center",
+    showPoints = TRUE, 
+    title = "Standardize and center variables",
+    alphaLines = 0.3
+    ) + 
+  scale_color_viridis(discrete=TRUE) +
+  theme_ipsum()+
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=13)
+  ) +
+  xlab("")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Highlight a group
+
+
+```{r}
+library(plotly)
+library(GGally)
+data <- iris
+
+p <- data %>%
+  arrange(desc(Species)) %>%
+  ggparcoord(
+    columns = 1:4, groupColumn = 5, order = "anyClass",
+    showPoints = TRUE, 
+    title = "Original",
+    alphaLines = 1
+    ) + 
+  scale_color_manual(values=c( "#69b3a2", "#E8E8E8", "#E8E8E8") ) +
+  theme_ipsum()+
+  theme(
+    legend.position="Default",
+    plot.title = element_text(size=10)
+  ) +
+  xlab("")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

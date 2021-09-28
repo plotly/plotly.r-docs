@@ -1,0 +1,76 @@
+---
+description:  How to make Scatter Plots on Maps plots in ggplot2 with Plotly.
+permalink: /ggplot2/scatter-plots-on-maps/
+layout: base
+language: ggplot2
+name: Scatter Plots on Maps
+display_as: maps
+page_type: u-guide
+order: 11
+output:
+  html_document:
+    keep_md: true
+---
+
+
+# Default map plot
+
+```{r}
+library(plotly)
+
+p <-    
+ if (require("maps")) {
+  ia <- map_data("county", "iowa")
+  mid_range <- function(x) mean(range(x))
+  seats <- do.call(rbind, lapply(split(ia, ia$subregion), function(d) {
+    data.frame(lat = mid_range(d$lat), long = mid_range(d$long), subregion = unique(d$subregion))
+}))
+
+ggplot(ia, aes(long, lat)) +
+  geom_polygon(aes(group = group), fill = NA, colour = "grey60") +
+  geom_text(aes(label = subregion), data = seats, size = 2, angle = 45)
+}
+
+plotly::ggplotly(p)
+```
+
+
+# Add capital cities data
+
+
+```{r}
+library(plotly)
+
+p <-    
+ if (require("maps")) {
+  data(us.cities)
+  capitals <- subset(us.cities, capital == 2)
+  ggplot(capitals, aes(long, lat)) +
+    borders("state") +
+    geom_point(aes(size = pop)) +
+    scale_size_area() +
+    coord_quickmap()
+}
+
+plotly::ggplotly(p)
+```
+
+# Add more map data to the plot
+
+
+```{r}
+library(plotly)
+
+p <-    
+ if (require("maps")) {
+  data(us.cities)
+  capitals <- subset(us.cities, capital == 2)
+  ggplot(capitals, aes(long, lat)) +
+    borders("world", xlim = c(-130, -60), ylim = c(20, 50)) +
+    geom_point(aes(size = pop)) +
+    scale_size_area() +
+    coord_quickmap()
+}
+
+plotly::ggplotly(p)
+```

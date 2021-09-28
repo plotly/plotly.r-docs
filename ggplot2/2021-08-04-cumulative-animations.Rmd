@@ -1,0 +1,80 @@
+---
+name: Cumulative Animations
+permalink: ggplot2/cumulative-animations/
+description: How to create cumulative animations in ggplot2 with Plotly.
+layout: base
+thumbnail: thumbnail/apple_stock_animation.gif
+language: ggplot2
+page_type: example_index
+display_as: animations
+order: 2
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+### Frames
+
+Now, along with `data` and `layout`, `frames` is added to the keys that `figure` allows. Your `frames` key points to a list of figures, each of which will be cycled through upon instantiation of the plot.
+
+### Cumulative Lines Animation
+
+```{r}
+library(plotly)
+library(quantmod)
+
+invisible(getSymbols("AAPL",src='yahoo'))
+
+df <- data.frame(Date=index(AAPL),coredata(AAPL))
+df <- tail(df, 30)
+df$ID <- seq.int(nrow(df))
+
+accumulate_by <- function(dat, var) {
+  var <- lazyeval::f_eval(var, dat)
+  lvls <- plotly:::getLevels(var)
+  dats <- lapply(seq_along(lvls), function(x) {
+    cbind(dat[var %in% lvls[seq(1, x)], ], frame = lvls[[x]])
+  })
+  dplyr::bind_rows(dats)
+}
+
+df <- df %>%
+  accumulate_by(~ID)
+
+p <- ggplot(df,aes(ID, AAPL.Close, frame = frame)) +
+  geom_line()
+  
+fig <- ggplotly(p) %>%
+  layout(
+    title = "AAPL: Last 30 days",
+    yaxis = list(
+      title = "Close",
+      zeroline = F,
+      tickprefix = "$"
+    ),
+    xaxis = list(
+      title = "Day",
+      zeroline = F, 
+      showgrid = F
+    )
+  ) %>% 
+  animation_opts(
+    frame = 100, 
+    transition = 0, 
+    redraw = FALSE
+  ) %>%
+  animation_slider(
+    currentvalue = list(
+      prefix = "Day "
+    )
+  )
+
+fig
+```
+
+### Reference 
+
+To read more on animations see [The Plotly Book](https://cpsievert.github.io/plotly_book/key-frame-animations.html).

@@ -1,0 +1,92 @@
+---
+description: How to make Bubble Maps in ggplot2 with Plotly.
+name: Bubble Maps
+permalink: ggplot2/bubble-maps/
+thumbnail: thumbnail/bubble-map.jpg
+layout: base
+language: ggplot2
+display_as: maps
+page_type: u-guide
+order: 4
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Basic scatterplot map
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(maps)
+
+UK <- map_data("world") %>% filter(region=="UK")
+data <- world.cities %>% filter(country.etc=="UK")
+
+p <- ggplot() +
+  geom_polygon(data = UK, aes(x=long, y = lat, group = group), fill="grey", alpha=0.3) +
+  geom_point( data=data, aes(x=long, y=lat)) +
+  theme_void() + ylim(50,59) + coord_map() 
+
+
+ggplotly(p)
+```
+
+
+Now let's highlight the 10 largest cities.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(maps)
+library(ggrepel)
+
+UK <- map_data("world") %>% filter(region=="UK")
+data <- world.cities %>% filter(country.etc=="UK")
+
+
+p <- ggplot() +
+  geom_polygon(data = UK, aes(x=long, y = lat, group = group), fill="grey", alpha=0.3) +
+  geom_point( data=data, aes(x=long, y=lat, alpha=pop)) +
+  geom_text_repel( data=data %>% arrange(pop) %>% tail(10), aes(x=long, y=lat, label=name), size=5) +
+  geom_point( data=data %>% arrange(pop) %>% tail(10), aes(x=long, y=lat), color="red", size=3) +
+  theme_void() + ylim(50,59) + coord_map() +
+  theme(legend.position="none")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Basic bubble map
+
+Now we want to add another information. The number of inhabitant per city will be mapped to the colour and the size of the bubbles. Note that the order of city matters! It is advised to show the most important information on top (center). This can been done sorting your dataset before making the plot.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(maps)
+library(viridis)
+
+UK <- map_data("world") %>% filter(region=="UK")
+data <- world.cities %>% filter(country.etc=="UK")
+ 
+p <- ggplot() +
+  geom_polygon(data = UK, aes(x=long, y = lat, group = group), fill="grey", alpha=0.3) +
+  geom_point( data=data, aes(x=long, y=lat, size=pop, color=pop)) +
+  scale_size_continuous(range=c(1,12)) +
+  scale_color_viridis(trans="log") +
+  theme_void() + ylim(50,59) + coord_map() 
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

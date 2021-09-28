@@ -1,0 +1,165 @@
+---
+description: How to make Strip Charts in ggplot2 with Plotly.
+name: Strip Charts
+permalink: ggplot2/strip-charts/
+thumbnail: thumbnail/figure-labels.png
+layout: base
+language: ggplot2
+display_as: statistical
+page_type: u-guide
+order: 14
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Basic stripchart
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+  geom_jitter()
+
+p<-ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+  geom_jitter(position=position_jitter(0.2))
+p <- p + coord_flip()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change point size
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+        geom_jitter(position=position_jitter(0.2), cex=1.2)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change shape
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+        geom_jitter(position=position_jitter(0.2), shape=17)
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Add summary statistics
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+  geom_jitter(position=position_jitter(0.2), cex=1.2)
+p <- p + stat_summary(fun.y=mean, geom="point", shape=18,
+                 size=3, color="red")
+
+ggplotly(p)
+```
+
+To add standard deviation use `mean_sdl` function which computes the mean plus or minus a constant times the standard deviation.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+    geom_jitter(position=position_jitter(0.2))
+p + stat_summary(fun.data=mean_sdl, mult=1, 
+                 geom="pointrange", color="red")
+
+ggplotly(p)
+```
+
+You can change the representation of the statistics by changing `geom`, for example setting it to `crossbar`.
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Add box plot
+
+To add a box plot you can use `geom_boxplot()`. Likewise, you can add a notched boxplot with `geom_boxplot(notch = TRUE)` and a violin plot with `geom_violin(trim = FALSE)`.  
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+        geom_boxplot()+
+        geom_jitter(position=position_jitter(0.2))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Colour data by groups
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, color=dose)) +
+  geom_jitter(position=position_jitter(0.2))
+
+ggplotly(p)
+```
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, color=dose, shape=dose)) + 
+  geom_jitter(position=position_jitter(0.2))+
+  labs(title="Plot of length  by dose",x="Dose (mg)", y = "Length")
+p + theme_classic()
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

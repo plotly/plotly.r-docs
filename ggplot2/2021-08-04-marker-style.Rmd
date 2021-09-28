@@ -1,0 +1,137 @@
+---
+description: How to Style Markers in ggplot2 with Plotly.
+name: Styling Markers
+permalink: ggplot2/marker-style/
+thumbnail: thumbnail/marker-style.gif
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 19
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+# Default point plot
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point()
+
+ggplotly(p)
+```
+# Add colour
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point(aes(colour = factor(cyl)))
+
+ggplotly(p)
+```
+
+# Changing shapes of data points
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point(aes(shape = factor(cyl)))
+
+ggplotly(p)
+```
+
+# Changing size of data points
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(wt, mpg))
+p <-  p + geom_point(aes(size = qsec))
+
+ggplotly(p)
+```
+
+
+# Manually setting aesthetics
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <-  ggplot(mtcars, aes(wt, mpg)) + geom_point(colour = "red", size = 3)
+
+ggplotly(p)
+```
+
+# Optional shape arguments
+
+For shapes that have a border (like shape 21), you can colour the inside and outside separately. Use the stroke aesthetic to modify the width of the border.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <-    
+ ggplot(mtcars, aes(wt, mpg)) +
+  geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 5)
+  
+ggplotly(p)
+```
+
+
+# Mix multiples shapes
+
+You can create interesting shapes by layering multiple points of different sizes.
+
+Default plot:
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(mpg, wt, shape = factor(cyl)))
+p <-    
+ p +
+  geom_point(aes(colour = factor(cyl)), size = 4) +
+  geom_point(colour = "grey90", size = 1.5)
+  
+ggplotly(p)
+```
+
+
+Mixed shapes:
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(mtcars, aes(mpg, wt, shape = factor(cyl)))
+p <-    
+ p +
+  geom_point(colour = "black", size = 4.5) +
+  geom_point(colour = "pink", size = 4) +
+  geom_point(aes(shape = factor(cyl)))
+  
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

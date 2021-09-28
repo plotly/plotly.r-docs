@@ -1,0 +1,72 @@
+---
+description: How to make Bullet Charts in ggplot2 with Plotly.
+name: Bullet Charts
+permalink: ggplot2/bullet-charts/
+thumbnail: thumbnail/bullet.png
+layout: base
+language: ggplot2
+display_as: financial
+page_type: u-guide
+order: 8
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default plot
+
+Control colours with `fill` argument inside `fill()`.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+
+data <- tibble(
+  name = "Example",
+  quant_value = 75,
+  qualitative = 100
+)
+
+p <- data %>% 
+  ggplot(aes(x = quant_value, y = name)) +
+  geom_col(aes(x = qualitative), fill = "grey") +
+  geom_col(width = 0.5, fill = "black")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Size of the plot
+
+To make the plot thinner use `ylim` argument inside `coord_cartesian()`.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+
+data <- tibble(
+  name = "Example",
+  quant_value = 75,
+  qualitative = 100
+)
+
+p <- data %>% 
+  ggplot(aes(x = quant_value, y = name)) +
+  geom_col(aes(x = qualitative), fill = "grey") +
+  geom_col(width = 0.5, fill = "black") +
+  coord_cartesian(ylim = c(0.3, 1.7)) +
+  theme_minimal() +
+  theme(panel.grid.major.y = element_blank())
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

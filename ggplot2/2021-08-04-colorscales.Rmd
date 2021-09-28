@@ -1,0 +1,122 @@
+---
+description: How to make Continuous Color Scales and Color Bars in ggplot2 with Plotly.
+name: Continuous Color Scales and Color Bars
+permalink: ggplot2/colorscales/
+thumbnail: thumbnail/heatmap_colorscale.jpg
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 20
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default colour scale
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+df <- data.frame(
+  x = runif(100),
+  y = runif(100),
+  z1 = rnorm(100),
+  z2 = abs(rnorm(100))
+)
+
+p <- ggplot(df, aes(x, y)) +
+      geom_point(aes(colour = z2))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Diverging colour scales
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+df <- data.frame(
+  x = runif(100),
+  y = runif(100),
+  z1 = rnorm(100),
+  z2 = abs(rnorm(100))
+)
+
+p <- ggplot(df, aes(x, y)) +
+      geom_point(aes(colour = z1)) +
+      scale_colour_gradient2()
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Custom colour gradient
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+df <- data.frame(
+  x = runif(100),
+  y = runif(100),
+  z1 = rnorm(100),
+  z2 = abs(rnorm(100))
+)
+
+p <- ggplot(df, aes(x, y)) +
+      geom_point(aes(colour = z1)) +
+      scale_colour_gradientn(colours = terrain.colors(10))
+
+ggplotly(p)
+```
+
+You can achievethe same result with the following aesthetic setup:
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(faithfuld, aes(waiting, eruptions)) +
+      geom_raster(aes(fill = density)) +
+      scale_fill_gradientn(colours = terrain.colors(10))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Adjust colour choices with low and high
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+df <- data.frame(
+  x = runif(100),
+  y = runif(100),
+  z1 = rnorm(100),
+  z2 = abs(rnorm(100))
+)
+
+p <- ggplot(df, aes(x, y)) +
+  geom_point(aes(colour = z2)) +
+  scale_colour_gradient(low = "white", high = "black")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

@@ -1,0 +1,84 @@
+---
+description: How to make Bubble Charts plots in ggplot2 with Plotly.
+name: Bubble Charts
+display_as: basic
+order: 5
+permalink: ggplot2/bubble-charts/
+thumbnail: thumbnail/bubble.jpg
+layout: base
+language: ggplot2
+page_type: u-guide
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default bubble chart
+
+
+```{r}
+library(plotly)
+library(dplyr)
+library(gapminder)
+
+data <- gapminder %>% filter(year=="2007") %>% dplyr::select(-year)
+
+p <- ggplot(data, aes(x=gdpPercap, y=lifeExp, size = pop)) +
+              geom_point(alpha=0.7)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Controlling size
+
+
+```{r}
+library(plotly)
+library(dplyr)
+library(gapminder)
+
+data <- gapminder %>% filter(year=="2007") %>% dplyr::select(-year)
+
+# Most basic bubble plot
+p <- data %>%
+      arrange(desc(pop)) %>%
+      mutate(country = factor(country, country)) %>%
+      ggplot(aes(x=gdpPercap, y=lifeExp, size = pop)) +
+        geom_point(alpha=0.5) +
+        scale_size(range = c(.1, 24), name="Population (M)")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Adding colour
+
+
+```{r}
+library(plotly)
+library(dplyr)
+library(gapminder)
+
+data <- gapminder %>% filter(year=="2007") %>% dplyr::select(-year)
+
+# Most basic bubble plot
+p <- data %>%
+      arrange(desc(pop)) %>%
+      mutate(country = factor(country, country)) %>%
+      ggplot(aes(x=gdpPercap, y=lifeExp, size=pop, color=continent)) +
+        geom_point(alpha=0.5) +
+        scale_size(range = c(.1, 24), name="Population (M)")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+

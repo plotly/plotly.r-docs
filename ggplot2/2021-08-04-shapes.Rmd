@@ -1,0 +1,158 @@
+---
+name: Shapes
+permalink: ggplot2/shapes/
+description: How to make Shapes in ggplot2 with Plotly.
+layout: base
+thumbnail: thumbnail/shape.jpg
+language: ggplot2
+page_type: example_index
+display_as: file_settings
+order: 24
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+### Basic Ploygon
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ids <- factor(c("1.1", "2.1", "1.2", "2.2", "1.3", "2.3"))
+
+values <- data.frame(
+  id = ids,
+  value = c(3, 3.1, 3.1, 3.2, 3.15, 3.5)
+)
+
+positions <- data.frame(
+  id = rep(ids, each = 4),
+  x = c(2, 1, 1.1, 2.2, 1, 0, 0.3, 1.1, 2.2, 1.1, 1.2, 2.5, 1.1, 0.3,
+  0.5, 1.2, 2.5, 1.2, 1.3, 2.7, 1.2, 0.5, 0.6, 1.3),
+  y = c(-0.5, 0, 1, 0.5, 0, 0.5, 1.5, 1, 0.5, 1, 2.1, 1.7, 1, 1.5,
+  2.2, 2.1, 1.7, 2.1, 3.2, 2.8, 2.1, 2.2, 3.3, 3.2)
+)
+
+datapoly <- merge(values, positions, by=c("id"))
+
+p <- ggplot(datapoly, aes(x=x, y=y)) + geom_polygon(aes(fill=value, group=id))
+
+ggplotly(p)
+```
+
+### Ellipses
+
+```{r}
+library(devtools)
+library(ggplot2)
+library(proto)
+
+n <- 200
+x1 <- rnorm(n, mean = 2)
+y1 <- 1.5 + 0.4 * x1 + rnorm(n)
+x2 <- rnorm(n, mean = -1)
+y2 <- 3.5 - 1.2 * x2 + rnorm(n)
+class <- rep(c("A", "B"), each = n)
+df <- data.frame(x = c(x1, x2), y = c(y1, y2), colour = class)
+
+p <- qplot(data = df, x = x, y = y, colour = class) +
+  stat_ellipse(geom = "polygon", alpha = 1/2, aes(fill = class))
+
+ggplotly(p)
+```
+
+### Highlighting
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+tmp <-  with(mtcars, data.frame(x=c(0, 0, max(wt)*35), y=c(0, max(wt), max(wt))))
+
+p <- ggplot(mtcars, aes(hp, wt)) +
+  geom_polygon(data=tmp, aes(x, y), fill="#d8161688") +
+  geom_point()
+
+ggplotly(p)
+```
+
+### Vertical Conversion
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+library(data.table)
+df<-data.table(Product=letters[1:10], minX=1:10, maxX=5:14, minY= 10:1, maxY=14:5)
+
+df.t<-data.table(rbind( df[,list(Product,X=minX,Y=minY)],
+       df[,list(Product,X=minX,Y=maxY)],
+       df[,list(Product,X=maxX,Y=minY)],
+       df[,list(Product,X=maxX,Y=maxY)]))[
+      order(Product,X,Y)]
+
+p <- ggplot(df,aes(xmin=minX,xmax=maxX,ymin=minY,ymax=maxY,fill=Product))+
+  geom_rect()
+
+ggplotly(p)
+```
+
+### Distributions
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+x=seq(-2,2,length=200)
+dat <- data.frame(
+  norm = dnorm(x,mean=0,sd=0.2),
+  logistic = dlogis(x,location=0,scale=0.2), x = x
+)
+p <- ggplot(data=dat, aes(x=x)) +
+  geom_polygon(aes(y=norm), fill="red", alpha=0.6) +
+  geom_polygon(aes(y=logistic), fill="blue", alpha=0.6) +
+  xlab("z") + ylab("") +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0))
+
+ggplotly(p)
+```
+
+### Convex Hull
+
+```{r}
+library(plotly)
+library(RColorBrewer)
+library(ggplot2)
+
+# Generate some data
+nn <- 500
+myData <- data.frame(X = rnorm(nn),
+                     Y = rnorm(nn))
+
+setK = 6  # How many clusters?
+clusterSolution <- kmeans(myData, centers = setK)
+
+myData$whichCluster <- factor(clusterSolution$cluster)
+
+splitData <- split(myData, myData$whichCluster)
+appliedData <- lapply(splitData, function(df){
+  df[chull(df), ]  # chull really is useful, even outside of contrived examples.
+  })
+combinedData <- do.call(rbind, appliedData)
+
+zp3 <- ggplot(data = myData,
+                     aes(x = X, y = Y))
+zp3 <- zp3 + geom_polygon(data = combinedData,  # This is also a nice example of how to plot
+                          aes(x = X, y = Y, fill = whichCluster),  # two superimposed geoms
+                          alpha = 1/2)                             # from different data.frames
+zp3 <- zp3 + geom_point(size=1)
+zp3 <- zp3 + coord_equal()
+zp3 <- zp3 + scale_fill_manual(values = colorRampPalette(rev(brewer.pal(11, "Spectral")))(setK))
+
+ggplotly(zp3)
+```

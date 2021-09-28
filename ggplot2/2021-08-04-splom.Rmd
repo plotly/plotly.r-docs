@@ -1,0 +1,97 @@
+---
+description: How to make Scatterplot Matrix using `ggpairs()` in ggplot2 with Plotly.
+name: Scatterplot Matrix
+permalink: ggplot2/splom/
+thumbnail: thumbnail/splom_image.jpg
+layout: base
+language: ggplot2
+display_as: statistical
+page_type: u-guide
+order: 6
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default splot plot
+
+The `ggpairs()` function of the `GGally` package allows to build a great scatterplot matrix.
+
+Scatterplots of each pair of numeric variable are drawn on the left part of the figure. Pearson correlation is displayed on the right. Variable distribution is available on the diagonal.
+
+```{r}
+library(plotly)
+library(GGally)
+ 
+data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1)) 
+data$v4 = data$var1 ** 2 
+data$v5 = -(data$var1 ** 2) 
+ 
+p <- ggpairs(data, title="correlogram with ggpairs()") 
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Visualize correlation
+
+he `ggcorr()` function allows to visualize the correlation of each pair of variable as a square. Note that the `method` argument allows to pick the correlation type you desire.
+
+```{r}
+library(plotly)
+library(GGally)
+ 
+data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1)) 
+data$v4 = data$var1 ** 2 
+data$v5 = -(data$var1 ** 2) 
+ 
+p <- ggcorr(data, method = c("everything", "pearson")) 
+
+p
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Split by group
+It is possible to use `ggplot2` aesthetics on the chart, for instance to color each category.
+
+```{r}
+library(plotly)
+library(GGally)
+ 
+data(flea)
+
+p <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species)) 
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change plot types
+
+Change the type of plot used on each part of the `correlogram`. This is done with the `upper` and `lower` argument.
+
+```{r}
+library(plotly)
+library(GGally)
+ 
+data(tips, package = "reshape")
+
+p <- ggpairs(
+      tips[, c(1, 3, 4, 2)],
+      upper = list(continuous = "density", combo = "box_no_facet"),
+      lower = list(continuous = "points", combo = "dot_no_facet")
+)
+
+p
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

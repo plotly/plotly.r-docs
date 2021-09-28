@@ -1,0 +1,73 @@
+---
+description: How to make Gantt Charts in ggplot2 with Plotly.
+name: Gantt Charts
+permalink: ggplot2/gantt/
+thumbnail: thumbnail/gantt.jpg
+layout: base
+language: ggplot2
+display_as: basic
+page_type: u-guide
+order: 9
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Gantt chart
+
+
+```{r}
+library(plotly)
+require(reshape2)
+require(ggplot2)
+
+
+tasks <- c("Write introduction", "Parse citation data",
+           "Construct data timeline",
+           "Write methods", "Model formulation", 
+           "Model selection", "Write results", "Write discussion",
+           "Write abstract and editing",
+           
+           "Write introduction", "Write introduction", "Write results")
+
+# Compile dataframe of task names, and respective start and end dates.
+dfr <- data.frame(
+  name = factor(tasks, levels = tasks[1:9]),
+  start.date = as.Date(c("2018-04-09", "2018-04-09", "2018-04-16",
+                         "2018-04-30", "2018-04-16", "2018-05-21",
+                         "2018-06-04", "2018-07-02", "2018-07-30",
+                         
+                         "2018-05-15", "2018-06-03", "2018-07-25"
+                         )),
+  end.date = as.Date(c("2018-04-30", "2018-04-20", "2018-05-18",
+                       "2018-06-01", "2018-05-18", "2018-06-01",
+                       "2018-06-29", "2018-07-27", "2018-08-31",
+                       
+                       "2018-05-29", "2018-06-20", "2018-08-15")),
+  flag = c(0, 0, 1, 
+           1, 1, 1,
+           0, 0, 1, 
+           1, 0, 1)
+)
+
+# Merge start and end dates into durations.
+mdfr <- melt(dfr, measure.vars = c("start.date", "end.date"))
+
+p <- ggplot(dfr) +
+      geom_linerange(aes(y = name, 
+                         xmin = start.date,
+                         xmax = end.date,
+                         colour = as.factor(flag)),
+                     size = I(5)) +
+      theme_minimal()
+
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->

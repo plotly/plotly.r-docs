@@ -1,0 +1,84 @@
+---
+description: How to make Log Plots in ggplot2 with Plotly.
+name: Log Plots
+permalink: ggplot2/log-plot/
+thumbnail: thumbnail/log.jpg
+layout: base
+language: ggplot2
+display_as: scientific
+page_type: u-guide
+order: 5
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Setting axis to log2 scale
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(cars, aes(x = speed, y = dist)) + 
+  geom_point()
+
+p <- p + scale_x_continuous(trans = 'log2') +
+  scale_y_continuous(trans = 'log2')
+
+ggplotly(p)
+```
+
+
+You can also format the axis ticks to be displayed as exponents.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(scales)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(cars, aes(x = speed, y = dist)) + 
+  geom_point()
+
+p <- p + scale_x_continuous(trans = 'log2') +
+  scale_y_continuous(trans = 'log2')
+
+p + scale_y_continuous(trans = log2_trans(),
+    breaks = trans_breaks("log2", function(x) 2^x),
+    labels = trans_format("log2", math_format(2^.x)))
+
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Setting axis to log10 scale
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+ToothGrowth$dose <- as.factor(ToothGrowth$dose)
+
+p <- ggplot(cars, aes(x = speed, y = dist)) + 
+  geom_point()
+
+p <- p + scale_y_log10()
+
+
+ggplotly(p)
+```
+ternatively, you can use the function `scale_y_continuous(trans = "log10")`, which allows to transform breaks and the format of labels.
+
+<!--------------------- EXAMPLE BREAK ------------------------->

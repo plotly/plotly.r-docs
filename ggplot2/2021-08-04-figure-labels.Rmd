@@ -1,0 +1,99 @@
+---
+description: How to Set the Font, Title, Legend Entries, and Axis Titles in ggplot2 with Plotly.
+name: Setting the Font, Title, Legend Entries, and Axis Titles
+permalink: ggplot2/figure-labels/
+thumbnail: thumbnail/figure-labels.png
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 12
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Automatic Labelling with ggplot2
+
+When using `ggplot2`, your axes and legend are automatically labelled, and it's easy to override the automation for a customized figure using the labels keyword argument. The title of your figure is up to you though!
+
+Here's a figure with automatic labels and then the same figure with overridden labels. Note the fact that when overriding labels, the axes, legend title and hover labels reflect the specified labels automatically.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+      geom_point(aes(color=Species, shape=Species)) +
+      labs(title = "Iris sepal width vs length")
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Manually specified labels
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+      geom_point(aes(color=Species, shape=Species)) +
+      labs(title = "Iris sepal width vs length", 
+            x = "Sepal Length", 
+            y = "Sepal Width")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Change color, size, style of text
+
+To change these, use `theme()` and appropriate arugment, in this case `plot.title`, `legend.title`, `legend.text`, `axis.title`, and the desired changes you wish to make to the specified element.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+      geom_point(aes(color=Species, shape=Species)) +
+      labs(title = "Iris sepal width vs length", 
+            x = "Sepal Length", 
+            y = "Sepal Width") +
+      theme(plot.title = element_text(size = 18, face = "bold", color = "red"),
+        legend.title=element_text(size=10, face = "italic", color = "blue"), 
+        legend.text=element_text(size=6, color="darkgreen"),
+        axis.title = element_text(face = "bold", color="orange"))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Align title
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+p <- ggplot(data=iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+      geom_point(aes(color=Species, shape=Species)) +
+      labs(title = "Iris sepal width vs length", 
+            x = "Sepal Length", 
+            y = "Sepal Width") +
+      theme(plot.title = element_text(hjust = 0.5))
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

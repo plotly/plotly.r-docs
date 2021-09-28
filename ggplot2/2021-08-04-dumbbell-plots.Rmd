@@ -1,0 +1,145 @@
+---
+description: How to make Dumbbell Plots in ggplot2 with Plotly.
+name: Dumbbell Plots
+permalink: ggplot2/dumbbell-plots/
+thumbnail: thumbnail/dumbbell-plot.jpg
+layout: base
+language: ggplot2
+display_as: file_settings
+page_type: u-guide
+order: 
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default dumbell plot
+
+To make the dumbell plot use `geom_line()` and `geom_point()` functions.
+
+For making dumbbell plot, let us subset the data for just two years 1952 and 2007. Also, we focus on one of the continents in the gapminder data.
+
+With this data we can make dumbbell plot to compare life expectancy change from 1952 to 2007 for all asian countries. We make dumbbell plot by plotting points for each time point and connect them with a line for each country. In order to connect the points, we need specify which rows or countries need to be connected. We create a new variable that specifies the group corresponding to each country.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+theme_set(theme_bw())
+
+gapminder <- read_csv("https://raw.githubusercontent.com/datavizpyr/data/master/gapminder-FiveYearData.csv")
+df <- gapminder %>%
+  filter(year %in% c(1952,2007)) %>%
+  filter(continent=="Asia") 
+
+df <- df %>%
+  mutate(paired = rep(1:(n()/2),each=2),
+         year=factor(year))
+
+p <- df %>% 
+  ggplot(aes(x= lifeExp, y= country)) +
+  geom_line(aes(group = paired))+
+  geom_point(aes(color=year), size=4) +
+  theme(legend.position="top")
+
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Changing order
+
+You can reorder the dumbbell plot by life expectancy values using `reorder()` function to make it easy to read the plot.
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+theme_set(theme_bw())
+
+gapminder <- read_csv("https://raw.githubusercontent.com/datavizpyr/data/master/gapminder-FiveYearData.csv")
+df <- gapminder %>%
+  filter(year %in% c(1952,2007)) %>%
+  filter(continent=="Asia") 
+
+df <- df %>%
+  mutate(paired = rep(1:(n()/2),each=2),
+         year=factor(year))
+
+p <- df %>% 
+  ggplot(aes(x= lifeExp, y= reorder(country,lifeExp))) +
+  geom_line(aes(group = paired))+
+  geom_point(aes(color=year), size=4) +
+  labs(y="country")
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Improving readability
+
+Change the colour of the line between the points to grey, to introduce contrast and highlight the change between the points.
+```{r}
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+theme_set(theme_bw())
+
+gapminder <- read_csv("https://raw.githubusercontent.com/datavizpyr/data/master/gapminder-FiveYearData.csv")
+df <- gapminder %>%
+  filter(year %in% c(1952,2007)) %>%
+  filter(continent=="Asia") 
+
+df <- df %>%
+  mutate(paired = rep(1:(n()/2),each=2),
+         year=factor(year))
+
+p <- df %>% 
+  group_by(paired) %>%
+  ggplot(aes(x= lifeExp, y= reorder(country,lifeExp))) +
+  geom_line(aes(group = paired),color="grey")+
+    geom_point(aes(color=year), size=4) +
+  labs(y="country")
+
+ggplotly(p)
+```
+
+To change colour, use `scale_color_brewer()`.
+
+To remove the grey lines in the background, use `theme_classic()`.
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+library(tidyverse)
+theme_set(theme_bw())
+
+gapminder <- read_csv("https://raw.githubusercontent.com/datavizpyr/data/master/gapminder-FiveYearData.csv")
+df <- gapminder %>%
+  filter(year %in% c(1952,2007)) %>%
+  filter(continent=="Asia") 
+
+df <- df %>%
+  mutate(paired = rep(1:(n()/2),each=2),
+         year=factor(year))
+
+p <- df %>% 
+  ggplot(aes(x= lifeExp, y= reorder(country,lifeExp))) +
+  geom_line(aes(group = paired),color="grey")+
+    geom_point(aes(color=year), size=6) +
+  labs(y="country")+
+  theme_classic()+
+  scale_color_brewer(palette="Accent", direction=-1)
+
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

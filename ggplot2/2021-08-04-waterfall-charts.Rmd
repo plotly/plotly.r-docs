@@ -1,0 +1,91 @@
+---
+description: How to make Waterfall Charts in ggplot2 with Plotly.
+name: Waterfall Charts
+permalink: ggplot2/waterfall-charts/
+thumbnail: thumbnail/waterfall-charts.jpg
+layout: base
+language: ggplot2
+display_as: financial
+page_type: u-guide
+order: 3
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+## Default waterfall plot
+
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+balance <- data.frame(desc = c("Starting Cash",
+     "Sales", "Refunds", "Payouts", "Court Losses",
+     "Court Wins", "Contracts", "End Cash"), amount = c(2000,
+     3400, -1100, -100, -6600, 3800, 1400, 2800))
+
+# In order to preserve the order of the lines in a dataframe I convert the desc variable to a factor; id and type variable are also added:
+balance$desc <- factor(balance$desc, levels = balance$desc)
+balance$id <- seq_along(balance$amount)
+balance$type <- ifelse(balance$amount > 0, "in","out")
+balance[balance$desc %in% c("Starting Cash", "End Cash"), "type"] <- "net"
+
+# Next the data will be slightly reworked to specify the coordinates for drawing the waterfall bars.
+balance$end <- cumsum(balance$amount)
+balance$end <- c(head(balance$end, -1), 0)
+balance$start <- c(0, head(balance$end, -1))
+balance <- balance[, c(3, 1, 4, 6, 5, 2)]
+
+p <- ggplot(balance, aes(desc, fill = type)) + geom_rect(aes(x = desc,
+     xmin = id - 0.45, xmax = id + 0.45, ymin = end,
+     ymax = start))
+
+ggplotly(p)
+```
+
+
+<!--------------------- EXAMPLE BREAK ------------------------->
+
+## Adjusting colours and labels
+
+The fill mapping could use some tweaking (for example: outflows in red, inflows in green, and net position in blue), for that change the order of the underlying factor levels.
+
+To improve readability of the legend add the following function `strwr <- function(str) gsub(" ", "\n", str)`.
+
+```{r}
+library(plotly)
+library(ggplot2)
+
+balance <- data.frame(desc = c("Starting Cash",
+     "Sales", "Refunds", "Payouts", "Court Losses",
+     "Court Wins", "Contracts", "End Cash"), amount = c(2000,
+     3400, -1100, -100, -6600, 3800, 1400, 2800))
+# In order to preserve the order of the lines in a dataframe I convert the desc variable to a factor; id and type variable are also added:
+balance$desc <- factor(balance$desc, levels = balance$desc)
+balance$id <- seq_along(balance$amount)
+balance$type <- ifelse(balance$amount > 0, "in","out")
+balance$type <- factor(balance$type, levels = c("out","in", "net"))
+balance[balance$desc %in% c("Starting Cash", "End Cash"), "type"] <- "net"
+
+# Next the data will be slightly reworked to specify the coordinates for drawing the waterfall bars.
+balance$end <- cumsum(balance$amount)
+balance$end <- c(head(balance$end, -1), 0)
+balance$start <- c(0, head(balance$end, -1))
+balance <- balance[, c(3, 1, 4, 6, 5, 2)]
+
+strwr <- function(str) gsub(" ", "\n", str)
+
+p <- ggplot(balance, aes(fill = type)) + geom_rect(aes(x = desc,
+    xmin = id - 0.45, xmax = id + 0.45, ymin = end,
+    ymax = start)) + 
+    scale_x_discrete("", breaks = levels(balance$desc),
+        labels = strwr(levels(balance$desc)))
+ggplotly(p)
+```
+
+<!--------------------- EXAMPLE BREAK ------------------------->

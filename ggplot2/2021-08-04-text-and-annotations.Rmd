@@ -1,0 +1,202 @@
+---
+description: Adding annotations in ggplot2 with Plotly.
+permalink: /ggplot2/text-and-annotations/
+layout: base
+language: ggplot2
+name: Text and Annotations
+page_type: u-guide
+display_as: file_settings
+order: 21
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+
+
+# Default annotate
+
+Set x and y position of the label.
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-  p + annotate("text", x = 4, y = 25, label = "Some text")
+
+plotly::ggplotly(p)
+```
+
+
+# Usin range
+
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-  p + annotate("text", x = 2:5, y = 25, label = "Some text")
+
+plotly::ggplotly(p)
+```
+
+
+
+
+# Creating rectangle
+
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-    
+ p + annotate("rect", xmin = 3, xmax = 4.2, ymin = 12, ymax = 21,
+  alpha = .2)
+  
+plotly::ggplotly(p)
+```
+
+
+
+# Creating segment
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-    
+ p + annotate("segment", x = 2.5, xend = 4, y = 15, yend = 25,
+  colour = "blue")
+  
+plotly::ggplotly(p)
+```
+
+
+
+
+
+# Creating pointrange
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-    
+ p + annotate("pointrange", x = 3.5, y = 20, ymin = 12, ymax = 28,
+  colour = "red", size = 1.5)
+  
+plotly::ggplotly(p)
+```
+
+
+# Adding multiple labels manually
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-  p + annotate("text", x = 2:3, y = 20:21, label = c("my label", "label 2"))
+
+plotly::ggplotly(p)
+```
+
+
+
+# Stlying label text
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-    
+ p + annotate("text", x = 4, y = 25, label = "italic(R) ^ 2 == 0.75",
+  parse = TRUE)
+  
+plotly::ggplotly(p)
+```
+
+
+```{r}
+library(plotly)
+
+p <- ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point()
+p <-    
+ p + annotate("text", x = 4, y = 25,
+  label = "paste(italic(R) ^ 2, \" = .75\")", parse = TRUE)
+
+plotly::ggplotly(p)
+```
+
+
+# Default raster plot
+
+Set `anootation_raster` at specific position.
+
+```{r}
+library(plotly)
+
+rainbow <- matrix(hcl(seq(0, 360, length.out = 50 * 50), 80, 70), nrow = 50)
+p <-    
+ ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() +
+  annotation_raster(rainbow, 15, 20, 3, 4)
+  
+plotly::ggplotly(p)
+```
+
+
+# Fill the whole raster plot
+
+
+```{r}
+library(plotly)
+
+rainbow <- matrix(hcl(seq(0, 360, length.out = 50 * 50), 80, 70), nrow = 50)
+p <-    
+ ggplot(mtcars, aes(mpg, wt)) +
+  annotation_raster(rainbow, -Inf, Inf, -Inf, Inf) +
+  geom_point()
+  
+plotly::ggplotly(p)
+```
+
+
+# Sequential raster
+
+```{r}
+library(plotly)
+
+rainbow2 <- matrix(hcl(seq(0, 360, length.out = 10), 80, 70), nrow = 1)
+p <-    
+ ggplot(mtcars, aes(mpg, wt)) +
+  annotation_raster(rainbow2, -Inf, Inf, -Inf, Inf) +
+  geom_point()
+  
+plotly::ggplotly(p)
+```
+
+
+
+# Interploate raster colours
+
+
+```{r}
+library(plotly)
+
+rainbow2 <- matrix(hcl(seq(0, 360, length.out = 10), 80, 70), nrow = 1)
+p <-    
+ ggplot(mtcars, aes(mpg, wt)) +
+  annotation_raster(rainbow2, -Inf, Inf, -Inf, Inf, interpolate = TRUE) +
+  geom_point()
+  
+plotly::ggplotly(p)
+```

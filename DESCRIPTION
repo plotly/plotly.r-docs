@@ -59,4 +59,17 @@ Imports:
     nlme,
     Lahman,
     quantreg,
-    backports
+    backports,
+    mapproj,
+    ggrepel,
+    ggdendro,
+    treemapify,
+    GGally,
+    tree,
+    ggfortify,
+    cluster,
+	hrbrthemes,
+	ggQC,
+	fmsb,
+	plotROC,
+	tidyquant

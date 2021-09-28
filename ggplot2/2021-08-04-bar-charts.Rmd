@@ -1,0 +1,236 @@
+---
+description: How to make Bar Plots plots ggplot2 with Plotly.
+name: Bar Plots
+display_as: basic
+order: 3
+permalink: ggplot2/bar-charts/
+thumbnail: thumbnail/bar.jpg
+layout: base
+language: ggplot2
+page_type: u-guide
+output:
+  html_document:
+    keep_md: true
+---
+
+```{r, echo = FALSE, message=FALSE}
+knitr::opts_chunk$set(message = FALSE, warning=FALSE)
+```
+
+`geom_bar` is designed to make it easy to create bar charts that show counts (or sums of weights).
+
+# Default bar plot
+
+```{r}
+library(plotly)
+g <- ggplot(mpg, aes(class))  
+p <-  g + geom_bar()
+
+ggplotly(p)
+```
+
+
+
+```{r}
+library(plotly)
+g <- ggplot(mpg, aes(class))  
+p <-  g + geom_bar(aes(weight = displ))
+
+ggplotly(p)
+```
+
+# Add colour 
+
+```{r}
+library(plotly)
+
+dat <- data.frame(
+    time = factor(c("Lunch","Dinner"), levels=c("Lunch","Dinner")),
+    total_bill = c(14.89, 17.23)
+)
+
+p <- ggplot(data=dat, aes(x=time, y=total_bill, fill=time)) +
+    geom_bar(stat="identity")
+
+fig <- ggplotly(p)
+
+fig
+```
+
+Setting custom colours:
+
+```{r}
+library(plotly)
+
+dat1 <- data.frame(
+    sex = factor(c("Female","Female","Male","Male")),
+    time = factor(c("Lunch","Dinner","Lunch","Dinner"), levels=c("Lunch","Dinner")),
+    total_bill = c(13.53, 16.81, 16.24, 17.42)
+)
+
+p <- ggplot(data=dat1, aes(x=time, y=total_bill, fill=sex)) +
+    geom_bar(stat="identity", position=position_dodge(), colour="black") +
+    scale_fill_manual(values=c("#999999", "#E69F00"))
+
+fig <- ggplotly(p)
+
+fig
+```
+
+
+# Stacking bar plots
+
+Bar plots are automatically stacked when multiple bars are at the same location. The order of the fill is designed to match the legend.
+
+```{r}
+library(plotly)
+g <- ggplot(mpg, aes(class))  
+p <-  g + geom_bar(aes(fill = drv))
+
+ggplotly(p)
+```
+
+
+
+# Showing mean
+
+```{r}
+library(plotly)
+df <- data.frame(trt = c("a", "b", "c"), outcome = c(2.3, 1.9, 3.2))  
+p <-    
+ ggplot(df, aes(trt, outcome)) +
+  geom_col()
+  
+ggplotly(p)
+```
+
+
+`geom_point()` displays exactly the same information and doesn't require the y-axis to touch zero.
+
+
+```{r}
+library(plotly)
+df <- data.frame(trt = c("a", "b", "c"), outcome = c(2.3, 1.9, 3.2))  
+p <-    
+ ggplot(df, aes(trt, outcome)) +
+  geom_point()
+  
+ggplotly(p)
+```
+
+
+You can also use `geom_bar()` with continuous data, in which case it will show counts at unique locations.
+
+```{r}
+library(plotly)
+df <- data.frame(x = rep(c(2.9, 3.1, 4.5), c(5, 10, 4)))  
+p <-  ggplot(df, aes(x)) + geom_bar()
+
+ggplotly(p)
+```
+
+
+
+# Using binwidth 
+
+
+```{r}
+library(plotly)
+df <- data.frame(x = rep(c(2.9, 3.1, 4.5), c(5, 10, 4)))  
+p <-  ggplot(df, aes(x)) + geom_histogram(binwidth = 0.5)
+
+ggplotly(p)
+```
+
+
+# Error Bars
+barplot with error bars
+
+```{r}
+library(plotly)
+library(dplyr)
+set.seed(123)
+
+df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
+
+df.summ <- df %>% group_by(cut) %>% summarize(Mean = mean(table), Min = min(table), Max = max(table))
+
+p <- ggplot(df.summ, aes(x = cut, y = Mean, ymin = Min, ymax = Max, fill = cut)) + 
+  geom_bar(stat = "identity") + 
+  geom_errorbar() + 
+  ggtitle("Bar chart with Error Bars")
+
+ggplotly(p)
+```
+
+# Ordered Bar Chart
+ordering variable in <code>geom_bar</code>
+
+```{r}
+library(plotly)
+library(plyr)
+
+dane<-data.frame(x=1:10,y=seq(-5,4),g=rep(c('A','B'),each=5))
+dane$x<-as.factor(dane$x)
+
+p <- ggplot(data=dane,aes(x=x,y=y,fill=g)) +
+    geom_bar(stat="identity")
+
+ggplotly(p)
+```
+
+# Precentages
+using <code>geom_bar</code> to show percentages
+
+```{r}
+library(plotly)
+set.seed(123)
+
+df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
+
+p <- ggplot(df, aes(x = color)) + 
+  geom_bar(aes(y = ..count../sum(..count..), fill = cut)) + 
+  scale_fill_brewer(palette = "Set3") + 
+  ylab("Percent") + 
+  ggtitle("Show precentages in bar chart")
+  
+ggplotly(p)
+```
+
+Set manual colors using <code>geom_bar</code> to manually specify colors.
+
+```{r}
+library(plotly)
+library(RColorBrewer)
+set.seed(123)
+
+df <- diamonds[sample(1:nrow(diamonds), size = 1000),]
+
+# Simply use fill = a vector of colors
+p <- ggplot(df, aes(x = color)) +
+  geom_bar(fill = brewer.pal(length(unique(df$color)), "Set3")) + 
+  ylab("Count") + 
+  ggtitle("Specify manual colors in a bar chart")
+  
+ggplotly(p)
+```
+
+# Reordered Bar Chart
+Re-ordering bars shown using <code>geom_bar</code>.
+
+```{r}
+library(plotly)
+
+df <- data.frame(x = as.factor(LETTERS[1:5]), 
+                 y = sample(10:20, size = 5))
+
+# First change factor levels
+df$x <- factor(df$x, levels = c("C", "B", "A", "D", "E"))
+
+# Plot
+p <- ggplot(df, aes(x, y, fill = x)) + 
+  geom_bar(stat = "identity") +
+  ggtitle("Bar Chart with changed factor levels")
+
+ggplotly(p)
+```
