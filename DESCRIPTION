@@ -67,5 +67,4 @@ Imports:
     GGally,
     tree,
     ggfortify,
-    cluster,
-    ggnet
+    cluster
