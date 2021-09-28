@@ -51,7 +51,7 @@ library(ggplot2)
 district_density <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/district_density.csv", stringsAsFactors = FALSE)
 district_density$cluster <- factor(district_density$cluster, levels=c("Pure urban", "Urban-suburban mix", "Dense suburban", "Sparse suburban", "Rural-suburban mix", "Pure rural"))
 district_density$region <- factor(district_density$region, levels=c("West", "South", "Midwest", "Northeast"))
-3
+
 p <- ggplot(district_density,aes(x=cluster, y=dem_margin, fill=cluster)) +
   geom_violin(colour=NA) +
   geom_hline(yintercept=0, alpha=0.5) +
@@ -204,7 +204,6 @@ plotly::ggplotly(p)
 Including facetting by region.
 
 Add colour to the facet titles, centre-align the title, rotate the y-axis title, change the font, and get rid of the unnecessary legend. Note that `coord_flip()` flips the axes for the variables and the titles, but does not flip `theme()` elements.
-
 
 Rotated the x-axis text 45 degrees, and used `facet_grid` to create a 4x1 facet (compared to `facet_wrap`, which defaults to 2x2).
 
