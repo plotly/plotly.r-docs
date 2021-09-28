@@ -70,4 +70,6 @@ Imports:
     cluster,
 	hrbrthemes,
 	ggQC,
-	fmsb
+	fmsb,
+	plotROC,
+	tidyquant
