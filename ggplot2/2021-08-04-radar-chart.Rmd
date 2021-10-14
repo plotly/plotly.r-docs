@@ -2,7 +2,7 @@
 description: How to make Radar Charts in ggplot2 with Plotly.
 name: Radar Charts
 permalink: ggplot2/radar-chart/
-thumbnail: thumbnail/radar.gif
+thumnail_github: radar.gif
 layout: base
 language: ggplot2
 display_as: scientific
