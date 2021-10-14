@@ -89,7 +89,7 @@ df <- df[which(df$year==2007 & df$continent=='Asia'),]
 fig <- plot_ly(df, type='pie', labels = ~country, values = ~pop, textposition = 'inside')
 fig <- fig %>% layout(uniformtext=list(minsize=12, mode='hide'))
 fig
-````
+```
 ### Adding Informations to Default Hover Text
 
 ```{r}
