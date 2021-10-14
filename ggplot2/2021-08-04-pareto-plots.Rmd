@@ -2,7 +2,7 @@
 description: How to make Pareto Plots in ggplot2 with Plotly.
 name: Pareto Plots
 permalink: ggplot2/pareto-plots/
-thumbnail: thumbnail/
+thumnail_github: pareto-plots.png
 layout: base
 language: ggplot2
 display_as: financial

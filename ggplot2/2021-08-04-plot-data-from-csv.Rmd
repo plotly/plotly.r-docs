@@ -2,10 +2,10 @@
 description: How to Plot CSV Data in ggplot2 with Plotly.
 name: Plot CSV Data
 permalink: ggplot2/plot-data-from-csv/
-thumbnail: thumbnail/csv.jpg
+thumnail_github: csv.png
 layout: base
 language: ggplot2
-display_as: advanced
+display_as: advanced_opt
 page_type: u-guide
 order: 1
 output:

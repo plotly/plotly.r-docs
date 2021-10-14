@@ -2,7 +2,7 @@
 description: How to make Time Series and Date Axes in ggplot2 with Plotly.
 name: Time Series and Date Axes
 permalink: ggplot2/time-series/
-thumbnail: thumbnail/time-series.jpg
+thumnail_github: time-series.png
 layout: base
 language: ggplot2
 display_as: financial

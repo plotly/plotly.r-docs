@@ -2,7 +2,7 @@
 description: How to make Stair Plots in ggplot2 with Plotly.
 name: Stair Plots
 permalink: ggplot2/stair-plots/
-thumbnail: thumbnail/
+thumnail_github: stair-plots.png
 layout: base
 language: ggplot2
 display_as: basic 

@@ -1,9 +1,9 @@
 ---
 name: 2D-Histogram
-permalink: ggplot2/geom_density2d/
+permalink: ggplot2/2D-Histogram/
 description: How to make 2D-Histogram Plots plots in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/histogram2d.jpg
+thumnail_github: 2D-Histogram.png
 language: ggplot2
 page_type: u-guide
 display_as: statistical

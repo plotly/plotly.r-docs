@@ -2,7 +2,7 @@
 description: How to make Strip Charts in ggplot2 with Plotly.
 name: Strip Charts
 permalink: ggplot2/strip-charts/
-thumbnail: thumbnail/figure-labels.png
+thumnail_github: strip-charts.png
 layout: base
 language: ggplot2
 display_as: statistical

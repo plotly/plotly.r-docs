@@ -3,7 +3,7 @@ name: Box Plots
 permalink: ggplot2/box-plots/
 description: How to make Box Plots in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/box.jpg
+thumnail_github: box-plots.png
 language: ggplot2
 page_type: u-guide
 display_as: statistical

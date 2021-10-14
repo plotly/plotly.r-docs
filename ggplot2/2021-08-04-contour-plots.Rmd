@@ -3,7 +3,7 @@ name: Contour Plots
 permalink: ggplot2/contour-plots/
 description: How to make Contour Plots in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/contour.jpg
+thumnail_github: contour-plots.png
 language: ggplot2
 page_type: u-guide
 display_as: scientific

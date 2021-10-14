@@ -2,10 +2,10 @@
 description: How to make Random Walk in ggplot2 with Plotly.
 name: Random Walk
 permalink: ggplot2/random-walk/
-thumbnail: thumbnail/static-image
+thumnail_github: static-image
 layout: base
 language: ggplot2
-display_as: advanced
+display_as: advanced_opt
 page_type: u-guide
 order: 2
 output:

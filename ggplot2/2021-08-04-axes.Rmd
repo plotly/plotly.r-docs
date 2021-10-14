@@ -2,7 +2,7 @@
 description: How to work with Axes in ggplot2 with Plotly.
 name: Axes
 permalink: ggplot2/axes/
-thumbnail: thumbnail/axes.png
+thumnail_github: axes.png
 layout: base
 language: ggplot2
 display_as: file_settings

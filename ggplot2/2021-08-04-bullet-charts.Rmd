@@ -2,7 +2,7 @@
 description: How to make Bullet Charts in ggplot2 with Plotly.
 name: Bullet Charts
 permalink: ggplot2/bullet-charts/
-thumbnail: thumbnail/bullet.png
+thumnail_github: bullet-charts.png
 layout: base
 language: ggplot2
 display_as: financial

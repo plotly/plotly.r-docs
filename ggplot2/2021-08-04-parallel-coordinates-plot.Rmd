@@ -2,7 +2,7 @@
 description: How to make Parallel Coordinates Plot in ggplot2 with Plotly.
 name: Parallel Coordinates Plot
 permalink: ggplot2/parallel-coordinates-plot/
-thumbnail: thumbnail/parcoords.jpg
+thumnail_github: parallel-coordinates-plot.png
 layout: base
 language: ggplot2
 display_as: scientific

@@ -3,7 +3,7 @@ name: Facet Plots
 permalink: ggplot2/facet-plots/
 description: How to make Facet Plots in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/facet-trellis-thumbnail.jpg
+thumnail_github: facet-plots.png
 language: ggplot2
 page_type: u-guide
 display_as: statistical

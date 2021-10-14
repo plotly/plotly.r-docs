@@ -3,10 +3,10 @@ name: Error Bars
 permalink: ggplot2/error-bars/
 description: How to make Error Plots in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/error-bar.jpg
+thumnail_github: error-bars.png
 language: ggplot2
 page_type: u-guide
-display_as: statistics
+display_as: statistical
 order: 1
 output:
   html_document:

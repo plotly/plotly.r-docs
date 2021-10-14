@@ -3,10 +3,10 @@ name: Smoothing
 permalink: ggplot2/smoothing/
 description: How to use Smoothing in ggplot2 online to add a line with specified slope and intercept to the plot.
 layout: base
-thumbnail: thumbnail/line-plots.jpg
+thumnail_github: line-plots.png
 language: ggplot2
 page_type: example_index
-display_as: advanced
+display_as: advanced_opt
 order: 4
 output:
   html_document:

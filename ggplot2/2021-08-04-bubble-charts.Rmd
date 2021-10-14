@@ -4,7 +4,7 @@ name: Bubble Charts
 display_as: basic
 order: 5
 permalink: ggplot2/bubble-charts/
-thumbnail: thumbnail/bubble.jpg
+thumnail_github: bubble-charts.png
 layout: base
 language: ggplot2
 page_type: u-guide

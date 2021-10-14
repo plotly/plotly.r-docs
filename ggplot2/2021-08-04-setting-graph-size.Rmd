@@ -2,7 +2,7 @@
 description: How to Set Graph Size in ggplot2 with Plotly.
 name: Setting Graph Size
 permalink: ggplot2/setting-graph-size/
-thumbnail: thumbnail/sizing.png
+thumnail_github: setting-graph-size.png
 layout: base
 language: ggplot2
 display_as: file_settings

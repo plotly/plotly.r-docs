@@ -2,7 +2,7 @@
 description: How to Style Markers in ggplot2 with Plotly.
 name: Styling Markers
 permalink: ggplot2/marker-style/
-thumbnail: thumbnail/marker-style.gif
+thumnail_github: marker-style.png
 layout: base
 language: ggplot2
 display_as: file_settings

@@ -2,7 +2,7 @@
 description: How to make Continuous Color Scales and Color Bars in ggplot2 with Plotly.
 name: Continuous Color Scales and Color Bars
 permalink: ggplot2/colorscales/
-thumbnail: thumbnail/heatmap_colorscale.jpg
+thumnail_github: colorscales.png
 layout: base
 language: ggplot2
 display_as: file_settings
