@@ -3,7 +3,7 @@ name: Hover Text and Formatting
 permalink: ggplot2/hover-text-and-formatting/
 description: How to use hover text and formatting in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/hover-text.png
+thumnail_github: hover-text.png
 language: ggplot2
 page_type: u-guide
 display_as: base

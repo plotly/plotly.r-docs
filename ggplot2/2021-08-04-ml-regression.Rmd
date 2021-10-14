@@ -2,7 +2,7 @@
 description: How to make ML Regression Plots in ggplot2 with Plotly.
 name: ML Regression
 permalink: ggplot2/ml-regression/
-thumbnail: thumbnail/ml-regression.png
+thumnail_github: ml-regression.png
 layout: base
 language: ggplot2
 display_as: ai_ml

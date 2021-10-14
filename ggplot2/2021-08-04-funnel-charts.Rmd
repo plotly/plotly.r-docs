@@ -2,7 +2,7 @@
 description: How to make Funnel Chart in ggplot2 with Plotly.
 name: Funnel Chart
 permalink: ggplot2/funnel-charts/
-thumbnail: thumbnail/funnel.jpg
+thumnail_github: funnel-charts.png
 layout: base
 language: ggplot2
 display_as: financial

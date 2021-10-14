@@ -3,11 +3,11 @@ name: Line Charts
 permalink: ggplot2/line-charts/
 description: How to make Line Charts in ggplot2 with geom_line in Plotly.
 layout: base
-thumbnail: thumbnail/line-plot.jpg
+thumnail_github: line-charts.png
 language: ggplot2
 page_type: u-guide
-display_as: basic
-order: 2
+display_as: file_settings
+order: 22
 output:
   html_document:
     keep_md: true

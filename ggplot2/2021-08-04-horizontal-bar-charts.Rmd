@@ -4,7 +4,7 @@ name: Horizontal Bar
 display_as: basic
 order: 8
 permalink: ggplot2/horizontal-bar-charts/
-thumbnail: thumbnail/horizontal-bar.jpg
+thumnail_github: horizontal-bar-charts.png
 layout: base
 language: ggplot2
 page_type: u-guide

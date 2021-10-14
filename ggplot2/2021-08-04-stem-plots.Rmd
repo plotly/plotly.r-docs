@@ -2,7 +2,7 @@
 description: How to make Stem Plots in ggplot2 with Plotly.
 name: Stem Plots
 permalink: ggplot2/stem-plots/
-thumbnail: thumbnail/
+thumnail_github: stem-plots.png
 layout: base
 language: ggplot2
 display_as: statistical

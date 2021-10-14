@@ -2,7 +2,7 @@
 description: How to Set the Font, Title, Legend Entries, and Axis Titles in ggplot2 with Plotly.
 name: Setting the Font, Title, Legend Entries, and Axis Titles
 permalink: ggplot2/figure-labels/
-thumbnail: thumbnail/figure-labels.png
+thumnail_github: figure-labels.png
 layout: base
 language: ggplot2
 display_as: file_settings

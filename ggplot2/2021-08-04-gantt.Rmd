@@ -2,7 +2,7 @@
 description: How to make Gantt Charts in ggplot2 with Plotly.
 name: Gantt Charts
 permalink: ggplot2/gantt/
-thumbnail: thumbnail/gantt.jpg
+thumnail_github: gantt.png
 layout: base
 language: ggplot2
 display_as: basic

@@ -4,7 +4,7 @@ name: Bar Plots
 display_as: basic
 order: 3
 permalink: ggplot2/bar-charts/
-thumbnail: thumbnail/bar.jpg
+thumnail_github: bar-charts.png
 layout: base
 language: ggplot2
 page_type: u-guide

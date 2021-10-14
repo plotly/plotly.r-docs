@@ -2,7 +2,7 @@
 description: How to do PCA Visualization in ggplot2 with Plotly.
 name: PCA Visualization
 permalink: ggplot2/pca-visualization/
-thumbnail: thumbnail/ml-pca.png
+thumnail_github: pca-visualization.png
 layout: base
 language: ggplot2
 display_as: ai_ml

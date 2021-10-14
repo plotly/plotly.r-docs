@@ -2,7 +2,7 @@
 description: How to make Violin Plots in ggplot2 with Plotly.
 name: Violin Plots
 permalink: ggplot2/violin/
-thumbnail: thumbnail/violin.jpg
+thumnail_github: violin.png
 layout: base
 language: ggplot2
 display_as: statistical

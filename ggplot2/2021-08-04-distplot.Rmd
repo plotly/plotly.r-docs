@@ -3,7 +3,7 @@ name: Distplots
 permalink: ggplot2/distplot/
 description: How to make Distplots in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/distplot.jpg
+thumnail_github: distplot.png
 language: ggplot2
 page_type: u-guide
 display_as: statistical

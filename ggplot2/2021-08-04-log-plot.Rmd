@@ -2,7 +2,7 @@
 description: How to make Log Plots in ggplot2 with Plotly.
 name: Log Plots
 permalink: ggplot2/log-plot/
-thumbnail: thumbnail/log.jpg
+thumnail_github: log-plot.png
 layout: base
 language: ggplot2
 display_as: scientific

@@ -3,7 +3,7 @@ name: Bubblecloud Plots
 permalink: ggplot2/bubblecloud/
 description: How to make a Bubblecloud Plots using ggplotly with Plotly.
 layout: base
-thumbnail: thumbnail/
+thumnail_github: bubblecloud.png
 language: ggplot2
 page_type: u-guide
 display_as: basic

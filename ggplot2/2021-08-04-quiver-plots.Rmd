@@ -3,7 +3,7 @@ name: Quiver Plots
 permalink: ggplot2/quiver-plots/
 description: How to use make Quiver Plots with `geom_spoke` in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/quiver-plot.jpg
+thumnail_github: quiver-plots.png
 language: ggplot2
 page_type: u-guide
 display_as: scientific

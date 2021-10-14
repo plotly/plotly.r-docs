@@ -2,10 +2,10 @@
 description: How to make Dot Plots in ggplot2 with Plotly.
 name: Dot Plots
 permalink: ggplot2/dot-plots/
-thumbnail: thumbnail/dot-plot.jpg
+thumnail_github: dot-plots.png
 layout: base
 language: ggplot2
-display_as: base
+display_as: basic
 page_type: u-guide
 order: 6
 output:

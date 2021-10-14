@@ -3,7 +3,7 @@ name: Histograms
 permalink: ggplot2/histograms/
 description: How to make Histogram Plots in ggplot2 with Plotly.
 layout: base
-thumbnail: thumbnail/histogram.jpg
+thumnail_github: histograms.png
 language: ggplot2
 page_type: u-guide
 display_as: statistical

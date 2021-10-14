@@ -2,7 +2,7 @@
 description: How to make OHLC Charts in ggplot2 with Plotly.
 name: OHLC Charts
 permalink: ggplot2/ohlc-charts/
-thumbnail: thumbnail/ohlc.jpg
+thumnail_github: ohlc-charts.png
 layout: base
 language: ggplot2
 display_as: financial

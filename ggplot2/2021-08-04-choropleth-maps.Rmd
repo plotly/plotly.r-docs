@@ -2,7 +2,7 @@
 description: How to make Choropleth Maps in ggplot2 with Plotly.
 name: Choropleth Maps
 permalink: ggplot2/choropleth-maps/
-thumbnail: thumbnail/choropleth.jpg
+thumnail_github: choropleth-maps.png
 layout: base
 language: ggplot2
 display_as: maps

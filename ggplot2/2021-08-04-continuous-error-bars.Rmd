@@ -2,7 +2,7 @@
 description: How to make Continuous Error Bands in ggplot2 with Plotly.
 name: Continuous Error Bands
 permalink: ggplot2/continuous-error-bars/
-thumbnail: thumbnail/error-cont.jpg
+thumnail_github: continuous-error-bars.png
 layout: base
 language: ggplot2
 display_as: statistical

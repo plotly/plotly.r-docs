@@ -2,7 +2,7 @@
 description: How to make Waterfall Charts in ggplot2 with Plotly.
 name: Waterfall Charts
 permalink: ggplot2/waterfall-charts/
-thumbnail: thumbnail/waterfall-charts.jpg
+thumnail_github: waterfall-charts.png
 layout: base
 language: ggplot2
 display_as: financial

@@ -2,7 +2,7 @@
 description: How to make Scatterplot Matrix using `ggpairs()` in ggplot2 with Plotly.
 name: Scatterplot Matrix
 permalink: ggplot2/splom/
-thumbnail: thumbnail/splom_image.jpg
+thumnail_github: splom.png
 layout: base
 language: ggplot2
 display_as: statistical

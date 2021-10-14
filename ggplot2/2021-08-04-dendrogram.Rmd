@@ -2,7 +2,7 @@
 description: How to make Dendrograms in ggplot2 with Plotly.
 name: Dendrograms
 permalink: ggplot2/dendrogram/
-thumbnail: thumbnail/dendrogram.jpg
+thumnail_github: dendrogram.png
 layout: base
 language: ggplot2
 display_as: scientific

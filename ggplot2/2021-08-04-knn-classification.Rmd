@@ -2,7 +2,7 @@
 description: How to do kNN Classification in ggplot2 with Plotly.
 name: kNN Classification
 permalink: ggplot2/knn-classification/
-thumbnail: thumbnail/knn-classification.png
+thumnail_github: knn-classification.png
 layout: base
 language: ggplot2
 display_as: ai_ml

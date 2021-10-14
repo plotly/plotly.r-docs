@@ -2,7 +2,7 @@
 description: How to work with Legends in ggplot2 with Plotly.
 name: Legends
 permalink: ggplot2/legend/
-thumbnail: thumbnail/legends.gif
+thumnail_github: legends.gif
 layout: base
 language: ggplot2
 display_as: file_settings

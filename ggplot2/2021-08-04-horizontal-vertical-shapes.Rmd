@@ -2,7 +2,7 @@
 description: How to add Horizontal and Vertical Lines in ggplot2 with Plotly.
 name: Horizontal and Vertical Lines
 permalink: ggplot2/horizontal-vertical-shapes/
-thumbnail: thumbnail/shape.jpg
+thumnail_github: orizontal-vertical-shapes.png
 layout: base
 language: ggplot2
 display_as: file_settings

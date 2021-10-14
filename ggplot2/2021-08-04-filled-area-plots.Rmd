@@ -2,7 +2,7 @@
 description: How to make Filled Area Plots in ggplot2 with Plotly.
 name: Filled Area
 permalink: ggplot2/filled-area-plots/
-thumbnail: thumbnail/area.jpg
+thumnail_github: filled-area-plots.png
 layout: base
 language: ggplot2
 display_as: basic

@@ -2,7 +2,7 @@
 description: How to make Network Graphs in ggplot2 with Plotly.
 name: Network Graphs
 permalink: ggplot2/network-graphs/
-thumbnail: thumbnail/net.jpg
+thumnail_github: network-graphs.png
 layout: base
 language: ggplot2
 display_as: scientific

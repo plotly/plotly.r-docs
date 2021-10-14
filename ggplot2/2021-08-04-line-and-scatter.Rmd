@@ -4,7 +4,7 @@ name: Scatter Plots
 display_as: basic
 order: 1
 permalink: ggplot2/line-and-scatter/
-thumbnail: thumbnail/line-and-scatter.jpg
+thumnail_github: line-and-scatter.png
 layout: base
 language: ggplot2
 page_type: u-guide

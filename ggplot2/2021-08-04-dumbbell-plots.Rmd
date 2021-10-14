@@ -2,7 +2,7 @@
 description: How to make Dumbbell Plots in ggplot2 with Plotly.
 name: Dumbbell Plots
 permalink: ggplot2/dumbbell-plots/
-thumbnail: thumbnail/dumbbell-plot.jpg
+thumnail_github: dumbbell-plots.png
 layout: base
 language: ggplot2
 display_as: file_settings
