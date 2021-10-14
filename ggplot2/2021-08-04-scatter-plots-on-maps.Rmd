@@ -1,8 +1,8 @@
 ---
 description:  How to make Scatter Plots on Maps plots in ggplot2 with Plotly.
 name: Scatter Plots on Maps
-permalink: /ggplot2/scatter-plots-on-maps/
-thumnail_github: maps-sf.png
+permalink: ggplot2/scatter-plots-on-maps/
+thumbnail: thumbnail/scatter-plot-on-maps.jpg
 layout: base
 language: ggplot2
 display_as: maps

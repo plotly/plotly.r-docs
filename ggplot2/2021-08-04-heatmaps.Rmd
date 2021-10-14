@@ -3,7 +3,7 @@ name: Heatmaps
 permalink: ggplot2/heatmaps/
 description: How to make Heatmaps plots in ggplot2 with Plotly.
 layout: base
-thumnail_github: heatmap.png
+thumnail_github: heatmaps.png
 language: ggplot2
 page_type: u-guide
 display_as: statistical

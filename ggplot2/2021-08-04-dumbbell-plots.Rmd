@@ -5,7 +5,7 @@ permalink: ggplot2/dumbbell-plots/
 thumnail_github: dumbbell-plots.png
 layout: base
 language: ggplot2
-display_as: file_settings
+display_as: basic
 page_type: u-guide
 order: 
 output:
