@@ -1,9 +1,9 @@
 ---
 name: Text and Annotations
-permalink: /ggplot2/text-and-annotations/
+permalink: ggplot2/text-and-annotations/
 description: Adding annotations in ggplot2 with Plotly.
 layout: base
-thumnail_github: text-and-annotations.png
+thumbnail: thumbnail/text-and-annotations.png
 language: ggplot2
 page_type: u-guide
 display_as: file_settings
