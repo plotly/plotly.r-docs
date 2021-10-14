@@ -5,7 +5,7 @@ permalink: ggplot2/random-walk/
 thumnail_github: static-image
 layout: base
 language: ggplot2
-display_as: advanced
+display_as: advanced_opt
 page_type: u-guide
 order: 2
 output:

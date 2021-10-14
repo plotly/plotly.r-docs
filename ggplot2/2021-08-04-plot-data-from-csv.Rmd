@@ -5,7 +5,7 @@ permalink: ggplot2/plot-data-from-csv/
 thumnail_github: csv.png
 layout: base
 language: ggplot2
-display_as: advanced
+display_as: advanced_opt
 page_type: u-guide
 order: 1
 output:
