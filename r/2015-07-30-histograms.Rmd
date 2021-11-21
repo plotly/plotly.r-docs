@@ -41,7 +41,7 @@ fig
 ```{r}
 library(plotly)
 
-x = c("Apples","Apples","Apples","Organges", "Bananas")
+x = c("Apples","Apples","Apples","Oranges", "Bananas")
 y = c("5","10","3","10","5")
 
 fig <- plot_ly(y=y, x=x, histfunc='sum', type = "histogram")
