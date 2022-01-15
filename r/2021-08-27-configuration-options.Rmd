@@ -354,4 +354,4 @@ The same configuration dictionary that you pass to the `config` parameter can al
 
 #### Reference
 
-See config options at https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js#L6
+See config options at [https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js#L6]()
