@@ -352,6 +352,6 @@ config(fig, doubleClickDelay= 1000)%>%layout(plot_bgcolor='#e5ecf6',
 
 The same configuration dictionary that you pass to the `config` parameter can also be passed to the [config property of a `dcc.Graph` component](https://dashr.plotly.com/dash-core-components/graph).
 
-#### Reference
+### Reference
 
-See config options at https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js#L6
+See config options at [https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js#L6]()
