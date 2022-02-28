@@ -45,6 +45,9 @@ library(plotly)
 Xn <- L[,1]
 Yn <- L[,2]
 
+names(Xn)<-vs$name
+names(Yn)<-vs$name
+
 network <- plot_ly(x = ~Xn, y = ~Yn, mode = "markers", text = vs$label, hoverinfo = "text")
 ```
 
