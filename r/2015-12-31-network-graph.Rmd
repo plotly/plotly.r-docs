@@ -31,7 +31,7 @@ L <- layout.circle(G)
 
 ### Create Vertices and Edges
 ```{r, results = 'hide'}
-vs <- V(G)
+vs <- as.data.frame(igraph::get.vertex.attribute(G))
 es <- as.data.frame(get.edgelist(G))
 
 Nv <- length(vs)
@@ -45,7 +45,7 @@ library(plotly)
 Xn <- L[,1]
 Yn <- L[,2]
 
-network <- plot_ly(x = ~Xn, y = ~Yn, mode = "markers", text = vs$label, hoverinfo = "text")
+network <- plot_ly(x = ~Xn, y = ~Yn, type="scatter", mode = "markers", text = vs$label, hoverinfo = "text")
 ```
 
 ### Creates Edges
@@ -58,10 +58,10 @@ for(i in 1:Ne) {
   edge_shape = list(
     type = "line",
     line = list(color = "#030303", width = 0.3),
-    x0 = Xn[v0],
-    y0 = Yn[v0],
-    x1 = Xn[v1],
-    y1 = Yn[v1]
+    x0 = Xn[vs$name == v0],
+    y0 = Yn[vs$name == v0],
+    x1 = Xn[vs$name == v1],
+    y1 = Yn[vs$name == v1]
   )
 
   edge_shapes[[i]] <- edge_shape
