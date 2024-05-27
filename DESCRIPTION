@@ -72,4 +72,5 @@ Imports:
 	fmsb,
 	plotROC,
 	tidyquant,
-	ggplot2movies
+	ggplot2movies,
+        pROC
