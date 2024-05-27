@@ -26,7 +26,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
   geom_boxplot()
 
 ggplotly(p)
@@ -46,10 +46,10 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
   geom_boxplot()
 
-p + theme(legend.position="bottom")
+p <- p + theme(legend.position="bottom")
 
 ggplotly(p)
 ```
@@ -62,10 +62,10 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
   geom_boxplot()
 
-p + theme(legend.position = c(0.8, 0.2))
+p <- p + theme(legend.position = c(0.8, 0.2))
 
 ggplotly(p)
 ```
@@ -83,12 +83,12 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
   geom_boxplot()
 
-p <- p + theme(legend.title = element_text(colour="red", size=10, 
+p <- p + theme(legend.title = element_text(colour="red", size=10,
                                       face="italic"))
-p <- p + theme(legend.text = element_text(colour="blue", size=10, 
+p <- p + theme(legend.text = element_text(colour="blue", size=10,
                                      face="bold"))
 
 ggplotly(p)
@@ -106,11 +106,11 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
   geom_boxplot()
 
 p <- p + theme(legend.background = element_rect(fill="lightblue",
-                                  size=0.5, linetype="solid", 
+                                  size=0.5, linetype="solid",
                                   colour ="red"))
 
 ggplotly(p)
@@ -128,10 +128,10 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
   geom_boxplot()
 
-p + scale_x_discrete(limits=c("2", "0.5", "1"))
+p <- p + scale_x_discrete(limits=c("2", "0.5", "1"))
 
 ggplotly(p)
 ```
@@ -149,7 +149,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, fill=dose)) +
   geom_boxplot()
 
 p <- p + theme(legend.title = element_blank())
