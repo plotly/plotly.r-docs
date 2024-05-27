@@ -69,7 +69,7 @@ fig
 
 ### Disabling Base Maps
 
-In certain cases, such as large scale [choropleth maps](plotly.com/r/choropleth-maps/), the default physical map can be distracting. In this case the `layout$geo$visible` attribute can be set to `FALSE` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
+In certain cases, such as large scale [choropleth maps](https://plotly.com/r/choropleth-maps/), the default physical map can be distracting. In this case the `layout$geo$visible` attribute can be set to `FALSE` to hide all base map attributes except those which are explicitly set to true. For example in the following map we hide all physical features except rivers and lakes, neither of which are shown by default:
 
 ```{r}
 library(plotly)
@@ -97,7 +97,7 @@ In addition to physical base map features, a "cultural" base map is included whi
 
 > Natural Earth Vector draws boundaries of countries according to defacto status. We show who actually controls the situation on the ground.
 
-**To create a map with your own cultural features** please refer to our [choropleth documentation](plotly.com/r/choropleth-maps/).
+**To create a map with your own cultural features** please refer to our [choropleth documentation](https://plotly.com/r/choropleth-maps/).
 
 Here is a map with only cultural features enabled and styled, at a 1:50m resolution, which includes only country boundaries. See below for country sub-unit cultural base map features:
 

@@ -64,7 +64,7 @@ fig
 
 ### Controlling text fontsize with uniformtext
 
-For the [pie](/r/pie-charts), [bar](/r/bar-charts), [sunburst](/r/sunburst-charts) and [treemap](/r/treemap-charts) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
+For the [pie](/r/pie-charts), [bar](/r/bar-charts), [sunburst](/r/sunburst-charts) and [treemap](/r/treemaps) traces, it is possible to force all the text labels to have the same size thanks to the `uniformtext` layout parameter. The `minsize` attribute sets the font size, and the `mode` attribute sets what happens for labels which cannot fit with the desired fontsize: either `hide` them or `show` them with overflow.
 
 ```{r}
 library(plotly)
@@ -228,10 +228,10 @@ library(plotly)
 
 fig <- plot_ly()
 fig <- fig %>% add_trace(
-    x = c("2017-01-01", "2017-02-10", "2017-03-20"), 
-    y = c("A", "B", "C"), 
-    z = c(1, 1000, 100000), 
-    name = "z", 
+    x = c("2017-01-01", "2017-02-10", "2017-03-20"),
+    y = c("A", "B", "C"),
+    z = c(1, 1000, 100000),
+    name = "z",
     type = "scatter3d"
   )
 fig <- fig %>% layout(
