@@ -26,10 +26,10 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+ggplot(ToothGrowth, aes(x=dose, y=len)) +
   geom_jitter()
 
-p<-ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+p<-ggplot(ToothGrowth, aes(x=dose, y=len)) +
   geom_jitter(position=position_jitter(0.2))
 p <- p + coord_flip()
 
@@ -48,7 +48,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
         geom_jitter(position=position_jitter(0.2), cex=1.2)
 
 ggplotly(p)
@@ -65,7 +65,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
         geom_jitter(position=position_jitter(0.2), shape=17)
 
 ggplotly(p)
@@ -83,7 +83,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
   geom_jitter(position=position_jitter(0.2), cex=1.2)
 p <- p + stat_summary(fun.y=mean, geom="point", shape=18,
                  size=3, color="red")
@@ -99,9 +99,9 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
     geom_jitter(position=position_jitter(0.2))
-p + stat_summary(fun.data=mean_sdl, mult=1, 
+p <- p + stat_summary(fun.data=mean_sdl, mult=1,
                  geom="pointrange", color="red")
 
 ggplotly(p)
@@ -114,7 +114,7 @@ You can change the representation of the statistics by changing `geom`, for exam
 
 ## Add box plot
 
-To add a box plot you can use `geom_boxplot()`. Likewise, you can add a notched boxplot with `geom_boxplot(notch = TRUE)` and a violin plot with `geom_violin(trim = FALSE)`.  
+To add a box plot you can use `geom_boxplot()`. Likewise, you can add a notched boxplot with `geom_boxplot(notch = TRUE)` and a violin plot with `geom_violin(trim = FALSE)`.
 
 ```{r}
 library(plotly)
@@ -122,7 +122,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
         geom_boxplot()+
         geom_jitter(position=position_jitter(0.2))
 
@@ -153,10 +153,10 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(ToothGrowth, aes(x=dose, y=len, color=dose, shape=dose)) + 
+p <- ggplot(ToothGrowth, aes(x=dose, y=len, color=dose, shape=dose)) +
   geom_jitter(position=position_jitter(0.2))+
   labs(title="Plot of length  by dose",x="Dose (mg)", y = "Length")
-p + theme_classic()
+p <- p + theme_classic()
 
 ggplotly(p)
 ```
