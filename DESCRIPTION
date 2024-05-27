@@ -74,3 +74,4 @@ Imports:
 	tidyquant,
 	ggplot2movies,
         pROC
+        rWind
