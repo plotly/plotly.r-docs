@@ -127,7 +127,7 @@ Or this facetted area plot:
 ```{r}
 library(tidyquant)
 library(plotly)
-tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+tickers = c("GOOG", "AAPL", "AMZN", "META", "NFLX", "MSFT")
 for (i in tickers){
   getSymbols(i,
              from = "2018-01-01",
@@ -143,13 +143,13 @@ y <- list(
 stock <- data.frame(GOOG$GOOG.Adjusted,
                     AAPL$AAPL.Adjusted,
                     AMZN$AMZN.Adjusted,
-                    FB$FB.Adjusted,
+                    META$META.Adjusted,
                     NFLX$NFLX.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
 stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
-stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$META.Adjusted <- stock$META.Adjusted/stock$META.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
 stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
@@ -178,7 +178,7 @@ fig3 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
 
 
 fig4 <- plot_ly(stock, type = 'scatter', mode = 'lines', fill = 'tonexty')%>%
-  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~META, name = 'META')%>%
   layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2),title = '', showticklabels = FALSE))
 
 
@@ -239,7 +239,7 @@ annotations = list(
     x = 0.775,
     y = 0.64,
     font = list(size = 10),
-    text = "company=FB",
+    text = "company=META",
     xref = "paper",
     yref = "paper",
     xanchor = "center",
@@ -285,7 +285,7 @@ Note that by default, the formatting of values of X and Y values in the hover la
 ```{r}
 library(tidyquant)
 library(plotly)
-tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+tickers = c("GOOG", "AAPL", "AMZN", "META", "NFLX", "MSFT")
 for (i in tickers){
   getSymbols(i,
              from = "2018-01-01",
@@ -293,13 +293,13 @@ for (i in tickers){
 stock <- data.frame(GOOG$GOOG.Adjusted,
                     AAPL$AAPL.Adjusted,
                     AMZN$AMZN.Adjusted,
-                    FB$FB.Adjusted,
+                    META$META.Adjusted,
                     NFLX$NFLX.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
 stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
-stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$META.Adjusted <- stock$META.Adjusted/stock$META.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
 stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
@@ -309,7 +309,7 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
   add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
   add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
-  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~META, name = 'META')%>%
   add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
   add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
   layout(title = 'custom tick labels',legend=list(title=list(text='variable')),
@@ -338,7 +338,7 @@ By setting the `ticklabelmode` attribute to `"period"` (the default is `"instant
 ```{r}
 library(tidyquant)
 library(plotly)
-tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+tickers = c("GOOG", "AAPL", "AMZN", "META", "NFLX", "MSFT")
 for (i in tickers){
   getSymbols(i,
              from = "2018-01-01",
@@ -346,13 +346,13 @@ for (i in tickers){
 stock <- data.frame(GOOG$GOOG.Adjusted,
                     AAPL$AAPL.Adjusted,
                     AMZN$AMZN.Adjusted,
-                    FB$FB.Adjusted,
+                    META$META.Adjusted,
                     NFLX$NFLX.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
 stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
-stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$META.Adjusted <- stock$META.Adjusted/stock$META.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
 stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
@@ -362,7 +362,7 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
   add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
   add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
-  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~META, name = 'META')%>%
   add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
   add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
   layout(title = 'custom tick labels with ticklabelmode="period"',legend=list(title=list(text='variable')),
