@@ -26,10 +26,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-ggplot(ToothGrowth, aes(x=dose, y=len)) +
-  geom_jitter()
-
-p<-ggplot(ToothGrowth, aes(x=dose, y=len)) +
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) +
   geom_jitter(position=position_jitter(0.2))
 p <- p + coord_flip()
 
