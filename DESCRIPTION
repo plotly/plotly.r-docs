@@ -72,6 +72,4 @@ Imports:
 	fmsb,
 	plotROC,
 	tidyquant,
-	ggplot2movies,
-        pROC
-        rWind
+	ggplot2movies
