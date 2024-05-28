@@ -141,7 +141,7 @@ After executing this code, give app$run_server() in the console to start the das
 ```{r}
 library(tidyquant)
 library(plotly)
-tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+tickers = c("GOOG", "AAPL", "AMZN", "META", "NFLX", "MSFT")
 for (i in tickers){
 getSymbols(i,
            from = "2018-01-01",
@@ -149,13 +149,13 @@ getSymbols(i,
 stock <- data.frame(GOOG$GOOG.Adjusted,
                     AAPL$AAPL.Adjusted,
                     AMZN$AMZN.Adjusted,
-                    FB$FB.Adjusted,
+                    META$META.Adjusted,
                     NFLX$NFLX.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
 stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
-stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$META.Adjusted <- stock$META.Adjusted/stock$META.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
 stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
@@ -184,7 +184,7 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
   add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
   add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
-  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~META, name = 'META')%>%
   add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
   add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
   layout(legend=list(title=list(text='company')), shapes = list(list(type = "rect", text = 'Decline', fillcolor = "green", line = list(color = "green"),
@@ -200,7 +200,7 @@ Extra formatting of the annotation can be done by adding `textfont` argument.
 ```{r}
 library(tidyquant)
 library(plotly)
-tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+tickers = c("GOOG", "AAPL", "AMZN", "META", "NFLX", "MSFT")
 for (i in tickers){
   getSymbols(i,
              from = "2018-01-01",
@@ -208,13 +208,13 @@ for (i in tickers){
 stock <- data.frame(GOOG$GOOG.Adjusted,
                     AAPL$AAPL.Adjusted,
                     AMZN$AMZN.Adjusted,
-                    FB$FB.Adjusted,
+                    META$META.Adjusted,
                     NFLX$NFLX.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
 stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
-stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$META.Adjusted <- stock$META.Adjusted/stock$META.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
 stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
@@ -243,7 +243,7 @@ fig <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
   add_trace(x = ~Dates, y = ~GOOG, name = 'GOOG')%>%
   add_trace(x = ~Dates, y = ~AAPL, name = 'AAPL')%>%
   add_trace(x = ~Dates, y = ~AMZN, name = 'AMZN')%>%
-  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~META, name = 'META')%>%
   add_trace(x = ~Dates, y = ~NFLX, name = 'NFLX')%>%
   add_trace(x = ~Dates, y = ~MSFT, name = 'MSFT')%>%
   layout(legend=list(title=list(text='company')), plot_bgcolor = "#e5ecf6", shapes = list(list(type = "rect", text = 'decline', fillcolor = "green", line = list(color = "green"),
@@ -262,7 +262,7 @@ The same line or box is added to multiple plots, and these plots are finally add
 ```{r}
 library(tidyquant)
 library(plotly)
-tickers = c("GOOG", "AAPL", "AMZN", "FB", "NFLX", "MSFT")
+tickers = c("GOOG", "AAPL", "AMZN", "META", "NFLX", "MSFT")
 for (i in tickers){
   getSymbols(i,
              from = "2018-01-01",
@@ -289,13 +289,13 @@ y <- list(
 stock <- data.frame(GOOG$GOOG.Adjusted,
                     AAPL$AAPL.Adjusted,
                     AMZN$AMZN.Adjusted,
-                    FB$FB.Adjusted,
+                    META$META.Adjusted,
                     NFLX$NFLX.Adjusted,
                     MSFT$MSFT.Adjusted)
 stock$GOOG.Adjusted <- stock$GOOG.Adjusted/stock$GOOG.Adjusted[1]
 stock$AAPL.Adjusted <- stock$AAPL.Adjusted/stock$AAPL.Adjusted[1]
 stock$AMZN.Adjusted <- stock$AMZN.Adjusted/stock$AMZN.Adjusted[1]
-stock$FB.Adjusted <- stock$FB.Adjusted/stock$FB.Adjusted[1]
+stock$META.Adjusted <- stock$META.Adjusted/stock$META.Adjusted[1]
 stock$NFLX.Adjusted <- stock$NFLX.Adjusted/stock$NFLX.Adjusted[1]
 stock$MSFT.Adjusted <- stock$MSFT.Adjusted/stock$MSFT.Adjusted[1]
 stock <- data.frame(stock,rownames(stock))
@@ -329,7 +329,7 @@ fig3 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
            text = c("decline"))
 
 fig4 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
-  add_trace(x = ~Dates, y = ~FB, name = 'FB')%>%
+  add_trace(x = ~Dates, y = ~META, name = 'META')%>%
   layout(legend=list(title=list(text='company')), xaxis = ax, yaxis = list(range = c(0.5,2),title = '', showticklabels = FALSE))
 
 fig5 <- plot_ly(stock, type = 'scatter', mode = 'lines')%>%
@@ -384,7 +384,7 @@ annotations = list(
     x = 0.775,
     y = 0.666,
     font = list(size = 10),
-    text = "company=FB",
+    text = "company=META",
     xref = "paper",
     yref = "paper",
     xanchor = "center",

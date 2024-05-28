@@ -26,7 +26,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(cars, aes(x = speed, y = dist)) + 
+p <- ggplot(cars, aes(x = speed, y = dist)) +
   geom_point()
 
 p <- p + scale_x_continuous(trans = 'log2') +
@@ -46,13 +46,13 @@ library(scales)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(cars, aes(x = speed, y = dist)) + 
+p <- ggplot(cars, aes(x = speed, y = dist)) +
   geom_point()
 
 p <- p + scale_x_continuous(trans = 'log2') +
   scale_y_continuous(trans = 'log2')
 
-p + scale_y_continuous(trans = log2_trans(),
+p <- p + scale_y_continuous(trans = log2_trans(),
     breaks = trans_breaks("log2", function(x) 2^x),
     labels = trans_format("log2", math_format(2^.x)))
 
@@ -71,7 +71,7 @@ library(ggplot2)
 
 ToothGrowth$dose <- as.factor(ToothGrowth$dose)
 
-p <- ggplot(cars, aes(x = speed, y = dist)) + 
+p <- ggplot(cars, aes(x = speed, y = dist)) +
   geom_point()
 
 p <- p + scale_y_log10()

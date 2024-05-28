@@ -65,55 +65,6 @@ fig2 <- fig2 %>% layout(legend=list(title=list(text='<b> Rate </b>')))
 fig2
 ```
 
-## Basic binary ROC curve
-
-We  display the area under the ROC curve (ROC AUC). While ROC shows how the TPR and FPR vary with the threshold, the ROC AUC is a measure of the classification model's ability to distinguish one class from the other. An ideal classifier will have ROC AUC = 1. In our example, we see that the ROC AUC is fairly high, thus consistent with our interpretation of the previous plots.
-
-```{r}
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(pROC)
-
-set.seed(0)
-X <- matrix(rnorm(10000),nrow=500)
-y <- sample(0:1, 500, replace=TRUE)
-db <- data.frame(X,y)
-db$y <- as.factor(db$y)
-test_data = db[1:20]
-
-model<- logistic_reg() %>%
-  set_engine("glm") %>%
-  set_mode("classification") %>%
-  # Fit the model
-  fit(y ~., data = db)
-
-
-ypred <- predict(model,
-                  new_data = test_data,
-                  type = "prob")
-
-yscore <- data.frame(ypred$.pred_0)
-rdb <- cbind(db$y,yscore)
-colnames(rdb) = c('y','yscore')
-
-
-pdb <- roc_curve(rdb, y, yscore)
-pdb$specificity <- 1 - pdb$specificity
-auc = roc_auc(rdb, y, yscore)
-auc = auc$.estimate
-
-tit = paste('ROC Curve (AUC = ',toString(round(auc,2)),')',sep = '')
-
-
-fig <-  plot_ly(data = pdb ,x =  ~specificity, y = ~sensitivity, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>%
-  layout(title = tit,xaxis = list(title = "False Positive Rate"), yaxis = list(title = "True Positive Rate")) %>%
-add_segments(x = 0, xend = 1, y = 0, yend = 1, line = list(dash = "dash", color = 'black'),inherit = FALSE, showlegend = FALSE)
-fig
-```
-
-
-
 ## Multiclass ROC Curve
 
 When you have more than 2 classes, you will need to plot the ROC curve for each class separately. Make sure that you use a [one-versus-rest](https://cran.r-project.org/web/packages/multiclassPairs/vignettes/Tutorial.html) model, or make sure that your problem has a multi-label format; otherwise, your ROC curve might not return the expected results.
@@ -187,52 +138,6 @@ fig <- plot_ly()%>%
   ),legend = list(x = 100, y = 0.5))
 fig
 
-```
-
-
-## Precision-Recall Curves
-
-Plotting the PR curve is very similar to plotting the ROC curve. The following examples are slightly modified from the previous examples:
-
-```{r}
-library(dplyr)
-library(ggplot2)
-library(plotly)
-library(pROC)
-
-set.seed(0)
-X <- matrix(rnorm(10000),nrow=500)
-y <- sample(0:1, 500, replace=TRUE)
-db <- data.frame(X,y)
-db$y <- as.factor(db$y)
-test_data = db[1:20]
-
-model<- logistic_reg() %>%
-  set_engine("glm") %>%
-  set_mode("classification") %>%
-  # Fit the model
-  fit(y ~., data = db)
-
-ypred <- predict(model,
-                 new_data = test_data,
-                 type = "prob")
-
-yscore <- data.frame(ypred$.pred_0)
-rdb <- cbind(db$y,yscore)
-colnames(rdb) = c('y','yscore')
-
-pdb <- pr_curve(rdb, y, yscore)
-auc = roc_auc(rdb, y, yscore)
-auc = auc$.estimate
-
-tit = paste('ROC Curve (AUC = ',toString(round(auc,2)),')',sep = '')
-
-
-fig <-  plot_ly(data = pdb ,x =  ~recall, y = ~precision, type = 'scatter', mode = 'lines', fill = 'tozeroy') %>%
-  add_segments(x = 0, xend = 1, y = 1, yend = 0, line = list(dash = "dash", color = 'black'),inherit = FALSE, showlegend = FALSE) %>%
-  layout(title = tit, xaxis = list(title = "Recall"), yaxis = list(title = "Precision") )
-
-fig
 ```
 
 In this example, we use the average precision metric, which is an alternative scoring method to the area under the PR curve.

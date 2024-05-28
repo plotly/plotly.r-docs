@@ -1,7 +1,6 @@
-Package: Plotly's R graphing library. 
+Package: Plotly's R graphing library.
 Imports:
     geomorph,
-    maptools,
     rjson,
     dplyr,
     quantmod,
