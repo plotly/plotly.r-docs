@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: rocker/tidyverse:3
+      - image: rocker/tidyverse
     steps:
       - add_ssh_keys:
           fingerprints:
