@@ -26,12 +26,12 @@ Scatterplots of each pair of numeric variable are drawn on the left part of the 
 ```{r}
 library(plotly)
 library(GGally)
- 
-data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1)) 
-data$v4 = data$var1 ** 2 
-data$v5 = -(data$var1 ** 2) 
- 
-p <- ggpairs(data, title="correlogram with ggpairs()") 
+
+data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1))
+data$v4 = data$var1 ** 2
+data$v5 = -(data$var1 ** 2)
+
+p <- ggpairs(data, title="correlogram with ggpairs()")
 
 ggplotly(p)
 ```
@@ -46,14 +46,14 @@ he `ggcorr()` function allows to visualize the correlation of each pair of varia
 ```{r}
 library(plotly)
 library(GGally)
- 
-data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1)) 
-data$v4 = data$var1 ** 2 
-data$v5 = -(data$var1 ** 2) 
- 
-p <- ggcorr(data, method = c("everything", "pearson")) 
 
-p
+data <- data.frame( var1 = 1:100 + rnorm(100,sd=20), v2 = 1:100 + rnorm(100,sd=27), v3 = rep(1, 100) + rnorm(100, sd = 1))
+data$v4 = data$var1 ** 2
+data$v5 = -(data$var1 ** 2)
+
+p <- ggcorr(data, method = c("everything", "pearson"))
+
+ggplotly(p)
 ```
 
 <!--------------------- EXAMPLE BREAK ------------------------->
@@ -64,10 +64,10 @@ It is possible to use `ggplot2` aesthetics on the chart, for instance to color e
 ```{r}
 library(plotly)
 library(GGally)
- 
+
 data(flea)
 
-p <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species)) 
+p <- ggpairs(flea, columns = 2:4, ggplot2::aes(colour=species))
 
 ggplotly(p)
 ```
@@ -82,7 +82,7 @@ Change the type of plot used on each part of the `correlogram`. This is done wit
 ```{r}
 library(plotly)
 library(GGally)
- 
+
 data(tips, package = "reshape")
 
 p <- ggpairs(
@@ -91,7 +91,7 @@ p <- ggpairs(
       lower = list(continuous = "points", combo = "dot_no_facet")
 )
 
-p
+ggplotly(p)
 ```
 
 <!--------------------- EXAMPLE BREAK ------------------------->
