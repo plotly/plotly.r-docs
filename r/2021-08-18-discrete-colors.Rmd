@@ -167,12 +167,10 @@ Use `app$run_server()` to run the dash app.
 
 By default, Plotly will use the color sequence from the `colors` attribute, and the default active template is `plotly` which uses the `plotly` color sequence. You can choose any of the following built-in qualitative color sequences however, or define your own.
 
-```{r}
+```{r eval=FALSE}
 
 library("RColorBrewer")
 display.brewer.all(type = 'qual')
-
-
 ```
 
 
