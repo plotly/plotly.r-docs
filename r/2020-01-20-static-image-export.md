@@ -1,0 +1,78 @@
+---
+description: How to export R graphs as static images.
+display_as: file_settings
+language: r
+layout: base
+name: Exporting Graphs as Static Images
+order: 4
+output:
+  html_document:
+    keep_md: true
+page_type: u-guide
+permalink: r/static-image-export/
+redirect_from: ggplot2/embedding-plotly-graphs-in-HTML/
+thumbnail: thumbnail/static-image-export.png
+---
+
+### Supported File Formats
+
+With the `plotly` R package, you can export graphs you create as static images in the `.png`, `.jpg`/`.jpeg`, `.eps`, `.svg`, and/or `.pdf` formats using[Orca](https://github.com/plotly/orca), an open source command line tool for generating static images of graphs created with [Plotly's graphing libraries](https://plotly.com/graphing-libraries).
+
+**Note:** It is important to be aware that R graphs containing WebGL-based traces (i.e. of type `scattergl`, `heatmapgl`, `contourgl`, `scatter3d`, `surface`, `mesh3d`, `scatterpolargl`, `cone`, `streamtube`, `splom`, and/or `parcoords`) will include encapsulated rasters instead of vectors for some parts of the image if they are exported as static images in a vector format like `.eps`, `.svg`, and/or `.pdf`.
+
+**Note** Orca runs entirely locally and does not require internet access. No network requests are made to the Chart Studio or any other web service when you invoke the `orca()` function to export static images in your R session.
+
+### Install Orca
+
+Please follow the installation instructions which can be found on [Orca's GitHub Page](https://github.com/plotly/orca#installation).
+
+### Export R Graphs As Static Images Using `orca()`
+
+To use Orca to export static images of the graphs you create with the `plotly` R package, you can use the built-in `orca()` function in versions `4.7.900` and above.
+
+You need to have the [`processx`](https://github.com/r-lib/processx) R package installed as well.
+
+The `orca()` function accepts two parameters. The first is the plot to be exported and second is the filename.
+
+For example, running the following commands in an R session would export the graph stored in `fig` in a file called `surface-plot.svg`:
+
+
+``` r
+library(plotly)
+
+if (!require("processx")) install.packages("processx")
+fig <- plot_ly(z = ~volcano) %>% add_surface()
+orca(fig, "surface-plot.svg")
+```
+
+### What About Dash?
+
+[Dash for R](https://dashr.plot.ly/) is an open-source framework for building analytical applications, with no Javascript required, and it is tightly integrated with the Plotly graphing library. 
+
+Learn about how to install Dash for R at https://dashr.plot.ly/installation.
+
+Everywhere in this page that you see `fig`, you can display the same figure in a Dash for R application by passing it to the `figure` argument of the [`Graph` component](https://dashr.plot.ly/dash-core-components/graph) from the built-in `dashCoreComponents` package like this:
+
+
+``` r
+library(plotly)
+
+fig <- plot_ly() 
+# fig <- fig %>% add_trace( ... )
+# fig <- fig %>% layout( ... ) 
+
+library(dash)
+library(dashCoreComponents)
+library(dashHtmlComponents)
+
+app <- Dash$new()
+app$layout(
+    htmlDiv(
+        list(
+            dccGraph(figure=fig) 
+        )
+     )
+)
+
+app$run_server(debug=TRUE, dev_tools_hot_reload=FALSE)
+```
