@@ -1,5 +1,5 @@
 ---
-description: How to create line aplots in R. Examples of basic and advanced line plots,
+description: How to create line plots in R. Examples of basic and advanced line plots,
   time series line plots, colored charts, and density plots.
 display_as: basic
 language: r
