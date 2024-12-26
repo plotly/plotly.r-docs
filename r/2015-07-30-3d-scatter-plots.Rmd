@@ -40,7 +40,8 @@ fig
 library(plotly)
 
 fig <- plot_ly(mtcars, x = ~wt, y = ~hp, z = ~qsec,
-               marker = list(color = ~mpg, colorscale = c('#FFE1A1', '#683531'), showscale = TRUE))
+               color = ~mpg,
+               colors = c('#FFE1A1', '#683531'))
 fig <- fig %>% add_markers()
 fig <- fig %>% layout(scene = list(xaxis = list(title = 'Weight'),
                                    yaxis = list(title = 'Gross horsepower'),
@@ -52,7 +53,7 @@ fig <- fig %>% layout(scene = list(xaxis = list(title = 'Weight'),
                         xref = 'paper',
                         yref = 'paper',
                         showarrow = FALSE
-                        ))
+                      ))
 fig
 ```
 
